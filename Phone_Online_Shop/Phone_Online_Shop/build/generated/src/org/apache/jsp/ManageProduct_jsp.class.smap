@@ -1,0 +1,14 @@
+SMAP
+ManageProduct_jsp.java
+JSP
+*S JSP
+*F
++ 0 ManageProduct.jsp
+ManageProduct.jsp
++ 1 headerforcustomer.jsp
+headerforcustomer.jsp
+*L
+1,40:49
+5#1,161:89
+40#0,237:249
+*E

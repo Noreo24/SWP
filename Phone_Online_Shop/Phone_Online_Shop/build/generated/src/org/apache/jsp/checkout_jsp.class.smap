@@ -1,0 +1,14 @@
+SMAP
+checkout_jsp.java
+JSP
+*S JSP
+*F
++ 0 checkout.jsp
+checkout.jsp
++ 1 headerforcustomer.jsp
+headerforcustomer.jsp
+*L
+1,39:49
+5#1,161:88
+39#0,344:248
+*E
