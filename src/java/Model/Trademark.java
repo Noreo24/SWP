@@ -4,17 +4,11 @@
  */
 package Model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-
 /**
  *
  * @author Admin
  */
-public class Trademark{
-
+public class Trademark {
 
     private String trademark_id,
             trademark_name,
@@ -53,15 +47,5 @@ public class Trademark{
     public void setStatus(String status) {
         this.status = status;
     }
-    //Khai báo các thành phần xủ lý DB
-    Connection cnn;//Kết nối với DB
-    //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
-    PreparedStatement stm;
-    ResultSet rs;//Lưu trữ và xử lý dữ liệu
- 
-    public ArrayList<Trademark> getAllTrademarks() {
-        
-        return null;
-        
-    }
+
 }

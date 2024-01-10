@@ -32,7 +32,7 @@
                                     <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input id="repassword-field" type="password" class="form-control" placeholder="Repassword" required>
+                                    <input id="repassword-field" type="password" class="form-control" placeholder="Re-password" required>
                                     <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
                                 <div class="form-group">

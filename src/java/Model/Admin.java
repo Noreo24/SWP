@@ -8,49 +8,41 @@ package Model;
  *
  * @author Admin
  */
-public class Customer {
+public class Admin {
 
-    private String userId,
-            roleId,
+    private String adminId,
             fullName,
             avatar,
             gender,
-            password,
-            user_name,
             email,
+            user_name,
+            password,
             phone,
-            address;
+            address,
+            roleId;
 
-    public Customer() {
+    public Admin() {
     }
 
-    public Customer(String userId, String roleId, String fullName, String avatar, String gender, String password, String user_name, String email, String phone, String address) {
-        this.userId = userId;
-        this.roleId = roleId;
+    public Admin(String adminId, String fullName, String avatar, String gender, String email, String user_name, String password, String phone, String address, String roleId) {
+        this.adminId = adminId;
         this.fullName = fullName;
         this.avatar = avatar;
         this.gender = gender;
-        this.password = password;
-        this.user_name = user_name;
         this.email = email;
+        this.user_name = user_name;
+        this.password = password;
         this.phone = phone;
         this.address = address;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
         this.roleId = roleId;
+    }
+
+    public String getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
     }
 
     public String getFullName() {
@@ -77,12 +69,12 @@ public class Customer {
         this.gender = gender;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUser_name() {
@@ -93,12 +85,12 @@ public class Customer {
         this.user_name = user_name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhone() {
@@ -115,6 +107,14 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
     
 }

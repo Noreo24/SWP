@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Controller.Common;
 
-import Model.Trademark;
+import DAO.productDAO;
+import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author Admin
  */
-public class addProduct extends HttpServlet {
+public class home extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +37,10 @@ public class addProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet addProduct</title>");
+            out.println("<title>Servlet home</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet addProduct at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet home at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,13 +58,11 @@ public class addProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String categoryId = request.getParameter("categoryId");
-        Trademark t = new Trademark();
-//
-//        if (categoryId.equals("1")) {
-//            request.setAttribute("tlist", trademarkList);
-//            request.getRequestDispatcher("addPhone.jsp").forward(request, response);
-//        }
+        productDAO pdao = new productDAO();
+        ArrayList<Product> pnewlist = pdao.getAllNewProduct();
+        
+        request.setAttribute("pnewlist", pnewlist);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     /**

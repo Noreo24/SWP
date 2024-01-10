@@ -90,7 +90,6 @@ public class addPhone extends HttpServlet {
         String screenfeature = request.getParameter("screenfeature");
         String otherfeature = request.getParameter("other");
         Trademark t = new Trademark();
-        ArrayList<Trademark> trademarkList = t.getAllTrademarks();
         System.out.println(name);
 //        if (name == null || desciption == null || oprice == null || quantity == null || trademark == null) {
 //            String err = " Please enter more information!";
