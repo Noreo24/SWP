@@ -46,4 +46,70 @@ public class customerDAO {
         }
         return null;
     }
+
+    public Customer getUserByEmail(String mail) {
+        String query = "select * from Customer where email = ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, mail);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Customer(String.valueOf(rs.getInt(1)),
+                        String.valueOf(rs.getBoolean(10)),
+                        rs.getString(2),
+                        rs.getString(3),
+                        String.valueOf(rs.getBoolean(4)),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+            }
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public Customer getUserByUsername(String username) {
+        String query = "select * from Customer where user_name = ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, username);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Customer(String.valueOf(rs.getInt(1)),
+                        String.valueOf(rs.getBoolean(10)),
+                        rs.getString(2),
+                        rs.getString(3),
+                        String.valueOf(rs.getBoolean(4)),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+            }
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void addNewAccount(String email, String username, String pass, String fullname, String phone, String address) {
+        String query = "insert into Customer(email, user_name, password, fullName, phone, address) values (?, ?, ?, ?, ?, ?)";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, email);
+            stm.setString(2, username);
+            stm.setString(3, pass);
+            stm.setString(4, fullname);
+            stm.setString(5, phone);
+            stm.setString(6, address);           
+            rs = stm.executeQuery();
+        } catch (Exception e) {
+        }
+    }
 }

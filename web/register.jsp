@@ -23,22 +23,34 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-lg-4">
                         <div class="login-wrap p-0">
-                            <form action="#" class="signin-form">
+                            <form action="registernewaccount" method="post" class="signin-form">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Username" required>
+                                    <input type="text" class="form-control" placeholder="Email" name="email" required>
                                 </div>
                                 <div class="form-group">
-                                    <input id="password-field" type="password" class="form-control" placeholder="Password" required>
+                                    <input type="text" class="form-control" placeholder="Username" name="username" required>
+                                </div>
+                                <div class="form-group">
+                                    <input id="password-field" type="password" class="form-control" placeholder="Password" name="pass" required>
                                     <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input id="repassword-field" type="password" class="form-control" placeholder="Re-password" required>
+                                    <input id="repassword-field" type="password" class="form-control" placeholder="Re-password" name="repass" required>
                                     <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Fullname" name="fullname" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Phone" name="phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Address" name="address" required>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="form-control btn btn-primary submit px-3">Register</button>
                                 </div>
-
+                                <i style="color: red">${err}</i>
                             </form>
                         </div>
                     </div>

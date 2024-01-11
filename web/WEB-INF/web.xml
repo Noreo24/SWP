@@ -16,6 +16,10 @@
         <servlet-name>home</servlet-name>
         <servlet-class>Controller.Common.home</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>registerNewAccount</servlet-name>
+        <servlet-class>Controller.Customer.registerNewAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addProduct</servlet-name>
         <url-pattern>/addProduct</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>registerNewAccount</servlet-name>
+        <url-pattern>/registernewaccount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -4,24 +4,20 @@
  */
 package Controller.Customer;
 
-import DAO.adminDAO;
 import DAO.customerDAO;
-import Model.Admin;
 import Model.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-public class login extends HttpServlet {
+public class registerNewAccount extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +36,10 @@ public class login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet login</title>");
+            out.println("<title>Servlet registerNewAccount</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet registerNewAccount at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,33 +71,35 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String email = request.getParameter("email");
         String username = request.getParameter("username");
-        String pass = request.getParameter("password");
+        String pass = request.getParameter("pass");
+        String repass = request.getParameter("repass");
+        String fullname = request.getParameter("fullname");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
         customerDAO cdao = new customerDAO();
-        adminDAO adao = new adminDAO();
-        String rememberpass = request.getParameter("rememberpass");
-        if (rememberpass!= null && rememberpass.equals("on")) {
-            Cookie c_user = new Cookie("username", username);
-            Cookie c_pass = new Cookie("pass", pass);
-            c_user.setMaxAge(3600 * 24 * 30);
-            c_pass.setMaxAge(3600 * 24 * 30);
-            c_user.setPath("main/login.jsp");
-            c_pass.setPath("main/login.jsp");
-            response.addCookie(c_user);
-            response.addCookie(c_pass);
-        }
-        if (cdao.getUserByUsername(username, pass) != null) {
-            Customer c = cdao.getUserByUsername(username, pass);
-            HttpSession session = request.getSession();
-
-            session.setAttribute("c", c);
-            response.sendRedirect("home");
-        } else if (adao.getAdminByUsername(username, pass) != null) {
-            Admin a = adao.getAdminByUsername(username, pass);
-        } else {
-            String err = "Wrong username or password!";
+        Customer c = cdao.getUserByEmail(email);
+        Customer cc = cdao.getUserByUsername(username);
+        if (c != null) {
+            String err = "Email is existed!";
             request.setAttribute("err", err);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        } else if (!pass.equals(repass)) {
+            String err = "Re-pass is wrong!";
+            request.setAttribute("err", err);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        } else if (cc != null) {
+            String err = "Account is existed!";
+            request.setAttribute("err", err);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        } else if (pass.length() < 6 || pass.length() > 24) {
+            String err = "Password must be from 6 to 24 characters!";
+            request.setAttribute("err", err);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        } else {
+            cdao.addNewAccount(email, username, pass, fullname, phone, address);
+            response.sendRedirect("login.jsp");
         }
     }
 
