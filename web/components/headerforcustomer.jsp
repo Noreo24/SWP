@@ -20,7 +20,8 @@
     .logo{
       width: 200px; /* Điều chỉnh kích thước theo nhu cầu */
       height: auto;
-      border-radius: 50%; /* Làm tròn góc để tạo hình dáng hình tròn */
+      border-radius: 50%;
+     /* Làm tròn góc để tạo hình dáng hình tròn */
     }
   </style>
     </head>
@@ -166,8 +167,9 @@
 						<li><a href="#">Categories</a></li>
 						<li><a href="#">Laptops</a></li>
 						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
+						<li><a href="#">Tables</a></li>
+                                                <li><a href="#">Headphones</a></li>
+
 					</ul>
 					<!-- /NAV -->
 				</div>
