@@ -4,8 +4,8 @@
  */
 package DAO;
 
+import DBContext.DBContext;
 import Model.Customer;
-import context.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +14,7 @@ import java.sql.ResultSet;
  *
  * @author Admin
  */
-public class customerDAO {
+public class CustomerDAO {
 
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
@@ -107,7 +107,7 @@ public class customerDAO {
             stm.setString(3, pass);
             stm.setString(4, fullname);
             stm.setString(5, phone);
-            stm.setString(6, address);           
+            stm.setString(6, address);
             rs = stm.executeQuery();
         } catch (Exception e) {
         }

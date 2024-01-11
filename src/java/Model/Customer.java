@@ -11,7 +11,6 @@ package Model;
 public class Customer {
 
     private String userId,
-            roleId,
             fullName,
             avatar,
             gender,
@@ -19,14 +18,14 @@ public class Customer {
             user_name,
             email,
             phone,
-            address;
+            address,
+            roleId;
 
     public Customer() {
     }
 
-    public Customer(String userId, String roleId, String fullName, String avatar, String gender, String password, String user_name, String email, String phone, String address) {
+    public Customer(String userId, String fullName, String avatar, String gender, String password, String user_name, String email, String phone, String address, String roleId) {
         this.userId = userId;
-        this.roleId = roleId;
         this.fullName = fullName;
         this.avatar = avatar;
         this.gender = gender;
@@ -35,6 +34,7 @@ public class Customer {
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.roleId = roleId;
     }
 
     public String getUserId() {
@@ -43,14 +43,6 @@ public class Customer {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
     }
 
     public String getFullName() {
@@ -115,6 +107,14 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
     
 }

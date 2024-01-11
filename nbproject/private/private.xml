@@ -3,19 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documents/GitHub/SWP/web/components/headerforcustomer.jsp</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/Model/Product.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/Controller/Customer/forgotpass.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/web/index.jsp</file>
-            <file>file:/D:/Documents/GitHub/SWP/web/register.jsp</file>
-            <file>file:/D:/Documents/GitHub/SWP/web/store.jsp</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/DAO/productDAO.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/Model/Customer.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/Model/SendMail.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/web/forgotPass.jsp</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/DAO/adminDAO.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/Model/Trademark.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/web/login.jsp</file>
+            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Shop/src/java/Controller/common/home.java</file>
+            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Shop/src/java/DAO/CustomerDAO.java</file>
+            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Shop/web/view/common/index.jsp</file>
+            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Shop/web/navigator/userheader.jsp</file>
+            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Shop/src/java/DAO/adminDAO.java</file>
+            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Shop/web/view/common/register.jsp</file>
+            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Shop/src/java/Controller/common/loginController.java</file>
         </group>
     </open-files>
 </project-private>

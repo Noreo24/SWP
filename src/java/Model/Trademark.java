@@ -8,17 +8,16 @@ package Model;
  *
  * @author Admin
  */
-public class Trademark {
+public class trademark {
 
     private String trademark_id,
             trademark_name,
             status;
 
-    public Trademark() {
-
+    public trademark() {
     }
 
-    public Trademark(String trademark_id, String trademark_name, String status) {
+    public trademark(String trademark_id, String trademark_name, String status) {
         this.trademark_id = trademark_id;
         this.trademark_name = trademark_name;
         this.status = status;
@@ -47,5 +46,5 @@ public class Trademark {
     public void setStatus(String status) {
         this.status = status;
     }
-
+    
 }

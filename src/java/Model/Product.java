@@ -8,35 +8,44 @@ package Model;
  *
  * @author Admin
  */
-public class Product {
+public class product {
 
-    private String product_id, product_name, original_prices, sale, sale_prices, product_hightlight, product_description, trademark, status, quantity, guarantee, category_id, update_date, sole, avr_rate_star, image;
+    private String product_id,
+            product_name,
+            original_prices,
+            sale,
+            sale_prices,
+            product_highlights,
+            product_description,
+            trademark_id,
+            status,
+            quantity,
+            guarantee,
+            category_id,
+            update_date,
+            sole,
+            avr_rated_star;
 
-    public Product() {
+    public product() {
     }
 
-    public Product(String product_id, String product_name, String original_prices, String sale, String sale_prices, String product_hightlight, String product_description, String trademark, String status, String quantity, String guarantee, String category_id, String update_date, String sole, String avr_rate_star, String image) {
+    public product(String product_id, String product_name, String original_prices, String sale, String sale_prices, String product_highlights, String product_description, String trademark_id, String status, String quantity, String guarantee, String category_id, String update_date, String sole, String avr_rated_star) {
         this.product_id = product_id;
         this.product_name = product_name;
         this.original_prices = original_prices;
         this.sale = sale;
         this.sale_prices = sale_prices;
-        this.product_hightlight = product_hightlight;
+        this.product_highlights = product_highlights;
         this.product_description = product_description;
-        this.trademark = trademark;
+        this.trademark_id = trademark_id;
         this.status = status;
         this.quantity = quantity;
         this.guarantee = guarantee;
         this.category_id = category_id;
         this.update_date = update_date;
         this.sole = sole;
-        this.avr_rate_star = avr_rate_star;
-        this.image = image;
+        this.avr_rated_star = avr_rated_star;
     }
-
-
-
-
 
     public String getProduct_id() {
         return product_id;
@@ -78,12 +87,12 @@ public class Product {
         this.sale_prices = sale_prices;
     }
 
-    public String getProduct_hightlight() {
-        return product_hightlight;
+    public String getProduct_highlights() {
+        return product_highlights;
     }
 
-    public void setProduct_hightlight(String product_hightlight) {
-        this.product_hightlight = product_hightlight;
+    public void setProduct_highlights(String product_highlights) {
+        this.product_highlights = product_highlights;
     }
 
     public String getProduct_description() {
@@ -94,12 +103,12 @@ public class Product {
         this.product_description = product_description;
     }
 
-    public String getTrademark() {
-        return trademark;
+    public String getTrademark_id() {
+        return trademark_id;
     }
 
-    public void setTrademark(String trademark) {
-        this.trademark = trademark;
+    public void setTrademark_id(String trademark_id) {
+        this.trademark_id = trademark_id;
     }
 
     public String getStatus() {
@@ -116,6 +125,14 @@ public class Product {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+
+    public String getGuarantee() {
+        return guarantee;
+    }
+
+    public void setGuarantee(String guarantee) {
+        this.guarantee = guarantee;
     }
 
     public String getCategory_id() {
@@ -142,28 +159,12 @@ public class Product {
         this.sole = sole;
     }
 
-    public String getAvr_rate_star() {
-        return avr_rate_star;
+    public String getAvr_rated_star() {
+        return avr_rated_star;
     }
 
-    public void setAvr_rate_star(String avr_rate_star) {
-        this.avr_rate_star = avr_rate_star;
+    public void setAvr_rated_star(String avr_rated_star) {
+        this.avr_rated_star = avr_rated_star;
     }
-
-    public String getGuarantee() {
-        return guarantee;
-    }
-
-    public void setGuarantee(String guarantee) {
-        this.guarantee = guarantee;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
+    
 }
