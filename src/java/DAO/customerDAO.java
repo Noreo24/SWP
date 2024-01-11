@@ -98,7 +98,7 @@ public class customerDAO {
     }
 
     public void addNewAccount(String email, String username, String pass, String fullname, String phone, String address) {
-        String query = "insert into Customer(email, user_name, password, fullName, phone, address) values (?, ?, ?, ?, ?, ?)";
+        String query = "insert into Customer(email, user_name, password, fullName, phone, address, roleId) values (?, ?, ?, ?, ?, ?, 0)";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);

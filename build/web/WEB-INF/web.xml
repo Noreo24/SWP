@@ -20,6 +20,10 @@
         <servlet-name>registerNewAccount</servlet-name>
         <servlet-class>Controller.Customer.registerNewAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>forgotpass</servlet-name>
+        <servlet-class>Controller.Customer.forgotpass</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addProduct</servlet-name>
         <url-pattern>/addProduct</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>registerNewAccount</servlet-name>
         <url-pattern>/registernewaccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>forgotpass</servlet-name>
+        <url-pattern>/forgotpass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

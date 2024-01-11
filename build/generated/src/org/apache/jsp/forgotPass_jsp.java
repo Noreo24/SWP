@@ -67,7 +67,7 @@ public final class forgotPass_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-md-6 col-lg-4\">\n");
       out.write("                        <div class=\"login-wrap p-0\">\n");
       out.write("                            <h3 class=\"mb-4 text-center\">Did you forget password?</h3>\n");
-      out.write("                            <form action=\"login\" class=\"signin-form\">\n");
+      out.write("                            <form action=\"forgotpass\" method=\"post\" class=\"signin-form\">\n");
       out.write("                                <div class=\"form-group\">\n");
       out.write("                                    <input type=\"text\" class=\"form-control\" placeholder=\"Email\" required name=\"email\">\n");
       out.write("                                </div>\n");

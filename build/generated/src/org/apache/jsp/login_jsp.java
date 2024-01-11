@@ -88,7 +88,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                        </label>\n");
       out.write("                                    </div>\n");
       out.write("                                    <div class=\"w-50 text-md-right\">\n");
-      out.write("                                        <a href=\"#\" style=\"color: #fff\">Forgot Password</a>\n");
+      out.write("                                        <a href=\"forgotPass.jsp\" style=\"color: #fff\">Forgot Password</a>\n");
       out.write("                                    </div>\n");
       out.write("                                </div>\n");
       out.write("                            </form>\n");
