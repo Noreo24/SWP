@@ -3,19 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documents/GitHub/SWP/web/components/headerforcustomer.jsp</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/Model/Product.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/web/index.jsp</file>
-            <file>file:/D:/Documents/GitHub/SWP/web/register.jsp</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/DAO/productDAO.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/Model/Customer.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/Controller/Common/home.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/DAO/adminDAO.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/Model/Trademark.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/web/login.jsp</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/DAO/customerDAO.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/Controller/Customer/login.java</file>
-            <file>file:/D:/Documents/GitHub/SWP/src/java/Model/Admin.java</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/components/adminHeader.jsp</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/WEB-INF/web.xml</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/css/style.css</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/META-INF/context.xml</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/components/headerforcustomer.jsp</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/screenshot/Index.png</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/css/bootstrap.min.css</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/index.jsp</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/screenshot/Checkout.png</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/css/slick.css</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/img/logo.png</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/store.jsp</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/css/font-awesome.min.css</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/css/slick-theme.css</file>
         </group>
     </open-files>
 </project-private>

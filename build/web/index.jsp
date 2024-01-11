@@ -172,6 +172,7 @@
                                             <!-- /product -->
                                         </c:forEach>
 
+<<<<<<< HEAD
                                     </div>
                                     <div id="slick-nav-1" class="products-slick-nav"></div>
                                 </div>
@@ -186,6 +187,25 @@
             <!-- /container -->
         </div>
         <!-- /SECTION -->
+=======
+					<!-- section title -->
+					<div class="col-md-12">
+						<div class="section-title">
+							<h3 class="title">New Products</h3>
+							<div class="section-nav">
+								<ul class="section-tab-nav tab-nav">
+									<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
+									<li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
+									<li><a data-toggle="tab" href="#tab1">Tables</a></li>
+									<li><a data-toggle="tab" href="#tab1">Headphones</a></li>
+									
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /section title -->
+>>>>>>> Phuc
 
         <!-- HOT DEAL SECTION -->
         <div id="hot-deal" class="section">
@@ -380,6 +400,7 @@
                                         </div>
                                         <!-- /product -->
 
+<<<<<<< HEAD
                                         <!-- product -->
                                         <div class="product">
                                             <div class="product-img">
@@ -421,6 +442,24 @@
             <!-- /container -->
         </div>
         <!-- /SECTION -->
+=======
+					<!-- section title -->
+					<div class="col-md-12">
+						<div class="section-title">
+							<h3 class="title">Top selling</h3>
+							<div class="section-nav">
+								<ul class="section-tab-nav tab-nav">
+									<li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
+									<li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
+									<li><a data-toggle="tab" href="#tab2">Tables</a></li>
+									<li><a data-toggle="tab" href="#tab2">Headphones</a></li>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /section title -->
+>>>>>>> Phuc
 
         <!-- SECTION -->
         <div class="section">
@@ -492,6 +531,7 @@
                                 </div>
                                 <!-- /product widget -->
 
+<<<<<<< HEAD
                                 <!-- product widget -->
                                 <div class="product-widget">
                                     <div class="product-img">
@@ -504,6 +544,21 @@
                                     </div>
                                 </div>
                                 <!-- /product widget -->
+=======
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-4 col-xs-6">
+						<div class="section-title">
+							<h4 class="title">New Products</h4>
+							<div class="section-nav">
+								<div id="slick-nav-3" class="products-slick-nav"></div>
+							</div>
+						</div>
+>>>>>>> Phuc
 
                                 <!-- product widget -->
                                 <div class="product-widget">
@@ -680,6 +735,7 @@
                                 </div>
                                 <!-- /product widget -->
 
+<<<<<<< HEAD
                                 <!-- product widget -->
                                 <div class="product-widget">
                                     <div class="product-img">
@@ -692,6 +748,15 @@
                                     </div>
                                 </div>
                                 <!-- /product widget -->
+=======
+					<div class="col-md-4 col-xs-6">
+						<div class="section-title">
+							<h4 class="title">Hot Deal</h4>
+							<div class="section-nav">
+								<div id="slick-nav-5" class="products-slick-nav"></div>
+							</div>
+						</div>
+>>>>>>> Phuc
 
                                 <!-- product widget -->
                                 <div class="product-widget">
@@ -819,6 +884,7 @@
             </div>
             <!-- /top footer -->
 
+<<<<<<< HEAD
             <!-- bottom footer -->
             <div id="bottom-footer" class="section">
                 <div class="container">
@@ -855,6 +921,40 @@
         <script src="js/nouislider.min.js"></script>
         <script src="js/jquery.zoom.min.js"></script>
         <script src="js/main.js"></script>
+=======
+		<!-- FOOTER -->
+		<footer id="footer">
+			<!-- top footer -->
+			<div class="section">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">About Us</h3>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+								<ul class="footer-links">
+									<li><a href="#"><i class="fa fa-map-marker"></i>FPT UNIVERSITY</a></li>
+									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>AkaiPhone@gmail.com</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Categories</h3>
+								<ul class="footer-links">
+									<li><a href="#">Hot deals</a></li>
+									<li><a href="#">Laptops</a></li>
+									<li><a href="#">Smartphones</a></li>
+									<li><a href="#">Tables</a></li>
+									<li><a href="#">Headphones</a></li>
+								</ul>
+							</div>
+						</div>
+>>>>>>> Phuc
 
     </body>
 </html>
