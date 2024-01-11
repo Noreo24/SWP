@@ -11,8 +11,23 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+    /* Thêm CSS để tùy chỉnh kích thước và bố cục của div */
+    .container {
+      text-align: center;
+    }
+
+    /* Thêm CSS để tùy chỉnh kích thước của hình ảnh */
+    .logo{
+      width: 200px; /* Điều chỉnh kích thước theo nhu cầu */
+      height: auto;
+      border-radius: 50%;
+     /* Làm tròn góc để tạo hình dáng hình tròn */
+    }
+  </style>
     </head>
     <body>
+<<<<<<< HEAD
         <!-- HEADER -->
         <header>
             <!-- TOP HEADER -->
@@ -31,6 +46,43 @@
                 </div>
             </div>
             <!-- /TOP HEADER -->
+=======
+<!-- HEADER -->
+		<header>
+			<!-- TOP HEADER -->
+			<div id="top-header">
+				<div class="container">
+					<ul class="header-links pull-left">
+						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+						<li><a href="#"><i class="fa fa-envelope-o"></i> AkaiPhone@gmail.com</a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i> FPT University</a></li>
+					</ul>
+					<ul class="header-links pull-right">
+						<li><a href="#"><i class="fa fa-user-o"></i> Sign in </a></li>
+                                                <li><a href="#"><i class="fa fa-user-plus"></i> Sign up </a></li>
+                                                
+					</ul>
+				</div>
+			</div>
+			<!-- /TOP HEADER -->
+
+			<!-- MAIN HEADER -->
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="#" class="logo">
+                                                                    <img style="width: 110px" src="./img/logo2.jpg" alt="">
+								</a>
+							</div>
+                                                    <p style = "color: red; font-size: 15px"> AKAI PHONES </p>
+						</div>
+						<!-- /LOGO -->
+>>>>>>> Phuc
 
             <!-- MAIN HEADER -->
             <div id="header">
@@ -120,6 +172,7 @@
                                 </div>
                                 <!-- /Cart -->
 
+<<<<<<< HEAD
                                 <!-- Menu Toogle -->
                                 <div class="menu-toggle">
                                     <a href="#">
@@ -163,4 +216,30 @@
             <!-- /container -->
         </nav>
         <!-- /NAVIGATION -->    </body>
+=======
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#">Hot Deals</a></li>
+						<li><a href="#">Categories</a></li>
+						<li><a href="#">Laptops</a></li>
+						<li><a href="#">Smartphones</a></li>
+						<li><a href="#">Tables</a></li>
+                                                <li><a href="#">Headphones</a></li>
+
+					</ul>
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->    </body>
+>>>>>>> Phuc
 </html>
