@@ -10,6 +10,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+    /* Thêm CSS để tùy chỉnh kích thước và bố cục của div */
+    .container {
+      text-align: center;
+    }
+
+    /* Thêm CSS để tùy chỉnh kích thước của hình ảnh */
+    .logo{
+      width: 200px; /* Điều chỉnh kích thước theo nhu cầu */
+      height: auto;
+      border-radius: 50%; /* Làm tròn góc để tạo hình dáng hình tròn */
+    }
+  </style>
     </head>
     <body>
 <!-- HEADER -->
@@ -19,12 +32,13 @@
 				<div class="container">
 					<ul class="header-links pull-left">
 						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+						<li><a href="#"><i class="fa fa-envelope-o"></i> AkaiPhone@gmail.com</a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i> FPT University</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+						<li><a href="#"><i class="fa fa-user-o"></i> Sign in </a></li>
+                                                <li><a href="#"><i class="fa fa-user-plus"></i> Sign up </a></li>
+                                                
 					</ul>
 				</div>
 			</div>
@@ -40,9 +54,10 @@
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="#" class="logo">
-                                                                    <img style="width: 250px" src="./img/logo.png" alt="">
+                                                                    <img style="width: 110px" src="./img/logo2.jpg" alt="">
 								</a>
 							</div>
+                                                    <p style = "color: red; font-size: 15px"> AKAI PHONES </p>
 						</div>
 						<!-- /LOGO -->
 

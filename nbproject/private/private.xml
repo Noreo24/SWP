@@ -3,17 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Online_Shop/web/product.jsp</file>
-            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Online_Shop/src/java/Model/Category.java</file>
-            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Online_Shop/web/checkout.jsp</file>
-            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Online_Shop/web/store.jsp</file>
-            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Online_Shop/web/ManageProduct.jsp</file>
-            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Online_Shop/web/index.jsp</file>
-            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Online_Shop/src/java/Controller/Admin/addProduct.java</file>
-            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Online_Shop/src/java/Controller/Admin/addPhone.java</file>
-            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Online_Shop/web/addProduct.jsp</file>
-            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Online_Shop/web/addPhone.jsp</file>
-            <file>file:/D:/FU%20Learning/Sem%205/SWP391/Phone_Online_Shop/src/java/Model/Trademark.java</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/components/adminHeader.jsp</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/WEB-INF/web.xml</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/css/style.css</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/META-INF/context.xml</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/components/headerforcustomer.jsp</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/screenshot/Index.png</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/css/bootstrap.min.css</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/screenshot/Checkout.png</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/css/slick.css</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/css/csslogin/customer.css</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/img/logo.png</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/store.jsp</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/css/font-awesome.min.css</file>
+            <file>file:/F:/FPTU/ky5/SWP/PRJ/GIT/SWP/web/css/slick-theme.css</file>
         </group>
     </open-files>
 </project-private>
