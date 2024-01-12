@@ -31,7 +31,6 @@ public class CustomerDAO {
             rs = stm.executeQuery();
             while (rs.next()) {
                 return new Customer(String.valueOf(rs.getInt(1)),
-                        String.valueOf(rs.getBoolean(10)),
                         rs.getString(2),
                         rs.getString(3),
                         String.valueOf(rs.getBoolean(4)),
@@ -39,7 +38,10 @@ public class CustomerDAO {
                         rs.getString(6),
                         rs.getString(7),
                         rs.getString(8),
-                        rs.getString(9));
+                        rs.getString(9),
+                        String.valueOf(rs.getBoolean(10)),
+                        String.valueOf(rs.getBoolean(11))
+                );
             }
 
         } catch (Exception e) {
@@ -56,7 +58,6 @@ public class CustomerDAO {
             rs = stm.executeQuery();
             while (rs.next()) {
                 return new Customer(String.valueOf(rs.getInt(1)),
-                        String.valueOf(rs.getBoolean(10)),
                         rs.getString(2),
                         rs.getString(3),
                         String.valueOf(rs.getBoolean(4)),
@@ -64,7 +65,10 @@ public class CustomerDAO {
                         rs.getString(6),
                         rs.getString(7),
                         rs.getString(8),
-                        rs.getString(9));
+                        rs.getString(9),
+                        String.valueOf(rs.getBoolean(10)),
+                        String.valueOf(rs.getBoolean(11))
+                );
             }
 
         } catch (Exception e) {
@@ -81,7 +85,6 @@ public class CustomerDAO {
             rs = stm.executeQuery();
             while (rs.next()) {
                 return new Customer(String.valueOf(rs.getInt(1)),
-                        String.valueOf(rs.getBoolean(10)),
                         rs.getString(2),
                         rs.getString(3),
                         String.valueOf(rs.getBoolean(4)),
@@ -89,7 +92,10 @@ public class CustomerDAO {
                         rs.getString(6),
                         rs.getString(7),
                         rs.getString(8),
-                        rs.getString(9));
+                        rs.getString(9),
+                        String.valueOf(rs.getBoolean(10)),
+                        String.valueOf(rs.getBoolean(11))
+                );
             }
 
         } catch (Exception e) {
@@ -98,7 +104,7 @@ public class CustomerDAO {
     }
 
     public void addNewAccount(String email, String username, String pass, String fullname, String phone, String address) {
-        String query = "insert into Customer(email, user_name, password, fullName, phone, address, roleId) values (?, ?, ?, ?, ?, ?, 0)";
+        String query = "insert into Customer(email, user_name, password, fullName, phone, address, roleId, status) values (?, ?, ?, ?, ?, ?, 0, 1)";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);

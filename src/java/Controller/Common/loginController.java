@@ -92,9 +92,16 @@ public class loginController extends HttpServlet {
         }
         if (cdao.getUserByUsername(username, pass) != null) {
             Customer c = cdao.getUserByUsername(username, pass);
-            HttpSession session = request.getSession();
-            session.setAttribute("c", c);
-            response.sendRedirect("home");
+            if ("true".equals(c.getStatus())) {
+                HttpSession session = request.getSession();
+                session.setAttribute("c", c);
+                response.sendRedirect("home");
+            } else {
+                String err = "Your account is banned!";
+                request.setAttribute("err", err);
+                request.getRequestDispatcher("/view/common/login.jsp").forward(request, response);
+            }
+
         } else if (adao.getAdminByUsername(username, pass) != null) {
             admin a = adao.getAdminByUsername(username, pass);
             HttpSession session = request.getSession();

@@ -19,12 +19,13 @@ public class Customer {
             email,
             phone,
             address,
-            roleId;
+            roleId,
+            status;
 
     public Customer() {
     }
 
-    public Customer(String userId, String fullName, String avatar, String gender, String password, String user_name, String email, String phone, String address, String roleId) {
+    public Customer(String userId, String fullName, String avatar, String gender, String password, String user_name, String email, String phone, String address, String roleId, String status) {
         this.userId = userId;
         this.fullName = fullName;
         this.avatar = avatar;
@@ -35,6 +36,7 @@ public class Customer {
         this.phone = phone;
         this.address = address;
         this.roleId = roleId;
+        this.status = status;
     }
 
     public String getUserId() {
@@ -116,5 +118,13 @@ public class Customer {
     public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
-    
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }
