@@ -8,7 +8,7 @@ package Model;
  *
  * @author Admin
  */
-public class admin {
+public class Admin {
 
     private String adminId,
             fullName,
@@ -21,10 +21,10 @@ public class admin {
             address,
             roleId;
 
-    public admin() {
+    public Admin() {
     }
 
-    public admin(String adminId, String fullName, String avatar, String gender, String email, String user_name, String password, String phone, String address, String roleId) {
+    public Admin(String adminId, String fullName, String avatar, String gender, String email, String user_name, String password, String phone, String address, String roleId) {
         this.adminId = adminId;
         this.fullName = fullName;
         this.avatar = avatar;

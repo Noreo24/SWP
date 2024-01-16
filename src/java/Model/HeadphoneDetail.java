@@ -8,7 +8,7 @@ package Model;
  *
  * @author Admin
  */
-public class headphoneDetail {
+public class HeadphoneDetail {
 
     private String connect,
             headphone_detail_id,
@@ -21,10 +21,10 @@ public class headphoneDetail {
             product_id,
             other_feature;
 
-    public headphoneDetail() {
+    public HeadphoneDetail() {
     }
 
-    public headphoneDetail(String connect, String headphone_detail_id, String color, String using_time, String sound_tech, String micro, String control_method, String waterproof, String product_id, String other_feature) {
+    public HeadphoneDetail(String connect, String headphone_detail_id, String color, String using_time, String sound_tech, String micro, String control_method, String waterproof, String product_id, String other_feature) {
         this.connect = connect;
         this.headphone_detail_id = headphone_detail_id;
         this.color = color;

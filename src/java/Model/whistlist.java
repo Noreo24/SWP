@@ -8,16 +8,16 @@ package Model;
  *
  * @author Admin
  */
-public class whistlist {
+public class Whistlist {
 
     private String whistlist_id,
             userId,
             productId;
 
-    public whistlist() {
+    public Whistlist() {
     }
 
-    public whistlist(String whistlist_id, String userId, String productId) {
+    public Whistlist(String whistlist_id, String userId, String productId) {
         this.whistlist_id = whistlist_id;
         this.userId = userId;
         this.productId = productId;

@@ -20,7 +20,7 @@ public class DBContext {
     }   
     /*Insert your other code right after this comment*/
     /*Change/update information of your database connection, DO NOT change name of instance variables in this class*/
-    private final String serverName = "ADMIN-PC\\MSSQLTUNG";// sua theo sql cua moi nguoi
+    private final String serverName = "localhost";// sua theo sql cua moi nguoi
     
     private final String dbName = "Phone_Shop_Online";
     private final String portNumber = "1433";
@@ -31,6 +31,7 @@ public class DBContext {
         try {
             System.out.println(new DBContext().getConnection());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

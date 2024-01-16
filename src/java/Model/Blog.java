@@ -8,7 +8,7 @@ package Model;
  *
  * @author Admin
  */
-public class blog {
+public class Blog {
 
     private String blog_id,
             title,
@@ -20,10 +20,10 @@ public class blog {
             categoryBlog_id,
             status;
 
-    public blog() {
+    public Blog() {
     }
 
-    public blog(String blog_id, String title, String author_id, String updated_date, String content, String thumbnail, String brief_infor, String categoryBlog_id, String status) {
+    public Blog(String blog_id, String title, String author_id, String updated_date, String content, String thumbnail, String brief_infor, String categoryBlog_id, String status) {
         this.blog_id = blog_id;
         this.title = title;
         this.author_id = author_id;

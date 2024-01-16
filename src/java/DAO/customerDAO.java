@@ -5,7 +5,7 @@
 package DAO;
 
 import DBContext.DBContext;
-import Model.Customer;
+import Model.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +20,11 @@ public class CustomerDAO {
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
     ResultSet rs;//Lưu trữ và xử lý dữ liệu
+
+    public static void main(String[] args) {
+        Customer customer = new CustomerDAO().getUserByEmail("tung050903@gmail.com");
+        System.out.println(customer.getAddress());
+    }
 
     public Customer getUserByUsername(String username, String pass) {
         String query = "select * from Customer where user_name = ? and password = ?";

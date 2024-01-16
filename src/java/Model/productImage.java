@@ -8,17 +8,17 @@ package Model;
  *
  * @author Admin
  */
-public class productImage {
+public class ProductImage {
 
     private String products_images_id,
             product_id,
             status,
             images;
 
-    public productImage() {
+    public ProductImage() {
     }
 
-    public productImage(String products_images_id, String product_id, String status, String images) {
+    public ProductImage(String products_images_id, String product_id, String status, String images) {
         this.products_images_id = products_images_id;
         this.product_id = product_id;
         this.status = status;
