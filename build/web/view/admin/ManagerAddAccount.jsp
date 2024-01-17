@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Manager Account</title>
+        <title>Manager Add Account</title>
 
         <!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -52,97 +52,87 @@
         <div class="section">
             <!-- container -->
             <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h2> <b>List Customer</b></h2>
-                            </div>
-                            <div class="col-sm-6">
-                                <a href="${pageContext.request.contextPath}/ManagerAddAccount"><button type="button" class="btn btn-success">Add New Customer</button></a>
-                            </div>
+                <div class="col-xl-4">
+                    <!-- Profile picture card-->
+                    <div class="card mb-4 mb-xl-0">
+                        <!--<div class="card-header"></div>-->
+                        <div class="card-body text-center">
+                            <!-- Profile picture image--> 
+                            <img class="img-account-profile rounded-circle mb-2" id="imgAvatar"
+                                 src="${userCustomer.getAvatar()}" 
+                                 onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'" 
+                                 alt="">
                         </div>
                     </div>
-                    <div class="table-title">
-                        <div class="row">
-                            <form action="${pageContext.request.contextPath}/ManagerAccount" method="get">
-                                <div class="col-sm-6">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="nameSearch"
-                                               value="${nameSearch}" placeholder="Search by name"
-                                               />
-                                        <input type="text" name="pageIndex"  hidden
-                                               value="${pageIndex}" required />
-                                        <input type="text" name="pageSize"  hidden
-                                               value="${pageSize}" required />
-                                        <input hidden type="submit"/>
+                </div>
+                <!-- row -->
+                <div class="col-xl-8">
+                    <!-- Account details card-->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <form action="${pageContext.request.contextPath}/ManagerEditAccount" method="post">
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="inputUsername">Username </label>
+                                    <input class="form-control" id="inputUsername" type="text" required
+                                           placeholder="Enter your username" value="${userCustomer.getUser_name()}">
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="inputFirstName">Gmail</label>
+                                        <input class="form-control" id="inputFirstName" type="email" disabled required
+                                               placeholder="Enter your gmail" value="${userCustomer.getEmail()}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="inputLastName">Full Name</label>
+                                        <input class="form-control" id="inputLastName" type="text" name="textFullName" required
+                                               placeholder="Enter your last name" value="${userCustomer.getFullName()}">
                                     </div>
                                 </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="inputOrgName">Phone</label>
+                                        <input class="form-control" id="inputOrgName" type  ="text" name="txtPhone" required
+                                               placeholder="Enter your phone" value="${userCustomer.getPhone()}">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="inputLocation">Address</label>
+                                        <input class="form-control" id="inputLocation" type="text" name="txtAddress" required
+                                               placeholder="Enter your address" value="${userCustomer.getAddress()}">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="inputEmailAddress">Link Avatar</label>
+                                    <input class="form-control" id="inputEmailAddress" type="text" name="txtAvatar" required
+                                           onchange="updateAvatar(this.value)"
+                                           placeholder="Enter your link avatar" value="${userCustomer.getAvatar()}">
+                                </div>
+                                <script>
+                                    function updateAvatar(link) {
+                                        var imgElement = document.getElementById("imgAvatar");
+                                        imgElement.src = link;
+                                    }
+                                </script>
+                                <div class="row gx-3 mb-3">
+
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" >Gender: </label>
+                                        <input  id="inputGenderMale" type="radio" name="gender"
+                                                checked   value="1"> 
+                                        <label for="inputGenderMale">Male</label>
+                                        <input  id="inputGenderFeMale" type="radio" name="gender"
+                                                <c:if test="${!userCustomer.getGender()}">
+                                                    checked
+                                                </c:if>
+                                                value="0">
+                                        <label for="inputGenderFeMale">FeMale</label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" type="submit">Save changes</button>
                             </form>
                         </div>
                     </div>
-                    <br/>
-                    <table class="table">
-                        <thead class="thead" style="background: #ff2e00">
-                            <tr> 
-                                <th scope="col">#</th>
-                                <th scope="col">Full Name</th>
-                                <th scope="col">UserName</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="item" items="${customers}" varStatus="loop">
-                                <tr>
-                                    <th scope="row">${loop.index +1}</th>
-                                    <td><a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserId()}">${item.getFullName()}</a> </td>
-                                    <td>${item.getUser_name()}</td>
-                                    <td>${item.getEmail()}</td>
-                                    <td>${item.getPhone()}</td>
-                                    <td>
-                                        <c:if test="${item.getStatus() == 'true'}">
-                                            <p class="text-success">Active</p>
-                                        </c:if>
-                                        <c:if test="${item.getStatus() == 'false'}">
-                                            <p class="text-danger">Block</p>
-                                        </c:if>
-                                    </td>
-                                    <td>
-                                        <c:if test="${item.getStatus() == 'true'}">
-                                            <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserId()}&active=false&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}">
-                                                <button class="btn btn-danger">Block</button>
-                                            </a> 
-                                        </c:if>
-                                        <c:if test="${item.getStatus() == 'false'}">
-                                            <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserId()}&active=true&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}">
-                                                <button class="btn btn-success">Active</button>
-                                            </a> 
-                                        </c:if>
-                                        <a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserId()}">
-                                            <button class="btn btn-dark">Edit</button>
-                                        </a> 
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /row -->
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>${customers.size()}</b> out of <b>${countAccount}</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex-1}&pageSize=${pageSize}">Previous</a></li>
-                            <c:forEach var="item" begin="1" end="${page}">
-                            <li class="page-item ${item == pageIndex ? 'active': ''}">
-                                <a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${item}&pageSize=${pageSize}" class="page-link">${item}</a>
-                            </li>
-                        </c:forEach>
-                        <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex+1}&pageSize=${pageSize}" class="page-link">Next</a></li>
-                    </ul>
                 </div>
             </div>
             <!-- /container -->

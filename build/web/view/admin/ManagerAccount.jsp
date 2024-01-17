@@ -60,7 +60,7 @@
                                 <h2> <b>List Customer</b></h2>
                             </div>
                             <div class="col-sm-6">
-                                <a href="#"><button type="button" class="btn btn-success">Add New Customer</button></a>
+                                <a href="${pageContext.request.contextPath}/ManagerAddAccount"><button type="button" class="btn btn-success">Add New Customer</button></a>
                             </div>
                         </div>
                     </div>
