@@ -32,7 +32,7 @@ public class ManagerAccountController extends HttpServlet {
         if (session.getAttribute("accountSession") != null && session.getAttribute("a") != null) {
 
             ArrayList<Role> roles = new RoleDAO().getAll();
-            
+
             // Xử lý hành động block hoặc active 
             if (request.getParameter("userID") != null && request.getParameter("active") != null) {
                 String userID = request.getParameter("userID");
@@ -40,7 +40,7 @@ public class ManagerAccountController extends HttpServlet {
 
                 Account account = new AccountDAO().getUserById(userID);
                 account.setStatus(active);
-                
+
                 new AccountDAO().update(account);
             }
 
@@ -51,6 +51,13 @@ public class ManagerAccountController extends HttpServlet {
             }
             int pageIndex = 1;
             int pageSize = 5;
+            int roleSelect = 0;
+            if (request.getParameter("roleSelect") != null) {
+                try {
+                    roleSelect = Integer.parseInt(request.getParameter("roleSelect"));
+                } catch (Exception e) {
+                }
+            }
 
             if (request.getParameter("pageSize") != null) {
                 try {
@@ -70,7 +77,7 @@ public class ManagerAccountController extends HttpServlet {
                 } catch (Exception e) {
                 }
             }
-            int countAccount = new AccountDAO().getCount(nameSearch);
+            int countAccount = new AccountDAO().getCount(nameSearch, roleSelect);
 
             if (pageSize > countAccount) {
                 pageSize = countAccount;
@@ -85,11 +92,13 @@ public class ManagerAccountController extends HttpServlet {
                     page = countAccount / pageSize;
                 }
             }
+
             if (pageIndex > page) {
                 pageIndex = page;
             }
 
-            ArrayList<Account> accounts = new AccountDAO().getAll(nameSearch, pageIndex, pageSize);
+            ArrayList<Account> accounts = new AccountDAO()
+                    .getAll(nameSearch, pageIndex, pageSize, roleSelect);
 
             request.setAttribute("nameSearch", nameSearch);
             request.setAttribute("accounts", accounts);
@@ -98,6 +107,8 @@ public class ManagerAccountController extends HttpServlet {
             request.setAttribute("pageSize", pageSize);
             request.setAttribute("checkActive", "Manage account");
             request.setAttribute("countAccount", countAccount);
+            request.setAttribute("roles", roles);
+            request.setAttribute("roleSelect", roleSelect);
 
             request.getRequestDispatcher("/view/admin/ManagerAccount.jsp").forward(request, response);
 

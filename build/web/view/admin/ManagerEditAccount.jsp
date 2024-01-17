@@ -116,7 +116,6 @@
                                     }
                                 </script>
                                 <div class="row gx-3 mb-3">
-
                                     <div class="col-md-6">
                                         <label class="small mb-1" >Gender: </label>
                                         <input  id="inputGenderMale" type="radio" name="gender"
@@ -128,6 +127,20 @@
                                                 </c:if>
                                                 value="0">
                                         <label for="inputGenderFeMale">FeMale</label>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label small mb-1">Role</label>
+                                        <select class="form-select" name="roleSelect">
+                                            <c:forEach var="item" items="${roles}">
+                                                <option value="${item.roleId}"
+                                                        <c:if test="${item.roleId == userAccount.roleId}">
+                                                            selected
+                                                        </c:if>
+                                                        >${item.role_name}</option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary" type="submit">Save changes</button>

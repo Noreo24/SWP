@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
@@ -29,10 +30,11 @@ public class ManagerEditAccountController extends HttpServlet {
         
         if (session.getAttribute("accountSession") != null) {
             Account account = new AccountDAO().getUserById(request.getParameter("userID"));
+            ArrayList<Role> roles = new RoleDAO().getAll();
             
             request.setAttribute("userAccount", account);
-            
             request.setAttribute("checkActive", "Edit account");
+            request.setAttribute("roles", roles);
             
             request.getRequestDispatcher("/view/admin/ManagerEditAccount.jsp").forward(request, response);
         } else {
@@ -58,12 +60,14 @@ public class ManagerEditAccountController extends HttpServlet {
         String address = request.getParameter("txtAddress");
         String avatar = request.getParameter("txtAvatar");
         String gender = request.getParameter("gender");
+        String roleId = request.getParameter("roleSelect");
         
         cus.setFullName(fullName);
         cus.setPhone(phone);
         cus.setAddress(address);
         cus.setAvatar(avatar);
         cus.setGender(gender);
+        cus.setRoleId(roleId);
         
         new AccountDAO().update(cus);
         
