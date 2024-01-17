@@ -59,7 +59,7 @@
                         <div class="card-body text-center">
                             <!-- Profile picture image--> 
                             <img class="img-account-profile rounded-circle mb-2" id="imgAvatar"
-                                 src="${userCustomer.getAvatar()}" 
+                                 src="${userAccount.getAvatar()}" 
                                  onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'" 
                                  alt="">
                         </div>
@@ -71,35 +71,35 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <form action="${pageContext.request.contextPath}/ManagerEditAccount" method="post">
-                                <input hidden type="text" name="userID" value="${userCustomer.getUserId()}" required/>
+                                <input hidden type="text" name="userID" value="${userAccount.getUserID()}" required/>
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputUsername">Username </label>
                                     <input class="form-control" disabled  id="inputUsername" type="text" required
-                                           placeholder="Enter your username" value="${userCustomer.getUser_name()}">
+                                           placeholder="Enter your username" value="${userAccount.getUser_name()}">
                                 </div>
                                 <div class="row gx-3 mb-3">
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputFirstName">Gmail</label>
                                         <input class="form-control" id="inputFirstName" type="email" disabled required
-                                               placeholder="Enter your gmail" value="${userCustomer.getEmail()}">
+                                               placeholder="Enter your gmail" value="${userAccount.getEmail()}">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputLastName">Full Name</label>
                                         <input class="form-control" id="inputLastName" type="text" name="textFullName" required
-                                               placeholder="Enter your last name" value="${userCustomer.getFullName()}">
+                                               placeholder="Enter your last name" value="${userAccount.getFullName()}">
                                     </div>
                                 </div>
                                 <div class="row gx-3 mb-3">
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputOrgName">Phone</label>
                                         <input class="form-control" id="inputOrgName" type  ="text" name="txtPhone" required
-                                               placeholder="Enter your phone" value="${userCustomer.getPhone()}">
+                                               placeholder="Enter your phone" value="${userAccount.getPhone()}">
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputLocation">Address</label>
                                         <input class="form-control" id="inputLocation" type="text" name="txtAddress" required
-                                               placeholder="Enter your address" value="${userCustomer.getAddress()}">
+                                               placeholder="Enter your address" value="${userAccount.getAddress()}">
                                     </div>
                                 </div>
 
@@ -107,7 +107,7 @@
                                     <label class="small mb-1" for="inputEmailAddress">Link Avatar</label>
                                     <input class="form-control" id="inputEmailAddress" type="text" name="txtAvatar" required
                                            onchange="updateAvatar(this.value)"
-                                           placeholder="Enter your link avatar" value="${userCustomer.getAvatar()}">
+                                           placeholder="Enter your link avatar" value="${userAccount.getAvatar()}">
                                 </div>
                                 <script>
                                     function updateAvatar(link) {
@@ -123,7 +123,7 @@
                                                 checked   value="1"> 
                                         <label for="inputGenderMale">Male</label>
                                         <input  id="inputGenderFeMale" type="radio" name="gender"
-                                                <c:if test="${!userCustomer.getGender()}">
+                                                <c:if test="${!userAccount.getGender()}">
                                                     checked
                                                 </c:if>
                                                 value="0">

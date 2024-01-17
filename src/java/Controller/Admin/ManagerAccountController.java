@@ -4,8 +4,8 @@
  */
 package Controller.Admin;
 
-import DAO.CustomerDAO;
-import Model.Customer;
+import DAO.*;
+import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -28,17 +29,19 @@ public class ManagerAccountController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        if (session.getAttribute("a") != null) {
+        if (session.getAttribute("accountSession") != null && session.getAttribute("a") != null) {
 
+            ArrayList<Role> roles = new RoleDAO().getAll();
+            
             // Xử lý hành động block hoặc active 
             if (request.getParameter("userID") != null && request.getParameter("active") != null) {
                 String userID = request.getParameter("userID");
                 String active = request.getParameter("active");
 
-                Customer customer = new CustomerDAO().getUserById(userID);
-                customer.setStatus(active);
+                Account account = new AccountDAO().getUserById(userID);
+                account.setStatus(active);
                 
-                new CustomerDAO().update(customer);
+                new AccountDAO().update(account);
             }
 
             // Xử lý lấy danh sách tài khoản
@@ -67,7 +70,7 @@ public class ManagerAccountController extends HttpServlet {
                 } catch (Exception e) {
                 }
             }
-            int countAccount = new CustomerDAO().getCount(nameSearch);
+            int countAccount = new AccountDAO().getCount(nameSearch);
 
             if (pageSize > countAccount) {
                 pageSize = countAccount;
@@ -86,10 +89,10 @@ public class ManagerAccountController extends HttpServlet {
                 pageIndex = page;
             }
 
-            ArrayList<Customer> customers = new CustomerDAO().getAll(nameSearch, pageIndex, pageSize);
+            ArrayList<Account> accounts = new AccountDAO().getAll(nameSearch, pageIndex, pageSize);
 
             request.setAttribute("nameSearch", nameSearch);
-            request.setAttribute("customers", customers);
+            request.setAttribute("accounts", accounts);
             request.setAttribute("page", page);
             request.setAttribute("pageIndex", pageIndex);
             request.setAttribute("pageSize", pageSize);

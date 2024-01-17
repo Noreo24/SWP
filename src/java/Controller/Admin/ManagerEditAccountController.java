@@ -4,8 +4,8 @@
  */
 package Controller.Admin;
 
-import DAO.CustomerDAO;
-import Model.Customer;
+import DAO.*;
+import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -27,10 +27,10 @@ public class ManagerEditAccountController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         
-        if (session.getAttribute("a") != null) {
-            Customer customer = new CustomerDAO().getUserById(request.getParameter("userID"));
+        if (session.getAttribute("accountSession") != null) {
+            Account account = new AccountDAO().getUserById(request.getParameter("userID"));
             
-            request.setAttribute("userCustomer", customer);
+            request.setAttribute("userAccount", account);
             
             request.setAttribute("checkActive", "Edit account");
             
@@ -51,7 +51,7 @@ public class ManagerEditAccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Customer cus = new CustomerDAO().getUserById(request.getParameter("userID"));
+        Account cus = new AccountDAO().getUserById(request.getParameter("userID"));
         
         String fullName = request.getParameter("textFullName");
         String phone = request.getParameter("txtPhone");
@@ -65,7 +65,7 @@ public class ManagerEditAccountController extends HttpServlet {
         cus.setAvatar(avatar);
         cus.setGender(gender);
         
-        new CustomerDAO().update(cus);
+        new AccountDAO().update(cus);
         
         response.sendRedirect("ManagerAccount");
     }

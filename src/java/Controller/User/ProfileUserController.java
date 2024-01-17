@@ -4,8 +4,8 @@
  */
 package Controller.User;
 
-import DAO.CustomerDAO;
-import Model.Customer;
+import DAO.*;
+import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -27,12 +27,12 @@ public class ProfileUserController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        if (session.getAttribute("c") != null) {
-            Customer customer = (Customer) session.getAttribute("c");
+        if (session.getAttribute("accountSession") != null) {
+            Account account = (Account) session.getAttribute("accountSession");
 
-            Customer cus = new CustomerDAO().getUserByEmail(customer.getEmail());
+            Account cus = new AccountDAO().getUserByEmail(account.getEmail());
 
-            request.setAttribute("userCustomer", cus);
+            request.setAttribute("userAccount", cus);
 
             request.getRequestDispatcher("/view/user/profile.jsp").forward(request, response);
         } else {

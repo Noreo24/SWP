@@ -20,25 +20,24 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author LanChau
  */
-@WebServlet(name="LoginController", urlPatterns={"/logincontroller"})
+@WebServlet(name = "LoginController", urlPatterns = {"/logincontroller"})
 public class LoginController extends HttpServlet {
 
-     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("/view/common/login.jsp").forward(request, response);
     }
 
-     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String pass = request.getParameter("password");
         String rempass = request.getParameter("rememberpass");
-        CustomerDAO cdao = new CustomerDAO();
-        AdminDAO adao = new AdminDAO();
+//        CustomerDAO cdao = new CustomerDAO();
+//        AdminDAO adao = new AdminDAO();
+        AccountDAO accountDAO = new AccountDAO();
         if (rempass != null) {
             Cookie c_user = new Cookie("username", username);
             Cookie c_pass = new Cookie("pass", pass);
@@ -49,23 +48,31 @@ public class LoginController extends HttpServlet {
             response.addCookie(c_user);
             response.addCookie(c_pass);
         }
-        if (cdao.getUserByUsername(username, pass) != null) {
-            Customer c = cdao.getUserByUsername(username, pass);
-            if ("true".equals(c.getStatus())) {
+        Account account = accountDAO.getUserByUsername(username, pass);
+        if (account != null) {
+            if ("true".equals(account.getStatus())) {
                 HttpSession session = request.getSession();
-                session.setAttribute("c", c);
-                response.sendRedirect("Home");
+                session.setAttribute("accountSession", account);
+
+                // đoạn này để ko ảnh hưởng code cũ. Nên trọc data từ accountSession
+                if (account.getRoleId().equals("1")) {
+                    session.setAttribute("a", account);
+                    response.sendRedirect("ManagerAccount");
+                } else {
+                    session.setAttribute("c", account);
+                    response.sendRedirect("Home");
+                }
             } else {
                 String err = "Your account is banned!";
                 request.setAttribute("err", err);
                 request.getRequestDispatcher("/view/common/login.jsp").forward(request, response);
             }
 
-        } else if (adao.getAdminByUsername(username, pass) != null) {
-            Admin a = adao.getAdminByUsername(username, pass);
-            HttpSession session = request.getSession();
-            session.setAttribute("a", a);
-            response.sendRedirect("ManagerAccount");
+//        } else if (adao.getAdminByUsername(username, pass) != null) {
+//            Admin a = adao.getAdminByUsername(username, pass);
+//            HttpSession session = request.getSession();
+//            session.setAttribute("a", a);
+//            
         } else {
             String err = "Wrong username or password!";
             request.setAttribute("err", err);

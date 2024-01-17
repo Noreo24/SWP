@@ -5,7 +5,7 @@
 package DAO;
 
 import DBContext.DBContext;
-import Model.Customer;
+import Model.*;
 import Model.Role;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

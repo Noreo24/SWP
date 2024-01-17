@@ -4,10 +4,8 @@
  */
 package Controller.Admin;
 
-import DAO.CustomerDAO;
-import DAO.RoleDAO;
-import Model.Customer;
-import Model.Role;
+import DAO.*;
+import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -29,10 +27,10 @@ public class ManagerAddAccountController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("a") != null) {
-            Customer customer = new CustomerDAO().getUserById(request.getParameter("userID"));
+        if (session.getAttribute("accountSession") != null) {
+            Account account = new AccountDAO().getUserById(request.getParameter("userID"));
             
-            request.setAttribute("userCustomer", customer);
+            request.setAttribute("userAccount", account);
             request.setAttribute("checkActive", "Add account");
 
             request.getRequestDispatcher("/view/admin/ManagerAddAccount.jsp").forward(request, response);

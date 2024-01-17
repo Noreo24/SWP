@@ -57,7 +57,7 @@
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2> <b>List Customer</b></h2>
+                                <h2> <b>List Account</b></h2>
                             </div>
                             <div class="col-sm-6">
                                 <a href="${pageContext.request.contextPath}/ManagerAddAccount"><button type="button" class="btn btn-success">Add New Customer</button></a>
@@ -96,10 +96,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="item" items="${customers}" varStatus="loop">
+                            <c:forEach var="item" items="${accounts}" varStatus="loop">
                                 <tr>
                                     <th scope="row">${loop.index +1}</th>
-                                    <td><a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserId()}">${item.getFullName()}</a> </td>
+                                    <td><a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserID()}">${item.getFullName()}</a> </td>
                                     <td>${item.getUser_name()}</td>
                                     <td>${item.getEmail()}</td>
                                     <td>${item.getPhone()}</td>
@@ -113,16 +113,16 @@
                                     </td>
                                     <td>
                                         <c:if test="${item.getStatus() == 'true'}">
-                                            <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserId()}&active=false&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}">
+                                            <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=false&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}">
                                                 <button class="btn btn-danger">Block</button>
                                             </a> 
                                         </c:if>
                                         <c:if test="${item.getStatus() == 'false'}">
-                                            <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserId()}&active=true&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}">
+                                            <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=true&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}">
                                                 <button class="btn btn-success">Active</button>
                                             </a> 
                                         </c:if>
-                                        <a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserId()}">
+                                        <a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserID()}">
                                             <button class="btn btn-dark">Edit</button>
                                         </a> 
                                     </td>

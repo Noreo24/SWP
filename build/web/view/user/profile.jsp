@@ -32,7 +32,7 @@
                         <div class="card-body text-center">
                             <!-- Profile picture image--> 
                             <img class="img-account-profile rounded-circle mb-2" 
-                                 src="${userCustomer.getAvatar()}" 
+                                 src="${userAccount.getAvatar()}" 
                                  onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'" 
                                  alt="">
                             <!-- Profile picture help block-->
@@ -51,20 +51,20 @@
                                 <div class="bio-graph-heading">
                                 </div>
                                 <div class="panel-body bio-graph-info">
-                                    <h1 class="mb-4">${userCustomer.getFullName()}</h1>
+                                    <h1 class="mb-4">${userAccount.getFullName()}</h1>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="bio-row">
-                                                <p><span>Email </span>: ${userCustomer.getEmail()}</p>
+                                                <p><span>Email </span>: ${userAccount.getEmail()}</p>
                                             </div>
                                             <div class="bio-row">
-                                                <p><span>User Name </span>: ${userCustomer.getUser_name()}</p>
+                                                <p><span>User Name </span>: ${userAccount.getUser_name()}</p>
                                             </div>
                                             <div class="bio-row">
-                                                <p><span>Phone </span>: ${userCustomer.getPhone()}</p>
+                                                <p><span>Phone </span>: ${userAccount.getPhone()}</p>
                                             </div>
                                             <div class="bio-row">
-                                                <p><span>Adderss </span>: ${userCustomer.getAddress()}</p>
+                                                <p><span>Adderss </span>: ${userAccount.getAddress()}</p>
                                             </div>
                                         </div>
                                         <!--                                        <div class="col-md-6">
