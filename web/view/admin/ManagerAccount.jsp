@@ -99,7 +99,7 @@
                             <c:forEach var="item" items="${customers}" varStatus="loop">
                                 <tr>
                                     <th scope="row">${loop.index +1}</th>
-                                    <td><a>${item.getFullName()}</a> </td>
+                                    <td><a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserId()}">${item.getFullName()}</a> </td>
                                     <td>${item.getUser_name()}</td>
                                     <td>${item.getEmail()}</td>
                                     <td>${item.getPhone()}</td>
@@ -118,10 +118,13 @@
                                             </a> 
                                         </c:if>
                                         <c:if test="${item.getStatus() == 'false'}">
-                                             <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserId()}&active=true&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}">
-                                            <button class="btn btn-success">Active</button>
-                                             </a> 
+                                            <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserId()}&active=true&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}">
+                                                <button class="btn btn-success">Active</button>
+                                            </a> 
                                         </c:if>
+                                        <a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserId()}">
+                                            <button class="btn btn-dark">Edit</button>
+                                        </a> 
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -137,7 +140,7 @@
                             <li class="page-item ${item == pageIndex ? 'active': ''}">
                                 <a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${item}&pageSize=${pageSize}" class="page-link">${item}</a>
                             </li>
-                            </c:forEach>
+                        </c:forEach>
                         <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex+1}&pageSize=${pageSize}" class="page-link">Next</a></li>
                     </ul>
                 </div>
