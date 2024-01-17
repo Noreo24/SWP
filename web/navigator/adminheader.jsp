@@ -3,7 +3,7 @@
     Created on : Jan 11, 2024, 10:23:23 PM
     Author     : Admin
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,11 +17,14 @@
             <!-- TOP HEADER -->
             <div id="top-header">
                 <div class="container">
-
                     <ul class="header-links pull-right">
+                         <c:if test="${sessionScope.a != null}">
                             <li><a href="#">Log out</a></li>
-                            <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-                            <li><a href="login.jsp"><i class="fa fa-user-o"></i> Log in</a></li>
+                            <li><a href="#"><i class="fa fa-user-o"></i> My Account - ${sessionScope.c.getFullName()}</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.a == null}">
+                            <li><a href="${pageContext.request.contextPath}/view/common/login.jsp"><i class="fa fa-user-o"></i> Log in</a></li>
+                            </c:if>
                     </ul>
                 </div>
             </div>

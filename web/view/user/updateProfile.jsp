@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : profile
     Created on : Jan 17, 2024, 2:48:08 AM
@@ -20,7 +21,6 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/Home">Home</a>
                 <a class="nav-link active ms-0" href="${pageContext.request.contextPath}/ProfileUser">Profile</a>
                 <!--                <a class="nav-link" href="#" target="__blank">Billing</a>
-                                <a class="nav-link" href="#" target="__blank">Security</a>
                                 <a class="nav-link" href="#"  target="__blank">Notifications</a>-->
             </nav>
             <hr class="mt-0 mb-4">
@@ -37,8 +37,7 @@
                                  alt="">
                             <!-- Profile picture help block-->
                             <div class="small font-italic text-muted mb-4">  </div>
-                            <!-- Profile picture upload button-->
-                            <a class="btn btn-primary" href="">Update Profile</a>
+                            <!-- Profile picture upload button-->  
                             <a class="btn btn-primary" href="#">Log out</a>
                         </div>
                     </div>
@@ -47,43 +46,58 @@
                     <!-- Account details card-->
                     <div class="card mb-4">
                         <div class="card-body">
-                            <div class="panel">
-                                <div class="bio-graph-heading">
+                            <form action="${pageContext.request.contextPath}/UpdateProfileUser" method="post">
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="inputUsername">Username </label>
+                                    <input class="form-control" disabled  id="inputUsername" type="text" required
+                                           placeholder="Enter your username" value="${userCustomer.getUser_name()}">
                                 </div>
-                                <div class="panel-body bio-graph-info">
-                                    <h1 class="mb-4">${userCustomer.getFullName()}</h1>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="bio-row">
-                                                <p><span>Email </span>: ${userCustomer.getEmail()}</p>
-                                            </div>
-                                            <div class="bio-row">
-                                                <p><span>User Name </span>: ${userCustomer.getUser_name()}</p>
-                                            </div>
-                                            <div class="bio-row">
-                                                <p><span>Phone </span>: ${userCustomer.getPhone()}</p>
-                                            </div>
-                                            <div class="bio-row">
-                                                <p><span>Adderss </span>: ${userCustomer.getAddress()}</p>
-                                            </div>
-                                        </div>
-                                        <!--                                        <div class="col-md-6">
-                                                                                    <div class="bio-row">
-                                                                                        <p><span>Occupation </span>: UI Designer</p>
-                                                                                    </div>
-                                                                                    <div class="bio-row">
-                                                                                        <p><span>Email </span>: jsmith@flatlab.com</p>
-                                                                                    </div>
-                                                                                    <div class="bio-row">
-                                                                                        <p><span>Mobile </span>: (12) 03 4567890</p>
-                                                                                    </div>
-                                                                                    <div class="bio-row">
-                                                                                        <p><span>Phone </span>: 88 (02) 123456</p>
-                                                                                    </div>
-                                                                                </div>-->
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="inputFirstName">Gmail</label>
+                                        <input class="form-control" id="inputFirstName" type="email" disabled required
+                                               placeholder="Enter your gmail" value="${userCustomer.getEmail()}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="inputLastName">Full Name</label>
+                                        <input class="form-control" id="inputLastName" type="text" name="textFullName" required
+                                               placeholder="Enter your last name" value="${userCustomer.getFullName()}">
                                     </div>
                                 </div>
-                            </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="inputOrgName">Phone</label>
+                                        <input class="form-control" id="inputOrgName" type  ="text" name="txtPhone" required
+                                               placeholder="Enter your phone" value="${userCustomer.getPhone()}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="inputLocation">Address</label>
+                                        <input class="form-control" id="inputLocation" type="text" name="txtAddress" required
+                                               placeholder="Enter your address" value="${userCustomer.getAddress()}">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="inputEmailAddress">Link Avatar</label>
+                                    <input class="form-control" id="inputEmailAddress" type="text" name="txtAvatar" required
+                                           placeholder="Enter your link avatar" value="${userCustomer.getAvatar()}">
+                                </div>
+                                <div class="row gx-3 mb-3">
+
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" >Gender: </label>
+                                        <input  id="inputGenderMale" type="radio" name="gender"
+                                                checked   value="1"> 
+                                        <label for="inputGenderMale">Male</label>
+                                        <input  id="inputGenderFeMale" type="radio" name="gender"
+                                                <c:if test="${!userCustomer.getGender()}">
+                                                    checked
+                                                </c:if>
+                                                value="0">
+                                        <label for="inputGenderFeMale">FeMale</label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" type="submit">Save changes</button>
+                            </form>
                         </div>
                     </div>
                 </div>

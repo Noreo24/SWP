@@ -38,7 +38,7 @@
                             <!-- Profile picture help block-->
                             <div class="small font-italic text-muted mb-4">  </div>
                             <!-- Profile picture upload button-->
-                            <a class="btn btn-primary" href="">Update Profile</a>
+                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/UpdateProfileUser">Update Profile</a>
                             <a class="btn btn-primary" href="#">Log out</a>
                         </div>
                     </div>

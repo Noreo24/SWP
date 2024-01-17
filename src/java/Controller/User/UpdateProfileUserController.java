@@ -32,8 +32,8 @@ public class UpdateProfileUserController extends HttpServlet {
 
             Customer cus = new CustomerDAO().getUserByEmail(customer.getEmail());
 
-            request.setAttribute("userCustomer", customer);
-            
+            request.setAttribute("userCustomer", cus);
+
             request.getRequestDispatcher("/view/user/updateProfile.jsp").forward(request, response);
         } else {
             response.sendRedirect("logincontroller");
@@ -51,6 +51,34 @@ public class UpdateProfileUserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        if (session.getAttribute("c") != null) {
+            Customer customer = (Customer) session.getAttribute("c");
+
+            Customer cus = new CustomerDAO().getUserByEmail(customer.getEmail());
+
+            String fullName = request.getParameter("textFullName");
+            String phone = request.getParameter("txtPhone");
+            String address = request.getParameter("txtAddress");
+            String avatar = request.getParameter("txtAvatar");
+            String gender = request.getParameter("gender");
+            
+            cus.setFullName(fullName);
+            cus.setPhone(phone);
+            cus.setAddress(address);
+            cus.setAvatar(avatar);
+            cus.setGender(gender);
+            
+            new CustomerDAO().update(cus);
+            
+            session.setAttribute("c", cus);
+            
+            response.sendRedirect("ProfileUser");
+        } else {
+            response.sendRedirect("logincontroller");
+        }
+
     }
 
     /**

@@ -25,16 +25,19 @@ public class ProfileUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        Customer customer = new CustomerDAO().getUserByEmail("tung050903@gmail.com");
-
-        // Fake khi chưa có login
         HttpSession session = request.getSession();
-        session.setAttribute("c", customer);
 
-        request.setAttribute("userCustomer", customer);
+        if (session.getAttribute("c") != null) {
+            Customer customer = (Customer) session.getAttribute("c");
 
-        request.getRequestDispatcher("/view/user/profile.jsp").forward(request, response);
+            Customer cus = new CustomerDAO().getUserByEmail(customer.getEmail());
+
+            request.setAttribute("userCustomer", cus);
+
+            request.getRequestDispatcher("/view/user/profile.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("logincontroller");
+        }
     }
 
     @Override

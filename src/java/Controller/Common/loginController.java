@@ -65,7 +65,7 @@ public class LoginController extends HttpServlet {
             Admin a = adao.getAdminByUsername(username, pass);
             HttpSession session = request.getSession();
             session.setAttribute("a", a);
-            response.sendRedirect("Home");
+            response.sendRedirect("ManagerAccount");
         } else {
             String err = "Wrong username or password!";
             request.setAttribute("err", err);

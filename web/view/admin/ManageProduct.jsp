@@ -193,11 +193,7 @@
                 <!-- row -->
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="breadcrumb-header">Manage Product</h3>
-                        <ul class="breadcrumb-tree">
-                            <li><a href="#">Home</a></li>
-                            <li class="active">Manage product</li>
-                        </ul>
+                        <%@include file="navigator/menu.jsp" %>
                     </div>
                 </div>
                 <!-- /row -->
