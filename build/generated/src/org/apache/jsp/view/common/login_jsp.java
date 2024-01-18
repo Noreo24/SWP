@@ -94,12 +94,17 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                        </label>\n");
       out.write("                                    </div>\n");
       out.write("                                    <div class=\"w-50 text-md-right\">\n");
-      out.write("                                        <a href=\"#\" style=\"color: #fff\">Forgot Password</a>\n");
+      out.write("                                        <a href=\"forgotPass.jsp\" style=\"color: #fff\">Forgot Password</a>\n");
       out.write("                                    </div>\n");
       out.write("                                </div>\n");
       out.write("                            </form>\n");
       out.write("                            <div class=\"form-group\">\n");
       out.write("                                <a href=\"register.jsp\"><button class=\"form-control btn btn-primary px-3\">Register a new account</button></a>\n");
+      out.write("                            </div>\n");
+      out.write("                            <p class=\"w-100 text-center\">&mdash; Or Sign In With &mdash;</p>\n");
+      out.write("                            <div class=\"social d-flex text-center\">\n");
+      out.write("                                <a href=\"#\" class=\"px-2 py-2 mr-md-1 rounded\"><span class=\"ion-logo-facebook mr-2\"></span> Facebook</a>\n");
+      out.write("                                <a href=\"#\" class=\"px-2 py-2 ml-md-1 rounded\"><span class=\"ion-logo-twitter mr-2\"></span> Twitter</a>\n");
       out.write("                            </div>\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");

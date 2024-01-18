@@ -23,7 +23,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-lg-4">
                         <div class="login-wrap p-0">
-                            <form action="registernewaccount" method="post" class="signin-form">
+                            <form action="${pageContext.request.contextPath}/registercontroller" method="post" class="signin-form">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Email" name="email" required>
                                 </div>

@@ -118,4 +118,16 @@ public class CustomerDAO {
         } catch (Exception e) {
         }
     }
+
+    public void addCusGoogleAcc(String email, String avatar) {
+        String query = "insert into Customer(email, avatar, roleId, status) values (?, ?, 0, 1)";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, email);
+            stm.setString(2, avatar);
+            rs = stm.executeQuery();
+        } catch (Exception e) {
+        }
+    }
 }

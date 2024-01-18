@@ -43,12 +43,17 @@
                                         </label>
                                     </div>
                                     <div class="w-50 text-md-right">
-                                        <a href="#" style="color: #fff">Forgot Password</a>
+                                        <a href="forgotPass.jsp" style="color: #fff">Forgot Password</a>
                                     </div>
                                 </div>
                             </form>
                             <div class="form-group">
                                 <a href="register.jsp"><button class="form-control btn btn-primary px-3">Register a new account</button></a>
+                            </div>
+                            <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>
+                            <div class="social d-flex text-center">
+                                <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:9999/Phone_Shop/logingooglecontroller&response_type=code
+		   &client_id=101425332251-q5etcuuteqhjvd19fg392nnprnqrnjla.apps.googleusercontent.com&approval_prompt=force" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Google</a>
                             </div>
                         </div>
                     </div>
