@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-<!--    <servlet>
+    <!--    <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>Controller.Common</servlet-class>
     </servlet>
@@ -16,6 +16,38 @@
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>-->
     <!--</servlet-mapping>-->
+    <servlet>
+        <servlet-name>whistlistController</servlet-name>
+        <servlet-class>Controller.Common.whistlistController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addWishListController</servlet-name>
+        <servlet-class>Controller.Common.addWishListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteWhistListController</servlet-name>
+        <servlet-class>Controller.Common.deleteWhistListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addtocartController</servlet-name>
+        <servlet-class>Controller.Common.addtocartController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>whistlistController</servlet-name>
+        <url-pattern>/whistlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addWishListController</servlet-name>
+        <url-pattern>/addWishList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteWhistListController</servlet-name>
+        <url-pattern>/deleteWhistList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addtocartController</servlet-name>
+        <url-pattern>/addtocartController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

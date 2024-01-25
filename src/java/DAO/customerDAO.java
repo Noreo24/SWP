@@ -14,7 +14,7 @@ import java.sql.ResultSet;
  *
  * @author Admin
  */
-public class CustomerDAO {
+public class customerDAO {
 
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
@@ -22,7 +22,7 @@ public class CustomerDAO {
     ResultSet rs;//Lưu trữ và xử lý dữ liệu
 
     public static void main(String[] args) {
-        Customer customer = new CustomerDAO().getUserByEmail("tung050903@gmail.com");
+        Customer customer = new customerDAO().getUserByEmail("tung050903@gmail.com");
         System.out.println(customer.getAddress());
     }
 
@@ -123,4 +123,30 @@ public class CustomerDAO {
         } catch (Exception e) {
         }
     }
+    
+public String getUserIdByEmail(String email) {
+    String query = "SELECT userId FROM Customer WHERE user_name = ?";
+    try {
+        cnn = new DBContext().getConnection();
+        stm = cnn.prepareStatement(query);
+        stm.setString(1, email);
+        rs = stm.executeQuery();
+        if (rs.next()) {
+            return rs.getString("userId");
+        }
+    } catch (Exception e) {
+        e.printStackTrace(); // Handle the exception properly in a production environment
+    } finally {
+        // Close resources in a finally block
+        try {
+            if (rs != null) rs.close();
+            if (stm != null) stm.close();
+            if (cnn != null) cnn.close();
+        } catch (Exception ex) {
+            ex.printStackTrace(); // Handle the exception properly in a production environment
+        }
+    }
+    return null; // Return null or another indicator to signify that the userId was not found
+}
+
 }

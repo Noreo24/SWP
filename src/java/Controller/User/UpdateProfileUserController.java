@@ -4,7 +4,7 @@
  */
 package Controller.User;
 
-import DAO.CustomerDAO;
+import DAO.customerDAO;
 import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,7 +30,7 @@ public class UpdateProfileUserController extends HttpServlet {
         if (session.getAttribute("c") != null) {
             Customer customer = (Customer) session.getAttribute("c");
 
-            Customer cus = new CustomerDAO().getUserByEmail(customer.getEmail());
+            Customer cus = new customerDAO().getUserByEmail(customer.getEmail());
 
             request.setAttribute("userCustomer", customer);
             

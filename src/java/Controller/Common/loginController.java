@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
  * @author LanChau
  */
 @WebServlet(name="LoginController", urlPatterns={"/logincontroller"})
-public class LoginController extends HttpServlet {
+public class loginController extends HttpServlet {
 
      
     @Override
@@ -37,7 +37,7 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("username");
         String pass = request.getParameter("password");
         String rempass = request.getParameter("rememberpass");
-        CustomerDAO cdao = new CustomerDAO();
+        customerDAO cdao = new customerDAO();
         AdminDAO adao = new AdminDAO();
         if (rempass != null) {
             Cookie c_user = new Cookie("username", username);
@@ -52,7 +52,11 @@ public class LoginController extends HttpServlet {
         if (cdao.getUserByUsername(username, pass) != null) {
             Customer c = cdao.getUserByUsername(username, pass);
             if ("true".equals(c.getStatus())) {
+                String ct = cdao.getUserIdByEmail(username);
+                
                 HttpSession session = request.getSession();
+                System.out.println("check ct: " + ct);
+                session.setAttribute("userID", ct);
                 session.setAttribute("c", c);
                 response.sendRedirect("Home");
             } else {

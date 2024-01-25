@@ -28,7 +28,7 @@ public class Product {
 
     public Product() {
     }
-
+    
     public Product(String product_id, String product_name, String original_prices, String sale, String sale_prices, String product_highlights, String product_description, String trademark_id, String status, String quantity, String guarantee, String category_id, String update_date, String sole, String avr_rated_star) {
         this.product_id = product_id;
         this.product_name = product_name;

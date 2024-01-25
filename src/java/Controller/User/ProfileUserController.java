@@ -4,7 +4,7 @@
  */
 package Controller.User;
 
-import DAO.CustomerDAO;
+import DAO.customerDAO;
 import Model.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,7 +26,7 @@ public class ProfileUserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Customer customer = new CustomerDAO().getUserByEmail("tung050903@gmail.com");
+        Customer customer = new customerDAO().getUserByEmail("tung050903@gmail.com");
 
         // Fake khi chưa có login
         HttpSession session = request.getSession();
