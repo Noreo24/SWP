@@ -32,7 +32,7 @@
                         <div class="card-body text-center">
                             <!-- Profile picture image--> 
                             <img class="img-account-profile rounded-circle mb-2" 
-                                 src="${userAccount.getAvatar()}" 
+                                 src="${pageContext.request.contextPath}/imgUser/${userAccount.getAvatar()}"
                                  onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'" 
                                  alt="">
                             <!-- Profile picture help block-->

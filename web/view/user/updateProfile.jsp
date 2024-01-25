@@ -32,13 +32,35 @@
                         <div class="card-body text-center">
                             <!-- Profile picture image--> 
                             <img class="img-account-profile rounded-circle mb-2" 
-                                 src="${userAccount.getAvatar()}" 
-                                 onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'" 
+                                src="${pageContext.request.contextPath}/imgUser/${userAccount.getAvatar()}"
+                                 onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'"  
                                  alt="">
                             <!-- Profile picture help block-->
                             <div class="small font-italic text-muted mb-4">  </div>
                             <!-- Profile picture upload button-->  
                             <a class="btn btn-primary" href="#">Log out</a>
+                            <button id="updateImageBtn" class="btn btn-primary">Update Image</button>
+                            <form id="formImg" hidden action="UpdateImageUser" method="post" enctype="multipart/form-data">
+                                <input id="inputFile" type="file" name="photo" accept="image/*"/>
+                            </form>
+                            <script>
+                                // Lấy tham chiếu đến nút và input
+                                var updateImageBtn = document.getElementById('updateImageBtn');
+                                var inputFile = document.getElementById('inputFile');
+                                var formImg = document.getElementById('formImg');
+
+                                // Thêm sự kiện click cho nút "Update Image"
+                                updateImageBtn.addEventListener('click', function () {
+                                    // Kích hoạt sự kiện click cho input file
+                                    inputFile.click();
+                                });
+
+                                // Thêm sự kiện change cho input file
+                                inputFile.addEventListener('change', function () {
+                                    // Tự động gửi form khi người dùng chọn ảnh
+                                    formImg.submit();
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -76,10 +98,10 @@
                                                placeholder="Enter your address" value="${userAccount.getAddress()}">
                                     </div>
                                 </div>
-                                <div class="mb-3">
+                                <div hidden class="mb-3">
                                     <label class="small mb-1" for="inputEmailAddress">Link Avatar</label>
-                                    <input class="form-control" id="inputEmailAddress" type="text" name="txtAvatar" required
-                                           placeholder="Enter your link avatar" value="${userAccount.getAvatar()}">
+                                    <input  class="form-control" id="inputEmailAddress" type="text" name="txtAvatar" required
+                                            placeholder="Enter your link avatar" value="${userAccount.getAvatar()}">
                                 </div>
                                 <div class="row gx-3 mb-3">
 
