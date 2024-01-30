@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/GIT/code_ho/Spring2024/SWP/src/java/Model/Customer.java</file>
+            <file>file:/D:/GIT/code_ho/Spring2024/SWP/web/view/common/index.jsp</file>
+            <file>file:/D:/GIT/code_ho/Spring2024/SWP/web/view/user/profile.jsp</file>
             <file>file:/D:/GIT/code_ho/Spring2024/SWP/web/view/user/updateProfile.jsp</file>
+            <file>file:/D:/GIT/code_ho/Spring2024/SWP/src/java/Model/Account.java</file>
+            <file>file:/D:/GIT/code_ho/Spring2024/SWP/src/java/Controller/Common/HomeController.java</file>
             <file>file:/D:/GIT/code_ho/Spring2024/SWP/src/java/Controller/User/UpdateProfileUserController.java</file>
         </group>
     </open-files>
