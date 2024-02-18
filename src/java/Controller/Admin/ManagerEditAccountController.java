@@ -6,6 +6,7 @@ package Controller.Admin;
 
 import DAO.*;
 import Model.*;
+import Uils.SendMail;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -66,6 +67,10 @@ public class ManagerEditAccountController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String username = request.getParameter("txtUsername");
+        String gmail = request.getParameter("txtGmail");
+        String usernameOld = request.getParameter("txtUsernameOld");
+        String gmailOld = request.getParameter("txtGmailOld");
         String fullName = request.getParameter("textFullName");
         String phone = request.getParameter("txtPhone");
         String address = request.getParameter("txtAddress");
@@ -83,21 +88,67 @@ public class ManagerEditAccountController extends HttpServlet {
             accountInfo = new ManagementDao().getManagementById(request.getParameter("userID"));
         }
 
+        boolean check = false;
+
+        if (!gmail.equals(gmailOld)) {
+            Account accountCheck = new CustomerDAO().getCustomerByEmail(gmail);
+            if (accountCheck == null) {
+                accountCheck = new AdminDAO().getAdminByEmail(gmail);
+            }
+
+            if (accountCheck == null) {
+                accountCheck = new ManagementDao().getManagementByEmail(gmail);
+            }
+
+            if (accountCheck != null) {
+                check = true;
+                request.setAttribute("errorGmail", "Gmail already exists");
+            }
+        }
+
+        if (!username.equals(usernameOld)) {
+            Account accountCheck = new CustomerDAO().getCustomerByUsername(username);
+            if (accountCheck == null) {
+                accountCheck = new AdminDAO().getAdminByUsername(username);
+            }
+
+            if (accountCheck == null) {
+                accountCheck = new ManagementDao().getManagementByUsername(username);
+            }
+
+            if (accountCheck != null) {
+                check = true;
+                request.setAttribute("errorUsername", "Username already exists");
+            }
+        }
+
+        accountInfo.setEmail(gmail);
+        accountInfo.setUser_name(username);
         accountInfo.setFullName(fullName);
         accountInfo.setPhone(phone);
         accountInfo.setAddress(address);
         accountInfo.setAvatar(avatar);
         accountInfo.setGender(gender);
 
-        if (roleName.equals("Customer")) {
-            new CustomerDAO().updateCustomer(accountInfo);
-        } else if (roleName.equals("Admin")) {
-            new AdminDAO().updateAdmin(accountInfo);
-        } else if (roleName.equals("Management")) {
-            new ManagementDao().updateManagement(accountInfo);
+        if (!check) {
+            if (roleName.equals("Customer")) {
+                new CustomerDAO().updateCustomer(accountInfo);
+            } else if (roleName.equals("Admin")) {
+                new AdminDAO().updateAdmin(accountInfo);
+            } else if (roleName.equals("Management")) {
+                new ManagementDao().updateManagement(accountInfo);
+            }
+            
+            SendMail.sendMailChangProfileByAdmin(accountInfo);
+            
+            response.sendRedirect("ManagerAccount");
+        }else{
+            request.setAttribute("userAccount", accountInfo);
+            request.setAttribute("checkActive", "Edit account");
+
+            request.getRequestDispatcher("/view/admin/ManagerEditAccount.jsp").forward(request, response);
         }
 
-        response.sendRedirect("ManagerAccount");
     }
 
     /**

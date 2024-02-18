@@ -75,13 +75,21 @@ public class ManagerAddAccountController extends HttpServlet {
 
         Account accountInfo = null;
 
-        if (roleSelect.equals("Customer")) {
-            accountInfo = new CustomerDAO().getCustomerByEmail(gmail);
-        } else if (roleSelect.equals("Admin")) {
+        accountInfo = new CustomerDAO().getCustomerByEmail(gmail);
+
+        if (accountInfo == null) {
             accountInfo = new AdminDAO().getAdminByEmail(gmail);
-        } else if (roleSelect.equals("Management")) {
+        }
+        if (accountInfo == null) {
             accountInfo = new ManagementDao().getManagementByEmail(gmail);
         }
+//        if (roleSelect.equals("Customer")) {
+//            accountInfo = new CustomerDAO().getCustomerByEmail(gmail);
+//        } else if (roleSelect.equals("Admin")) {
+//            accountInfo = new AdminDAO().getAdminByEmail(gmail);
+//        } else if (roleSelect.equals("Management")) {
+//            accountInfo = new ManagementDao().getManagementByEmail(gmail);
+//        }
 
         if (accountInfo != null) {
             check = false;
@@ -90,13 +98,22 @@ public class ManagerAddAccountController extends HttpServlet {
 
         accountInfo = null;
 
-        if (roleSelect.equals("Customer")) {
-            accountInfo = new CustomerDAO().getCustomerByUsername(username);
-        } else if (roleSelect.equals("Admin")) {
+        accountInfo = new CustomerDAO().getCustomerByUsername(username);
+
+        if (accountInfo == null) {
             accountInfo = new AdminDAO().getAdminByUsername(username);
-        } else if (roleSelect.equals("Management")) {
+        }
+
+        if (accountInfo == null) {
             accountInfo = new ManagementDao().getManagementByUsername(username);
         }
+//        if (roleSelect.equals("Customer")) {
+//            accountInfo = new CustomerDAO().getCustomerByUsername(username);
+//        } else if (roleSelect.equals("Admin")) {
+//            accountInfo = new AdminDAO().getAdminByUsername(username);
+//        } else if (roleSelect.equals("Management")) {
+//            accountInfo = new ManagementDao().getManagementByUsername(username);
+//        }
 
         if (accountInfo != null) {
             check = false;
