@@ -30,11 +30,30 @@ public class ProfileUserController extends HttpServlet {
         if (session.getAttribute("accountSession") != null) {
             Account account = (Account) session.getAttribute("accountSession");
 
-            Account cus = new AccountDAO().getUserByEmail(account.getEmail());
+            Account accountInfo = null;
 
-            request.setAttribute("userAccount", cus);
+            if (account.getRoleName().equals("Customer")) {
+                accountInfo = new CustomerDAO().getCustomerByEmail(account.getEmail());
 
-            request.getRequestDispatcher("/view/user/profile.jsp").forward(request, response);
+                request.setAttribute("userAccount", accountInfo);
+
+                request.getRequestDispatcher("/view/user/profile.jsp").forward(request, response);
+            } else if (account.getRoleName().equals("Admin")) {
+                accountInfo = new AdminDAO().getAdminByEmail(account.getEmail());
+
+                request.setAttribute("userAccount", accountInfo);
+
+                request.getRequestDispatcher("/view/user/profile.jsp").forward(request, response);
+            } else if (account.getRoleName().equals("Management")) {
+                accountInfo = new ManagementDao().getManagementByEmail(account.getEmail());
+
+                request.setAttribute("userAccount", accountInfo);
+
+                request.getRequestDispatcher("/view/user/profile.jsp").forward(request, response);
+            }
+
+            // Chua thiet ke cho role khac
+            // ....
         } else {
             response.sendRedirect("logincontroller");
         }

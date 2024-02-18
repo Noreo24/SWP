@@ -19,7 +19,7 @@
                 <div class="container">
                     <ul class="header-links pull-right">
                          <c:if test="${sessionScope.a != null}">
-                            <li><a href="#">Log out</a></li>
+                            <li><a href="${pageContext.request.contextPath}/Logout">Log out</a></li>
                             <li><a href="${pageContext.request.contextPath}/ProfileUser"><i class="fa fa-user-o"></i> My Account - ${sessionScope.a.getFullName()}</a></li>
                             <li><a href="${pageContext.request.contextPath}/ManagerAccount"><i class="fa fa-user-o"></i> Manager Admin</a></li>
                             </c:if>

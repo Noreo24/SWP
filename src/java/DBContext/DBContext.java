@@ -22,7 +22,7 @@ public class DBContext {
     /*Change/update information of your database connection, DO NOT change name of instance variables in this class*/
     private final String serverName = "localhost";// sua theo sql cua moi nguoi
     
-    private final String dbName = "Phone_Shop_Online_2";
+    private final String dbName = "Phone_Shop_Online_3";
     private final String portNumber = "1433";
     private final String instance="";//LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
     private final String userID = "sa";

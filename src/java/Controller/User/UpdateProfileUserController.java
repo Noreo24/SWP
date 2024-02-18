@@ -21,20 +21,37 @@ import jakarta.servlet.http.HttpSession;
  */
 @WebServlet(name = "UpdateProfileUserController", urlPatterns = {"/UpdateProfileUser"})
 public class UpdateProfileUserController extends HttpServlet {
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-
+        
         if (session.getAttribute("accountSession") != null) {
             Account account = (Account) session.getAttribute("accountSession");
-
-            Account cus = new AccountDAO().getUserByEmail(account.getEmail());
-
-            request.setAttribute("userAccount", cus);
-
-            request.getRequestDispatcher("/view/user/updateProfile.jsp").forward(request, response);
+            
+            Account accountInfo = null;
+            
+            if (account.getRoleName().equals("Customer")) {
+                accountInfo = new CustomerDAO().getCustomerByEmail(account.getEmail());
+                
+                request.setAttribute("userAccount", accountInfo);
+                
+                request.getRequestDispatcher("/view/user/updateProfile.jsp").forward(request, response);
+            } else if (account.getRoleName().equals("Admin")) {
+                accountInfo = new AdminDAO().getAdminByEmail(account.getEmail());
+                
+                request.setAttribute("userAccount", accountInfo);
+                
+                request.getRequestDispatcher("/view/user/updateProfile.jsp").forward(request, response);
+            } else if (account.getRoleName().equals("Management")) {
+                accountInfo = new ManagementDao().getManagementByEmail(account.getEmail());
+                
+                request.setAttribute("userAccount", accountInfo);
+                
+                request.getRequestDispatcher("/view/user/updateProfile.jsp").forward(request, response);
+            }
+            
         } else {
             response.sendRedirect("logincontroller");
         }
@@ -52,33 +69,47 @@ public class UpdateProfileUserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-
+        
         if (session.getAttribute("accountSession") != null) {
             Account account = (Account) session.getAttribute("accountSession");
-
-            Account cus = new AccountDAO().getUserByEmail(account.getEmail());
-
+            
+            Account accountInfo = null;
+            
+            if (account.getRoleName().equals("Customer")) {
+                accountInfo = new CustomerDAO().getCustomerByEmail(account.getEmail());
+            } else if (account.getRoleName().equals("Admin")) {
+                accountInfo = new AdminDAO().getAdminByEmail(account.getEmail());
+            } else if (account.getRoleName().equals("Management")) {
+                accountInfo = new ManagementDao().getManagementByEmail(account.getEmail());
+            }
+            
             String fullName = request.getParameter("textFullName");
             String phone = request.getParameter("txtPhone");
             String address = request.getParameter("txtAddress");
             String avatar = request.getParameter("txtAvatar");
             String gender = request.getParameter("gender");
             
-            cus.setFullName(fullName);
-            cus.setPhone(phone);
-            cus.setAddress(address);
-            cus.setAvatar(avatar);
-            cus.setGender(gender);
+            accountInfo.setFullName(fullName);
+            accountInfo.setPhone(phone);
+            accountInfo.setAddress(address);
+            accountInfo.setAvatar(avatar);
+            accountInfo.setGender(gender);
             
-            new AccountDAO().update(cus);
+            if (account.getRoleName().equals("Customer")) {
+                new CustomerDAO().updateCustomer(accountInfo);
+            } else if (account.getRoleName().equals("Admin")) {
+                new AdminDAO().updateAdmin(accountInfo);
+            } else if (account.getRoleName().equals("Management")) {
+                new ManagementDao().updateManagement(accountInfo);
+            }
             
-            session.setAttribute("c", cus);
+            session.setAttribute("accountSession", accountInfo);
             
             response.sendRedirect("ProfileUser");
         } else {
             response.sendRedirect("logincontroller");
         }
-
+        
     }
 
     /**

@@ -35,9 +35,12 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("username");
         String pass = request.getParameter("password");
         String rempass = request.getParameter("rememberpass");
-//        CustomerDAO cdao = new CustomerDAO();
-//        AdminDAO adao = new AdminDAO();
-        AccountDAO accountDAO = new AccountDAO();
+
+        CustomerDAO customerDAO = new CustomerDAO();
+        AdminDAO adminDAO = new AdminDAO();
+        ManagementDao managementDao = new ManagementDao();
+
+//        AccountDAO accountDAO = new AccountDAO();
         if (rempass != null) {
             Cookie c_user = new Cookie("username", username);
             Cookie c_pass = new Cookie("pass", pass);
@@ -48,20 +51,36 @@ public class LoginController extends HttpServlet {
             response.addCookie(c_user);
             response.addCookie(c_pass);
         }
-        Account account = accountDAO.getUserByUsername(username, pass);
+        // Get User by account
+        Account account = customerDAO.getUserCustomerByUsername(username, pass);
+        
+        // If account null --> find account in table admin
+        if (account == null) {
+            account = adminDAO.getUserAdminByUsername(username, pass);
+        }
+        
+        // If account null --> find account in table management
+        if (account == null) {
+            account = managementDao.getUserManagementByUsername(username, pass);
+        }
+        
         if (account != null) {
             if ("true".equals(account.getStatus())) {
                 HttpSession session = request.getSession();
                 session.setAttribute("accountSession", account);
 
                 // đoạn này để ko ảnh hưởng code cũ. Nên trọc data từ accountSession
-                if (account.getRoleId().equals("1")) {
+                if (account.getRoleName().equals("Admin")) {
                     session.setAttribute("a", account);
                     response.sendRedirect("ManagerAccount");
-                } else {
+                } else if(account.getRoleName().equals("Customer")) {
                     session.setAttribute("c", account);
                     response.sendRedirect("Home");
+                }else if(account.getRoleName().equals("Management")) {
+                    session.setAttribute("m", account);
+                    response.sendRedirect("Home");
                 }
+                
             } else {
                 String err = "Your account is banned!";
                 request.setAttribute("err", err);

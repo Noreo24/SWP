@@ -141,13 +141,16 @@
                                     <div class="col-md-6">
                                         <label class="form-label small mb-1">Role</label>
                                         <select class="form-select" name="roleSelect">
-                                            <c:forEach var="item" items="${roles}">
-                                                <option value="${item.roleId}"
-                                                        <c:if test="${item.roleId == userAccount.roleId}">
-                                                            selected
-                                                        </c:if>
-                                                        >${item.role_name}</option>
-                                            </c:forEach>
+                                            <option value="Customer" selected>Customer</option>
+                                            <option value="Admin" 
+                                                    <c:if test="${userAccount.getRoleName().equals('Admin')}">
+                                                        selected
+                                                    </c:if>
+                                                    >Admin</option>
+                                            <option value="Management" 
+                                                    <c:if test="${userAccount.getRoleName().equals('Management')}">
+                                                        selected
+                                                    </c:if>>Management</option>
                                         </select>
                                     </div>
                                 </div>

@@ -89,14 +89,16 @@
                                                />
 
                                         <select onchange="onSubmitForm()" class="form-select" name="roleSelect">
-                                            <option value="0" selected>All Role</option>
-                                            <c:forEach  var="item" items="${roles}">
-                                                <option 
-                                                    <c:if test="${roleSelect == item.roleId}">
+                                            <option value="Customer" selected>Customer</option>
+                                            <option value="Admin" 
+                                                    <c:if test="${roleSelect.equals('Admin')}">
                                                         selected
                                                     </c:if>
-                                                    value="${item.roleId}">${item.role_name}</option>
-                                            </c:forEach>
+                                                    >Admin</option>
+                                            <option value="Management" 
+                                                    <c:if test="${roleSelect.equals('Management')}">
+                                                        selected
+                                                    </c:if>>Management</option>
                                         </select>
                                         <input type="text" name="pageIndex"  hidden
                                                value="${pageIndex}" required />
@@ -147,17 +149,17 @@
                                     <td>
                                         <c:if test="${item.getUserID() != sessionScope.accountSession.getUserID()}">
                                             <c:if test="${item.getStatus() == 'true'}">
-                                                <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=false&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}">
+                                                <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=false&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}&roleSelect=${roleSelect}">
                                                     <button class="btn btn-danger">Block</button>
                                                 </a> 
                                             </c:if>
                                             <c:if test="${item.getStatus() == 'false'}">
-                                                <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=true&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}">
+                                                <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=true&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}&roleSelect=${roleSelect}">
                                                     <button class="btn btn-success">Active</button>
                                                 </a> 
                                             </c:if>
 
-                                            <a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserID()}">
+                                            <a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserID()}&roleSelect=${roleSelect}">
                                                 <button class="btn btn-dark">Edit</button>
                                             </a> 
                                         </c:if>
@@ -171,13 +173,13 @@
                 <div class="clearfix">
                     <div class="hint-text">Showing <b>${accounts.size()}</b> out of <b>${countAccount}</b> entries</div>
                     <ul class="pagination">
-                        <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex-1}&pageSize=${pageSize}">Previous</a></li>
+                        <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex-1}&pageSize=${pageSize}&roleSelect=${roleSelect}">Previous</a></li>
                             <c:forEach var="item" begin="1" end="${page}">
                             <li class="page-item ${item == pageIndex ? 'active': ''}">
-                                <a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${item}&pageSize=${pageSize}" class="page-link">${item}</a>
+                                <a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${item}&pageSize=${pageSize}&roleSelect=${roleSelect}" class="page-link">${item}</a>
                             </li>
                         </c:forEach>
-                        <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex+1}&pageSize=${pageSize}" class="page-link">Next</a></li>
+                        <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex+1}&pageSize=${pageSize}&roleSelect=${roleSelect}" class="page-link">Next</a></li>
                     </ul>
                 </div>
             </div>

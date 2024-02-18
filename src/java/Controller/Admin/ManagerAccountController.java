@@ -31,17 +31,37 @@ public class ManagerAccountController extends HttpServlet {
 
         if (session.getAttribute("accountSession") != null && session.getAttribute("a") != null) {
 
-            ArrayList<Role> roles = new RoleDAO().getAll();
+            String roleSelect = "Customer";
+
+            if (request.getParameter("roleSelect") != null) {
+                roleSelect = request.getParameter("roleSelect");
+            }
 
             // Xử lý hành động block hoặc active 
             if (request.getParameter("userID") != null && request.getParameter("active") != null) {
                 String userID = request.getParameter("userID");
                 String active = request.getParameter("active");
 
-                Account account = new AccountDAO().getUserById(userID);
-                account.setStatus(active);
+                Account accountInfo = null;
 
-                new AccountDAO().update(account);
+                if (roleSelect.equals("Customer")) {
+                    accountInfo = new CustomerDAO().getCustomerById(userID);
+                } else if (roleSelect.equals("Admin")) {
+                    accountInfo = new AdminDAO().getAdminById(userID);
+                } else if (roleSelect.equals("Management")) {
+                    accountInfo = new ManagementDao().getManagementById(userID);
+                }
+
+                accountInfo.setStatus(active);
+
+                if (roleSelect.equals("Customer")) {
+                    new CustomerDAO().updateCustomer(accountInfo);
+                } else if (roleSelect.equals("Admin")) {
+                    new AdminDAO().updateAdmin(accountInfo);
+                } else if (roleSelect.equals("Management")) {
+                    new ManagementDao().updateManagement(accountInfo);
+                }
+
             }
 
             // Xử lý lấy danh sách tài khoản
@@ -51,13 +71,6 @@ public class ManagerAccountController extends HttpServlet {
             }
             int pageIndex = 1;
             int pageSize = 5;
-            int roleSelect = 0;
-            if (request.getParameter("roleSelect") != null) {
-                try {
-                    roleSelect = Integer.parseInt(request.getParameter("roleSelect"));
-                } catch (Exception e) {
-                }
-            }
 
             if (request.getParameter("pageSize") != null) {
                 try {
@@ -77,7 +90,16 @@ public class ManagerAccountController extends HttpServlet {
                 } catch (Exception e) {
                 }
             }
-            int countAccount = new AccountDAO().getCount(nameSearch, roleSelect);
+
+            int countAccount = 0;
+
+            if(roleSelect.equals("Customer")) {
+                countAccount = new CustomerDAO().getCount(nameSearch);
+            } else if (roleSelect.equals("Admin")) {
+                countAccount = new AdminDAO().getCount(nameSearch);
+            } else if (roleSelect.equals("Management")) {
+                countAccount = new ManagementDao().getCount(nameSearch);
+            }
 
             if (pageSize > countAccount) {
                 pageSize = countAccount;
@@ -97,9 +119,16 @@ public class ManagerAccountController extends HttpServlet {
                 pageIndex = page;
             }
 
-            ArrayList<Account> accounts = new AccountDAO()
-                    .getAll(nameSearch, pageIndex, pageSize, roleSelect);
-
+            ArrayList<Account> accounts = new ArrayList<>();
+                    
+            if(roleSelect.equals("Customer")) {
+                accounts = new CustomerDAO().getAllCustomer(nameSearch, pageIndex, pageSize);
+            } else if (roleSelect.equals("Admin")) {
+                accounts = new AdminDAO().getAllAdmin(nameSearch, pageIndex, pageSize);
+            } else if (roleSelect.equals("Management")) {
+                accounts = new ManagementDao().getAllManagement(nameSearch, pageIndex, pageSize);
+            }
+            
             request.setAttribute("nameSearch", nameSearch);
             request.setAttribute("accounts", accounts);
             request.setAttribute("page", page);
@@ -107,9 +136,8 @@ public class ManagerAccountController extends HttpServlet {
             request.setAttribute("pageSize", pageSize);
             request.setAttribute("checkActive", "Manage account");
             request.setAttribute("countAccount", countAccount);
-            request.setAttribute("roles", roles);
             request.setAttribute("roleSelect", roleSelect);
-
+ 
             request.getRequestDispatcher("/view/admin/ManagerAccount.jsp").forward(request, response);
 
         } else {

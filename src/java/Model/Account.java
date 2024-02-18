@@ -19,12 +19,16 @@ public class Account {
             password,
             phone,
             address,
-            roleId, status, roleName;
-
+            status, roleName;
+    
+    private int adminCreateId;
+    
+    private Account adminCreate;
+    
     public Account() {
     }
 
-    public Account(String adminId, String fullName, String avatar, String gender, String email, String user_name, String password, String phone, String address, String roleId) {
+    public Account(String adminId, String fullName, String avatar, String gender, String email, String user_name, String password, String phone, String address, String roleName) {
         this.userID = adminId;
         this.fullName = fullName;
         this.avatar = avatar;
@@ -34,10 +38,10 @@ public class Account {
         this.password = password;
         this.phone = phone;
         this.address = address;
-        this.roleId = roleId;
+        this.roleName = roleName;
     }
 
-    public Account(String userId, String fullName, String avatar, String gender, String password, String user_name, String email, String phone, String address, String roleId, String status) {
+    public Account(String userId, String fullName, String avatar, String gender, String password, String user_name, String email, String phone, String address, String roleName, String status) {
         this.userID = userId;
         this.fullName = fullName;
         this.avatar = avatar;
@@ -47,28 +51,20 @@ public class Account {
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.roleId = roleId;
+        this.roleName = roleName;
         this.status = status;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public int getAdminCreateId() {
+        return adminCreateId;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setAdminCreateId(int adminCreateId) {
+        this.adminCreateId = adminCreateId;
     }
-
+ 
     public String getUserID() {
         return userID;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public void setUserID(String userID) {
@@ -139,12 +135,30 @@ public class Account {
         this.address = address;
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
+    public void setStatus(String status) {
+        this.status = status;
     }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public Account getAdminCreate() {
+        return adminCreate;
+    }
+
+    public void setAdminCreate(Account adminCreate) {
+        this.adminCreate = adminCreate;
+    }
+
+     
 
 }

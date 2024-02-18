@@ -7,6 +7,7 @@
             <file>file:/D:/GIT/code_ho/Spring2024/SWP/web/view/user/profile.jsp</file>
             <file>file:/D:/GIT/code_ho/Spring2024/SWP/web/view/user/updateProfile.jsp</file>
             <file>file:/D:/GIT/code_ho/Spring2024/SWP/src/java/Model/Account.java</file>
+            <file>file:/D:/GIT/code_ho/Spring2024/SWP/src/java/DBContext/DBContext.java</file>
             <file>file:/D:/GIT/code_ho/Spring2024/SWP/src/java/Controller/Common/HomeController.java</file>
             <file>file:/D:/GIT/code_ho/Spring2024/SWP/src/java/Controller/User/UpdateProfileUserController.java</file>
         </group>

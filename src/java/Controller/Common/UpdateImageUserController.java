@@ -5,6 +5,9 @@
 package Controller.Common;
 
 import DAO.AccountDAO;
+import DAO.AdminDAO;
+import DAO.CustomerDAO;
+import DAO.ManagementDao;
 import Model.Account;
 import Uils.Util;
 import com.google.firebase.FirebaseApp;
@@ -57,7 +60,15 @@ public class UpdateImageUserController extends HttpServlet {
             try {
                 Account account = (Account) session.getAttribute("accountSession");
 
-                Account cus = new AccountDAO().getUserByEmail(account.getEmail());
+                Account accountInfo = null;
+
+                if (account.getRoleName().equals("Customer")) {
+                    accountInfo = new CustomerDAO().getCustomerByEmail(account.getEmail());
+                } else if (account.getRoleName().equals("Admin")) {
+                    accountInfo = new AdminDAO().getAdminByEmail(account.getEmail());
+                } else if (account.getRoleName().equals("Management")) {
+                    accountInfo = new ManagementDao().getManagementByEmail(account.getEmail());
+                }
 
                 Part photo = request.getPart("photo");
 
@@ -97,8 +108,8 @@ public class UpdateImageUserController extends HttpServlet {
                 String imgDirPathBuild = appPath + relativePath;
 
                 // Tạo đối tượng File cho ảnh cần xóa
-                File imageFile = new File(imgDirPath + File.separator + cus.getAvatar());
-                File imageFileBuild = new File(imgDirPathBuild + File.separator + cus.getAvatar());
+                File imageFile = new File(imgDirPath + File.separator + accountInfo.getAvatar());
+                File imageFileBuild = new File(imgDirPathBuild + File.separator + accountInfo.getAvatar());
 
                 // Kiểm tra xem tệp tồn tại trước khi xóa
                 if (imageFile.exists()) {
@@ -129,7 +140,7 @@ public class UpdateImageUserController extends HttpServlet {
                 }
 
                 // Lấy tên file gốc 
-                String submittedFileName = Util.generateRandomName(10) + "_" + account.getUser_name() + "." + imgType;
+                String submittedFileName = Util.generateRandomName(10) + "_" + account.getUser_name()+ "_" + account.getRoleName() + "." + imgType;
 
                 // Tạo đường dẫn tới file trong thư mục Img
                 String filePath = imgDirPath + File.separator + submittedFileName;
@@ -141,11 +152,19 @@ public class UpdateImageUserController extends HttpServlet {
 
                 photo.write(filePathBuild);
 
-                cus.setAvatar(submittedFileName);
+                accountInfo.setAvatar(submittedFileName);
 
-                session.setAttribute("accountSession", cus);
+                session.setAttribute("accountSession", accountInfo);
 
-                new AccountDAO().update(cus);
+                if (account.getRoleName().equals("Customer")) {
+                    new CustomerDAO().updateCustomer(accountInfo);
+                } else if (account.getRoleName().equals("Admin")) {
+                    new AdminDAO().updateAdmin(accountInfo);
+                } else if (account.getRoleName().equals("Management")) {
+                    new ManagementDao().updateManagement(accountInfo);
+                }
+
+                session.setAttribute("accountSession", accountInfo);
 
                 Thread.sleep(2000);
 

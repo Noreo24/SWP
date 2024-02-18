@@ -26,13 +26,9 @@ public class ManagerAddAccountController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("accountSession") != null) {
-            Account account = new AccountDAO().getUserById(request.getParameter("userID"));
-            ArrayList<Role> roles = new RoleDAO().getAll();
+        if (session.getAttribute("accountSession") != null && session.getAttribute("a") != null) {
 
-            request.setAttribute("userAccount", account);
             request.setAttribute("checkActive", "Add account");
-            request.setAttribute("roles", roles);
 
             request.getRequestDispatcher("/view/admin/ManagerAddAccount.jsp").forward(request, response);
         } else {
@@ -61,7 +57,7 @@ public class ManagerAddAccountController extends HttpServlet {
         String address = request.getParameter("txtAddress");
         String avatar = request.getParameter("txtAvatar");
         String gender = request.getParameter("gender");
-        String roleId = request.getParameter("roleSelect");
+        String roleSelect = request.getParameter("roleSelect");
         String pass = request.getParameter("pass");
 
         account.setEmail(gmail);
@@ -71,29 +67,58 @@ public class ManagerAddAccountController extends HttpServlet {
         account.setAddress(address);
         account.setAvatar(avatar);
         account.setGender(gender);
-        account.setRoleId(roleId);
+        account.setRoleName(roleSelect);
         account.setStatus("true");
         account.setPassword(pass);
 
         boolean check = true;
-        
-        if(new AccountDAO().getUserByEmail(gmail) != null){
+
+        Account accountInfo = null;
+
+        if (roleSelect.equals("Customer")) {
+            accountInfo = new CustomerDAO().getCustomerByEmail(gmail);
+        } else if (roleSelect.equals("Admin")) {
+            accountInfo = new AdminDAO().getAdminByEmail(gmail);
+        } else if (roleSelect.equals("Management")) {
+            accountInfo = new ManagementDao().getManagementByEmail(gmail);
+        }
+
+        if (accountInfo != null) {
             check = false;
             request.setAttribute("errorEmail", "Email is exist");
         }
-        
-        if(new AccountDAO().getUserByUsername(username) != null){
+
+        accountInfo = null;
+
+        if (roleSelect.equals("Customer")) {
+            accountInfo = new CustomerDAO().getCustomerByUsername(username);
+        } else if (roleSelect.equals("Admin")) {
+            accountInfo = new AdminDAO().getAdminByUsername(username);
+        } else if (roleSelect.equals("Management")) {
+            accountInfo = new ManagementDao().getManagementByUsername(username);
+        }
+
+        if (accountInfo != null) {
             check = false;
             request.setAttribute("errorUserName", "UserName is exist");
         }
-        
+
         if (check) {
-            new AccountDAO().add(account);
+            if (roleSelect.equals("Customer")) {
+                new CustomerDAO().add(account);
+            } else if (roleSelect.equals("Admin")) {
+                new AdminDAO().add(account);
+            } else if (roleSelect.equals("Management")) {
+                Account accountAdmin = (Account) request.getSession().getAttribute("accountSession");
+                account.setAdminCreateId(Integer.parseInt(accountAdmin.getUserID()));
+
+                new ManagementDao().add(account);
+            }
 
             response.sendRedirect("ManagerAccount");
         } else {
             request.setAttribute("userAccount", account);
-            
+
             request.getRequestDispatcher("/view/admin/ManagerAddAccount.jsp").forward(request, response);
         }
 

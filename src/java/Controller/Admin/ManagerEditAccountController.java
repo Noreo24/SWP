@@ -22,20 +22,32 @@ import java.util.ArrayList;
  */
 @WebServlet(name = "ManagerEditAccountController", urlPatterns = {"/ManagerEditAccount"})
 public class ManagerEditAccountController extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
+
         if (session.getAttribute("accountSession") != null) {
-            Account account = new AccountDAO().getUserById(request.getParameter("userID"));
-            ArrayList<Role> roles = new RoleDAO().getAll();
-            
-            request.setAttribute("userAccount", account);
+
+            String roleName = "";
+
+            if (request.getParameter("roleSelect") != null) {
+                roleName = request.getParameter("roleSelect");
+            }
+            Account accountInfo = null;
+
+            if (roleName.equals("Customer")) {
+                accountInfo = new CustomerDAO().getCustomerById(request.getParameter("userID"));
+            } else if (roleName.equals("Admin")) {
+                accountInfo = new AdminDAO().getAdminById(request.getParameter("userID"));
+            } else if (roleName.equals("Management")) {
+                accountInfo = new ManagementDao().getManagementById(request.getParameter("userID"));
+            }
+
+            request.setAttribute("userAccount", accountInfo);
             request.setAttribute("checkActive", "Edit account");
-            request.setAttribute("roles", roles);
-            
+
             request.getRequestDispatcher("/view/admin/ManagerEditAccount.jsp").forward(request, response);
         } else {
             response.sendRedirect("logincontroller");
@@ -53,24 +65,38 @@ public class ManagerEditAccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Account cus = new AccountDAO().getUserById(request.getParameter("userID"));
-        
+
         String fullName = request.getParameter("textFullName");
         String phone = request.getParameter("txtPhone");
         String address = request.getParameter("txtAddress");
         String avatar = request.getParameter("txtAvatar");
         String gender = request.getParameter("gender");
-        String roleId = request.getParameter("roleSelect");
-        
-        cus.setFullName(fullName);
-        cus.setPhone(phone);
-        cus.setAddress(address);
-        cus.setAvatar(avatar);
-        cus.setGender(gender);
-        cus.setRoleId(roleId);
-        
-        new AccountDAO().update(cus);
-        
+        String roleName = request.getParameter("roleSelect");
+
+        Account accountInfo = null;
+
+        if (roleName.equals("Customer")) {
+            accountInfo = new CustomerDAO().getCustomerById(request.getParameter("userID"));
+        } else if (roleName.equals("Admin")) {
+            accountInfo = new AdminDAO().getAdminById(request.getParameter("userID"));
+        } else if (roleName.equals("Management")) {
+            accountInfo = new ManagementDao().getManagementById(request.getParameter("userID"));
+        }
+
+        accountInfo.setFullName(fullName);
+        accountInfo.setPhone(phone);
+        accountInfo.setAddress(address);
+        accountInfo.setAvatar(avatar);
+        accountInfo.setGender(gender);
+
+        if (roleName.equals("Customer")) {
+            new CustomerDAO().updateCustomer(accountInfo);
+        } else if (roleName.equals("Admin")) {
+            new AdminDAO().updateAdmin(accountInfo);
+        } else if (roleName.equals("Management")) {
+            new ManagementDao().updateManagement(accountInfo);
+        }
+
         response.sendRedirect("ManagerAccount");
     }
 
