@@ -8,7 +8,7 @@ public class Constants {
     /**
      * Gửi maill
      */
-    public static String SEENDMAIL_ACCOUNT = "levietaqviet2001@gmail.com";
+    public static String SEENDMAIL_ACCOUNT = "lanChau@gmail.com";
     public static String SEENDMAIL_PASS = "abhl syrd twak waoh";
 
     /**
