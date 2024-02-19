@@ -8,44 +8,44 @@ package Model;
  *
  * @author Admin
  */
+// ProductImage.java
 public class ProductImage {
-
-    private String products_images_id,
-            product_id,
-            status,
-            images;
+    private int productsImagesId;
+    private int productId;
+    private boolean status;
+    private String images;
 
     public ProductImage() {
     }
 
-    public ProductImage(String products_images_id, String product_id, String status, String images) {
-        this.products_images_id = products_images_id;
-        this.product_id = product_id;
+    public ProductImage(int productsImagesId, int productId, boolean status, String images) {
+        this.productsImagesId = productsImagesId;
+        this.productId = productId;
         this.status = status;
         this.images = images;
     }
 
-    public String getProducts_images_id() {
-        return products_images_id;
+    public int getProductsImagesId() {
+        return productsImagesId;
     }
 
-    public void setProducts_images_id(String products_images_id) {
-        this.products_images_id = products_images_id;
+    public void setProductsImagesId(int productsImagesId) {
+        this.productsImagesId = productsImagesId;
     }
 
-    public String getProduct_id() {
-        return product_id;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -56,5 +56,5 @@ public class ProductImage {
     public void setImages(String images) {
         this.images = images;
     }
-    
 }
+
