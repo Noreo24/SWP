@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <servlet>
-        <servlet-name>loginController</servlet-name>
-        <servlet-class>Controller.common.loginController</servlet-class>
-    </servlet>
+    
     <servlet>
         <servlet-name>home</servlet-name>
         <servlet-class>Controller.common.home</servlet-class>
@@ -12,10 +9,6 @@
         <servlet-name>registerController</servlet-name>
         <servlet-class>Controller.common.registerController</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>loginController</servlet-name>
-        <url-pattern>/logincontroller</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
