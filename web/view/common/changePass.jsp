@@ -28,16 +28,16 @@
                             <form action="ChangePassword" class="signin-form" method="post">
                                 <div class="form-group">
                                     <p class="text-danger">${errorPassOld}</p>
-                                    <input type="text" class="form-control"
+                                    <input type="password" class="form-control"
                                            value="${passOld}"   placeholder="Entrt old password" required name="txtPasswordOld">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" 
+                                    <input type="password" class="form-control" 
                                          value="${pass}"   placeholder="Entrt new password" required name="txtPassword">
                                 </div> 
                                 <div class="form-group">
                                      <p class="text-danger">${errorPassConfirm}</p>
-                                    <input type="text" class="form-control" value="${passConfirm}"
+                                     <input type="password" class="form-control" value="${passConfirm}"
                                            placeholder="Confirm password" required name="txtPasswordConfirm">
                                 </div>
                                 <div class="form-group">

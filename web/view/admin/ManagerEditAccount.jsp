@@ -58,8 +58,8 @@
                         <!--<div class="card-header"></div>-->
                         <div class="card-body text-center">
                             <!-- Profile picture image--> 
-                            <img class="img-account-profile rounded-circle mb-2" id="imgAvatar"
-                                 src="${userAccount.getAvatar()}" 
+                            <img class="img-account-profile rounded-circle mb-2" id="imgAvatar" style="max-height: 350px; max-width: 350px"
+                                 src="${pageContext.request.contextPath}/imgUser/${userAccount.getAvatar()}" 
                                  onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'" 
                                  alt="">
                         </div>
@@ -70,7 +70,7 @@
                     <!-- Account details card-->
                     <div class="card mb-4">
                         <div class="card-body">
-                            <form action="${pageContext.request.contextPath}/ManagerEditAccount" method="post">
+                            <form action="${pageContext.request.contextPath}/ManagerEditAccount" method="post" enctype="multipart/form-data">
                                 <input hidden type="text" name="userID" value="${userAccount.getUserID()}" required/>
                                 <div class="mb-3">
                                     <p class="text-danger">${errorUsername}</p>
@@ -78,7 +78,7 @@
                                     <input class="form-control" id="inputUsername" type="text" required name="txtUsername"
                                            placeholder="Enter your username" value="${userAccount.getUser_name()}">
                                     <input type="text" required hidden name="txtUsernameOld"
-                                           value="${accountSession.getUser_name()}">
+                                           value="${accountOld.getUser_name()}">
                                 </div>
                                 <div class="row gx-3 mb-3">
                                     <div class="col-md-6">
@@ -87,7 +87,7 @@
                                         <input class="form-control" id="inputFirstName" type="email" required name="txtGmail"
                                                placeholder="Enter your gmail" value="${userAccount.getEmail()}">
                                         <input type="text" required hidden name="txtGmailOld"
-                                               value="${accountSession.getEmail()}">
+                                               value="${accountOld.getEmail()}">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputLastName">Full Name</label>
@@ -109,13 +109,63 @@
                                     </div>
                                 </div>
 
+                                <!--                                <div class="mb-3">
+                                                                    <label class="small mb-1" for="inputEmailAddress">Link Avatar</label>
+                                                                    <input class="form-control" id="inputEmailAddress" type="text" name="txtAvatar" required
+                                                                           onchange="updateAvatar(this.value)"
+                                                                           placeholder="Enter your link avatar" value="${userAccount.getAvatar()}">
+                                                                </div>
+                                                                <script>
+                                                                    function updateAvatar(link) {
+                                                                        var imgElement = document.getElementById("imgAvatar");
+                                                                        imgElement.src = link;
+                                                                    }
+                                                                </script>-->
                                 <div class="mb-3">
-                                    <label class="small mb-1" for="inputEmailAddress">Link Avatar</label>
-                                    <input class="form-control" id="inputEmailAddress" type="text" name="txtAvatar" required
-                                           onchange="updateAvatar(this.value)"
-                                           placeholder="Enter your link avatar" value="${userAccount.getAvatar()}">
+                                    <label class="small mb-1" for="inputEmailAddress">Upload New Avatar</label>
+                                    <input id="inputFile" type="file" name="txtAvatar" accept="image/*" />
                                 </div>
                                 <script>
+                                    // L?y tham chi?u ??n nút và input
+                                    var inputFile = document.getElementById('inputFile');
+
+                                    // Thêm s? ki?n change cho input file
+                                    inputFile.addEventListener('change', function () {
+                                        var file = inputFile.files[0];
+                                        validateFileType(file);
+                                    });
+
+                                    function validateFileType(file) {
+                                        if (file) {
+                                            var fileType = file.type;
+
+                                            // Ki?m tra ??nh d?ng t?p có ph?i là hình ?nh hay không
+                                            if (!fileType.startsWith('image/')) {
+                                                // Hi?n th? thông báo l?i n?u t?p không ph?i là hình ?nh
+                                                alert('Please choose a file image.');
+                                                clearFileInput();
+                                            } else {
+                                                var fileReader = new FileReader();
+                                                fileReader.onload = function () {
+                                                    var link = fileReader.result;
+                                                    updateAvatar(link);
+                                                };
+                                                fileReader.readAsDataURL(file);
+                                            }
+                                        }
+                                    }
+
+                                    function clearFileInput() {
+                                        // Xóa giá tr? c?a input file
+                                        inputFile.value = '';
+
+                                        // Ti?p t?c l?ng nghe s? ki?n change cho input file
+                                        inputFile.addEventListener('change', function () {
+                                            var file = inputFile.files[0];
+                                            validateFileType(file);
+                                        });
+                                    }
+
                                     function updateAvatar(link) {
                                         var imgElement = document.getElementById("imgAvatar");
                                         imgElement.src = link;

@@ -32,7 +32,7 @@
                         <div class="card-body text-center">
                             <!-- Profile picture image--> 
                             <img class="img-account-profile rounded-circle mb-2" 
-                                src="${pageContext.request.contextPath}/imgUser/${userAccount.getAvatar()}"
+                                 src="${pageContext.request.contextPath}/imgUser/${userAccount.getAvatar()}"
                                  onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'"  
                                  alt="">
                             <!-- Profile picture help block-->
@@ -57,8 +57,20 @@
 
                                 // Thêm sự kiện change cho input file
                                 inputFile.addEventListener('change', function () {
-                                    // Tự động gửi form khi người dùng chọn ảnh
-                                    formImg.submit();
+                                    // Kiểm tra xem có tệp nào được chọn hay không
+                                    if (inputFile.files.length > 0) {
+                                        var file = inputFile.files[0];
+                                        var fileType = file.type;
+
+                                        // Kiểm tra định dạng tệp có phải là hình ảnh hay không
+                                        if (fileType.startsWith('image/')) {
+                                            // Tự động gửi form khi người dùng chọn ảnh
+                                            formImg.submit();
+                                        } else {
+                                            // Hiển thị thông báo lỗi nếu tệp không phải là hình ảnh
+                                            alert('Please choose a file image.');
+                                        }
+                                    }
                                 });
                             </script>
                         </div>
