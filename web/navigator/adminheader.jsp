@@ -18,6 +18,7 @@
         <link href="${pageContext.request.contextPath}/css/managecss/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
+<<<<<<< HEAD
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -40,6 +41,23 @@
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="#!">Logout</a></li>
+=======
+    <body>
+        <!-- HEADER -->
+        <header>
+            <!-- TOP HEADER -->
+            <div id="top-header">
+                <div class="container">
+                    <ul class="header-links pull-right">
+                         <c:if test="${sessionScope.a != null}">
+                            <li><a href="${pageContext.request.contextPath}/Logout">Log out</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ProfileUser"><i class="fa fa-user-o"></i> My Account - ${sessionScope.a.getFullName()}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ManagerAccount"><i class="fa fa-user-o"></i> Manager Admin</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.a == null}">
+                            <li><a href="${pageContext.request.contextPath}/view/common/login.jsp"><i class="fa fa-user-o"></i> Log in</a></li>
+                            </c:if>
+>>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
                     </ul>
                 </li>
             </ul>

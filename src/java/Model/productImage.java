@@ -8,44 +8,59 @@ package Model;
  *
  * @author Admin
  */
+<<<<<<< HEAD
 public class productImage {
 
     private String products_images_id,
             product_id,
             status,
             images;
+=======
+// ProductImage.java
+public class ProductImage {
+    private int productsImagesId;
+    private int productId;
+    private boolean status;
+    private String images;
+>>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
 
     public productImage() {
     }
 
+<<<<<<< HEAD
     public productImage(String products_images_id, String product_id, String status, String images) {
         this.products_images_id = products_images_id;
         this.product_id = product_id;
+=======
+    public ProductImage(int productsImagesId, int productId, boolean status, String images) {
+        this.productsImagesId = productsImagesId;
+        this.productId = productId;
+>>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
         this.status = status;
         this.images = images;
     }
 
-    public String getProducts_images_id() {
-        return products_images_id;
+    public int getProductsImagesId() {
+        return productsImagesId;
     }
 
-    public void setProducts_images_id(String products_images_id) {
-        this.products_images_id = products_images_id;
+    public void setProductsImagesId(int productsImagesId) {
+        this.productsImagesId = productsImagesId;
     }
 
-    public String getProduct_id() {
-        return product_id;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -56,5 +71,5 @@ public class productImage {
     public void setImages(String images) {
         this.images = images;
     }
-    
 }
+

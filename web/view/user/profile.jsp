@@ -177,15 +177,25 @@
                         <div class="card-body text-center">
                             <!-- Profile picture image--> 
                             <img class="img-account-profile rounded-circle mb-2" 
+<<<<<<< HEAD
                                  src="${sessionScope.acc.getAvatar()}" 
+=======
+                                 src="${pageContext.request.contextPath}/imgUser/${userAccount.getAvatar()}"
+>>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
                                  onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'" 
                                  alt="">
                             <!-- Profile picture help block-->
                             <div class="small font-italic text-muted mb-4">  </div>
                             <!-- Profile picture upload button-->
+<<<<<<< HEAD
                             <a class="btn btn-primary" href="${pageContext.request.contextPath}/view/user/changePassword.jsp">Change Password</a>
                             <a class="btn btn-primary" href="">Update Profile</a>
                             <a class="btn btn-primary" href="${pageContext.request.contextPath}/logoutcontroller">Log out</a>
+=======
+                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/UpdateProfileUser">Update Profile</a>
+                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/ChangePassword">Change Password</a>
+                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/Logout">Log out</a>
+>>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
                         </div>
                     </div>
                 </div>

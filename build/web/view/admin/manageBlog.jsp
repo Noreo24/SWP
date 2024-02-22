@@ -76,6 +76,61 @@
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD:build/web/view/admin/manageBlog.jsp
+=======
+                    <div class="table-title">
+                        <div class="row">
+                            <form id="searchForm" action="${pageContext.request.contextPath}/ManagerAccount" method="get">
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+
+                                        <select onchange="onSubmitForm()" class="form-select" name="pageSize">
+                                            <option selected value="5">5</option>
+                                            <option 
+                                                <c:if test="${pageSize == 10}">
+                                                    selected
+                                                </c:if> value="10">10</option>
+                                            <option <c:if test="${pageSize == 30}">
+                                                    selected
+                                                </c:if> value="30">30</option> 
+                                            <option <c:if test="${pageSize == 50}">
+                                                    selected
+                                                </c:if> value="50">50</option>
+                                        </select>
+
+                                        <input type="text" class="form-control" name="nameSearch"
+                                               value="${nameSearch}" placeholder="Search by name"
+                                               />
+
+                                        <select onchange="onSubmitForm()" class="form-select" name="roleSelect">
+                                            <option value="Customer" selected>Customer</option>
+                                            <option value="Admin" 
+                                                    <c:if test="${roleSelect.equals('Admin')}">
+                                                        selected
+                                                    </c:if>
+                                                    >Admin</option>
+                                            <option value="Management" 
+                                                    <c:if test="${roleSelect.equals('Management')}">
+                                                        selected
+                                                    </c:if>>Management</option>
+                                        </select>
+                                        <input type="text" name="pageIndex"  hidden
+                                               value="${pageIndex}" required />
+                                        <input type="text" name="pageSize"  hidden
+                                               value="${pageSize}" required />
+                                        <input hidden type="submit"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br/>
+                    <script>
+                        function onSubmitForm() {
+                            document.querySelector('#searchForm').submit();
+                        }
+                    </script>
+>>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558:web/view/admin/ManagerAccount.jsp
                     <table class="table">
                         <thead class="thead" style="background: #ff2e00">
                             <tr>
@@ -108,6 +163,7 @@
                                         </c:if>
                                     </td>
                                     <td>
+<<<<<<< HEAD:build/web/view/admin/manageBlog.jsp
                                         <div style="display: flex; justify-content: space-around;">
                                             <a><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -120,6 +176,24 @@
                                                 </svg></a>
 
                                         </div>
+=======
+                                        <c:if test="${item.getUserID() != sessionScope.accountSession.getUserID()}">
+                                            <c:if test="${item.getStatus() == 'true'}">
+                                                <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=false&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}&roleSelect=${roleSelect}">
+                                                    <button class="btn btn-danger">Block</button>
+                                                </a> 
+                                            </c:if>
+                                            <c:if test="${item.getStatus() == 'false'}">
+                                                <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=true&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}&roleSelect=${roleSelect}">
+                                                    <button class="btn btn-success">Active</button>
+                                                </a> 
+                                            </c:if>
+
+                                            <a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserID()}&roleSelect=${roleSelect}">
+                                                <button class="btn btn-dark">Edit</button>
+                                            </a> 
+                                        </c:if>
+>>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558:web/view/admin/ManagerAccount.jsp
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -127,6 +201,7 @@
                     </table>
                 </div>
                 <!-- /row -->
+<<<<<<< HEAD:build/web/view/admin/manageBlog.jsp
                 <!-- store bottom filter -->
                 <div class="store-filter clearfix">
                     <ul class="store-pagination">
@@ -137,6 +212,18 @@
                         </c:forEach>
 
                         <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+=======
+                <div class="clearfix">
+                    <div class="hint-text">Showing <b>${accounts.size()}</b> out of <b>${countAccount}</b> entries</div>
+                    <ul class="pagination">
+                        <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex-1}&pageSize=${pageSize}&roleSelect=${roleSelect}">Previous</a></li>
+                            <c:forEach var="item" begin="1" end="${page}">
+                            <li class="page-item ${item == pageIndex ? 'active': ''}">
+                                <a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${item}&pageSize=${pageSize}&roleSelect=${roleSelect}" class="page-link">${item}</a>
+                            </li>
+                        </c:forEach>
+                        <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex+1}&pageSize=${pageSize}&roleSelect=${roleSelect}" class="page-link">Next</a></li>
+>>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558:web/view/admin/ManagerAccount.jsp
                     </ul>
                 </div>
 

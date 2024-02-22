@@ -6,26 +6,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Electro - HTML Ecommerce Template</title>
+        <title>Manager Add Account</title>
 
         <!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
         <!-- Bootstrap -->
-        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
 
         <!-- Slick -->
-        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/slick.css"/>
-        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/slick-theme.css"/>
+        <link type="text/css" rel="stylesheet" href="css/slick.css"/>
+        <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
 
         <!-- nouislider -->
-        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/nouislider.min.css"/>
+        <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
 
         <!-- Font Awesome Icon -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
 
         <!-- Custom stlylesheet -->
-        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
+        <link type="text/css" rel="stylesheet" href="css/style.css"/>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,13 +36,8 @@
 
     </head>
     <body>
+        <!-- HEADER -->
         <%@include file="/navigator/adminheader.jsp" %>
-<<<<<<< HEAD:web/view/admin/adminMenu.jsp
-        <div class="d-grid gap-2" style="display: flex; flex-direction: column; align-items: center;">
-            <button class="btn btn-primary" style="margin-top: 20px" type="button">Products manage</button>
-            <button class="btn btn-success" style="margin-top: 20px" type="button">Accounts manage</button>
-            <a href="${pageContext.request.contextPath}/bloglistmanage"><button class="btn btn-info" style="margin-top: 20px" type="button">Blogs manage</button></a>
-=======
         <!-- /HEADER -->
 
         <!-- NAVIGATION -->
@@ -64,7 +59,7 @@
                         <div class="card-body text-center">
                             <!-- Profile picture image--> 
                             <img class="img-account-profile rounded-circle mb-2" id="imgAvatar" style="max-height: 350px; max-width: 350px"
-                                 src="${pageContext.request.contextPath}/imgUser/${userAccount.getAvatar()}" 
+                                 src="${userAccount.getAvatar()}" 
                                  onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'" 
                                  alt="">
                         </div>
@@ -75,24 +70,25 @@
                     <!-- Account details card-->
                     <div class="card mb-4">
                         <div class="card-body">
-                            <form action="${pageContext.request.contextPath}/ManagerEditAccount" method="post" enctype="multipart/form-data">
-                                <input hidden type="text" name="userID" value="${userAccount.getUserID()}" required/>
+                            <form action="${pageContext.request.contextPath}/ManagerAddAccount" method="post" enctype="multipart/form-data">
                                 <div class="mb-3">
-                                    <p class="text-danger">${errorUsername}</p>
-                                    <label class="small mb-1" for="inputUsername">Username </label>
-                                    <input class="form-control" id="inputUsername" type="text" required name="txtUsername"
-                                           placeholder="Enter your username" value="${userAccount.getUser_name()}">
-                                    <input type="text" required hidden name="txtUsernameOld"
-                                           value="${accountOld.getUser_name()}">
+                                    <label class="small mb-1" for="inputUsername">Username <span class="text-danger">${errorUserName}</span></label> </label>
+                                    <input class="form-control" id="inputUsername"
+                                           type="text" required
+                                           name="username"
+                                           placeholder="Enter your username" 
+                                           value="${userAccount.getUser_name()}">
                                 </div>
                                 <div class="row gx-3 mb-3">
+
                                     <div class="col-md-6">
-                                        <p class="text-danger">${errorGmail}</p>
-                                        <label class="small mb-1" for="inputFirstName">Gmail</label>
-                                        <input class="form-control" id="inputFirstName" type="email" required name="txtGmail"
-                                               placeholder="Enter your gmail" value="${userAccount.getEmail()}">
-                                        <input type="text" required hidden name="txtGmailOld"
-                                               value="${accountOld.getEmail()}">
+
+                                        <label class="small mb-1" for="inputFirstName">Gmail <span class="text-danger">${errorEmail}</span></label>
+                                        <input class="form-control" id="inputFirstName"
+                                               type="email" required
+                                               placeholder="Enter your gmail" 
+                                               name="gmail"
+                                               value="${userAccount.getEmail()}">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputLastName">Full Name</label>
@@ -114,21 +110,9 @@
                                     </div>
                                 </div>
 
-                                <!--                                <div class="mb-3">
-                                                                    <label class="small mb-1" for="inputEmailAddress">Link Avatar</label>
-                                                                    <input class="form-control" id="inputEmailAddress" type="text" name="txtAvatar" required
-                                                                           onchange="updateAvatar(this.value)"
-                                                                           placeholder="Enter your link avatar" value="${userAccount.getAvatar()}">
-                                                                </div>
-                                                                <script>
-                                                                    function updateAvatar(link) {
-                                                                        var imgElement = document.getElementById("imgAvatar");
-                                                                        imgElement.src = link;
-                                                                    }
-                                                                </script>-->
                                 <div class="mb-3">
-                                    <label class="small mb-1" for="inputEmailAddress">Upload New Avatar</label>
-                                    <input id="inputFile" type="file" name="txtAvatar" accept="image/*" />
+                                    <label class="small mb-1" for="inputEmailAddress">Upload Avatar</label>
+                                    <input id="inputFile" type="file" name="txtAvatar" accept="image/*" required/>
                                 </div>
                                 <script>
                                     // L?y tham chi?u ??n nút và input
@@ -177,6 +161,7 @@
                                     }
                                 </script>
                                 <div class="row gx-3 mb-3">
+
                                     <div class="col-md-6">
                                         <label class="small mb-1" >Gender: </label>
                                         <input  id="inputGenderMale" type="radio" name="gender"
@@ -207,6 +192,13 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="inputEmailAddress">Password</label>
+                                    <input class="form-control" id="inputEmailAddress"
+                                           type="text" name="pass" required
+                                           placeholder="Enter your password" value="${userAccount.getAvatar()}">
+                                </div>
+                                <br/>
                                 <button class="btn btn-primary" type="submit">Save changes</button>
                             </form>
                         </div>
@@ -214,8 +206,9 @@
                 </div>
             </div>
             <!-- /container -->
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558:web/view/admin/ManagerEditAccount.jsp
         </div>
+        <!-- /SECTION -->
+
         <!-- NEWSLETTER -->
         <div id="newsletter" class="section">
             <!-- container -->

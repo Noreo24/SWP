@@ -5,19 +5,7 @@
 package DAO;
 
 import DBContext.DBContext;
-<<<<<<< HEAD
-import Model.Admin;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
-/**
- *
- * @author Admin
- */
-public class adminDAO {
-=======
-import Model.*;
+import Model.Account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,20 +15,15 @@ import java.util.ArrayList;
  *
  * @author LanChau
  */
-public class AdminDAO {
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
+public class ManagementDao {
 
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
     ResultSet rs;//Lưu trữ và xử lý dữ liệu
-<<<<<<< HEAD
-    public Admin getAdminByUsername(String username, String pass) {
-=======
 
-    public Account getUserAdminByUsername(String username, String pass) {
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
-        String query = "select * from Admin where user_name = ? and password = ?";
+    public Account getUserManagementByUsername(String username, String pass) {
+        String query = "select * from Management where user_name = ? and password = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
@@ -48,11 +31,7 @@ public class AdminDAO {
             stm.setString(2, pass);
             rs = stm.executeQuery();
             while (rs.next()) {
-<<<<<<< HEAD
-                return new Admin(String.valueOf(rs.getInt(1)),
-=======
-                return new Account(String.valueOf(rs.getInt(1)),
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
+                Account account = new Account(String.valueOf(rs.getInt(1)),
                         rs.getString(2),
                         rs.getString(3),
                         String.valueOf(rs.getBoolean(4)),
@@ -61,13 +40,12 @@ public class AdminDAO {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-<<<<<<< HEAD
-                        String.valueOf(rs.getInt(10)),
-                        String.valueOf(rs.getBoolean(11)));
-=======
-                        "Admin",
-                        String.valueOf(rs.getBoolean(10))
+                        "Management",
+                        String.valueOf(rs.getBoolean(11))
                 );
+                account.setAdminCreateId(rs.getInt(10));
+
+                return account;
             }
 
         } catch (Exception e) {
@@ -76,15 +54,15 @@ public class AdminDAO {
         return null;
     }
 
-    public Account getAdminByEmail(String mail) {
-        String query = "select * from Admin where email = ?";
+    public Account getManagementByEmail(String mail) {
+        String query = "select * from Management where email = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
             stm.setString(1, mail);
             rs = stm.executeQuery();
             while (rs.next()) {
-                return new Account(String.valueOf(rs.getInt(1)),
+                Account account = new Account(String.valueOf(rs.getInt(1)),
                         rs.getString(2),
                         rs.getString(3),
                         String.valueOf(rs.getBoolean(4)),
@@ -93,21 +71,21 @@ public class AdminDAO {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-                        "Admin",
-                        String.valueOf(rs.getBoolean(10))
+                        "Management",
+                        String.valueOf(rs.getBoolean(11))
                 );
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
+                account.setAdminCreateId(rs.getInt(10));
+
+                return account;
             }
 
         } catch (Exception e) {
         }
         return null;
     }
-<<<<<<< HEAD
-=======
 
-    public void updateAdmin(Account account) {
-        String query = "UPDATE [dbo].[Admin]\n"
+    public void updateManagement(Account account) {
+        String query = "UPDATE [dbo].[Management]\n"
                 + "   SET [fullName] = ? \n"
                 + "      ,[avatar] =?\n"
                 + "      ,[gender] = ?\n"
@@ -138,15 +116,15 @@ public class AdminDAO {
         }
     }
 
-    public Account getAdminById(String id) {
-        String query = "select * from Admin where [id] = ?";
+    public Account getManagementById(String id) {
+        String query = "select * from Management where [id] = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
             stm.setString(1, id);
             rs = stm.executeQuery();
             while (rs.next()) {
-                return new Account(String.valueOf(rs.getInt(1)),
+                Account account = new Account(String.valueOf(rs.getInt(1)),
                         rs.getString(2),
                         rs.getString(3),
                         String.valueOf(rs.getBoolean(4)),
@@ -155,9 +133,12 @@ public class AdminDAO {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-                        "Admin",
-                        String.valueOf(rs.getBoolean(10))
+                        "Management",
+                        String.valueOf(rs.getBoolean(11))
                 );
+                account.setAdminCreateId(rs.getInt(10));
+
+                return account;
             }
 
         } catch (Exception e) {
@@ -167,7 +148,7 @@ public class AdminDAO {
 
     public int getCount(String name) {
         String query = "SELECT count(*)\n"
-                + "FROM [Admin]\n"
+                + "FROM [Management]\n"
                 + "WHERE fullName like ? \n";
 
         try {
@@ -184,12 +165,12 @@ public class AdminDAO {
         return 0;
     }
 
-    public ArrayList<Account> getAllAdmin(String name, int pageNumber, int pageSize) {
+    public ArrayList<Account> getAllManagement(String name, int pageNumber, int pageSize) {
         ArrayList<Account> accounts = new ArrayList<>();
 
         String query = ""
                 + "SELECT * "
-                + "  FROM [Admin] a \n"
+                + "  FROM [Management] a \n"
                 + "WHERE a.[fullName] like ?\n";
 
         query += "  ORDER BY id\n"
@@ -213,9 +194,10 @@ public class AdminDAO {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-                        "Admin",
-                        String.valueOf(rs.getBoolean(10))
+                        "Management",
+                        String.valueOf(rs.getBoolean(11))
                 );
+                account.setAdminCreateId(rs.getInt(10));
 
                 accounts.add(account);
             }
@@ -226,15 +208,15 @@ public class AdminDAO {
         return accounts;
     }
 
-    public Account getAdminByUsername(String username) {
-        String query = "select * from Admin where user_name = ?";
+    public Account getManagementByUsername(String username) {
+        String query = "select * from Management where user_name = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
             stm.setString(1, username);
             rs = stm.executeQuery();
             while (rs.next()) {
-                return new Account(String.valueOf(rs.getInt(1)),
+                Account account = new Account(String.valueOf(rs.getInt(1)),
                         rs.getString(2),
                         rs.getString(3),
                         String.valueOf(rs.getBoolean(4)),
@@ -243,9 +225,12 @@ public class AdminDAO {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-                        "Admin",
-                        String.valueOf(rs.getBoolean(10))
+                        "Management",
+                        String.valueOf(rs.getBoolean(11))
                 );
+                account.setAdminCreateId(rs.getInt(10));
+
+                return account;
             }
         } catch (Exception e) {
         }
@@ -254,7 +239,7 @@ public class AdminDAO {
 
     public void add(Account account) {
         String query = ""
-                + " INSERT INTO [Admin]\n"
+                + " INSERT INTO [Management]\n"
                 + "           ([fullName]\n"
                 + "           ,[avatar]\n"
                 + "           ,[gender]\n"
@@ -263,9 +248,10 @@ public class AdminDAO {
                 + "           ,[email]\n"
                 + "           ,[phone]\n"
                 + "           ,[address]\n"
+                + "           ,[admin_create_id]\n"
                 + "           ,[status])\n"
                 + "     VALUES\n"
-                + "( ? ,? ,? ,? ,? ,? ,? ,? ,?)";
+                + "( ? ,? ,? ,? ,? ,? ,? ,? ,?,?)";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
@@ -277,36 +263,11 @@ public class AdminDAO {
             stm.setString(6, account.getEmail());
             stm.setString(7, account.getPhone());
             stm.setString(8, account.getAddress());
-            stm.setBoolean(9, account.getStatus().equals("true"));
+            stm.setInt(9, account.getAdminCreateId());
+            stm.setBoolean(10, account.getStatus().equals("true"));
             rs = stm.executeQuery();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
-//    public Admin getAdminByUsername(String username, String pass) {
-//        String query = "select * from Admin where user_name = ? and password = ?";
-//        try {
-//            cnn = new DBContext().getConnection();//mo ket noi voi sql
-//            stm = cnn.prepareStatement(query);
-//            stm.setString(1, username);
-//            stm.setString(2, pass);
-//            rs = stm.executeQuery();
-//            while (rs.next()) {
-//                return new Admin(String.valueOf(rs.getInt(1)),
-//                        rs.getString(2),
-//                        rs.getString(3),
-//                        String.valueOf(rs.getBoolean(4)),
-//                        rs.getString(5),
-//                        rs.getString(6),
-//                        rs.getString(7),
-//                        rs.getString(8),
-//                        rs.getString(9),
-//                        String.valueOf(rs.getBoolean(10)));
-//            }
-//
-//        } catch (Exception e) {
-//        }
-//        return null;
-//    }
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
 }

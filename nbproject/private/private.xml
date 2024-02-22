@@ -2,6 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/C:/Users/buiph/Documents/GitHub/SWP/src/java/Model/Account.java</file>
+            <file>file:/C:/Users/buiph/Documents/GitHub/SWP/src/java/Controller/Common/UpdateImageUserController.java</file>
+            <file>file:/C:/Users/buiph/Documents/GitHub/SWP/src/java/Controller/Admin/ManagerAccountController.java</file>
+            <file>file:/C:/Users/buiph/Documents/GitHub/SWP/src/java/DAO/AccountDAO.java</file>
+            <file>file:/C:/Users/buiph/Documents/GitHub/SWP/src/java/Uils/Util.java</file>
+            <file>file:/C:/Users/buiph/Documents/GitHub/SWP/src/java/Controller/Admin/ManagerAddAccountController.java</file>
+            <file>file:/C:/Users/buiph/Documents/GitHub/SWP/src/java/DBContext/DBContext.java</file>
+            <file>file:/C:/Users/buiph/Documents/GitHub/SWP/web/view/admin/ManagerAddAccount.jsp</file>
+            <file>file:/C:/Users/buiph/Documents/GitHub/SWP/web/view/user/updateProfile.jsp</file>
+        </group>
+>>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
     </open-files>
 </project-private>
