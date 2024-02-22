@@ -81,15 +81,18 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <form action="${pageContext.request.contextPath}/UpdateProfileUser" method="post">
+                                <p class="text-danger"> ${errorUsername}</p>
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputUsername">Username </label>
-                                    <input class="form-control" disabled  id="inputUsername" type="text" required
+                                    <input class="form-control" id="inputUsername" type="text" name="txtUsername" required
                                            placeholder="Enter your username" value="${userAccount.getUser_name()}">
                                 </div>
+                                <p class="text-danger"> ${errorGmail}</p>
                                 <div class="row gx-3 mb-3">
+
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputFirstName">Gmail</label>
-                                        <input class="form-control" id="inputFirstName" type="email" disabled required
+                                        <input class="form-control" id="inputFirstName" type="email" name="txtGmail" required
                                                placeholder="Enter your gmail" value="${userAccount.getEmail()}">
                                     </div>
                                     <div class="col-md-6">

@@ -21,37 +21,37 @@ import jakarta.servlet.http.HttpSession;
  */
 @WebServlet(name = "UpdateProfileUserController", urlPatterns = {"/UpdateProfileUser"})
 public class UpdateProfileUserController extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+              throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
+
         if (session.getAttribute("accountSession") != null) {
             Account account = (Account) session.getAttribute("accountSession");
-            
+
             Account accountInfo = null;
-            
+
             if (account.getRoleName().equals("Customer")) {
                 accountInfo = new CustomerDAO().getCustomerByEmail(account.getEmail());
-                
+
                 request.setAttribute("userAccount", accountInfo);
-                
+
                 request.getRequestDispatcher("/view/user/updateProfile.jsp").forward(request, response);
             } else if (account.getRoleName().equals("Admin")) {
                 accountInfo = new AdminDAO().getAdminByEmail(account.getEmail());
-                
+
                 request.setAttribute("userAccount", accountInfo);
-                
+
                 request.getRequestDispatcher("/view/user/updateProfile.jsp").forward(request, response);
             } else if (account.getRoleName().equals("Management")) {
                 accountInfo = new ManagementDao().getManagementByEmail(account.getEmail());
-                
+
                 request.setAttribute("userAccount", accountInfo);
-                
+
                 request.getRequestDispatcher("/view/user/updateProfile.jsp").forward(request, response);
             }
-            
+
         } else {
             response.sendRedirect("logincontroller");
         }
@@ -67,14 +67,14 @@ public class UpdateProfileUserController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+              throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
+
         if (session.getAttribute("accountSession") != null) {
             Account account = (Account) session.getAttribute("accountSession");
-            
+
             Account accountInfo = null;
-            
+
             if (account.getRoleName().equals("Customer")) {
                 accountInfo = new CustomerDAO().getCustomerByEmail(account.getEmail());
             } else if (account.getRoleName().equals("Admin")) {
@@ -82,34 +82,80 @@ public class UpdateProfileUserController extends HttpServlet {
             } else if (account.getRoleName().equals("Management")) {
                 accountInfo = new ManagementDao().getManagementByEmail(account.getEmail());
             }
-            
+
             String fullName = request.getParameter("textFullName");
             String phone = request.getParameter("txtPhone");
             String address = request.getParameter("txtAddress");
             String avatar = request.getParameter("txtAvatar");
             String gender = request.getParameter("gender");
-            
+            String username = request.getParameter("txtUsername");
+            String gmail = request.getParameter("txtGmail");
+
             accountInfo.setFullName(fullName);
             accountInfo.setPhone(phone);
             accountInfo.setAddress(address);
             accountInfo.setAvatar(avatar);
             accountInfo.setGender(gender);
-            
-            if (account.getRoleName().equals("Customer")) {
-                new CustomerDAO().updateCustomer(accountInfo);
-            } else if (account.getRoleName().equals("Admin")) {
-                new AdminDAO().updateAdmin(accountInfo);
-            } else if (account.getRoleName().equals("Management")) {
-                new ManagementDao().updateManagement(accountInfo);
+
+            boolean check = false;
+
+            if (!gmail.equals(accountInfo.getEmail())) {
+                Account accountCheck = new CustomerDAO().getCustomerByEmail(gmail);
+                if (accountCheck == null) {
+                    accountCheck = new AdminDAO().getAdminByEmail(gmail);
+                }
+
+                if (accountCheck == null) {
+                    accountCheck = new ManagementDao().getManagementByEmail(gmail);
+                }
+
+                if (accountCheck != null) {
+                    check = true;
+                    request.setAttribute("errorGmail", "Gmail already exists");
+                }
             }
+
+            if (!username.equals(accountInfo.getUser_name())) {
+                Account accountCheck = new CustomerDAO().getCustomerByUsername(username);
+                if (accountCheck == null) {
+                    accountCheck = new AdminDAO().getAdminByUsername(username);
+                }
+
+                if (accountCheck == null) {
+                    accountCheck = new ManagementDao().getManagementByUsername(username);
+                }
+
+                if (accountCheck != null) {
+                    check = true;
+                    request.setAttribute("errorUsername", "Username already exists");
+                }
+            }
+            accountInfo.setEmail(gmail);
+            accountInfo.setUser_name(username);
             
-            session.setAttribute("accountSession", accountInfo);
-            
-            response.sendRedirect("ProfileUser");
+            if (!check) {
+                if (account.getRoleName().equals("Customer")) {
+                    new CustomerDAO().updateCustomer(accountInfo);
+                } else if (account.getRoleName().equals("Admin")) {
+                    new AdminDAO().updateAdmin(accountInfo);
+                } else if (account.getRoleName().equals("Management")) {
+                    new ManagementDao().updateManagement(accountInfo);
+                }
+
+                session.setAttribute("accountSession", accountInfo);
+
+                response.sendRedirect("ProfileUser");
+            } else {
+
+                request.setAttribute("userAccount", accountInfo);
+
+                request.getRequestDispatcher("/view/user/updateProfile.jsp").forward(request, response);
+            }
+
         } else {
             response.sendRedirect("logincontroller");
         }
-        
+
     }
 
     /**
@@ -119,7 +165,7 @@ public class UpdateProfileUserController extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        
+
         return "Short description";
     }// </editor-fold>
 
