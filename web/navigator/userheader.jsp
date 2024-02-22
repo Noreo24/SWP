@@ -50,11 +50,11 @@
             <div id="top-header">
                 <div class="container">
                     <ul class="header-links pull-right">
-                        <c:if test="${sessionScope.c != null}">
-                            <li><a href="${pageContext.request.contextPath}/logoutcontroller">Log out</a></li>
-                            <li><a href="#"><i class="fa fa-user-o"></i> My Account - ${sessionScope.c.getFullName()}</a></li>
+                        <c:if test="${sessionScope.acc != null}">
+                            <li><a href="logoutcontroller">Log out</a></li>
+                            <li><a href="${pageContext.request.contextPath}/view/user/profile.jsp"><i class="fa fa-user-o"></i> My Account - ${sessionScope.acc.getFullName()}</a></li>
                             </c:if>
-                            <c:if test="${sessionScope.c == null}">
+                            <c:if test="${sessionScope.acc == null}">
                             <li><a href="${pageContext.request.contextPath}/view/common/login.jsp"><i class="fa fa-user-o"></i> Log in</a></li>
                             </c:if>
                     </ul>
@@ -71,8 +71,8 @@
                         <!-- LOGO -->
                         <div class="col-md-3">
                             <div class="header-logo">
-                                <a href="#" class="logo">
-                                    <img style="width: 250px" src="./img/logo.png" alt="">
+                                <a href="${pageContext.request.contextPath}/home" class="logo">
+                                    <img style="width: 250px" src="${pageContext.request.contextPath}/img/logo.png" alt="">
                                 </a>
                             </div>
                         </div>
@@ -149,6 +149,7 @@
                                     </div>
                                 </div>
                                 <!-- /Cart -->
+                                
 
                                 <!-- Menu Toogle -->
                                 <div class="menu-toggle">
@@ -169,6 +170,28 @@
             <!-- /MAIN HEADER -->
         </header>
         <!-- /HEADER -->
+        <nav id="navigation">
+            <!-- container -->
+            <div class="container">
+                <!-- responsive-nav -->
+                <div id="responsive-nav">
+                    <!-- NAV -->
+                    <ul class="main-nav nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Hot Deals</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Laptops</a></li>
+                        <li><a href="#">Smartphones</a></li>
+                        <li><a href="#">Cameras</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="${pageContext.request.contextPath}/loadblogpage">Blogs</a></li>
+                    </ul>
+                    <!-- /NAV -->
+                </div>
+                <!-- /responsive-nav -->
+            </div>
+            <!-- /container -->
+        </nav>   
         <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>

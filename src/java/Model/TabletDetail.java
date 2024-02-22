@@ -8,7 +8,7 @@ package Model;
  *
  * @author Admin
  */
-public class tabletDetail {
+public class TabletDetail {
 
     private String tablet_detail_id,
             color,
@@ -27,10 +27,10 @@ public class tabletDetail {
             product_id,
             other_feature;
 
-    public tabletDetail() {
+    public TabletDetail() {
     }
 
-    public tabletDetail(String tablet_detail_id, String color, String screen_size, String screen_tech, String camera_rear, String front_camera, String chip, String ram, String rom, String pin, String sim, String operation_system, String screen_resolution, String screen_feature, String product_id, String other_feature) {
+    public TabletDetail(String tablet_detail_id, String color, String screen_size, String screen_tech, String camera_rear, String front_camera, String chip, String ram, String rom, String pin, String sim, String operation_system, String screen_resolution, String screen_feature, String product_id, String other_feature) {
         this.tablet_detail_id = tablet_detail_id;
         this.color = color;
         this.screen_size = screen_size;

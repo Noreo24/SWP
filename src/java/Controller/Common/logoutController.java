@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.common;
+package Controller.Common;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -57,7 +57,7 @@ public class logoutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.removeAttribute("c");
+        session.removeAttribute("acc");
         response.sendRedirect("home");
     }
 

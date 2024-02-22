@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input id="repassword-field" type="password" class="form-control" placeholder="Re-password" name="repass" required>
-                                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                    <span toggle="#repassword-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Fullname" name="fullname" required>

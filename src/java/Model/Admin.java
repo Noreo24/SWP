@@ -8,9 +8,8 @@ package Model;
  *
  * @author Admin
  */
-public class admin {
-
-    private String adminId,
+public class Admin {
+        private String userID,
             fullName,
             avatar,
             gender,
@@ -19,13 +18,13 @@ public class admin {
             password,
             phone,
             address,
-            roleId;
+            roleId, status;
 
-    public admin() {
+    public Admin() {
     }
 
-    public admin(String adminId, String fullName, String avatar, String gender, String email, String user_name, String password, String phone, String address, String roleId) {
-        this.adminId = adminId;
+    public Admin(String userID, String fullName, String avatar, String gender, String email, String user_name, String password, String phone, String address, String roleId, String status) {
+        this.userID = userID;
         this.fullName = fullName;
         this.avatar = avatar;
         this.gender = gender;
@@ -35,14 +34,15 @@ public class admin {
         this.phone = phone;
         this.address = address;
         this.roleId = roleId;
+        this.status = status;
     }
 
-    public String getAdminId() {
-        return adminId;
+    public String getUserID() {
+        return userID;
     }
 
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getFullName() {
@@ -116,5 +116,13 @@ public class admin {
     public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
-    
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+        
 }

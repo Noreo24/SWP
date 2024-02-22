@@ -14,14 +14,14 @@ import java.sql.ResultSet;
  *
  * @author Admin
  */
-public class CustomerDAO {
+public class customerDAO {
 
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
     ResultSet rs;//Lưu trữ và xử lý dữ liệu
 
-    public Customer getUserByUsername(String username, String pass) {
+    public Customer getCustomerByUsername(String username, String pass) {
         String query = "select * from Customer where user_name = ? and password = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
@@ -39,9 +39,8 @@ public class CustomerDAO {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-                        String.valueOf(rs.getBoolean(10)),
-                        String.valueOf(rs.getBoolean(11))
-                );
+                        String.valueOf(rs.getInt(10)),
+                        String.valueOf(rs.getBoolean(11)));
             }
 
         } catch (Exception e) {
@@ -49,12 +48,12 @@ public class CustomerDAO {
         return null;
     }
 
-    public Customer getUserByEmail(String mail) {
+    public Customer getCustomerByEmail(String email) {
         String query = "select * from Customer where email = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
-            stm.setString(1, mail);
+            stm.setString(1, email);
             rs = stm.executeQuery();
             while (rs.next()) {
                 return new Customer(String.valueOf(rs.getInt(1)),
@@ -66,9 +65,8 @@ public class CustomerDAO {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-                        String.valueOf(rs.getBoolean(10)),
-                        String.valueOf(rs.getBoolean(11))
-                );
+                        String.valueOf(rs.getInt(10)),
+                        String.valueOf(rs.getBoolean(11)));
             }
 
         } catch (Exception e) {
@@ -76,7 +74,7 @@ public class CustomerDAO {
         return null;
     }
 
-    public Customer getUserByUsername(String username) {
+    public Customer getCustomerByUsername(String username) {
         String query = "select * from Customer where user_name = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
@@ -93,9 +91,8 @@ public class CustomerDAO {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-                        String.valueOf(rs.getBoolean(10)),
-                        String.valueOf(rs.getBoolean(11))
-                );
+                        String.valueOf(rs.getInt(10)),
+                        String.valueOf(rs.getBoolean(11)));
             }
 
         } catch (Exception e) {
@@ -103,8 +100,8 @@ public class CustomerDAO {
         return null;
     }
 
-    public void addNewAccount(String email, String username, String pass, String fullname, String phone, String address) {
-        String query = "insert into Customer(email, user_name, password, fullName, phone, address, roleId, status) values (?, ?, ?, ?, ?, ?, 0, 1)";
+    public void registCustomer(String email, String username, String pass, String fullname, String phone, String address) {
+        String query = "insert into Customer(email, user_name, password, fullName, phone, address, roleId, status) values (?, ?, ?, ?, ?, ?, 2, 1)";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
@@ -119,13 +116,26 @@ public class CustomerDAO {
         }
     }
 
-    public void addCusGoogleAcc(String email, String avatar) {
-        String query = "insert into Customer(email, avatar, roleId, status) values (?, ?, 0, 1)";
+    public void addNewCustomerWithGoogleAccount(String email, String fullname, String avatar) {
+        String query = "insert into Customer(email, fullName, avatar, roleId, status) values (?, ?, ?, 2, 1)";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
             stm.setString(1, email);
-            stm.setString(2, avatar);
+            stm.setString(2, fullname);
+            stm.setString(3, avatar);
+            rs = stm.executeQuery();
+        } catch (Exception e) {
+        }
+    }
+
+    public void changePassword(String userID, String newpass) {
+        String query = "UPDATE Customer set password = ? where userId = ? ";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, newpass);
+            stm.setString(2, userID);
             rs = stm.executeQuery();
         } catch (Exception e) {
         }

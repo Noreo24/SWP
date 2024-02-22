@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.common;
+package Controller.Common;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,7 +34,7 @@ public class home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet home</title>");
+            out.println("<title>Servlet home</title>");            
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet home at " + request.getContextPath() + "</h1>");

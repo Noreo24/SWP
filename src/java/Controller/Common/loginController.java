@@ -2,12 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.common;
+package Controller.Common;
 
-import DAO.CustomerDAO;
 import DAO.adminDAO;
+import DAO.customerDAO;
+import DAO.staffDAO;
+import Model.Admin;
 import Model.Customer;
-import Model.admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import util.Encode;
 
 /**
  *
@@ -78,8 +80,9 @@ public class loginController extends HttpServlet {
         String username = request.getParameter("username");
         String pass = request.getParameter("password");
         String rempass = request.getParameter("rememberpass");
-        CustomerDAO cdao = new CustomerDAO();
         adminDAO adao = new adminDAO();
+        customerDAO cdao = new customerDAO();
+        staffDAO sdao = new staffDAO();
         if (rempass != null) {
             Cookie c_user = new Cookie("username", username);
             Cookie c_pass = new Cookie("pass", pass);
@@ -90,23 +93,23 @@ public class loginController extends HttpServlet {
             response.addCookie(c_user);
             response.addCookie(c_pass);
         }
-        if (cdao.getUserByUsername(username, pass) != null) {
-            Customer c = cdao.getUserByUsername(username, pass);
-            if ("true".equals(c.getStatus())) {
+        if (cdao.getCustomerByUsername(username, Encode.toSHA1(pass)) != null) {
+            Customer c = cdao.getCustomerByUsername(username, Encode.toSHA1(pass));
+            if (c.getStatus().equals("true")) {
                 HttpSession session = request.getSession();
-                session.setAttribute("c", c);
+                session.setAttribute("acc", c);
                 response.sendRedirect("home");
             } else {
                 String err = "Your account is banned!";
                 request.setAttribute("err", err);
                 request.getRequestDispatcher("/view/common/login.jsp").forward(request, response);
             }
-
         } else if (adao.getAdminByUsername(username, pass) != null) {
-            admin c = adao.getAdminByUsername(username, pass);
+            Admin a = adao.getAdminByUsername(username, pass);
             HttpSession session = request.getSession();
-            session.setAttribute("c", c);
-            response.sendRedirect("home");
+            session.setAttribute("acc", a);
+//            response.sendRedirect("/PhoneShop/view/admin/Manage.jsp");
+            response.sendRedirect("/PhoneShop/bloglistmanage");
         } else {
             String err = "Wrong username or password!";
             request.setAttribute("err", err);

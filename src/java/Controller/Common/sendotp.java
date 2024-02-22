@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller.common;
+package Controller.Common;
 
-import DAO.CustomerDAO;
+import DAO.customerDAO;
 import Model.Customer;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -73,10 +73,10 @@ public class sendotp extends HttpServlet {
             throws ServletException, IOException {
         String otp = request.getParameter("otp");
         if (otp.equals(otpvalue)) {
-            CustomerDAO cdao = new CustomerDAO();
-            Customer c = cdao.getUserByEmail(email);
+            customerDAO cdao = new customerDAO();
+            Customer c = cdao.getCustomerByEmail(email);
             HttpSession session = request.getSession();
-            session.setAttribute("c", c);
+            session.setAttribute("acc", c);
             response.sendRedirect("home");
         } else {
             String err = "Wrong OTP!";
@@ -97,8 +97,8 @@ public class sendotp extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         email = request.getParameter("email");
-        CustomerDAO cdao = new CustomerDAO();
-        if (cdao.getUserByEmail(email) == null) {
+        customerDAO adao = new customerDAO();
+        if (adao.getCustomerByEmail(email) == null) {
             String err = "This email is not registered";
             request.setAttribute("err", err);
             request.getRequestDispatcher("/view/common/forgotPass.jsp").forward(request, response);

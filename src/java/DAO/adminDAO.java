@@ -4,9 +4,8 @@
  */
 package DAO;
 
-
 import DBContext.DBContext;
-import Model.admin;
+import Model.Admin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,8 +20,7 @@ public class adminDAO {
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
     ResultSet rs;//Lưu trữ và xử lý dữ liệu
-
-    public admin getAdminByUsername(String username, String pass) {
+    public Admin getAdminByUsername(String username, String pass) {
         String query = "select * from Admin where user_name = ? and password = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
@@ -31,7 +29,7 @@ public class adminDAO {
             stm.setString(2, pass);
             rs = stm.executeQuery();
             while (rs.next()) {
-                return new admin(String.valueOf(rs.getInt(1)),
+                return new Admin(String.valueOf(rs.getInt(1)),
                         rs.getString(2),
                         rs.getString(3),
                         String.valueOf(rs.getBoolean(4)),
@@ -40,7 +38,8 @@ public class adminDAO {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-                        String.valueOf(rs.getBoolean(10)));
+                        String.valueOf(rs.getInt(10)),
+                        String.valueOf(rs.getBoolean(11)));
             }
 
         } catch (Exception e) {

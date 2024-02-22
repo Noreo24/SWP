@@ -8,15 +8,15 @@ package Model;
  *
  * @author Admin
  */
-public class category {
+public class Category {
 
     private String category_id,
             category_name;
 
-    public category() {
+    public Category() {
     }
 
-    public category(String category_id, String category_name) {
+    public Category(String category_id, String category_name) {
         this.category_id = category_id;
         this.category_name = category_name;
     }

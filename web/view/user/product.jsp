@@ -39,7 +39,6 @@
     </head>
     <body>
         <%@include file="/navigator/userheader.jsp" %>
-        <%@include file="/navigator/navigation.jsp" %>
         <div id="breadcrumb" class="section">
             <!-- container -->
             <div class="container">
