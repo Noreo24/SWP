@@ -5,8 +5,8 @@
 package Controller.Common;
 
 import DAO.AccountDAO;
-import DAO.AdminDAO;
-import DAO.CustomerDAO;
+import DAO.adminDAO;
+import DAO.customerDAO;
 import DAO.ManagementDao;
 import Model.Account;
 import Uils.Util;
@@ -63,9 +63,9 @@ public class UpdateImageUserController extends HttpServlet {
                 Account accountInfo = null;
 
                 if (account.getRoleName().equals("Customer")) {
-                    accountInfo = new CustomerDAO().getCustomerByEmail(account.getEmail());
+                    accountInfo = new customerDAO().getCustomerByEmail(account.getEmail());
                 } else if (account.getRoleName().equals("Admin")) {
-                    accountInfo = new AdminDAO().getAdminByEmail(account.getEmail());
+                    accountInfo = new adminDAO().getAdminByEmail(account.getEmail());
                 } else if (account.getRoleName().equals("Management")) {
                     accountInfo = new ManagementDao().getManagementByEmail(account.getEmail());
                 }
@@ -157,9 +157,9 @@ public class UpdateImageUserController extends HttpServlet {
                 session.setAttribute("accountSession", accountInfo);
 
                 if (account.getRoleName().equals("Customer")) {
-                    new CustomerDAO().updateCustomer(accountInfo);
+                    new customerDAO().updateCustomer(accountInfo);
                 } else if (account.getRoleName().equals("Admin")) {
-                    new AdminDAO().updateAdmin(accountInfo);
+                    new adminDAO().updateAdmin(accountInfo);
                 } else if (account.getRoleName().equals("Management")) {
                     new ManagementDao().updateManagement(accountInfo);
                 }

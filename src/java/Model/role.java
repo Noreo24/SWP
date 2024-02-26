@@ -8,16 +8,16 @@ package Model;
  *
  * @author Admin
  */
-public class Role {
+public class role {
 
     private String roleId,
             role_name,
             status;
 
-    public Role() {
+    public role() {
     }
 
-    public Role(String roleId, String role_name, String status) {
+    public role(String roleId, String role_name, String status) {
         this.roleId = roleId;
         this.role_name = role_name;
         this.status = status;

@@ -10,7 +10,7 @@ package Model;
  */
 public class PhoneDetail {
 
-    private String phone_detail_id,
+    public String phone_detail_id,
             color,
             screen_size,
             screen_tech,

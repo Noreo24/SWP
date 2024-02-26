@@ -46,9 +46,9 @@ public class ManagerEditAccountController extends HttpServlet {
             Account accountInfo = null;
 
             if (roleName.equals("Customer")) {
-                accountInfo = new CustomerDAO().getCustomerById(request.getParameter("userID"));
+                accountInfo = new customerDAO().getCustomerById(request.getParameter("userID"));
             } else if (roleName.equals("Admin")) {
-                accountInfo = new AdminDAO().getAdminById(request.getParameter("userID"));
+                accountInfo = new adminDAO().getAdminById(request.getParameter("userID"));
             } else if (roleName.equals("Management")) {
                 accountInfo = new ManagementDao().getManagementById(request.getParameter("userID"));
             }
@@ -89,9 +89,9 @@ public class ManagerEditAccountController extends HttpServlet {
         Account accountInfo = null;
 
         if (roleName.equals("Customer")) {
-            accountInfo = new CustomerDAO().getCustomerById(request.getParameter("userID"));
+            accountInfo = new customerDAO().getCustomerById(request.getParameter("userID"));
         } else if (roleName.equals("Admin")) {
-            accountInfo = new AdminDAO().getAdminById(request.getParameter("userID"));
+            accountInfo = new adminDAO().getAdminById(request.getParameter("userID"));
         } else if (roleName.equals("Management")) {
             accountInfo = new ManagementDao().getManagementById(request.getParameter("userID"));
         }
@@ -101,9 +101,9 @@ public class ManagerEditAccountController extends HttpServlet {
         boolean check = false;
 
         if (!gmail.equals(gmailOld)) {
-            Account accountCheck = new CustomerDAO().getCustomerByEmail(gmail);
+            Account accountCheck = new customerDAO().getCustomerByEmail(gmail);
             if (accountCheck == null) {
-                accountCheck = new AdminDAO().getAdminByEmail(gmail);
+                accountCheck = new adminDAO().getAdminByEmail(gmail);
             }
 
             if (accountCheck == null) {
@@ -117,9 +117,9 @@ public class ManagerEditAccountController extends HttpServlet {
         }
 
         if (!username.equals(usernameOld)) {
-            Account accountCheck = new CustomerDAO().getCustomerByUsername(username);
+            Account accountCheck = new customerDAO().getCustomerByUsername(username);
             if (accountCheck == null) {
-                accountCheck = new AdminDAO().getAdminByUsername(username);
+                accountCheck = new adminDAO().getAdminByUsername(username);
             }
 
             if (accountCheck == null) {
@@ -227,9 +227,9 @@ public class ManagerEditAccountController extends HttpServlet {
             }
 
             if (roleName.equals("Customer")) {
-                new CustomerDAO().updateCustomer(accountInfo);
+                new customerDAO().updateCustomer(accountInfo);
             } else if (roleName.equals("Admin")) {
-                new AdminDAO().updateAdmin(accountInfo);
+                new adminDAO().updateAdmin(accountInfo);
             } else if (roleName.equals("Management")) {
                 new ManagementDao().updateManagement(accountInfo);
             }

@@ -33,13 +33,13 @@ public class ProfileUserController extends HttpServlet {
             Account accountInfo = null;
 
             if (account.getRoleName().equals("Customer")) {
-                accountInfo = new CustomerDAO().getCustomerByEmail(account.getEmail());
+                accountInfo = new customerDAO().getCustomerByEmail(account.getEmail());
 
                 request.setAttribute("userAccount", accountInfo);
 
                 request.getRequestDispatcher("/view/user/profile.jsp").forward(request, response);
             } else if (account.getRoleName().equals("Admin")) {
-                accountInfo = new AdminDAO().getAdminByEmail(account.getEmail());
+                accountInfo = new adminDAO().getAdminByEmail(account.getEmail());
 
                 request.setAttribute("userAccount", accountInfo);
 

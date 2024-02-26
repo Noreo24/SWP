@@ -7,7 +7,6 @@ package Controller.Admin;
 import DAO.*;
 import Model.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,7 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -45,9 +43,9 @@ public class ManagerAccountController extends HttpServlet {
                 Account accountInfo = null;
 
                 if (roleSelect.equals("Customer")) {
-                    accountInfo = new CustomerDAO().getCustomerById(userID);
+                    accountInfo = new customerDAO().getCustomerById(userID);
                 } else if (roleSelect.equals("Admin")) {
-                    accountInfo = new AdminDAO().getAdminById(userID);
+                    accountInfo = new adminDAO().getAdminById(userID);
                 } else if (roleSelect.equals("Management")) {
                     accountInfo = new ManagementDao().getManagementById(userID);
                 }
@@ -55,9 +53,9 @@ public class ManagerAccountController extends HttpServlet {
                 accountInfo.setStatus(active);
 
                 if (roleSelect.equals("Customer")) {
-                    new CustomerDAO().updateCustomer(accountInfo);
+                    new customerDAO().updateCustomer(accountInfo);
                 } else if (roleSelect.equals("Admin")) {
-                    new AdminDAO().updateAdmin(accountInfo);
+                    new adminDAO().updateAdmin(accountInfo);
                 } else if (roleSelect.equals("Management")) {
                     new ManagementDao().updateManagement(accountInfo);
                 }
@@ -94,9 +92,9 @@ public class ManagerAccountController extends HttpServlet {
             int countAccount = 0;
 
             if(roleSelect.equals("Customer")) {
-                countAccount = new CustomerDAO().getCount(nameSearch);
+                countAccount = new customerDAO().getCount(nameSearch);
             } else if (roleSelect.equals("Admin")) {
-                countAccount = new AdminDAO().getCount(nameSearch);
+                countAccount = new adminDAO().getCount(nameSearch);
             } else if (roleSelect.equals("Management")) {
                 countAccount = new ManagementDao().getCount(nameSearch);
             }
@@ -122,9 +120,9 @@ public class ManagerAccountController extends HttpServlet {
             ArrayList<Account> accounts = new ArrayList<>();
                     
             if(roleSelect.equals("Customer")) {
-                accounts = new CustomerDAO().getAllCustomer(nameSearch, pageIndex, pageSize);
+                accounts = new customerDAO().getAllCustomer(nameSearch, pageIndex, pageSize);
             } else if (roleSelect.equals("Admin")) {
-                accounts = new AdminDAO().getAllAdmin(nameSearch, pageIndex, pageSize);
+                accounts = new adminDAO().getAllAdmin(nameSearch, pageIndex, pageSize);
             } else if (roleSelect.equals("Management")) {
                 accounts = new ManagementDao().getAllManagement(nameSearch, pageIndex, pageSize);
             }
@@ -138,7 +136,7 @@ public class ManagerAccountController extends HttpServlet {
             request.setAttribute("countAccount", countAccount);
             request.setAttribute("roleSelect", roleSelect);
  
-            request.getRequestDispatcher("/view/admin/ManagerAccount.jsp").forward(request, response);
+            request.getRequestDispatcher("/view/admin/ManageAccount.jsp").forward(request, response);
 
         } else {
             response.sendRedirect("logincontroller");

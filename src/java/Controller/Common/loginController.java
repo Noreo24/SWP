@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
  * @author LanChau
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/logincontroller"})
-public class LoginController extends HttpServlet {
+public class loginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,8 +36,8 @@ public class LoginController extends HttpServlet {
         String pass = request.getParameter("password");
         String rempass = request.getParameter("rememberpass");
 
-        CustomerDAO customerDAO = new CustomerDAO();
-        AdminDAO adminDAO = new AdminDAO();
+        customerDAO customerDAO = new customerDAO();
+        adminDAO adminDAO = new adminDAO();
         ManagementDao managementDao = new ManagementDao();
 
 //        AccountDAO accountDAO = new AccountDAO();

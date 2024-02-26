@@ -8,7 +8,7 @@ package Model;
  *
  * @author Admin
  */
-public class Feedback {
+public class feedback {
 
     private String feedBack_id,
             fullName,
@@ -20,10 +20,10 @@ public class Feedback {
             userId,
             date;
 
-    public Feedback() {
+    public feedback() {
     }
 
-    public Feedback(String feedBack_id, String fullName, String rated_star, String feedback, String image, String status, String product_id, String userId, String date) {
+    public feedback(String feedBack_id, String fullName, String rated_star, String feedback, String image, String status, String product_id, String userId, String date) {
         this.feedBack_id = feedBack_id;
         this.fullName = fullName;
         this.rated_star = rated_star;

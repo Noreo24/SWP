@@ -10,7 +10,7 @@ package Model;
  */
 public class HeadphoneDetail {
 
-    private String connect,
+    public String connect,
             headphone_detail_id,
             color,
             using_time,

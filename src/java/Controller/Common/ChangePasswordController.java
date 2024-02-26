@@ -4,8 +4,8 @@
  */
 package Controller.Common;
 
-import DAO.AdminDAO;
-import DAO.CustomerDAO;
+import DAO.adminDAO;
+import DAO.customerDAO;
 import DAO.ManagementDao;
 import Model.Account;
 import Uils.SendMail;
@@ -68,9 +68,9 @@ public class ChangePasswordController extends HttpServlet {
                     account.setPassword(pass);
 
                     if (account.getRoleName().equals("Customer")) {
-                        new CustomerDAO().updateCustomer(account);
+                        new customerDAO().updateCustomer(account);
                     } else if (account.getRoleName().equals("Admin")) {
-                        new AdminDAO().updateAdmin(account);
+                        new adminDAO().updateAdmin(account);
                     } else if (account.getRoleName().equals("Management")) {
                         new ManagementDao().updateManagement(account);
                     }

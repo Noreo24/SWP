@@ -10,7 +10,7 @@ package Model;
  */
 public class TabletDetail {
 
-    private String tablet_detail_id,
+    public String tablet_detail_id,
             color,
             screen_size,
             screen_tech,

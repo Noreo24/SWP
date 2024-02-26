@@ -8,7 +8,7 @@ package Model;
  *
  * @author Admin
  */
-public class OrderDetail {
+public class orderDetail {
 
     private String orderDetail_id,
             product_price,
@@ -17,10 +17,10 @@ public class OrderDetail {
             product_id,
             total_cost;
 
-    public OrderDetail() {
+    public orderDetail() {
     }
 
-    public OrderDetail(String orderDetail_id, String product_price, String quantity, String order_id, String product_id, String total_cost) {
+    public orderDetail(String orderDetail_id, String product_price, String quantity, String order_id, String product_id, String total_cost) {
         this.orderDetail_id = orderDetail_id;
         this.product_price = product_price;
         this.quantity = quantity;

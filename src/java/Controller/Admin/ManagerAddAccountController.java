@@ -142,10 +142,10 @@ public class ManagerAddAccountController extends HttpServlet {
 
         Account accountInfo = null;
 
-        accountInfo = new CustomerDAO().getCustomerByEmail(gmail);
+        accountInfo = new customerDAO().getCustomerByEmail(gmail);
 
         if (accountInfo == null) {
-            accountInfo = new AdminDAO().getAdminByEmail(gmail);
+            accountInfo = new adminDAO().getAdminByEmail(gmail);
         }
         if (accountInfo == null) {
             accountInfo = new ManagementDao().getManagementByEmail(gmail);
@@ -165,10 +165,10 @@ public class ManagerAddAccountController extends HttpServlet {
 
         accountInfo = null;
 
-        accountInfo = new CustomerDAO().getCustomerByUsername(username);
+        accountInfo = new customerDAO().getCustomerByUsername(username);
 
         if (accountInfo == null) {
-            accountInfo = new AdminDAO().getAdminByUsername(username);
+            accountInfo = new adminDAO().getAdminByUsername(username);
         }
 
         if (accountInfo == null) {
@@ -189,9 +189,9 @@ public class ManagerAddAccountController extends HttpServlet {
 
         if (check) {
             if (roleSelect.equals("Customer")) {
-                new CustomerDAO().add(account);
+                new customerDAO().add(account);
             } else if (roleSelect.equals("Admin")) {
-                new AdminDAO().add(account);
+                new adminDAO().add(account);
             } else if (roleSelect.equals("Management")) {
                 Account accountAdmin = (Account) request.getSession().getAttribute("accountSession");
                 account.setAdminCreateId(Integer.parseInt(accountAdmin.getUserID()));

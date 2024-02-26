@@ -8,16 +8,16 @@ package Model;
  *
  * @author Admin
  */
-public class CategoryBlog {
+public class categoryBlog {
 
     private String categoryBlog_id,
             categoryBlog_name,
             status;
 
-    public CategoryBlog() {
+    public categoryBlog() {
     }
 
-    public CategoryBlog(String categoryBlog_id, String categoryBlog_name, String status) {
+    public categoryBlog(String categoryBlog_id, String categoryBlog_name, String status) {
         this.categoryBlog_id = categoryBlog_id;
         this.categoryBlog_name = categoryBlog_name;
         this.status = status;

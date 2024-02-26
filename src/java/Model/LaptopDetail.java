@@ -10,7 +10,7 @@ package Model;
  */
 public class LaptopDetail {
 
-    private String laptop_detail_id,
+    public String laptop_detail_id,
             color,
             screen_size,
             screen_tech,
