@@ -227,6 +227,47 @@ public class customerDAO {
         }
         return null;
     }
+
+    public void registCustomer(String email, String username, String pass, String fullname, String phone, String address) {
+        String query = "insert into Customer(email, user_name, password, fullName, phone, address, roleId, status) values (?, ?, ?, ?, ?, ?, 2, 1)";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, email);
+            stm.setString(2, username);
+            stm.setString(3, pass);
+            stm.setString(4, fullname);
+            stm.setString(5, phone);
+            stm.setString(6, address);
+            rs = stm.executeQuery();
+        } catch (Exception e) {
+        }
+    }
+
+    public void addNewCustomerWithGoogleAccount(String email, String fullname, String avatar) {
+        String query = "insert into Customer(email, fullName, avatar, roleId, status) values (?, ?, ?, 2, 1)";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, email);
+            stm.setString(2, fullname);
+            stm.setString(3, avatar);
+            rs = stm.executeQuery();
+        } catch (Exception e) {
+        }
+    }
+
+    public void changePassword(String userID, String newpass) {
+        String query = "UPDATE Customer set password = ? where userId = ? ";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, newpass);
+            stm.setString(2, userID);
+            rs = stm.executeQuery();
+        } catch (Exception e) {
+        }
+    }
     
     public void add(Account account) {
         String query = ""

@@ -16,7 +16,6 @@ import java.util.ArrayList;
  * @author LanChau
  */
 public class adminDAO {
-
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
@@ -77,7 +76,6 @@ public class adminDAO {
         }
         return null;
     }
-
     public void updateAdmin(Account account) {
         String query = "UPDATE [dbo].[Admin]\n"
                 + "   SET [fullName] = ? \n"

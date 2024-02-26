@@ -12,6 +12,7 @@ public class categoryBlog {
 
     private String categoryBlog_id,
             categoryBlog_name,
+            numblog,
             status;
 
     public categoryBlog() {
@@ -20,6 +21,13 @@ public class categoryBlog {
     public categoryBlog(String categoryBlog_id, String categoryBlog_name, String status) {
         this.categoryBlog_id = categoryBlog_id;
         this.categoryBlog_name = categoryBlog_name;
+        this.status = status;
+    }
+
+    public categoryBlog(String categoryBlog_id, String categoryBlog_name, String numblog, String status) {
+        this.categoryBlog_id = categoryBlog_id;
+        this.categoryBlog_name = categoryBlog_name;
+        this.numblog = numblog;
         this.status = status;
     }
 
@@ -45,6 +53,14 @@ public class categoryBlog {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getNumblog() {
+        return numblog;
+    }
+
+    public void setNumblog(String numblog) {
+        this.numblog = numblog;
     }
     
 }
