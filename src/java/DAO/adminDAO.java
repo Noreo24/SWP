@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author LanChau
  */
-public class AdminDAO {
+public class adminDAO {
 
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
