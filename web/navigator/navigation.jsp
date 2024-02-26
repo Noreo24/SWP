@@ -43,31 +43,31 @@
 
     </head>
     <body>
-        <nav id="navigation">
+        <nav id="navigation" style="position: sticky; top: 110px; z-index: 100;">
             <!-- container -->
             <div class="container">
                 <!-- responsive-nav -->
                 <div id="responsive-nav">
                     <!-- NAV -->
                     <ul class="main-nav nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Hot Deals</a></li>
-                        <li><a href="#">Categories</a></li>
-                        <li><a href="#">Laptops</a></li>
-                        <li><a href="#">Smartphones</a></li>
-                        <li><a href="#">Cameras</a></li>
-                        <li><a href="#">Accessories</a></li>
+                        <li class="active"><a style="padding: 10px;" href="Home">Home</a></li>
+                            <c:forEach var="c" items="${allCategories}">
+                            <li>
+                                <a style="padding: 10px;" href="#">${c.categoryName}</a>
+                            </li>
+                        </c:forEach>
                     </ul>
                     <!-- /NAV -->
                 </div>
                 <!-- /responsive-nav -->
             </div>
             <!-- /container -->
-        </nav>   
+        </nav>  
         <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/nouislider.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/main.js"></script></body>
+        <script src="${pageContext.request.contextPath}/js/main.js"></script>
+    </body>
 </html>

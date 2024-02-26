@@ -13,7 +13,7 @@
     </head>
     <body>
         <!-- HEADER -->
-        <header>
+        <header style="position: sticky; top: 0px; z-index: 100;">
             <!-- TOP HEADER -->
             <div id="top-header">
                 <div class="container">
@@ -32,16 +32,16 @@
             <!-- /TOP HEADER -->
 
             <!-- MAIN HEADER -->
-            <div id="header">
+            <div id="header" style="padding: 0;">
                 <!-- container -->
                 <div class="container">
                     <!-- row -->
                     <div class="row">
                         <!-- LOGO -->
-                        <div class="col-md-3">
+                        <div class="col-md-3"  style="padding-top: 10px; padding-bottom: 10px;">
                             <div class="header-logo">
-                                <a href="#" class="logo">
-                                    <img style="width: 250px" src="./img/logo.png" alt="">
+                                <a href="Home" class="logo">
+                                    <img style="width: 150px; border-radius: 10px;" src="./img/logo.png" alt="">
                                 </a>
                             </div>
                         </div>
@@ -51,13 +51,8 @@
                         <div class="col-md-6">
                             <div class="header-search">
                                 <form>
-                                    <select class="input-select">
-                                        <option value="0">All Categories</option>
-                                        <option value="1">Category 01</option>
-                                        <option value="1">Category 02</option>
-                                    </select>
-                                    <input class="input" placeholder="Search here">
-                                    <button class="search-btn">Search</button>
+                                    <input class="input" placeholder="Search here" style="width: 75%; border-width: 0; border-bottom-left-radius: 50px; border-top-left-radius: 50px;">
+                                    <button class="search-btn" style="width: 25%;">Search</button>
                                 </form>
                             </div>
                         </div>
