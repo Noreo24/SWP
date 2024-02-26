@@ -4,9 +4,17 @@
         <servlet-name>registerController</servlet-name>
         <servlet-class>Controller.common.registerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>manageProduct</servlet-name>
+        <servlet-class>Controller.Admin.manageProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>registerController</servlet-name>
         <url-pattern>/registercontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>manageProduct</servlet-name>
+        <url-pattern>/manageProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
