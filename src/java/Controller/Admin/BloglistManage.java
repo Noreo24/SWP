@@ -75,7 +75,7 @@ public class BloglistManage extends HttpServlet {
 //        request.setAttribute("index", index
         ArrayList<Blog> blist = bdao.getBlogList();
         request.setAttribute("bloglist", blist);
-        request.getRequestDispatcher("/view/admin/Manage.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/admin/ManageBlog.jsp").forward(request, response);
     }
 
     /**

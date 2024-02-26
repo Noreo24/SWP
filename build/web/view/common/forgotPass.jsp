@@ -29,7 +29,7 @@
                                     <input type="text" class="form-control" placeholder="Email" required name="email">
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="form-control btn btn-primary submit px-3">Send OTP</button>
+                                    <button type="submit" class="form-control btn btn-primary submit px-3">Send new password</button>
                                 </div>
                             </form>
                                 

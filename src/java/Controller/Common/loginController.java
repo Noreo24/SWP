@@ -80,18 +80,9 @@ public class loginController extends HttpServlet {
         String username = request.getParameter("username");
         String pass = request.getParameter("password");
         String rempass = request.getParameter("rememberpass");
-<<<<<<< HEAD
         adminDAO adao = new adminDAO();
         customerDAO cdao = new customerDAO();
         staffDAO sdao = new staffDAO();
-=======
-
-        CustomerDAO customerDAO = new CustomerDAO();
-        AdminDAO adminDAO = new AdminDAO();
-        ManagementDao managementDao = new ManagementDao();
-
-//        AccountDAO accountDAO = new AccountDAO();
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
         if (rempass != null) {
             Cookie c_user = new Cookie("username", username);
             Cookie c_pass = new Cookie("pass", pass);
@@ -102,45 +93,12 @@ public class loginController extends HttpServlet {
             response.addCookie(c_user);
             response.addCookie(c_pass);
         }
-<<<<<<< HEAD
         if (cdao.getCustomerByUsername(username, Encode.toSHA1(pass)) != null) {
             Customer c = cdao.getCustomerByUsername(username, Encode.toSHA1(pass));
             if (c.getStatus().equals("true")) {
                 HttpSession session = request.getSession();
                 session.setAttribute("acc", c);
                 response.sendRedirect("home");
-=======
-        // Get User by account
-        Account account = customerDAO.getUserCustomerByUsername(username, pass);
-        
-        // If account null --> find account in table admin
-        if (account == null) {
-            account = adminDAO.getUserAdminByUsername(username, pass);
-        }
-        
-        // If account null --> find account in table management
-        if (account == null) {
-            account = managementDao.getUserManagementByUsername(username, pass);
-        }
-        
-        if (account != null) {
-            if ("true".equals(account.getStatus())) {
-                HttpSession session = request.getSession();
-                session.setAttribute("accountSession", account);
-
-                // đoạn này để ko ảnh hưởng code cũ. Nên trọc data từ accountSession
-                if (account.getRoleName().equals("Admin")) {
-                    session.setAttribute("a", account);
-                    response.sendRedirect("ManagerAccount");
-                } else if(account.getRoleName().equals("Customer")) {
-                    session.setAttribute("c", account);
-                    response.sendRedirect("Home");
-                }else if(account.getRoleName().equals("Management")) {
-                    session.setAttribute("m", account);
-                    response.sendRedirect("Home");
-                }
-                
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
             } else {
                 String err = "Your account is banned!";
                 request.setAttribute("err", err);
@@ -150,8 +108,7 @@ public class loginController extends HttpServlet {
             Admin a = adao.getAdminByUsername(username, pass);
             HttpSession session = request.getSession();
             session.setAttribute("acc", a);
-//            response.sendRedirect("/PhoneShop/view/admin/Manage.jsp");
-            response.sendRedirect("/PhoneShop/bloglistmanage");
+            response.sendRedirect("dashboard");
         } else {
             String err = "Wrong username or password!";
             request.setAttribute("err", err);

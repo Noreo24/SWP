@@ -24,7 +24,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Bảng điều khiển</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/dashboard">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Bảng điều khiển tiếp thị
                             </a>
@@ -48,7 +48,7 @@
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="${pageContext.request.contextPath}/bloglistmanage">Danh sách blogs</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Thêm blog</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/addblog">Thêm blog</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapseCustomer">

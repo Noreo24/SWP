@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
+import Model.Chart;
 
 /**
  *
@@ -239,6 +241,7 @@ public class blogDAO {
         }
         return null;
     }
+
     public ArrayList<Blog> getBlogList() {
         ArrayList<Blog> bloglist = new ArrayList<>();
         String query = "select b.*, cb.categoryBlog_name from Blog b join Category_blog cb on b.categoryBlog_id = cb.categoryBlog_id ";
@@ -262,5 +265,92 @@ public class blogDAO {
         } catch (Exception e) {
         }
         return bloglist;
+    }
+
+    public void changeBlogStatus(String blogId, String newStatus) {
+        String query = "UPDATE Blog\n"
+                + "SET status = ?\n"
+                + "WHERE blog_id = ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, newStatus);
+            stm.setString(2, blogId);
+            rs = stm.executeQuery();
+
+        } catch (Exception e) {
+        }
+    }
+
+    public List<Chart> getChartBlogBar(String start, int day) {
+        List<Chart> list = new ArrayList<>();
+        for (int i = 0; i < day; i++) {
+            int value = 0;
+            String query = "select count(*) from Blog where updated_date = DATEADD(DAY, ?, ?)";
+            try {
+                cnn = new DBContext().getConnection();
+                stm = cnn.prepareStatement(query);
+                stm.setInt(1, i);
+                stm.setString(2, start);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    value = rs.getInt(1);
+                }
+                query = "select  DATEADD(DAY, ?, ?)";
+                cnn = new DBContext().getConnection();
+                stm = cnn.prepareStatement(query);
+                stm.setInt(1, i);
+                stm.setString(2, start);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Chart c = Chart.builder()
+                            .date(rs.getDate(1))
+                            .value(value)
+                            .build();
+                    list.add(c);
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+        return list;
+    }
+
+    public List<Chart> getChartBlogArea(String start, int day) {
+        List<Chart> list = new ArrayList<>();
+        for (int i = 0; i < day; i++) {
+            int value = 0;
+            String query = "select count(*) from Blog where updated_date <= DATEADD(DAY, ?, ?) and status = 1";
+            try {
+                cnn = new DBContext().getConnection();
+                stm = cnn.prepareStatement(query);
+                stm.setInt(1, i);
+                stm.setString(2, start);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    value = rs.getInt(1);
+                }
+                query = "select  DATEADD(DAY, ?, ?)";
+                cnn = new DBContext().getConnection();
+                stm = cnn.prepareStatement(query);
+                stm.setInt(1, i);
+                stm.setString(2, start);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Chart c = Chart.builder()
+                            .date(rs.getDate(1))
+                            .value(value)
+                            .build();
+                    list.add(c);
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+        return list;
     }
 }

@@ -22,6 +22,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import util.Encode;
 import verify.RandomCode;
 
 /**
@@ -79,7 +80,7 @@ public class sendotp extends HttpServlet {
             session.setAttribute("acc", c);
             response.sendRedirect("home");
         } else {
-            String err = "Wrong OTP!";
+            String err = "Wrong password!";
             request.setAttribute("err", err);
             request.getRequestDispatcher("/view/common/enterOTP.jsp").forward(request, response);
         }
@@ -140,7 +141,7 @@ public class sendotp extends HttpServlet {
                         + "      border-radius: 10px\n"
                         + "      \"\n"
                         + "    >\n"
-                        + "    <h1>Your OTP verification code is</h1>\n"
+                        + "    <h1>Your new password is</h1>\n"
                         + "      <h3></h3>\n"
                         + "      <small\n"
                         + "        >------------------------------------------------------------------</small>\n"
@@ -166,13 +167,17 @@ public class sendotp extends HttpServlet {
                 throw new RuntimeException(e);
             }
             dispatcher = request.getRequestDispatcher("/view/common/enterOTP.jsp");
-            request.setAttribute("message", "OTP is sent to your email id");
+            request.setAttribute("message", "New password is sent to your email id");
             //request.setAttribute("connection", con);
 //        mySession.setAttribute("otp", otpvalue);
             mySession.setAttribute("email", email);
             dispatcher.forward(request, response);
             //request.setAttribute("status", "success");
+            customerDAO cdao = new customerDAO();
+            Customer c = cdao.getCustomerByEmail(email);
+            cdao.changePassword(c.getUserID(), Encode.toSHA1(otpvalue));
         }
+
     }
 
     /**

@@ -18,7 +18,6 @@ public class Staff {
             password,
             phone,
             address,
-<<<<<<< HEAD:src/java/Model/Staff.java
             roleId, status;
 
     public Staff() {
@@ -26,19 +25,6 @@ public class Staff {
 
     public Staff(String userID, String fullName, String avatar, String gender, String email, String user_name, String password, String phone, String address, String roleId, String status) {
         this.userID = userID;
-=======
-            status, roleName;
-    
-    private int adminCreateId;
-    
-    private Account adminCreate;
-    
-    public Account() {
-    }
-
-    public Account(String adminId, String fullName, String avatar, String gender, String email, String user_name, String password, String phone, String address, String roleName) {
-        this.userID = adminId;
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558:src/java/Model/Account.java
         this.fullName = fullName;
         this.avatar = avatar;
         this.gender = gender;
@@ -47,38 +33,10 @@ public class Staff {
         this.password = password;
         this.phone = phone;
         this.address = address;
-<<<<<<< HEAD:src/java/Model/Staff.java
         this.roleId = roleId;
         this.status = status;
     }
 
-=======
-        this.roleName = roleName;
-    }
-
-    public Account(String userId, String fullName, String avatar, String gender, String password, String user_name, String email, String phone, String address, String roleName, String status) {
-        this.userID = userId;
-        this.fullName = fullName;
-        this.avatar = avatar;
-        this.gender = gender;
-        this.password = password;
-        this.user_name = user_name;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.roleName = roleName;
-        this.status = status;
-    }
-
-    public int getAdminCreateId() {
-        return adminCreateId;
-    }
-
-    public void setAdminCreateId(int adminCreateId) {
-        this.adminCreateId = adminCreateId;
-    }
- 
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558:src/java/Model/Account.java
     public String getUserID() {
         return userID;
     }
@@ -151,15 +109,14 @@ public class Staff {
         this.address = address;
     }
 
-    public String getStatus() {
-        return status;
+    public String getRoleId() {
+        return roleId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 
-<<<<<<< HEAD:src/java/Model/Staff.java
     public String getStatus() {
         return status;
     }
@@ -168,24 +125,4 @@ public class Staff {
         this.status = status;
     }
         
-=======
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public Account getAdminCreate() {
-        return adminCreate;
-    }
-
-    public void setAdminCreate(Account adminCreate) {
-        this.adminCreate = adminCreate;
-    }
-
-     
-
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558:src/java/Model/Account.java
 }

@@ -13,7 +13,7 @@
         <title>Profile Page</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/profile.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
-                <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
         <!-- Bootstrap -->
         <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
@@ -32,14 +32,14 @@
         <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
     </head>
     <body>
-        
+
         <header>
             <!-- TOP HEADER -->
             <div id="top-header">
                 <div class="container">
                     <ul class="header-links pull-right">
                         <c:if test="${sessionScope.acc != null}">
-                            <li><a href="logoutcontroller">Log out</a></li>
+                            <li><a href="${pageContext.request.contextPath}/logoutcontroller">Log out</a></li>
                             <li><a href="${pageContext.request.contextPath}/view/user/profile.jsp"><i class="fa fa-user-o"></i> My Account - ${sessionScope.acc.getFullName()}</a></li>
                             </c:if>
                             <c:if test="${sessionScope.acc == null}">
@@ -137,7 +137,7 @@
                                     </div>
                                 </div>
                                 <!-- /Cart -->
-                                
+
 
                                 <!-- Menu Toogle -->
                                 <div class="menu-toggle">
@@ -177,78 +177,71 @@
                         <div class="card-body text-center">
                             <!-- Profile picture image--> 
                             <img class="img-account-profile rounded-circle mb-2" 
-<<<<<<< HEAD
                                  src="${sessionScope.acc.getAvatar()}" 
-=======
-                                 src="${pageContext.request.contextPath}/imgUser/${userAccount.getAvatar()}"
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
                                  onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'" 
                                  alt="">
                             <!-- Profile picture help block-->
                             <div class="small font-italic text-muted mb-4">  </div>
                             <!-- Profile picture upload button-->
-<<<<<<< HEAD
-                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/view/user/changePassword.jsp">Change Password</a>
-                            <a class="btn btn-primary" href="">Update Profile</a>
-                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/logoutcontroller">Log out</a>
-=======
-                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/UpdateProfileUser">Update Profile</a>
-                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/ChangePassword">Change Password</a>
-                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/Logout">Log out</a>
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
+                            <c:if test="${sessionScope.acc.getPassword() != null}">
+                                <a class="btn btn-primary" href="${pageContext.request.contextPath}/view/user/changePassword.jsp">Change Password</a>
+                            </c:if>
+                                <a class="btn btn-primary" href="">Update Profile</a>
+                                <a class="btn btn-primary" href="${pageContext.request.contextPath}/logoutcontroller">Log out</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-8">
-                    <!-- Account details card-->
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="panel">
-                                <div class="bio-graph-heading">
-                                </div>
-                                <div class="panel-body bio-graph-info">
-                                    <h1 class="mb-4">${sessionScope.acc.getFullName()}</h1>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="bio-row">
-                                                <p><span>User Name </span>: ${sessionScope.acc.getUser_name()}</p>
-                                            </div>
-                                            <div class="bio-row">
-                                                <p><span>Gender </span>:
-                                                    <c:if test="${sessionScope.acc.getGender() eq 'true'}">
-                                                        Male
-                                                    </c:if>
-                                                    <c:if test="${sessionScope.acc.getGender() eq 'false'}">
-                                                        Female
-                                                    </c:if>
+                    <div class="col-xl-8">
+                        <!-- Account details card-->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="panel">
+                                    <div class="bio-graph-heading">
+                                    </div>
+                                    <div class="panel-body bio-graph-info">
+                                        <h1 class="mb-4">${sessionScope.acc.getFullName()}</h1>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="bio-row">
+                                                    <p><span>User Name </span>: ${sessionScope.acc.getUser_name()}</p>
+                                                </div>
+                                                <div class="bio-row">
+                                                    <p><span>Gender </span>:
+                                                        <c:if test="${sessionScope.acc.getGender() eq 'true'}">
+                                                            Male
+                                                        </c:if>
+                                                        <c:if test="${sessionScope.acc.getGender() eq 'false'}">
+                                                            Female
+                                                        </c:if>
 
-                                            </div>
+                                                </div>
 
-                                            <div class="bio-row">
-                                                <p><span>Email </span>: ${sessionScope.acc.getEmail()}</p>
-                                            </div>
+                                                <div class="bio-row">
+                                                    <p><span>Email </span>: ${sessionScope.acc.getEmail()}</p>
+                                                </div>
 
-                                            <div class="bio-row">
-                                                <p><span>Phone </span>: ${sessionScope.acc.getPhone()}</p>
+                                                <div class="bio-row">
+                                                    <p><span>Phone </span>: ${sessionScope.acc.getPhone()}</p>
+                                                </div>
+                                                <div class="bio-row">
+                                                    <p><span>Adderss </span>: ${sessionScope.acc.getAddress()}</p>
+                                                </div>
                                             </div>
-                                            <div class="bio-row">
-                                                <p><span>Adderss </span>: ${sessionScope.acc.getAddress()}</p>
-                                            </div>
+                                            <!--                                        <div class="col-md-6">
+                                                                                        <div class="bio-row">
+                                                                                            <p><span>Occupation </span>: UI Designer</p>
+                                                                                        </div>
+                                                                                        <div class="bio-row">
+                                                                                            <p><span>Email </span>: jsmith@flatlab.com</p>
+                                                                                        </div>
+                                                                                        <div class="bio-row">
+                                                                                            <p><span>Mobile </span>: (12) 03 4567890</p>
+                                                                                        </div>
+                                                                                        <div class="bio-row">
+                                                                                            <p><span>Phone </span>: 88 (02) 123456</p>
+                                                                                        </div>
+                                                                                    </div>-->
                                         </div>
-                                        <!--                                        <div class="col-md-6">
-                                                                                    <div class="bio-row">
-                                                                                        <p><span>Occupation </span>: UI Designer</p>
-                                                                                    </div>
-                                                                                    <div class="bio-row">
-                                                                                        <p><span>Email </span>: jsmith@flatlab.com</p>
-                                                                                    </div>
-                                                                                    <div class="bio-row">
-                                                                                        <p><span>Mobile </span>: (12) 03 4567890</p>
-                                                                                    </div>
-                                                                                    <div class="bio-row">
-                                                                                        <p><span>Phone </span>: 88 (02) 123456</p>
-                                                                                    </div>
-                                                                                </div>-->
                                     </div>
                                 </div>
                             </div>
@@ -256,6 +249,5 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </body>
-</html>
+        </body>
+    </html>

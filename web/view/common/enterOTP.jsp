@@ -29,13 +29,13 @@
                                     <input type="text" class="form-control" placeholder="Email" value="${email}" required name="email">
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="form-control btn btn-primary submit px-3">Send OTP again</button>
+                                    <button type="submit" class="form-control btn btn-primary submit px-3">Send new password again</button>
                                 </div>
                             </form>
-                            <h3 class="mb-4 text-center">Enter OTP</h3>
+                            <h3 class="mb-4 text-center">Enter password</h3>
                             <form action="${pageContext.request.contextPath}/sendotp" class="signin-form">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="OTP" required name="otp">
+                                    <input type="text" class="form-control" placeholder="password" required name="otp">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="form-control btn btn-primary submit px-3">Verify</button>

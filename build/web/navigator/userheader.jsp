@@ -41,6 +41,7 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 
     </head>
     <body>
@@ -149,7 +150,7 @@
                                     </div>
                                 </div>
                                 <!-- /Cart -->
-                                
+
 
                                 <!-- Menu Toogle -->
                                 <div class="menu-toggle">
@@ -198,5 +199,11 @@
         <script src="${pageContext.request.contextPath}/js/nouislider.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
-    </body>
+    <df-messenger
+        intent="WELCOME"
+        chat-title="Phone_Shop_AI"
+        agent-id="c263e20b-a262-4f4a-9b97-c708d35f8917"
+        language-code="vi"
+        ></df-messenger>
+</body>
 </html>
