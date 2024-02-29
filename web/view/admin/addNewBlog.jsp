@@ -63,11 +63,12 @@
         <div class="groundy" id="layoutSidenav_content">
                 <main>
                     <div class="container rounded bg-white mt-5 mb-5">
-                        <form action="addblogcontrol" method="post" enctype="multipart/form-data" >
+                        <form action="${pageContext.request.contextPath}/addblogcontrol" method="post" enctype="multipart/form-data" >
                             <div class="row"  style="margin-top: 8%;">
                                 <div class="p-4">
 
                                     <h4 class="text-center">Thêm Bài Viết</h4>
+                                    <i style="color: red">${ERROR}</i>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="p-3 py-5">

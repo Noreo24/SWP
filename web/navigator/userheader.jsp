@@ -84,9 +84,10 @@
                             <div class="header-search">
                                 <form>
                                     <select class="input-select">
-                                        <option value="0">All Categories</option>
-                                        <option value="1">Category 01</option>
-                                        <option value="1">Category 02</option>
+                                        <option value="0">Danh mục</option>
+                                        <c:forEach items="${catelist}" var="c">
+                                        <option value="${c.getCategory_id()}">${c.getCategory_name()}</option>
+                                        </c:forEach>
                                     </select>
                                     <input class="input" placeholder="Search here">
                                     <button class="search-btn">Search</button>

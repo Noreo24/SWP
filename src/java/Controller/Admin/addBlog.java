@@ -63,7 +63,7 @@ public class addBlog extends HttpServlet {
         ArrayList<categoryBlog> list = bdao.getCateBlog();
         HttpSession session = request.getSession();
         session.setAttribute("list", list);
-        request.getRequestDispatcher("/view/admin/addNewBlog.jsp").forward(request, response);
+        response.sendRedirect("/PhoneShop/view/admin/addNewBlog.jsp");
     }
 
     /**

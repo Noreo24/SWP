@@ -31,6 +31,7 @@
                             <input class="ml-4 btn btn-danger" type="submit" value="Thống kê"/>
                         </form>
                     </div>
+                    <br>
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card mb-4">
@@ -56,7 +57,7 @@
                             <div class="card mb-4">
                                 <div class="card-header mb-4 nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseThongkesanpham" aria-expanded="false" aria-controls="collapseThongkesanpham">
                                     <i class="fas fa-chart-area me-1"></i>
-                                    Thống kê sản phẩm
+                                    Thống kê doanh thu
                                 </div>
                                 <div id="collapseThongkesanpham" aria-labelledby="headingOne" data-bs-parent="#cutomerSetting" class="collapse card-body">
                                     <div class="row">
@@ -71,44 +72,7 @@
 
                             </div>
                         </div>
-                        <div class="col-xl-12">
-                            <div class="card mb-4">
-                                <div class="card-header mb-4 nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseThongkekhachhang" aria-expanded="false" aria-controls="collapseThongkekhachhang">
-                                    <i class="fas fa-chart-area me-1"></i>
-                                    Thống kê khách hàng
-                                </div>
-                                <div id="collapseThongkekhachhang" aria-labelledby="headingOne" data-bs-parent="#cutomerSetting" class="collapse card-body">
-                                    <div class="row">
-                                        <div class="col-xl-6">
-                                            <div class="card-body"><canvas id="myBarChart-3" width="100%" height="40"></canvas></div>
-                                        </div>
-                                        <div class="col-xl-6">
-                                            <div class="card-body"><canvas id="myAreaChart-3" width="100%" height="40"></canvas></div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </div>
-                        <div class="col-xl-12">
-                            <div class="card mb-4">
-                                <div class="card-header mb-4 nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseThongkephanhoi" aria-expanded="false" aria-controls="collapseThongkephanhoi">
-                                    <i class="fas fa-chart-area me-1"></i>
-                                    Thống kê phản hồi
-                                </div>
-                                <div id="collapseThongkephanhoi" aria-labelledby="headingOne" data-bs-parent="#cutomerSetting" class="collapse card-body">
-                                    <div class="row">
-                                        <div class="col-xl-6">
-                                            <div class="card-body"><canvas id="myBarChart-4" width="100%" height="40"></canvas></div>
-                                        </div>
-                                        <div class="col-xl-6">
-                                            <div class="card-body"><canvas id="myAreaChart-4" width="100%" height="40"></canvas></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
                     </div>
                 </div>
             </main>

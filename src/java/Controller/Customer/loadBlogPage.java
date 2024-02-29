@@ -72,7 +72,7 @@ public class loadBlogPage extends HttpServlet {
         }
         int a = Integer.parseInt(index);
         ArrayList<Blog> bloglist = bdao.getPaging15BlogList(a, categoryBlogId, s);
-        int count = bdao.getNumBlog();
+        int count = bdao.getNumBlog(categoryBlogId, s);
         int endPage = count / 15;
         if (count % 15 != 0) {
             endPage++;

@@ -4,10 +4,13 @@
  */
 package Controller.Admin;
 
+import DAO.blogDAO;
 import Model.Admin;
+import helper.UploadFile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +23,7 @@ import jakarta.servlet.http.Part;
  * @author Admin
  */
 @WebServlet(name = "addBlogControl", urlPatterns = {"/addblogcontrol"})
+@MultipartConfig
 public class addBlogControl extends HttpServlet {
 
     /**
@@ -65,15 +69,47 @@ public class addBlogControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-        String brief_infor = request.getParameter("brief_infor");
-        String categoryId = request.getParameter("categoryId");
-        String status = request.getParameter("status");
-        Part thumbnail = request.getPart("thumbnail");
+        UploadFile uploadFile = new UploadFile();
         HttpSession session = request.getSession();
-        Admin a = (Admin)session.getAttribute("acc");
-        System.out.println(thumbnail);
+        Admin a = (Admin) session.getAttribute("acc");
+        blogDAO bd = new blogDAO();
+        try {
+            if (a != null) {
+                String title = request.getParameter("title");
+                String brief_infor = request.getParameter("brief_infor");
+                String content = request.getParameter("content");
+                String categoryId = request.getParameter("categoryId");
+                String status = request.getParameter("status");
+
+                String fileName = "";
+                Part filePart = request.getPart("thumbnail");
+                fileName = (String) filePart.getSubmittedFileName();
+                if (!fileName.isEmpty()) {
+                    if (isImage(fileName)) {
+                        fileName = uploadFile.uploadFile(request, "thumbnail");
+                        bd.addNewBlog(title, a.getUserID(), content, fileName, brief_infor, categoryId, status);
+                        response.sendRedirect("bloglistmanage");
+                    } else {
+                        request.setAttribute("ERROR", "File is not valid!");
+                        request.getRequestDispatcher("/view/admin/addNewBlog.jsp").forward(request, response);
+                    }
+                } else {
+                    request.setAttribute("ERROR", "This blog doesn't have thumbnail!");
+                    request.getRequestDispatcher("/view/admin/addNewBlog.jsp").forward(request, response);
+                }
+
+            } else {
+                request.getRequestDispatcher("/view/common/login.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private boolean isImage(String fileName) {
+        // Get the file extension
+        String ext = fileName.substring(fileName.length() - 4, fileName.length());
+        // Check if the extension is one of the supported image formats
+        return ext.contains("jpg") || ext.contains("jpeg") || ext.contains("png") || ext.contains("gif") || ext.contains("bmp") || ext.contains("JPG") || ext.contains("JPEG") || ext.contains("PNG") || ext.contains("GIF") || ext.contains("BMP");
     }
 
     /**

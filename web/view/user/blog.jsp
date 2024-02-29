@@ -164,27 +164,7 @@
 
                             </ul>
                         </div>
-                        <!--                         tags 
-                                                <div class="widget">
-                                                    <h5 class="widget-title"><span>Tags</span></h5>
-                                                    <ul class="list-inline widget-list-inline">
-                                                        <li class="list-inline-item"><a href="#!">Booth</a>
-                                                        </li>
-                                                        <li class="list-inline-item"><a href="#!">City</a>
-                                                        </li>
-                                                        <li class="list-inline-item"><a href="#!">Image</a>
-                                                        </li>
-                                                        <li class="list-inline-item"><a href="#!">New</a>
-                                                        </li>
-                                                        <li class="list-inline-item"><a href="#!">Photo</a>
-                                                        </li>
-                                                        <li class="list-inline-item"><a href="#!">Seasone</a>
-                                                        </li>
-                                                        <li class="list-inline-item"><a href="#!">Video</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>-->
-                        <!-- latest post -->
+
                         <div class="widget">
                             <h5 class="widget-title"><span>Bài viết mới nhất</span></h5>
                             <!-- post-item -->
@@ -192,7 +172,7 @@
                                 <ul class="list-unstyled widget-list">
                                     <li class="media widget-post align-items-center">
                                         <a href="${pageContext.request.contextPath}/blogdetail?blogId=${b.getBlog_id()}">
-                                            <img loading="lazy" class="mr-3" src="${b.getThumbnail()}">
+                                            <img loading="lazy" class="mr-3" src="${pageContext.request.contextPath}/thumbnail/${b.getThumbnail()}">
                                         </a>
                                         <div class="media-body">
                                             <h5 class="h6 mb-0"><a href="${pageContext.request.contextPath}/blogdetail?blogId=${b.getBlog_id()}">${b.getTitle()}</a></h5>
@@ -208,19 +188,19 @@
                             <article class="row mb-5">
                                 <div class="col-md-4 mb-4 mb-md-0">
                                     <div class="post-slider slider-sm">
-                                        <img loading="lazy" src="${b.getThumbnail()}" class="img-fluid" alt="post-thumb" style="height:200px; object-fit: cover;">
+                                        <img loading="lazy" src="${pageContext.request.contextPath}/thumbnail/${b.getThumbnail()}" class="img-fluid" alt="post-thumb" style="height:200px; object-fit: cover;">
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <h3 class="h5"><a class="post-title" href="${pageContext.request.contextPath}/blogdetail?blogId=${b.getBlog_id()}">${b.getTitle()}</a></h3>
                                     <ul class="list-inline post-meta mb-2">
-                                        <li class="list-inline-item"><i class="ti-user mr-2"></i><a href="author.html">${b.getAuthor_id()}</a>
+                                        <li class="list-inline-item"><i class="ti-user mr-2"></i>${b.getAuthor_id()}
                                         </li>
                                         <li class="list-inline-item">Date : ${b.getUpdated_date()}</li>
                                         <li class="list-inline-item">Categories : ${b.getCategoryBlog_id()}
                                         </li>
                                     </ul>
-                                    <p>${b.getBrief_infor()}</p> <a href="" class="btn btn-outline-primary">Đọc tiếp</a>
+                                    <p>${b.getBrief_infor()}</p> <a href="${pageContext.request.contextPath}/blogdetail?blogId=${b.getBlog_id()}" class="btn btn-outline-primary">Đọc tiếp</a>
                                 </div>
                             </article>
                         </c:forEach>
@@ -243,55 +223,7 @@
             </div>
         </section>
 
-        <footer class="section-sm pb-0 border-top border-default">
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-md-3 mb-4">
-                        <a class="mb-4 d-block" href="index.html">
-                            <img class="img-fluid" width="150px" src="${pageContext.request.contextPath}/img/logo.png" alt="LogBook">
-                        </a>
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 col-6 mb-4">
-                        <h6 class="mb-4">Quick Links</h6>
-                        <ul class="list-unstyled footer-list">
-                            <!--                            <li><a href="about.html">About</a></li>
-                                                        <li><a href="contact.html">Contact</a></li>
-                                                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                                        <li><a href="terms-conditions.html">Terms Conditions</a></li>-->
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 col-6 mb-4">
-                        <h6 class="mb-4">Social Links</h6>
-                        <ul class="list-unstyled footer-list">
-                            <li><a href="#">facebook</a></li>
-                            <li><a href="#">twitter</a></li>
-                            <li><a href="#">linkedin</a></li>
-                            <li><a href="#">github</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-3 mb-4">
-                        <h6 class="mb-4">Subscribe Newsletter</h6>
-                        <form class="subscription" action="javascript:void(0)" method="post">
-                            <div class="position-relative">
-                                <i class="ti-email email-icon"></i>
-                                <input type="email" class="form-control" placeholder="Your Email Address">
-                            </div>
-                            <button class="btn btn-primary btn-block rounded" type="submit">Subscribe now</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="scroll-top">
-                    <a href="javascript:void(0);" id="scrollTop"><i class="ti-angle-up"></i></a>
-                </div>
-                <div class="text-center">
-                    <p class="content">&copy; 2020 - Design &amp; Develop By <a href="https://themefisher.com/" target="_blank">Themefisher</a></p>
-                </div>
-            </div>
-        </footer>
+                                <%@include file="/navigator/blogfooter.jsp" %>
 
 
         <!-- JS Plugins -->

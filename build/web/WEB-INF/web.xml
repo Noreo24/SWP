@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-<welcome-file-list>
-  <welcome-file>home</welcome-file>
-</welcome-file-list>
-    
+    <welcome-file-list>
+        <welcome-file>home</welcome-file>
+    </welcome-file-list>
     <servlet>
         <servlet-name>home</servlet-name>
         <servlet-class>Controller.Common.home</servlet-class>
@@ -48,6 +47,10 @@
         <servlet-name>blogDetail</servlet-name>
         <servlet-class>Controller.Customer.blogDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>editBlog</servlet-name>
+        <servlet-class>Controller.Admin.editBlog</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -91,6 +94,10 @@
     <servlet-mapping>
         <servlet-name>blogDetail</servlet-name>
         <url-pattern>/blogdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editBlog</servlet-name>
+        <url-pattern>/editblog</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
