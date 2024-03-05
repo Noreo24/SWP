@@ -15,8 +15,8 @@ public class Constants {
      * Kết nối database
      */
     public static String DBCONTEXT_USER = "sa";
-    public static String DBCONTEXT_PASS = "sa";
-    public static String DBCONTEXT_DATABASE = "Phone_Shop_Online_Final_Final_Final";
+    public static String DBCONTEXT_PASS = "123";
+    public static String DBCONTEXT_DATABASE = "Phone_Shop_Online_4";
     public static String DBCONTEXT_PORT = "1433";
-    public static String DBCONTEXT_SERVER = "Tuan";
+    public static String DBCONTEXT_SERVER = "localhost";
 }

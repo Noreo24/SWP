@@ -8,7 +8,7 @@ import DAO.AdminDAO;
 import DAO.CustomerDAO;
 import DAO.ManagementDao;
 import Model.Account;
-import Uils.SendMail;
+import Uils.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -74,7 +74,7 @@ public class ChangePasswordController extends HttpServlet {
                     } else if (account.getRoleName().equals("Management")) {
                         new ManagementDao().updateManagement(account);
                     }
-                    SendMail.sendMailChangPass(account);
+                    SendMailLC.sendMailChangPass(account);
 
                     request.setAttribute("sussPass", "Password changed successfully");
                 } else {

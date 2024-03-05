@@ -14,7 +14,7 @@ import java.sql.ResultSet;
  *
  * @author Admin
  */
-public class phoneDetailDAO {
+public class PhoneDetailDAO {
 
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
@@ -53,7 +53,7 @@ public class phoneDetailDAO {
     }
     
     public static void main(String[] args) {
-        phoneDetailDAO pdDAO = new phoneDetailDAO();
+        PhoneDetailDAO pdDAO = new PhoneDetailDAO();
         String pid = "4";
         PhoneDetail pd = pdDAO.phoneDetail(pid);
         System.out.println(pd.ram);

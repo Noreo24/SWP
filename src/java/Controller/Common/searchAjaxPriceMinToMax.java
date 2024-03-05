@@ -4,10 +4,8 @@
  */
 package Controller.Common;
 
-import DAO.ProductDAO;
-import DAO.productImagesDAO;
-import Model.Product;
-import Model.productImage;
+import DAO.*;
+import Model.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -47,10 +45,10 @@ public class searchAjaxPriceMinToMax extends HttpServlet {
         
 //        if (Integer.parseInt(priceMin) % 1 == 0 && Integer.parseInt(priceMax) % 1 == 0) {
         ProductDAO pDAO = new ProductDAO();
-        productImagesDAO piDAO = new productImagesDAO();
+        ProductImagesDAO piDAO = new ProductImagesDAO();
         
         List<Product> searchByPriceMinToMax = pDAO.searchByPriceMinToMax(priceMin, priceMax);
-        List<productImage> allImages = piDAO.getAllImage();
+        List<ProductImage> allImages = piDAO.getAllImage();
 
         for (Product i : searchByPriceMinToMax) {
             long related_original_price = Long.parseLong(i.getOriginal_prices());
@@ -61,7 +59,7 @@ public class searchAjaxPriceMinToMax extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         for (Product o : searchByPriceMinToMax) {
-            for (productImage i : allImages) {
+            for (ProductImage i : allImages) {
                 if (o.getProduct_id() == null ? String.valueOf(i.getProductId()) == null : o.getProduct_id().equals(i.getProductId())) {
                     if ("1".equals(o.getSale())) {
                         out.println("<div class=\"col-md-4 col-xs-6\">\n"

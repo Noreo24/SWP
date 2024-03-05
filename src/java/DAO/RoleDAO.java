@@ -6,7 +6,6 @@ package DAO;
 
 import DBContext.DBContext;
 import Model.*;
-import Model.role;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +23,8 @@ public class RoleDAO {
     PreparedStatement stm;
     ResultSet rs;//Lưu trữ và xử lý dữ liệu
 
-    public ArrayList<role> getAll() {
-        ArrayList<role> roles = new ArrayList<role>();
+    public ArrayList<Role> getAll() {
+        ArrayList<Role> roles = new ArrayList<Role>();
 
         String query = "SELECT  [roleId]\n"
                 + "      ,[role_name]\n"
@@ -36,7 +35,7 @@ public class RoleDAO {
             stm = cnn.prepareStatement(query);
             rs = stm.executeQuery();
             while (rs.next()) {
-                role role = new role(rs.getString("roleId"),
+                Role role = new Role(rs.getString("roleId"),
                         rs.getString("role_name"),
                         rs.getString("status"));
 

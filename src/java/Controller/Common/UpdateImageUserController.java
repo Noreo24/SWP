@@ -4,11 +4,8 @@
  */
 package Controller.Common;
 
-import DAO.AccountDAO;
-import DAO.adminDAO;
-import DAO.customerDAO;
-import DAO.ManagementDao;
-import Model.Account;
+import DAO.*;
+import Model.*;
 import Uils.Util;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -63,9 +60,9 @@ public class UpdateImageUserController extends HttpServlet {
                 Account accountInfo = null;
 
                 if (account.getRoleName().equals("Customer")) {
-                    accountInfo = new customerDAO().getCustomerByEmail(account.getEmail());
+                    accountInfo = new CustomerDAO().getCustomerByEmail(account.getEmail());
                 } else if (account.getRoleName().equals("Admin")) {
-                    accountInfo = new adminDAO().getAdminByEmail(account.getEmail());
+                    accountInfo = new AdminDAO().getAdminByEmail(account.getEmail());
                 } else if (account.getRoleName().equals("Management")) {
                     accountInfo = new ManagementDao().getManagementByEmail(account.getEmail());
                 }
@@ -157,9 +154,9 @@ public class UpdateImageUserController extends HttpServlet {
                 session.setAttribute("accountSession", accountInfo);
 
                 if (account.getRoleName().equals("Customer")) {
-                    new customerDAO().updateCustomer(accountInfo);
+                    new CustomerDAO().updateCustomer(accountInfo);
                 } else if (account.getRoleName().equals("Admin")) {
-                    new adminDAO().updateAdmin(accountInfo);
+                    new AdminDAO().updateAdmin(accountInfo);
                 } else if (account.getRoleName().equals("Management")) {
                     new ManagementDao().updateManagement(accountInfo);
                 }

@@ -4,25 +4,8 @@
  */
 package Controller.Common;
 
-import DAO.ProductDAO;
-import DAO.categoryDAO;
-import DAO.customerDAO;
-import DAO.feedbackDAO;
-import DAO.headphoneDetailDAO;
-import DAO.laptopDetailDAO;
-import DAO.phoneDetailDAO;
-import DAO.productImagesDAO;
-import DAO.tabletDetailDAO;
-import Model.Account;
-import Model.Category;
-import Model.Customer;
-import Model.HeadphoneDetail;
-import Model.LaptopDetail;
-import Model.PhoneDetail;
-import Model.Product;
-import Model.TabletDetail;
-import Model.feedback;
-import Model.productImage;
+import DAO.*;
+import Model.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -62,22 +45,22 @@ public class productDetail1 extends HttpServlet {
         }
 
         ProductDAO pDAO = new ProductDAO();
-        categoryDAO cDAO = new categoryDAO();
-        feedbackDAO fDAO = new feedbackDAO();
-        customerDAO cusDAO = new customerDAO();
-        productImagesDAO piDAO = new productImagesDAO();
-        phoneDetailDAO pdDAO = new phoneDetailDAO();
-        laptopDetailDAO ltDAO = new laptopDetailDAO();
-        tabletDetailDAO tbDAO = new tabletDetailDAO();
-        headphoneDetailDAO hpDAO = new headphoneDetailDAO();
+        CategoryDAO cDAO = new CategoryDAO();
+        FeedbackDAO fDAO = new FeedbackDAO();
+        CustomerDAO cusDAO = new CustomerDAO();
+        ProductImagesDAO piDAO = new ProductImagesDAO();
+        PhoneDetailDAO pdDAO = new PhoneDetailDAO();
+        LaptopDetailDAO ltDAO = new LaptopDetailDAO();
+        TabletDetailDAO tbDAO = new TabletDetailDAO();
+        HeadphoneDetailDAO hpDAO = new HeadphoneDetailDAO();
 
         Product p = pDAO.getProductByID(id);
         Category cate = cDAO.getCategoryByProductID(id);
         int numberOfFeedback = fDAO.numberOfFeedback(id);
-        List<feedback> list3F = fDAO.feedbackPaging(id, feedbackPageNum);
+        List<Feedback> list3F = fDAO.feedbackPaging(id, feedbackPageNum);
         Account acc = cusDAO.getCustomerById(id);
-        List<productImage> listProductImages = piDAO.getImageByProductId(id);
-        List<productImage> allImages = piDAO.getAllImage();
+        List<ProductImage> listProductImages = piDAO.getImageByProductId(id);
+        List<ProductImage> allImages = piDAO.getAllImage();
         List<Product> relatedProduct = pDAO.get4RelatedProduct(cate.getCategoryId(), id);
         List<Category> listAllCategory = cDAO.getAllCategory();
 

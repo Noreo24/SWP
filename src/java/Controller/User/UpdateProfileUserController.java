@@ -33,13 +33,13 @@ public class UpdateProfileUserController extends HttpServlet {
             Account accountInfo = null;
 
             if (account.getRoleName().equals("Customer")) {
-                accountInfo = new customerDAO().getCustomerByEmail(account.getEmail());
+                accountInfo = new CustomerDAO().getCustomerByEmail(account.getEmail());
 
                 request.setAttribute("userAccount", accountInfo);
 
                 request.getRequestDispatcher("/view/user/updateProfile.jsp").forward(request, response);
             } else if (account.getRoleName().equals("Admin")) {
-                accountInfo = new adminDAO().getAdminByEmail(account.getEmail());
+                accountInfo = new AdminDAO().getAdminByEmail(account.getEmail());
 
                 request.setAttribute("userAccount", accountInfo);
 
@@ -76,9 +76,9 @@ public class UpdateProfileUserController extends HttpServlet {
             Account accountInfo = null;
 
             if (account.getRoleName().equals("Customer")) {
-                accountInfo = new customerDAO().getCustomerByEmail(account.getEmail());
+                accountInfo = new CustomerDAO().getCustomerByEmail(account.getEmail());
             } else if (account.getRoleName().equals("Admin")) {
-                accountInfo = new adminDAO().getAdminByEmail(account.getEmail());
+                accountInfo = new AdminDAO().getAdminByEmail(account.getEmail());
             } else if (account.getRoleName().equals("Management")) {
                 accountInfo = new ManagementDao().getManagementByEmail(account.getEmail());
             }
@@ -100,9 +100,9 @@ public class UpdateProfileUserController extends HttpServlet {
             boolean check = false;
 
             if (!gmail.equals(accountInfo.getEmail())) {
-                Account accountCheck = new customerDAO().getCustomerByEmail(gmail);
+                Account accountCheck = new CustomerDAO().getCustomerByEmail(gmail);
                 if (accountCheck == null) {
-                    accountCheck = new adminDAO().getAdminByEmail(gmail);
+                    accountCheck = new AdminDAO().getAdminByEmail(gmail);
                 }
 
                 if (accountCheck == null) {
@@ -116,9 +116,9 @@ public class UpdateProfileUserController extends HttpServlet {
             }
 
             if (!username.equals(accountInfo.getUser_name())) {
-                Account accountCheck = new customerDAO().getCustomerByUsername(username);
+                Account accountCheck = new CustomerDAO().getCustomerByUsername(username);
                 if (accountCheck == null) {
-                    accountCheck = new adminDAO().getAdminByUsername(username);
+                    accountCheck = new AdminDAO().getAdminByUsername(username);
                 }
 
                 if (accountCheck == null) {
@@ -135,9 +135,9 @@ public class UpdateProfileUserController extends HttpServlet {
             
             if (!check) {
                 if (account.getRoleName().equals("Customer")) {
-                    new customerDAO().updateCustomer(accountInfo);
+                    new CustomerDAO().updateCustomer(accountInfo);
                 } else if (account.getRoleName().equals("Admin")) {
-                    new adminDAO().updateAdmin(accountInfo);
+                    new AdminDAO().updateAdmin(accountInfo);
                 } else if (account.getRoleName().equals("Management")) {
                     new ManagementDao().updateManagement(accountInfo);
                 }

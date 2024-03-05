@@ -5,8 +5,7 @@
 package DAO;
 
 import DBContext.DBContext;
-import Model.Blog;
-import Model.categoryBlog;
+import Model.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author Admin
  */
-public class blogDAO {
+public class BlogDAO {
 
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
@@ -67,15 +66,15 @@ public class blogDAO {
         return 0;
     }
 
-    public ArrayList<categoryBlog> getCateBlog() {
-        ArrayList<categoryBlog> list = new ArrayList<>();
+    public ArrayList<CategoryBlog> getCateBlog() {
+        ArrayList<CategoryBlog> list = new ArrayList<>();
         String query = "select * from Category_blog";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
             rs = stm.executeQuery();
             while (rs.next()) {
-                categoryBlog b = new categoryBlog(String.valueOf(rs.getInt(1)),
+                CategoryBlog b = new CategoryBlog(String.valueOf(rs.getInt(1)),
                         rs.getString(2),
                         String.valueOf(rs.getBoolean(3)));
                 list.add(b);
@@ -86,8 +85,8 @@ public class blogDAO {
         return list;
     }
 
-    public ArrayList<categoryBlog> getCateBlogAndNumBlog() {
-        ArrayList<categoryBlog> list = new ArrayList<>();
+    public ArrayList<CategoryBlog> getCateBlogAndNumBlog() {
+        ArrayList<CategoryBlog> list = new ArrayList<>();
         String query = "select cb.categoryBlog_id,cb.categoryBlog_name, count(b.blog_id) as numBlog from Category_blog cb join Blog b on b.categoryBlog_id = cb.categoryBlog_id where b.status=1 \n"
                 + "group by cb.categoryBlog_id, cb.categoryBlog_name";
         try {
@@ -95,7 +94,7 @@ public class blogDAO {
             stm = cnn.prepareStatement(query);
             rs = stm.executeQuery();
             while (rs.next()) {
-                categoryBlog b = new categoryBlog(String.valueOf(rs.getInt(1)),
+                CategoryBlog b = new CategoryBlog(String.valueOf(rs.getInt(1)),
                         rs.getString(2),
                         String.valueOf(rs.getInt(3)),
                         null);
@@ -217,8 +216,6 @@ public class blogDAO {
     }
 
     public static void main(String[] args) {
-        blogDAO b = new blogDAO();
-        System.out.println(b.getCateBlog());
     }
 
     public void addNewBlog(String title, String user_id, String content, String brief_infor, String category_id, String status, String url_thumbnail) {

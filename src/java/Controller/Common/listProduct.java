@@ -4,14 +4,8 @@
  */
 package Controller.Common;
 
-import DAO.categoryDAO;
-import DAO.ProductDAO;
-import DAO.productImagesDAO;
-import DAO.trademarkDAO;
-import Model.Category;
-import Model.Product;
-import Model.Trademark;
-import Model.productImage;
+import DAO.*;
+import Model.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -51,16 +45,16 @@ public class listProduct extends HttpServlet {
             productPageNum = Integer.parseInt(stringProductPageNum);
         }
 
-        categoryDAO cDAO = new categoryDAO();
+        CategoryDAO cDAO = new CategoryDAO();
         ProductDAO pDAO = new ProductDAO();
-        productImagesDAO piDAO = new productImagesDAO();
-        trademarkDAO tmDAO = new trademarkDAO();
+        ProductImagesDAO piDAO = new ProductImagesDAO();
+        TrademarkDAO tmDAO = new TrademarkDAO();
 
 //        List<Product> allProduct = pDAO.getAllProduct();
         List<Category> listAllCategory = cDAO.getAllCategory();
         int countCategories = cDAO.countNumberOfCategories();
         List<Product> top3SellingInProductList = pDAO.getTop3SoleProduct();
-        List<productImage> allImages = piDAO.getAllImage();
+        List<ProductImage> allImages = piDAO.getAllImage();
         int numOfProduct = pDAO.totalNumberOfProduct();
         List<Trademark> trademarkList = tmDAO.listAllTrademark();
         

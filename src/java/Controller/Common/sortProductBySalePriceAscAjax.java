@@ -4,10 +4,8 @@
  */
 package Controller.Common;
 
-import DAO.ProductDAO;
-import DAO.productImagesDAO;
-import Model.Product;
-import Model.productImage;
+import DAO.*;
+import Model.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,9 +41,9 @@ public class sortProductBySalePriceAscAjax extends HttpServlet {
         String selectedOption = request.getParameter("selectoption");
         int status = Integer.parseInt(selectedOption);
         ProductDAO pDAO = new ProductDAO();
-        productImagesDAO piDAO = new productImagesDAO();
+        ProductImagesDAO piDAO = new ProductImagesDAO();
         List<Product> sortProductBySalePriceAsc = pDAO.sortProductBySalePrice(status);
-        List<productImage> allImages = piDAO.getAllImage();
+        List<ProductImage> allImages = piDAO.getAllImage();
 
         for (Product i : sortProductBySalePriceAsc) {
             long related_original_price = Long.parseLong(i.getOriginal_prices());
@@ -56,7 +54,7 @@ public class sortProductBySalePriceAscAjax extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         for (Product o : sortProductBySalePriceAsc) {
-            for (productImage i : allImages) {
+            for (ProductImage i : allImages) {
                 if (o.getProduct_id() == null ? String.valueOf(i.getProductId()) == null : o.getProduct_id().equals(i.getProductId())) {
                     if ("1".equals(o.getSale())) {
                         out.println("<div class=\"col-md-4 col-xs-6\">\n"

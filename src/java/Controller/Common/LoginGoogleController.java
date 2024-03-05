@@ -4,7 +4,8 @@
  */
 package Controller.Common;
 
-import DAO.customerDAO;
+import DAO.*;
+import Model.Account;
 import Model.Customer;
 import Model.UserGoogleDto;
 import com.google.gson.Gson;
@@ -26,42 +27,7 @@ import util.Constants;
  * @author Admin
  */
 public class LoginGoogleController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginGoogleController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginGoogleController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+ 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -73,11 +39,11 @@ public class LoginGoogleController extends HttpServlet {
         String name = user.getName();
         String avatar = user.getPicture();
         System.out.println(user);
-        customerDAO cdao = new customerDAO();
+        CustomerDAO cdao = new CustomerDAO();
         if (cdao.getCustomerByEmail(email) == null) {
             cdao.addNewCustomerWithGoogleAccount(email, name, avatar);
         }
-        Customer c = cdao.getCustomerByEmail(email);
+        Account c = cdao.getCustomerByEmail(email);
         HttpSession session = request.getSession();
         session.setAttribute("acc", c);
         response.sendRedirect("home");
@@ -94,7 +60,6 @@ public class LoginGoogleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

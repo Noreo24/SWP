@@ -6,8 +6,7 @@ package Controller.Admin;
 
 import DAO.*;
 import Model.*;
-import Uils.SendMail;
-import Uils.Util;
+import Uils.*;
 import java.io.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -142,10 +141,10 @@ public class ManagerAddAccountController extends HttpServlet {
 
         Account accountInfo = null;
 
-        accountInfo = new customerDAO().getCustomerByEmail(gmail);
+        accountInfo = new CustomerDAO().getCustomerByEmail(gmail);
 
         if (accountInfo == null) {
-            accountInfo = new adminDAO().getAdminByEmail(gmail);
+            accountInfo = new AdminDAO().getAdminByEmail(gmail);
         }
         if (accountInfo == null) {
             accountInfo = new ManagementDao().getManagementByEmail(gmail);
@@ -165,10 +164,10 @@ public class ManagerAddAccountController extends HttpServlet {
 
         accountInfo = null;
 
-        accountInfo = new customerDAO().getCustomerByUsername(username);
+        accountInfo = new CustomerDAO().getCustomerByUsername(username);
 
         if (accountInfo == null) {
-            accountInfo = new adminDAO().getAdminByUsername(username);
+            accountInfo = new AdminDAO().getAdminByUsername(username);
         }
 
         if (accountInfo == null) {
@@ -189,9 +188,9 @@ public class ManagerAddAccountController extends HttpServlet {
 
         if (check) {
             if (roleSelect.equals("Customer")) {
-                new customerDAO().add(account);
+                new CustomerDAO().add(account);
             } else if (roleSelect.equals("Admin")) {
-                new adminDAO().add(account);
+                new AdminDAO().add(account);
             } else if (roleSelect.equals("Management")) {
                 Account accountAdmin = (Account) request.getSession().getAttribute("accountSession");
                 account.setAdminCreateId(Integer.parseInt(accountAdmin.getUserID()));
@@ -199,7 +198,7 @@ public class ManagerAddAccountController extends HttpServlet {
                 new ManagementDao().add(account);
             }
             
-            SendMail.sendMailAfterAddAccount(account);
+            SendMailLC.sendMailAfterAddAccount(account);
             response.sendRedirect("ManagerAccount");
         } else {
             request.setAttribute("userAccount", account);

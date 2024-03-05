@@ -45,16 +45,16 @@
     </head>
     <body>
         <!-- HEADER -->
-        <header>
+        <header style="position: sticky; top: 0px; z-index: 100;">
             <!-- TOP HEADER -->
             <div id="top-header">
                 <div class="container">
                     <ul class="header-links pull-right">
-                        <c:if test="${sessionScope.acc != null}">
-                            <li><a href="logoutcontroller">Log out</a></li>
-                            <li><a href="${pageContext.request.contextPath}/view/user/profile.jsp"><i class="fa fa-user-o"></i> My Account - ${sessionScope.acc.getFullName()}</a></li>
+                        <c:if test="${sessionScope.c != null}">
+                            <li><a href="${pageContext.request.contextPath}/Logout">Log out</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ProfileUser"><i class="fa fa-user-o"></i> My Account - ${sessionScope.c.getFullName()}</a></li>
                             </c:if>
-                            <c:if test="${sessionScope.acc == null}">
+                            <c:if test="${sessionScope.c == null}">
                             <li><a href="${pageContext.request.contextPath}/view/common/login.jsp"><i class="fa fa-user-o"></i> Log in</a></li>
                             </c:if>
                     </ul>
@@ -63,16 +63,16 @@
             <!-- /TOP HEADER -->
 
             <!-- MAIN HEADER -->
-            <div id="header">
+            <div id="header" style="padding: 0;">
                 <!-- container -->
                 <div class="container">
                     <!-- row -->
                     <div class="row">
                         <!-- LOGO -->
-                        <div class="col-md-3">
+                        <div class="col-md-3"  style="padding-top: 10px; padding-bottom: 10px;">
                             <div class="header-logo">
-                                <a href="${pageContext.request.contextPath}/home" class="logo">
-                                    <img style="width: 250px" src="${pageContext.request.contextPath}/img/logo.png" alt="">
+                                <a href="Home" class="logo">
+                                    <img style="width: 150px; border-radius: 10px;" src="./img/logo.png" alt="">
                                 </a>
                             </div>
                         </div>
@@ -82,13 +82,8 @@
                         <div class="col-md-6">
                             <div class="header-search">
                                 <form>
-                                    <select class="input-select">
-                                        <option value="0">All Categories</option>
-                                        <option value="1">Category 01</option>
-                                        <option value="1">Category 02</option>
-                                    </select>
-                                    <input class="input" placeholder="Search here">
-                                    <button class="search-btn">Search</button>
+                                    <input class="input" placeholder="Search here" style="width: 75%; border-width: 0; border-bottom-left-radius: 50px; border-top-left-radius: 50px;">
+                                    <button class="search-btn" style="width: 25%;">Search</button>
                                 </form>
                             </div>
                         </div>
@@ -149,7 +144,6 @@
                                     </div>
                                 </div>
                                 <!-- /Cart -->
-                                
 
                                 <!-- Menu Toogle -->
                                 <div class="menu-toggle">
@@ -170,28 +164,6 @@
             <!-- /MAIN HEADER -->
         </header>
         <!-- /HEADER -->
-        <nav id="navigation">
-            <!-- container -->
-            <div class="container">
-                <!-- responsive-nav -->
-                <div id="responsive-nav">
-                    <!-- NAV -->
-                    <ul class="main-nav nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Hot Deals</a></li>
-                        <li><a href="#">Categories</a></li>
-                        <li><a href="#">Laptops</a></li>
-                        <li><a href="#">Smartphones</a></li>
-                        <li><a href="#">Cameras</a></li>
-                        <li><a href="#">Accessories</a></li>
-                        <li><a href="${pageContext.request.contextPath}/loadblogpage">Blogs</a></li>
-                    </ul>
-                    <!-- /NAV -->
-                </div>
-                <!-- /responsive-nav -->
-            </div>
-            <!-- /container -->
-        </nav>   
         <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>

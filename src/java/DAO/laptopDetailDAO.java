@@ -14,7 +14,7 @@ import java.sql.ResultSet;
  *
  * @author Admin
  */
-public class laptopDetailDAO {
+public class LaptopDetailDAO {
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
@@ -48,7 +48,7 @@ public class laptopDetailDAO {
     }
     
     public static void main(String[] args) {
-        laptopDetailDAO ltDAO = new laptopDetailDAO();
+        LaptopDetailDAO ltDAO = new LaptopDetailDAO();
         String pid = "4";
         LaptopDetail lt = ltDAO.lapDetail(pid);
         System.out.println(lt.screen_size);

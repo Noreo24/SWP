@@ -5,7 +5,7 @@
 package DAO;
 
 import DBContext.DBContext;
-import Model.feedback;
+import Model.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Admin
  */
-public class feedbackDAO {
+public class FeedbackDAO {
 
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
@@ -38,8 +38,8 @@ public class feedbackDAO {
         return 0;
     }
 
-    public List<feedback> getFeedbackByProductId(String product_id) {
-        List<feedback> list = new ArrayList<>();
+    public List<Feedback> getFeedbackByProductId(String product_id) {
+        List<Feedback> list = new ArrayList<>();
         String query = "select * from Feedback where product_id = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
@@ -47,7 +47,7 @@ public class feedbackDAO {
             stm.setString(1, product_id);
             rs = stm.executeQuery();
             while (rs.next()) {
-                list.add(new feedback(
+                list.add(new Feedback(
                         rs.getString(1), // feedBack_id
                         rs.getString(2), // fullName
                         rs.getString(3), // rated_star
@@ -63,8 +63,8 @@ public class feedbackDAO {
         return list;
     }
     
-    public List<feedback> feedbackPaging(String product_id, int pageNumber) {
-        List<feedback> list = new ArrayList<>();
+    public List<Feedback> feedbackPaging(String product_id, int pageNumber) {
+        List<Feedback> list = new ArrayList<>();
         String query = "select * from Feedback "
                 + "where product_id = ? "
                 + "order by date desc "
@@ -76,7 +76,7 @@ public class feedbackDAO {
             stm.setInt(2, (pageNumber-1)*3);
             rs = stm.executeQuery();
             while (rs.next()) {
-                list.add(new feedback(
+                list.add(new Feedback(
                         rs.getString(1), // feedBack_id
                         rs.getString(2), // fullName
                         rs.getString(3), // rated_star
@@ -93,16 +93,6 @@ public class feedbackDAO {
     }
     
     public static void main(String[] args) {
-        feedbackDAO fDAO = new feedbackDAO();
-        String pid = "1";
-//        List<feedback> feedbackList = fDAO.getFeedbackByProductId(pid);
-//        for (feedback o : feedbackList) {
-//            System.out.println(o.getFullName());
-//        }
-        System.out.println("Down");
-        List<feedback> feedbackPaging = fDAO.feedbackPaging(pid,2);
-        for (feedback o : feedbackPaging) {
-            System.out.println(o.getFullName());
-        }
+        
     }
 }

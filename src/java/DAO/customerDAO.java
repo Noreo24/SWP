@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author LanChau
  */
-public class customerDAO {
+public class CustomerDAO {
 
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
@@ -23,7 +23,6 @@ public class customerDAO {
     ResultSet rs;//Lưu trữ và xử lý dữ liệu
 
     public static void main(String[] args) {
-        System.out.println(new customerDAO().getUserCustomerByUsername("tung123", "1").getAddress());
     }
 
     public Account getUserCustomerByUsername(String username, String pass) {

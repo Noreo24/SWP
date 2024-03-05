@@ -5,8 +5,7 @@
 package DAO;
 
 import DBContext.DBContext;
-import Model.Category;
-import Model.Product;
+import Model.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +16,7 @@ import java.util.List;
  *
  * @author Admin
  */
-public class categoryDAO {
+public class CategoryDAO {
 
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
@@ -90,7 +89,7 @@ public class categoryDAO {
     }
     
     public static void main(String[] args) {
-        categoryDAO cdao = new categoryDAO();
+        CategoryDAO cdao = new CategoryDAO();
         String pid = "5";
         // Category ID
 //        Category cate = cdao.getCategoryByProductID(pid);

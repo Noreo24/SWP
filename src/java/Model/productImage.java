@@ -9,16 +9,16 @@ package Model;
  * @author Admin
  */
 // ProductImage.java
-public class productImage {
+public class ProductImage {
     private int productsImagesId;
     private int productId;
     private boolean status;
     private String images;
 
-    public productImage() {
+    public ProductImage() {
     }
 
-    public productImage(int productsImagesId, int productId, boolean status, String images) {
+    public ProductImage(int productsImagesId, int productId, boolean status, String images) {
         this.productsImagesId = productsImagesId;
         this.productId = productId;
         this.status = status;

@@ -4,10 +4,8 @@
  */
 package Controller.Admin;
 
-import DAO.ManagementDao;
-import DAO.adminDAO;
-import DAO.customerDAO;
-import Model.Account;
+import DAO.*;
+import Model.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -45,9 +43,9 @@ public class manageProduct extends HttpServlet {
                 Account accountInfo = null;
 
                 if (roleSelect.equals("Customer")) {
-                    accountInfo = new customerDAO().getCustomerById(userID);
+                    accountInfo = new CustomerDAO().getCustomerById(userID);
                 } else if (roleSelect.equals("Admin")) {
-                    accountInfo = new adminDAO().getAdminById(userID);
+                    accountInfo = new AdminDAO().getAdminById(userID);
                 } else if (roleSelect.equals("Management")) {
                     accountInfo = new ManagementDao().getManagementById(userID);
                 }
@@ -55,9 +53,9 @@ public class manageProduct extends HttpServlet {
                 accountInfo.setStatus(active);
 
                 if (roleSelect.equals("Customer")) {
-                    new customerDAO().updateCustomer(accountInfo);
+                    new CustomerDAO().updateCustomer(accountInfo);
                 } else if (roleSelect.equals("Admin")) {
-                    new adminDAO().updateAdmin(accountInfo);
+                    new AdminDAO().updateAdmin(accountInfo);
                 } else if (roleSelect.equals("Management")) {
                     new ManagementDao().updateManagement(accountInfo);
                 }
@@ -94,9 +92,9 @@ public class manageProduct extends HttpServlet {
             int countAccount = 0;
 
             if (roleSelect.equals("Customer")) {
-                countAccount = new customerDAO().getCount(nameSearch);
+                countAccount = new CustomerDAO().getCount(nameSearch);
             } else if (roleSelect.equals("Admin")) {
-                countAccount = new adminDAO().getCount(nameSearch);
+                countAccount = new AdminDAO().getCount(nameSearch);
             } else if (roleSelect.equals("Management")) {
                 countAccount = new ManagementDao().getCount(nameSearch);
             }
@@ -122,9 +120,9 @@ public class manageProduct extends HttpServlet {
             ArrayList<Account> accounts = new ArrayList<>();
 
             if (roleSelect.equals("Customer")) {
-                accounts = new customerDAO().getAllCustomer(nameSearch, pageIndex, pageSize);
+                accounts = new CustomerDAO().getAllCustomer(nameSearch, pageIndex, pageSize);
             } else if (roleSelect.equals("Admin")) {
-                accounts = new adminDAO().getAllAdmin(nameSearch, pageIndex, pageSize);
+                accounts = new AdminDAO().getAllAdmin(nameSearch, pageIndex, pageSize);
             } else if (roleSelect.equals("Management")) {
                 accounts = new ManagementDao().getAllManagement(nameSearch, pageIndex, pageSize);
             }

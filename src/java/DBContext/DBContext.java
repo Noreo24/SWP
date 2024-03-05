@@ -21,14 +21,7 @@ public class DBContext {
     }   
     /*Insert your other code right after this comment*/
     /*Change/update information of your database connection, DO NOT change name of instance variables in this class*/
-<<<<<<< HEAD
-    private final String serverName = "ADMIN-PC\\MSSQLTUNG";// sua theo sql cua moi nguoi
-    
-    private final String dbName = "Phone_Shop_Online_2";
-    private final String portNumber = "1433";
-=======
  
->>>>>>> 51d25809906605ac8e4ce6aa7ab5edf1d3e40558
     private final String instance="";//LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
  
     public static void main(String[] args) {

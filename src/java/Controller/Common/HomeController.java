@@ -4,12 +4,8 @@
  */
 package Controller.Common;
 
-import DAO.categoryDAO;
-import DAO.ProductDAO;
-import DAO.productImagesDAO;
-import Model.Category;
-import Model.Product;
-import Model.productImage;
+import DAO.*;
+import Model.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -47,13 +43,13 @@ public class HomeController extends HttpServlet {
             cate_id = "2";
         }
 
-        categoryDAO cDAO = new categoryDAO();
+        CategoryDAO cDAO = new CategoryDAO();
         ProductDAO pDAO = new ProductDAO();
-        productImagesDAO piDAO = new productImagesDAO();
+        ProductImagesDAO piDAO = new ProductImagesDAO();
 
         List<Category> listAllCategory = cDAO.getAllCategory();
         List<Product> list4NewProduct = pDAO.get4NewProductByCateId(cate_id);
-        List<productImage> allImages = piDAO.getAllImage();
+        List<ProductImage> allImages = piDAO.getAllImage();
 
         // Định dạng giá tiền cho sản phẩm
         for (Product i : list4NewProduct) {

@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Admin
  */
-public class trademarkDAO {
+public class TrademarkDAO {
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
@@ -70,7 +70,7 @@ public class trademarkDAO {
     }
     
     public static void main(String[] args) {
-        trademarkDAO tmdao = new trademarkDAO();
+        TrademarkDAO tmdao = new TrademarkDAO();
 
         List<Trademark> feedbackList = tmdao.listAllTrademark();
         for (Trademark o : feedbackList) {
