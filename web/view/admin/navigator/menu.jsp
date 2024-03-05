@@ -7,8 +7,9 @@
                 <h3 class="breadcrumb-header">${checkActive}</h3>
                 <ul class="breadcrumb-tree">
                     <li><a href="Home">Home</a></li>
-                    <li class="${checkActive == 'Manage product' ? 'active': ''}"><a href="${pageContext.request.contextPath}/manageProduct">Manage product</a></li>
-                    <li class="${checkActive == 'Manage Account' ? 'active': ''}"><a href="${pageContext.request.contextPath}/ManagerAccount">Manage account </a></li>
+                    <li class="${checkActive == 'Manage product' ? 'active': ''}"><a href="${pageContext.request.contextPath}/manageProduct">Manage Product</a></li>
+                    <li class="${checkActive == 'Manage Account' ? 'active': ''}"><a href="${pageContext.request.contextPath}/ManagerAccount">Manage Account </a></li>
+                    <li class="${checkActive == 'Manage Brand' ? 'active': ''}"><a href="${pageContext.request.contextPath}/ManagerBrand">Manage Brand </a></li>
                 </ul> 
             </div>
         </div>
