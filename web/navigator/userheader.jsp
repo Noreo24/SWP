@@ -50,11 +50,11 @@
             <div id="top-header">
                 <div class="container">
                     <ul class="header-links pull-right">
-                        <c:if test="${sessionScope.c != null}">
+                        <c:if test="${sessionScope.accountSession != null}">
                             <li><a href="${pageContext.request.contextPath}/Logout">Log out</a></li>
                             <li><a href="${pageContext.request.contextPath}/ProfileUser"><i class="fa fa-user-o"></i> My Account - ${sessionScope.c.getFullName()}</a></li>
                             </c:if>
-                            <c:if test="${sessionScope.c == null}">
+                            <c:if test="${sessionScope.accountSession == null}">
                             <li><a href="${pageContext.request.contextPath}/view/common/login.jsp"><i class="fa fa-user-o"></i> Log in</a></li>
                             </c:if>
                     </ul>

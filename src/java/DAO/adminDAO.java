@@ -16,14 +16,16 @@ import java.util.ArrayList;
  * @author LanChau
  */
 public class AdminDAO {
+
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
     ResultSet rs;//Lưu trữ và xử lý dữ liệu
 
     public static void main(String[] args) {
-        System.out.println(new AdminDAO().getUserAdminByUsername("admin123", "1").getEmail());
+        System.out.println(new AdminDAO().getAdminByEmail("1").getAddress());
     }
+
     public Account getUserAdminByUsername(String username, String pass) {
         String query = "select * from Admin where user_name = ? and password = ?";
         try {
@@ -79,6 +81,8 @@ public class AdminDAO {
         }
         return null;
     }
+
+    
     public void updateAdmin(Account account) {
         String query = "UPDATE [dbo].[Admin]\n"
                 + "   SET [fullName] = ? \n"
