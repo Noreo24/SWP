@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Manager Add Account</title>
+        <title>Manager Edit Account</title>
 
         <!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -59,7 +59,7 @@
                         <div class="card-body text-center">
                             <!-- Profile picture image--> 
                             <img class="img-account-profile rounded-circle mb-2" id="imgAvatar" style="max-height: 350px; max-width: 350px"
-                                 src="${userAccount.getAvatar()}" 
+                                 src="${pageContext.request.contextPath}/imgUser/${userAccount.getAvatar()}" 
                                  onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'" 
                                  alt="">
                         </div>
@@ -70,25 +70,24 @@
                     <!-- Account details card-->
                     <div class="card mb-4">
                         <div class="card-body">
-                            <form action="${pageContext.request.contextPath}/ManagerAddAccount" method="post" enctype="multipart/form-data">
+                            <form action="${pageContext.request.contextPath}/ManagerEditAccount" method="post" enctype="multipart/form-data">
+                                <input hidden type="text" name="userID" value="${userAccount.getUserID()}" required/>
                                 <div class="mb-3">
-                                    <label class="small mb-1" for="inputUsername">Username <span class="text-danger">${errorUserName}</span></label> </label>
-                                    <input class="form-control" id="inputUsername"
-                                           type="text" required
-                                           name="username"
-                                           placeholder="Enter your username" 
-                                           value="${userAccount.getUser_name()}">
+                                    <p class="text-danger">${errorUsername}</p>
+                                    <label class="small mb-1" for="inputUsername">Username </label>
+                                    <input class="form-control" id="inputUsername" type="text" required name="txtUsername"
+                                           placeholder="Enter your username" value="${userAccount.getUser_name()}">
+                                    <input type="text" required hidden name="txtUsernameOld"
+                                           value="${accountOld.getUser_name()}">
                                 </div>
                                 <div class="row gx-3 mb-3">
-
                                     <div class="col-md-6">
-
-                                        <label class="small mb-1" for="inputFirstName">Gmail <span class="text-danger">${errorEmail}</span></label>
-                                        <input class="form-control" id="inputFirstName"
-                                               type="email" required
-                                               placeholder="Enter your gmail" 
-                                               name="gmail"
-                                               value="${userAccount.getEmail()}">
+                                        <p class="text-danger">${errorGmail}</p>
+                                        <label class="small mb-1" for="inputFirstName">Gmail</label>
+                                        <input class="form-control" id="inputFirstName" type="email" required name="txtGmail"
+                                               placeholder="Enter your gmail" value="${userAccount.getEmail()}">
+                                        <input type="text" required hidden name="txtGmailOld"
+                                               value="${accountOld.getEmail()}">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputLastName">Full Name</label>
@@ -110,9 +109,21 @@
                                     </div>
                                 </div>
 
+                                <!--                                <div class="mb-3">
+                                                                    <label class="small mb-1" for="inputEmailAddress">Link Avatar</label>
+                                                                    <input class="form-control" id="inputEmailAddress" type="text" name="txtAvatar" required
+                                                                           onchange="updateAvatar(this.value)"
+                                                                           placeholder="Enter your link avatar" value="${userAccount.getAvatar()}">
+                                                                </div>
+                                                                <script>
+                                                                    function updateAvatar(link) {
+                                                                        var imgElement = document.getElementById("imgAvatar");
+                                                                        imgElement.src = link;
+                                                                    }
+                                                                </script>-->
                                 <div class="mb-3">
-                                    <label class="small mb-1" for="inputEmailAddress">Upload Avatar</label>
-                                    <input id="inputFile" type="file" name="txtAvatar" accept="image/*" required/>
+                                    <label class="small mb-1" for="inputEmailAddress">Upload New Avatar</label>
+                                    <input id="inputFile" type="file" name="txtAvatar" accept="image/*" />
                                 </div>
                                 <script>
                                     // L?y tham chi?u ??n n?t v? input
@@ -161,7 +172,6 @@
                                     }
                                 </script>
                                 <div class="row gx-3 mb-3">
-
                                     <div class="col-md-6">
                                         <label class="small mb-1" >Gender: </label>
                                         <input  id="inputGenderMale" type="radio" name="gender"
@@ -192,13 +202,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="inputEmailAddress">Password</label>
-                                    <input class="form-control" id="inputEmailAddress"
-                                           type="text" name="pass" required
-                                           placeholder="Enter your password" value="${userAccount.getAvatar()}">
-                                </div>
-                                <br/>
                                 <button class="btn btn-primary" type="submit">Save changes</button>
                             </form>
                         </div>

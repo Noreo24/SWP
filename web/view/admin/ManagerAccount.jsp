@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Manager Add Account</title>
+        <title>Manager Account</title>
 
         <!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -52,157 +52,135 @@
         <div class="section">
             <!-- container -->
             <div class="container">
-                <div class="col-xl-4">
-                    <!-- Profile picture card-->
-                    <div class="card mb-4 mb-xl-0">
-                        <!--<div class="card-header"></div>-->
-                        <div class="card-body text-center">
-                            <!-- Profile picture image--> 
-                            <img class="img-account-profile rounded-circle mb-2" id="imgAvatar" style="max-height: 350px; max-width: 350px"
-                                 src="${userAccount.getAvatar()}" 
-                                 onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'" 
-                                 alt="">
+                <!-- row -->
+                <div class="row">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2> <b>List Account</b></h2>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="${pageContext.request.contextPath}/ManagerAddAccount"><button type="button" class="btn btn-success">Add New Account</button></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- row -->
-                <div class="col-xl-8">
-                    <!-- Account details card-->
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <form action="${pageContext.request.contextPath}/ManagerAddAccount" method="post" enctype="multipart/form-data">
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="inputUsername">Username <span class="text-danger">${errorUserName}</span></label> </label>
-                                    <input class="form-control" id="inputUsername"
-                                           type="text" required
-                                           name="username"
-                                           placeholder="Enter your username" 
-                                           value="${userAccount.getUser_name()}">
-                                </div>
-                                <div class="row gx-3 mb-3">
+                    <div class="table-title">
+                        <div class="row">
+                            <form id="searchForm" action="${pageContext.request.contextPath}/ManagerAccount" method="get">
+                                <div class="col-sm-6">
+                                    <div class="input-group">
 
-                                    <div class="col-md-6">
+                                        <select onchange="onSubmitForm()" class="form-select" name="pageSize">
+                                            <option selected value="5">5</option>
+                                            <option 
+                                                <c:if test="${pageSize == 10}">
+                                                    selected
+                                                </c:if> value="10">10</option>
+                                            <option <c:if test="${pageSize == 30}">
+                                                    selected
+                                                </c:if> value="30">30</option> 
+                                            <option <c:if test="${pageSize == 50}">
+                                                    selected
+                                                </c:if> value="50">50</option>
+                                        </select>
 
-                                        <label class="small mb-1" for="inputFirstName">Gmail <span class="text-danger">${errorEmail}</span></label>
-                                        <input class="form-control" id="inputFirstName"
-                                               type="email" required
-                                               placeholder="Enter your gmail" 
-                                               name="gmail"
-                                               value="${userAccount.getEmail()}">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputLastName">Full Name</label>
-                                        <input class="form-control" id="inputLastName" type="text" name="textFullName" required
-                                               placeholder="Enter your last name" value="${userAccount.getFullName()}">
-                                    </div>
-                                </div>
-                                <div class="row gx-3 mb-3">
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputOrgName">Phone</label>
-                                        <input class="form-control" id="inputOrgName" type  ="text" name="txtPhone" required
-                                               placeholder="Enter your phone" value="${userAccount.getPhone()}">
-                                    </div>
+                                        <input type="text" class="form-control" name="nameSearch"
+                                               value="${nameSearch}" placeholder="Search by name"
+                                               />
 
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" for="inputLocation">Address</label>
-                                        <input class="form-control" id="inputLocation" type="text" name="txtAddress" required
-                                               placeholder="Enter your address" value="${userAccount.getAddress()}">
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="inputEmailAddress">Upload Avatar</label>
-                                    <input id="inputFile" type="file" name="txtAvatar" accept="image/*" required/>
-                                </div>
-                                <script>
-                                    // L?y tham chi?u ??n n?t v? input
-                                    var inputFile = document.getElementById('inputFile');
-
-                                    // Th?m s? ki?n change cho input file
-                                    inputFile.addEventListener('change', function () {
-                                        var file = inputFile.files[0];
-                                        validateFileType(file);
-                                    });
-
-                                    function validateFileType(file) {
-                                        if (file) {
-                                            var fileType = file.type;
-
-                                            // Ki?m tra ??nh d?ng t?p c? ph?i l? h?nh ?nh hay kh?ng
-                                            if (!fileType.startsWith('image/')) {
-                                                // Hi?n th? th?ng b?o l?i n?u t?p kh?ng ph?i l? h?nh ?nh
-                                                alert('Please choose a file image.');
-                                                clearFileInput();
-                                            } else {
-                                                var fileReader = new FileReader();
-                                                fileReader.onload = function () {
-                                                    var link = fileReader.result;
-                                                    updateAvatar(link);
-                                                };
-                                                fileReader.readAsDataURL(file);
-                                            }
-                                        }
-                                    }
-
-                                    function clearFileInput() {
-                                        // X?a gi? tr? c?a input file
-                                        inputFile.value = '';
-
-                                        // Ti?p t?c l?ng nghe s? ki?n change cho input file
-                                        inputFile.addEventListener('change', function () {
-                                            var file = inputFile.files[0];
-                                            validateFileType(file);
-                                        });
-                                    }
-
-                                    function updateAvatar(link) {
-                                        var imgElement = document.getElementById("imgAvatar");
-                                        imgElement.src = link;
-                                    }
-                                </script>
-                                <div class="row gx-3 mb-3">
-
-                                    <div class="col-md-6">
-                                        <label class="small mb-1" >Gender: </label>
-                                        <input  id="inputGenderMale" type="radio" name="gender"
-                                                checked   value="1"> 
-                                        <label for="inputGenderMale">Male</label>
-                                        <input  id="inputGenderFeMale" type="radio" name="gender"
-                                                <c:if test="${!userAccount.getGender()}">
-                                                    checked
-                                                </c:if>
-                                                value="0">
-                                        <label for="inputGenderFeMale">FeMale</label>
-                                    </div>
-                                </div>
-                                <div class="row gx-3 mb-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label small mb-1">Role</label>
-                                        <select class="form-select" name="roleSelect">
+                                        <select onchange="onSubmitForm()" class="form-select" name="roleSelect">
                                             <option value="Customer" selected>Customer</option>
                                             <option value="Admin" 
-                                                    <c:if test="${userAccount.getRoleName().equals('Admin')}">
+                                                    <c:if test="${roleSelect.equals('Admin')}">
                                                         selected
                                                     </c:if>
                                                     >Admin</option>
                                             <option value="Management" 
-                                                    <c:if test="${userAccount.getRoleName().equals('Management')}">
+                                                    <c:if test="${roleSelect.equals('Management')}">
                                                         selected
                                                     </c:if>>Management</option>
                                         </select>
+                                        <input type="text" name="pageIndex"  hidden
+                                               value="${pageIndex}" required />
+                                        <input type="text" name="pageSize"  hidden
+                                               value="${pageSize}" required />
+                                        <input hidden type="submit"/>
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="inputEmailAddress">Password</label>
-                                    <input class="form-control" id="inputEmailAddress"
-                                           type="text" name="pass" required
-                                           placeholder="Enter your password" value="${userAccount.getAvatar()}">
-                                </div>
-                                <br/>
-                                <button class="btn btn-primary" type="submit">Save changes</button>
                             </form>
                         </div>
                     </div>
+                    <br/>
+                    <script>
+                        function onSubmitForm() {
+                            document.querySelector('#searchForm').submit();
+                        }
+                    </script>
+                    <table class="table">
+                        <thead class="thead" style="background: #ff2e00">
+                            <tr> 
+                                <th scope="col">#</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">UserName</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="item" items="${accounts}" varStatus="loop">
+                                <tr>
+                                    <th scope="row">${loop.index +1}</th>
+                                    <td><a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserID()}">${item.getFullName()}</a> </td>
+                                    <td>${item.getUser_name()}</td>
+                                    <td>${item.getEmail()}</td>
+                                    <td>${item.getPhone()}</td>
+                                    <td>${item.getRoleName()}</td>
+                                    <td>
+                                        <c:if test="${item.getStatus() == 'true'}">
+                                            <p class="text-success">Active</p>
+                                        </c:if>
+                                        <c:if test="${item.getStatus() == 'false'}">
+                                            <p class="text-danger">Block</p>
+                                        </c:if>
+                                    </td>
+                                    <td>
+                                        <c:if test="${item.getUserID() != sessionScope.accountSession.getUserID()}">
+                                            <c:if test="${item.getStatus() == 'true'}">
+                                                <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=false&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}&roleSelect=${roleSelect}">
+                                                    <button class="btn btn-danger">Block</button>
+                                                </a> 
+                                            </c:if>
+                                            <c:if test="${item.getStatus() == 'false'}">
+                                                <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=true&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}&roleSelect=${roleSelect}">
+                                                    <button class="btn btn-success">Active</button>
+                                                </a> 
+                                            </c:if>
+
+                                            <a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserID()}&roleSelect=${roleSelect}">
+                                                <button class="btn btn-dark">Edit</button>
+                                            </a> 
+                                        </c:if>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /row -->
+                <div class="clearfix">
+                    <div class="hint-text">Showing <b>${accounts.size()}</b> out of <b>${countAccount}</b> entries</div>
+                    <ul class="pagination">
+                        <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex-1}&pageSize=${pageSize}&roleSelect=${roleSelect}">Previous</a></li>
+                            <c:forEach var="item" begin="1" end="${page}">
+                            <li class="page-item ${item == pageIndex ? 'active': ''}">
+                                <a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${item}&pageSize=${pageSize}&roleSelect=${roleSelect}" class="page-link">${item}</a>
+                            </li>
+                        </c:forEach>
+                        <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex+1}&pageSize=${pageSize}&roleSelect=${roleSelect}" class="page-link">Next</a></li>
+                    </ul>
                 </div>
             </div>
             <!-- /container -->

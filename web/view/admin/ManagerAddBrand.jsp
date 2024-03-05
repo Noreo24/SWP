@@ -4,10 +4,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="img/shortcut.png">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <title>Manager Account</title>
+        <title>Manager Add Brand</title>
 
         <!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -41,6 +40,10 @@
         <%@include file="/navigator/adminheader.jsp" %>
         <!-- /HEADER -->
 
+        <!-- NAVIGATION -->
+        <%@include file="/navigator/navigation.jsp" %>
+        <!-- /NAVIGATION -->
+
         <!-- BREADCRUMB -->
         <%@include file="navigator/menu.jsp" %>
         <!-- /BREADCRUMB -->
@@ -49,135 +52,57 @@
         <div class="section">
             <!-- container -->
             <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h2> <b>List Account</b></h2>
-                            </div>
-                            <div class="col-sm-6">
-                                <a href="${pageContext.request.contextPath}/ManagerAddAccount"><button type="button" class="btn btn-success">Add New Account</button></a>
-                            </div>
+                <div class="col-xl-4">
+                    <!-- Profile picture card-->
+                    <div class="card mb-4 mb-xl-0">
+                        <!--<div class="card-header"></div>-->
+                        <div class="card-body text-center">
+                            <!-- Profile picture image--> 
+                            <img class="img-account-profile rounded-circle mb-2" id="imgAvatar" style="max-height: 350px; max-width: 350px"
+                                 src="${brand.getImg()}" 
+                                 onerror="this.src='http://bootdey.com/img/Content/avatar/avatar1.png'" 
+                                 alt="">
                         </div>
                     </div>
-                    <div class="table-title">
-                        <div class="row">
-                            <form id="searchForm" action="${pageContext.request.contextPath}/ManagerAccount" method="get">
-                                <div class="col-sm-6">
-                                    <div class="input-group">
-
-                                        <select onchange="onSubmitForm()" class="form-select" name="pageSize">
-                                            <option selected value="5">5</option>
-                                            <option 
-                                                <c:if test="${pageSize == 10}">
-                                                    selected
-                                                </c:if> value="10">10</option>
-                                            <option <c:if test="${pageSize == 30}">
-                                                    selected
-                                                </c:if> value="30">30</option> 
-                                            <option <c:if test="${pageSize == 50}">
-                                                    selected
-                                                </c:if> value="50">50</option>
-                                        </select>
-
-                                        <input type="text" class="form-control" name="nameSearch"
-                                               value="${nameSearch}" placeholder="Search by name"
-                                               />
-
-                                        <select onchange="onSubmitForm()" class="form-select" name="roleSelect">
-                                            <option value="Customer" selected>Customer</option>
-                                            <option value="Admin" 
-                                                    <c:if test="${roleSelect.equals('Admin')}">
-                                                        selected
-                                                    </c:if>
-                                                    >Admin</option>
-                                            <option value="Management" 
-                                                    <c:if test="${roleSelect.equals('Management')}">
-                                                        selected
-                                                    </c:if>>Management</option>
-                                        </select>
-                                        <input type="text" name="pageIndex"  hidden
-                                               value="${pageIndex}" required />
-                                        <input type="text" name="pageSize"  hidden
-                                               value="${pageSize}" required />
-                                        <input hidden type="submit"/>
-                                    </div>
+                </div>
+                <!-- row -->
+                <div class="col-xl-8">
+                    <!-- Account details card-->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <form action="${pageContext.request.contextPath}/ManagerAddBrand" method="post" >
+                                
+                                <div class="mb-3">
+                                    <p class="text-danger">${errorUsername}</p>
+                                    <label class="small mb-1" for="inputUsername">Name </label>
+                                    <input class="form-control" id="inputUsername"
+                                           type="text" required name="txtName"
+                                           placeholder="Enter your Name" 
+                                           value="${brand.getName()}">
                                 </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <!--<p class="text-danger">${errorGmail}</p>-->
+                                        <label class="small mb-1" for="inputFirstName">Description</label>
+                                        <input class="form-control" id="inputFirstName" 
+                                               type="text" required 
+                                               name="txtDes"
+                                               placeholder="Enter your description"
+                                               value="${brand.getDes()}"> 
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="inputLastName">Link img</label>
+                                        <input class="form-control" id="inputLastName" 
+                                               type="text" name="txtImg" 
+                                               required
+                                               placeholder="Enter your link image brand" 
+                                               value="${brand.getImg()}">
+                                    </div>
+                                </div>  
+                                <button class="btn btn-primary" type="submit">Save changes</button>
                             </form>
                         </div>
                     </div>
-                    <br/>
-                    <script>
-                        function onSubmitForm() {
-                            document.querySelector('#searchForm').submit();
-                        }
-                    </script>
-                    <table class="table">
-                        <thead class="thead" style="background: #ff2e00">
-                            <tr> 
-                                <th scope="col">No</th>
-                                <th scope="col">Full Name</th>
-                                <th scope="col">UserName</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone</th>
-                                <th scope="col">Role</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="item" items="${accounts}" varStatus="loop">
-                                <tr>
-                                    <th scope="row">${loop.index +1}</th>
-                                    <td><a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserID()}">${item.getFullName()}</a> </td>
-                                    <td>${item.getUser_name()}</td>
-                                    <td>${item.getEmail()}</td>
-                                    <td>${item.getPhone()}</td>
-                                    <td>${item.getRoleName()}</td>
-                                    <td>
-                                        <c:if test="${item.getStatus() == 'true'}">
-                                            <p class="text-success">Active</p>
-                                        </c:if>
-                                        <c:if test="${item.getStatus() == 'false'}">
-                                            <p class="text-danger">Block</p>
-                                        </c:if>
-                                    </td>
-                                    <td>
-                                        <c:if test="${item.getUserID() != sessionScope.accountSession.getUserID()}">
-                                            <c:if test="${item.getStatus() == 'true'}">
-                                                <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=false&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}&roleSelect=${roleSelect}">
-                                                    <button class="btn btn-danger">Block</button>
-                                                </a> 
-                                            </c:if>
-                                            <c:if test="${item.getStatus() == 'false'}">
-                                                <a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=true&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}&roleSelect=${roleSelect}">
-                                                    <button class="btn btn-success">Active</button>
-                                                </a> 
-                                            </c:if>
-
-                                            <a href="${pageContext.request.contextPath}/ManagerEditAccount?userID=${item.getUserID()}&roleSelect=${roleSelect}">
-                                                <button class="btn btn-dark">Edit</button>
-                                            </a> 
-                                        </c:if>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /row -->
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>${accounts.size()}</b> out of <b>${countAccount}</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex-1}&pageSize=${pageSize}&roleSelect=${roleSelect}">Previous</a></li>
-                            <c:forEach var="item" begin="1" end="${page}">
-                            <li class="page-item ${item == pageIndex ? 'active': ''}">
-                                <a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${item}&pageSize=${pageSize}&roleSelect=${roleSelect}" class="page-link">${item}</a>
-                            </li>
-                        </c:forEach>
-                        <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerAccount?nameSearch=${nameSearch}&pageIndex=${pageIndex+1}&pageSize=${pageSize}&roleSelect=${roleSelect}" class="page-link">Next</a></li>
-                    </ul>
                 </div>
             </div>
             <!-- /container -->

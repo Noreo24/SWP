@@ -15,28 +15,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import util.Encode;
 
 /**
  *
- * @author Admin
+ * @author LanChau
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/logincontroller"})
 public class LoginController extends HttpServlet {
- 
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("/view/common/login.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -94,13 +86,13 @@ public class LoginController extends HttpServlet {
                 request.setAttribute("err", err);
                 request.getRequestDispatcher("/view/common/login.jsp").forward(request, response);
             }
+
 //        } else if (adao.getAdminByUsername(username, pass) != null) {
 //            Admin a = adao.getAdminByUsername(username, pass);
 //            HttpSession session = request.getSession();
-//            session.setAttribute("acc", a);
-////            response.sendRedirect("/PhoneShop/view/admin/Manage.jsp");
-//            response.sendRedirect("/PhoneShop/bloglistmanage");
-//        } else {
+//            session.setAttribute("a", a);
+//            
+        } else {
             String err = "Wrong username or password!";
             request.setAttribute("err", err);
             request.getRequestDispatcher("/view/common/login.jsp").forward(request, response);

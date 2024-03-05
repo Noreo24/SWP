@@ -7,6 +7,7 @@ package Controller.Admin;
 import DAO.*;
 import Model.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -136,7 +138,7 @@ public class ManagerAccountController extends HttpServlet {
             request.setAttribute("countAccount", countAccount);
             request.setAttribute("roleSelect", roleSelect);
  
-            request.getRequestDispatcher("/view/admin/ManageAccount.jsp").forward(request, response);
+            request.getRequestDispatcher("/view/admin/ManagerAccount.jsp").forward(request, response);
 
         } else {
             response.sendRedirect("logincontroller");
