@@ -31,17 +31,17 @@ public class ManagementDao {
             stm.setString(2, pass);
             rs = stm.executeQuery();
             while (rs.next()) {
-                Account account = new Account(String.valueOf(rs.getInt(1)),
-                        rs.getString(2),
-                        rs.getString(3),
-                        String.valueOf(rs.getBoolean(4)),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
+                Account account = new Account(String.valueOf(rs.getInt("userId")),
+                        rs.getString("fullName"),
+                        rs.getString("avatar"),
+                        String.valueOf(rs.getBoolean("gender")),
+                        rs.getString("email"),
+                        rs.getString("user_name"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
                         "Management",
-                        String.valueOf(rs.getBoolean(11))
+                        String.valueOf(rs.getBoolean("status"))
                 );
                 account.setAdminCreateId(rs.getInt(10));
 
@@ -62,17 +62,17 @@ public class ManagementDao {
             stm.setString(1, mail);
             rs = stm.executeQuery();
             while (rs.next()) {
-                Account account = new Account(String.valueOf(rs.getInt(1)),
-                        rs.getString(2),
-                        rs.getString(3),
-                        String.valueOf(rs.getBoolean(4)),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
+                Account account = new Account(String.valueOf(rs.getInt("userId")),
+                        rs.getString("fullName"),
+                        rs.getString("avatar"),
+                        String.valueOf(rs.getBoolean("gender")),
+                        rs.getString("email"),
+                        rs.getString("user_name"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
                         "Management",
-                        String.valueOf(rs.getBoolean(11))
+                        String.valueOf(rs.getBoolean("status"))
                 );
                 account.setAdminCreateId(rs.getInt(10));
 
@@ -124,17 +124,17 @@ public class ManagementDao {
             stm.setString(1, id);
             rs = stm.executeQuery();
             while (rs.next()) {
-                Account account = new Account(String.valueOf(rs.getInt(1)),
-                        rs.getString(2),
-                        rs.getString(3),
-                        String.valueOf(rs.getBoolean(4)),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
+                Account account = new Account(String.valueOf(rs.getInt("userId")),
+                        rs.getString("fullName"),
+                        rs.getString("avatar"),
+                        String.valueOf(rs.getBoolean("gender")),
+                        rs.getString("email"),
+                        rs.getString("user_name"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
                         "Management",
-                        String.valueOf(rs.getBoolean(11))
+                        String.valueOf(rs.getBoolean("status"))
                 );
                 account.setAdminCreateId(rs.getInt(10));
 
@@ -185,17 +185,17 @@ public class ManagementDao {
 
             rs = stm.executeQuery();
             while (rs.next()) {
-                Account account = new Account(String.valueOf(rs.getInt(1)),
-                        rs.getString(2),
-                        rs.getString(3),
-                        String.valueOf(rs.getBoolean(4)),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
+                Account account = new Account(String.valueOf(rs.getInt("userId")),
+                        rs.getString("fullName"),
+                        rs.getString("avatar"),
+                        String.valueOf(rs.getBoolean("gender")),
+                        rs.getString("email"),
+                        rs.getString("user_name"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
                         "Management",
-                        String.valueOf(rs.getBoolean(11))
+                        String.valueOf(rs.getBoolean("status"))
                 );
                 account.setAdminCreateId(rs.getInt(10));
 
@@ -216,17 +216,17 @@ public class ManagementDao {
             stm.setString(1, username);
             rs = stm.executeQuery();
             while (rs.next()) {
-                Account account = new Account(String.valueOf(rs.getInt(1)),
-                        rs.getString(2),
-                        rs.getString(3),
-                        String.valueOf(rs.getBoolean(4)),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
+                Account account = new Account(String.valueOf(rs.getInt("userId")),
+                        rs.getString("fullName"),
+                        rs.getString("avatar"),
+                        String.valueOf(rs.getBoolean("gender")),
+                        rs.getString("email"),
+                        rs.getString("user_name"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
                         "Management",
-                        String.valueOf(rs.getBoolean(11))
+                        String.valueOf(rs.getBoolean("status"))
                 );
                 account.setAdminCreateId(rs.getInt(10));
 

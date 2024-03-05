@@ -33,17 +33,17 @@ public class AdminDAO {
             stm.setString(2, pass);
             rs = stm.executeQuery();
             while (rs.next()) {
-                return new Account(String.valueOf(rs.getInt(1)),
-                        rs.getString(2),
-                        rs.getString(3),
-                        String.valueOf(rs.getBoolean(4)),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
+                return new Account(String.valueOf(rs.getInt("userId")),
+                        rs.getString("fullName"),
+                        rs.getString("avatar"),
+                        String.valueOf(rs.getBoolean("gender")),
+                        rs.getString("email"),
+                        rs.getString("user_name"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
                         "Admin",
-                        String.valueOf(rs.getBoolean(10))
+                        String.valueOf(rs.getBoolean("status"))
                 );
             }
 
@@ -61,17 +61,17 @@ public class AdminDAO {
             stm.setString(1, mail);
             rs = stm.executeQuery();
             while (rs.next()) {
-                return new Account(String.valueOf(rs.getInt(1)),
-                        rs.getString(2),
-                        rs.getString(3),
-                        String.valueOf(rs.getBoolean(4)),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
+                return new Account(String.valueOf(rs.getInt("userId")),
+                        rs.getString("fullName"),
+                        rs.getString("avatar"),
+                        String.valueOf(rs.getBoolean("gender")),
+                        rs.getString("email"),
+                        rs.getString("user_name"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
                         "Admin",
-                        String.valueOf(rs.getBoolean(10))
+                        String.valueOf(rs.getBoolean("status"))
                 );
             }
 
@@ -119,17 +119,17 @@ public class AdminDAO {
             stm.setString(1, id);
             rs = stm.executeQuery();
             while (rs.next()) {
-                return new Account(String.valueOf(rs.getInt(1)),
-                        rs.getString(2),
-                        rs.getString(3),
-                        String.valueOf(rs.getBoolean(4)),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
+                return new Account(String.valueOf(rs.getInt("userId")),
+                        rs.getString("fullName"),
+                        rs.getString("avatar"),
+                        String.valueOf(rs.getBoolean("gender")),
+                        rs.getString("email"),
+                        rs.getString("user_name"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
                         "Admin",
-                        String.valueOf(rs.getBoolean(10))
+                        String.valueOf(rs.getBoolean("status"))
                 );
             }
 
@@ -177,17 +177,17 @@ public class AdminDAO {
 
             rs = stm.executeQuery();
             while (rs.next()) {
-                Account account = new Account(String.valueOf(rs.getInt(1)),
-                        rs.getString(2),
-                        rs.getString(3),
-                        String.valueOf(rs.getBoolean(4)),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
+                Account account = new Account(String.valueOf(rs.getInt("userId")),
+                        rs.getString("fullName"),
+                        rs.getString("avatar"),
+                        String.valueOf(rs.getBoolean("gender")),
+                        rs.getString("email"),
+                        rs.getString("user_name"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
                         "Admin",
-                        String.valueOf(rs.getBoolean(10))
+                        String.valueOf(rs.getBoolean("status"))
                 );
 
                 accounts.add(account);
@@ -207,17 +207,17 @@ public class AdminDAO {
             stm.setString(1, username);
             rs = stm.executeQuery();
             while (rs.next()) {
-                return new Account(String.valueOf(rs.getInt(1)),
-                        rs.getString(2),
-                        rs.getString(3),
-                        String.valueOf(rs.getBoolean(4)),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
+                return new Account(String.valueOf(rs.getInt("userId")),
+                        rs.getString("fullName"),
+                        rs.getString("avatar"),
+                        String.valueOf(rs.getBoolean("gender")),
+                        rs.getString("email"),
+                        rs.getString("user_name"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
                         "Admin",
-                        String.valueOf(rs.getBoolean(10))
+                        String.valueOf(rs.getBoolean("status"))
                 );
             }
         } catch (Exception e) {

@@ -55,6 +55,39 @@ public class ProductDAO {
         return list;
     }
 
+      public ArrayList<Product> getAllProductByBrandId(int brandId) {
+        ArrayList<Product> list = new ArrayList<>();
+        String query = "select * from product where brand_id = " + brandId;
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15),
+                        rs.getString(16)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+      
     public List<Product> get4RelatedProduct(int cate_id, String product_id) {
         List<Product> list = new ArrayList<>();
         String query = "SELECT top(4) WITH TIES *  FROM Product "

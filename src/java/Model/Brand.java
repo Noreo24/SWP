@@ -4,13 +4,18 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author buiph
  */
 public class Brand {
+
     private int id;
     private String name, img, des;
+
+    private ArrayList<Product> list = new ArrayList<>();
 
     public Brand() {
     }
@@ -20,6 +25,22 @@ public class Brand {
         this.name = name;
         this.img = img;
         this.des = des;
+    }
+
+    public Brand(int id, String name, String img, String des, ArrayList<Product> products) {
+        this.id = id;
+        this.name = name;
+        this.img = img;
+        this.des = des;
+        this.list = products;
+    }
+
+    public ArrayList<Product> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<Product> list) {
+        this.list = list;
     }
 
     public int getId() {
@@ -53,5 +74,5 @@ public class Brand {
     public void setDes(String des) {
         this.des = des;
     }
-    
+
 }

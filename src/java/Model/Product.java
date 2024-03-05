@@ -25,7 +25,7 @@ public class Product {
             update_date,
             sole,
             management_id,
-            avr_rated_star;
+            avr_rated_star, brandId;
 
     public Product() {
     }
@@ -47,6 +47,14 @@ public class Product {
         this.sole = sole;
         this.management_id = management_id;
         this.avr_rated_star = avr_rated_star;
+    }
+
+    public String getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(String brandId) {
+        this.brandId = brandId;
     }
 
     public String getProduct_id() {

@@ -70,7 +70,7 @@ public class BrandDao {
                           rs.getInt(1),
                           rs.getNString(2),
                           rs.getNString(3),
-                          rs.getNString(4)
+                          rs.getNString(4), new ProductDAO().getAllProductByBrandId(id)
                 );
             }
         } catch (Exception e) {

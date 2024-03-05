@@ -51,11 +51,12 @@
                     <!-- NAV -->
                     <ul class="main-nav nav navbar-nav">
                         <li class="active"><a style="padding: 10px;" href="Home">Home</a></li>
-                            <c:forEach var="c" items="${allCategories}">
+                        <c:forEach var="c" items="${allCategories}">
                             <li>
                                 <a style="padding: 10px;" href="#">${c.categoryName}</a>
                             </li>
-                        </c:forEach>
+                        </c:forEach> 
+                        <li><a style="padding: 10px;"  href="${pageContext.request.contextPath}/BrandList">Brand List</a></li>
                     </ul>
                     <!-- /NAV -->
                 </div>
