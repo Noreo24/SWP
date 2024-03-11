@@ -4,39 +4,62 @@
  */
 package Controller.Common;
 
-import DAO.AdminDAO;
-import DAO.CustomerDAO;
-import DAO.ManagementDao;
-import Model.Account;
-import Uils.*;
+import DAO.customerDAO;
+import Model.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import util.Encode;
 
 /**
  *
- * @author DELL
+ * @author Admin
  */
-@WebServlet(name = "ChangePasswordController", urlPatterns = {"/ChangePassword"})
-public class ChangePasswordController extends HttpServlet {
+public class changePasswordController extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet changePasswordController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet changePasswordController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        HttpSession session = request.getSession();
-
-        if (session.getAttribute("accountSession") != null) {
-
-            request.getRequestDispatcher("/view/common/changePass.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("logincontroller");
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -50,42 +73,31 @@ public class ChangePasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String oldpass = request.getParameter("oldpass");
+        String newpass = request.getParameter("newpass");
+        String repass = request.getParameter("repass");
         HttpSession session = request.getSession();
-
-        if (session.getAttribute("accountSession") != null) {
-            Account account = (Account) session.getAttribute("accountSession");
-
-            String passOld = request.getParameter("txtPasswordOld");
-            String pass = request.getParameter("txtPassword");
-            String passConfirm = request.getParameter("txtPasswordConfirm");
-
-            request.setAttribute("passOld", passOld);
-            request.setAttribute("pass", pass);
-            request.setAttribute("passConfirm", passConfirm);
-
-            if (account.getPassword().equals(passOld)) {
-                if (pass.equals(passConfirm)) {
-                    account.setPassword(pass);
-
-                    if (account.getRoleName().equals("Customer")) {
-                        new CustomerDAO().updateCustomer(account);
-                    } else if (account.getRoleName().equals("Admin")) {
-                        new AdminDAO().updateAdmin(account);
-                    } else if (account.getRoleName().equals("Management")) {
-                        new ManagementDao().updateManagement(account);
-                    }
-                    SendMailLC.sendMailChangPass(account);
-
-                    request.setAttribute("sussPass", "Password changed successfully");
-                } else {
-                    request.setAttribute("errorPassConfirm", "Confirm password does not match");
-                }
-            } else {
-                request.setAttribute("errorPassOld", "Incorrect password");
-            }
-            request.getRequestDispatcher("/view/common/changePass.jsp").forward(request, response);
+        Customer acc = (Customer) session.getAttribute("acc");
+        String pass = acc.getPassword();
+        if (!pass.equals(Encode.toSHA1(oldpass))) {
+            String err = "Your old password is wrong!";
+            request.setAttribute("err", err);
+            request.getRequestDispatcher("/view/user/changePassword.jsp").forward(request, response);
+        } else if (newpass.length() < 6 || newpass.length() > 24) {
+            String err = "Password must be 6 to 24 characters!";
+            request.setAttribute("err", err);
+            request.getRequestDispatcher("/view/user/changePassword.jsp").forward(request, response);
+        } else if (!newpass.equals(repass)) {
+            String err = "Wrong re-password!";
+            request.setAttribute("err", err);
+            request.getRequestDispatcher("/view/user/changePassword.jsp").forward(request, response);
         } else {
-            response.sendRedirect("logincontroller");
+            customerDAO accdao = new customerDAO();
+            accdao.changePassword(acc.getUserID(), Encode.toSHA1(newpass));
+            acc.setPassword(Encode.toSHA1(newpass));
+            String suc = "Change password successful!";
+            request.setAttribute("suc", suc);
+            request.getRequestDispatcher("/view/user/profile.jsp").forward(request, response);
         }
     }
 

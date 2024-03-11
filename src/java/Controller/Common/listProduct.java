@@ -4,8 +4,14 @@
  */
 package Controller.Common;
 
-import DAO.*;
-import Model.*;
+import DAO.categoryDAO;
+import DAO.ProductDAO;
+import DAO.productImagesDAO;
+import DAO.trademarkDAO;
+import Model.Category;
+import Model.Product;
+import Model.Trademark;
+import Model.productImage;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -38,53 +44,53 @@ public class listProduct extends HttpServlet {
 
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-        
+
         String stringProductPageNum = request.getParameter("productPageNum");
         int productPageNum = 1;
         if (stringProductPageNum != null) {
             productPageNum = Integer.parseInt(stringProductPageNum);
         }
 
-        CategoryDAO cDAO = new CategoryDAO();
+        categoryDAO cDAO = new categoryDAO();
         ProductDAO pDAO = new ProductDAO();
-        ProductImagesDAO piDAO = new ProductImagesDAO();
-        TrademarkDAO tmDAO = new TrademarkDAO();
+        productImagesDAO piDAO = new productImagesDAO();
+        trademarkDAO tmDAO = new trademarkDAO();
 
 //        List<Product> allProduct = pDAO.getAllProduct();
         List<Category> listAllCategory = cDAO.getAllCategory();
         int countCategories = cDAO.countNumberOfCategories();
         List<Product> top3SellingInProductList = pDAO.getTop3SoleProduct();
-        List<ProductImage> allImages = piDAO.getAllImage();
+        List<productImage> allImages = piDAO.getAllImage();
         int numOfProduct = pDAO.totalNumberOfProduct();
         List<Trademark> trademarkList = tmDAO.listAllTrademark();
-        
+
         List<Product> list6P = pDAO.productPaging(productPageNum);
 
         for (Category c : listAllCategory) {
-            if (null != String.valueOf(c.getCategoryId())) {
-                switch (String.valueOf(c.getCategoryId())) {
+            if (null != String.valueOf(c.getCategory_id())) {
+                switch (String.valueOf(c.getCategory_id())) {
                     case "1": {
-                        int countNumOfProduct = cDAO.countNumberOfProductOfEachCategory(String.valueOf(c.getCategoryId()));
+                        int countNumOfProduct = cDAO.countNumberOfProductOfEachCategory(String.valueOf(c.getCategory_id()));
                         request.setAttribute("numOfProduct1", countNumOfProduct);
                         break;
                     }
                     case "2": {
-                        int countNumOfProduct = cDAO.countNumberOfProductOfEachCategory(String.valueOf(c.getCategoryId()));
+                        int countNumOfProduct = cDAO.countNumberOfProductOfEachCategory(String.valueOf(c.getCategory_id()));
                         request.setAttribute("numOfProduct2", countNumOfProduct);
                         break;
                     }
                     case "3": {
-                        int countNumOfProduct = cDAO.countNumberOfProductOfEachCategory(String.valueOf(c.getCategoryId()));
+                        int countNumOfProduct = cDAO.countNumberOfProductOfEachCategory(String.valueOf(c.getCategory_id()));
                         request.setAttribute("numOfProduct3", countNumOfProduct);
                         break;
                     }
                     case "4": {
-                        int countNumOfProduct = cDAO.countNumberOfProductOfEachCategory(String.valueOf(c.getCategoryId()));
+                        int countNumOfProduct = cDAO.countNumberOfProductOfEachCategory(String.valueOf(c.getCategory_id()));
                         request.setAttribute("numOfProduct4", countNumOfProduct);
                         break;
                     }
                     case "5": {
-                        int countNumOfProduct = cDAO.countNumberOfProductOfEachCategory(String.valueOf(c.getCategoryId()));
+                        int countNumOfProduct = cDAO.countNumberOfProductOfEachCategory(String.valueOf(c.getCategory_id()));
                         request.setAttribute("numOfProduct5", countNumOfProduct);
                         break;
                     }
@@ -93,7 +99,7 @@ public class listProduct extends HttpServlet {
                 }
             }
         }
-        
+
         for (Trademark c : trademarkList) {
             if (null != c.getTrademark_id()) {
                 switch (c.getTrademark_id()) {
@@ -169,14 +175,14 @@ public class listProduct extends HttpServlet {
             i.setOriginal_prices(currencyVN.format(related_original_price));
             i.setSale_prices(currencyVN.format(related_new_price));
         }
-        
+
         for (Product i : list6P) {
             long related_original_price = Long.parseLong(i.getOriginal_prices());
             long related_new_price = Long.parseLong(i.getSale_prices());
             i.setOriginal_prices(currencyVN.format(related_original_price));
             i.setSale_prices(currencyVN.format(related_new_price));
         }
-        
+
         // Phân trang
         int endPageProduct = numOfProduct / 6;
         if (numOfProduct % 6 != 0) {
@@ -191,8 +197,9 @@ public class listProduct extends HttpServlet {
         request.setAttribute("numOfProduct", numOfProduct);
         request.setAttribute("endPP", endPageProduct);
         request.setAttribute("list_6_product", list6P);
+        request.setAttribute("checkActive", "List product");
 
-        request.getRequestDispatcher("/view/user/store.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/common/store.jsp").forward(request, response);
 
     }
 

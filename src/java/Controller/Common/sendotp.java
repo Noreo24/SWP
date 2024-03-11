@@ -4,8 +4,7 @@
  */
 package Controller.Common;
 
-import DAO.*;
-import Model.Account;
+import DAO.customerDAO;
 import Model.Customer;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -23,6 +22,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import util.Encode;
 import verify.RandomCode;
 
 /**
@@ -33,19 +33,54 @@ public class sendotp extends HttpServlet {
 
     String otpvalue;
     String email;
- 
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet sendotp</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet sendotp at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String otp = request.getParameter("otp");
         if (otp.equals(otpvalue)) {
-            CustomerDAO cdao = new CustomerDAO();
-            Account c = cdao.getCustomerByEmail(email);
+            customerDAO cdao = new customerDAO();
+            Customer c = cdao.getCustomerByEmail(email);
             HttpSession session = request.getSession();
             session.setAttribute("acc", c);
             response.sendRedirect("home");
         } else {
-            String err = "Wrong OTP!";
+            String err = "Wrong password!";
             request.setAttribute("err", err);
             request.getRequestDispatcher("/view/common/enterOTP.jsp").forward(request, response);
         }
@@ -63,7 +98,7 @@ public class sendotp extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         email = request.getParameter("email");
-        CustomerDAO adao = new CustomerDAO();
+        customerDAO adao = new customerDAO();
         if (adao.getCustomerByEmail(email) == null) {
             String err = "This email is not registered";
             request.setAttribute("err", err);
@@ -106,7 +141,7 @@ public class sendotp extends HttpServlet {
                         + "      border-radius: 10px\n"
                         + "      \"\n"
                         + "    >\n"
-                        + "    <h1>Your OTP verification code is</h1>\n"
+                        + "    <h1>Your new password is</h1>\n"
                         + "      <h3></h3>\n"
                         + "      <small\n"
                         + "        >------------------------------------------------------------------</small>\n"
@@ -132,13 +167,17 @@ public class sendotp extends HttpServlet {
                 throw new RuntimeException(e);
             }
             dispatcher = request.getRequestDispatcher("/view/common/enterOTP.jsp");
-            request.setAttribute("message", "OTP is sent to your email id");
+            request.setAttribute("message", "New password is sent to your email id");
             //request.setAttribute("connection", con);
 //        mySession.setAttribute("otp", otpvalue);
             mySession.setAttribute("email", email);
             dispatcher.forward(request, response);
             //request.setAttribute("status", "success");
+            customerDAO cdao = new customerDAO();
+            Customer c = cdao.getCustomerByEmail(email);
+            cdao.changePassword(c.getUserID(), Encode.toSHA1(otpvalue));
         }
+
     }
 
     /**

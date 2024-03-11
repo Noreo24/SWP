@@ -14,7 +14,7 @@ import java.sql.ResultSet;
  *
  * @author Admin
  */
-public class HeadphoneDetailDAO {
+public class headphoneDetailDAO {
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
@@ -47,7 +47,7 @@ public class HeadphoneDetailDAO {
     }
     
     public static void main(String[] args) {
-        HeadphoneDetailDAO hpDAO = new HeadphoneDetailDAO();
+        headphoneDetailDAO hpDAO = new headphoneDetailDAO();
         String pid = "9";
         HeadphoneDetail hp = hpDAO.headphoneDetail(pid);
         System.out.println(hp.control_method);

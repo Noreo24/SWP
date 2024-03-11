@@ -9,7 +9,7 @@ package Model;
  * @author Admin
  */
 public class Product {
-    
+
     private String product_id,
             product_name,
             original_prices,
@@ -25,7 +25,7 @@ public class Product {
             update_date,
             sole,
             management_id,
-            avr_rated_star, brandId;
+            avr_rated_star;
 
     public Product() {
     }
@@ -49,14 +49,6 @@ public class Product {
         this.avr_rated_star = avr_rated_star;
     }
 
-    public String getBrandId() {
-        return brandId;
-    }
-
-    public void setBrandId(String brandId) {
-        this.brandId = brandId;
-    }
-
     public String getProduct_id() {
         return product_id;
     }
@@ -76,7 +68,7 @@ public class Product {
     public String getOriginal_prices() {
         return original_prices;
     }
-    
+
     public void setOriginal_prices(String original_prices) {
         this.original_prices = original_prices;
     }
@@ -176,7 +168,7 @@ public class Product {
     public void setManagement_id(String management_id) {
         this.management_id = management_id;
     }
-    
+
     public String getAvr_rated_star() {
         return avr_rated_star;
     }

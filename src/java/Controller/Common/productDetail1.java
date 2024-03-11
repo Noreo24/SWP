@@ -4,8 +4,24 @@
  */
 package Controller.Common;
 
-import DAO.*;
-import Model.*;
+import DAO.ProductDAO;
+import DAO.categoryDAO;
+import DAO.customerDAO;
+import DAO.feedbackDAO;
+import DAO.headphoneDetailDAO;
+import DAO.laptopDetailDAO;
+import DAO.phoneDetailDAO;
+import DAO.productImagesDAO;
+import DAO.tabletDetailDAO;
+import Model.Category;
+import Model.Customer;
+import Model.HeadphoneDetail;
+import Model.LaptopDetail;
+import Model.PhoneDetail;
+import Model.Product;
+import Model.TabletDetail;
+import Model.feedback;
+import Model.productImage;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -45,23 +61,23 @@ public class productDetail1 extends HttpServlet {
         }
 
         ProductDAO pDAO = new ProductDAO();
-        CategoryDAO cDAO = new CategoryDAO();
-        FeedbackDAO fDAO = new FeedbackDAO();
-        CustomerDAO cusDAO = new CustomerDAO();
-        ProductImagesDAO piDAO = new ProductImagesDAO();
-        PhoneDetailDAO pdDAO = new PhoneDetailDAO();
-        LaptopDetailDAO ltDAO = new LaptopDetailDAO();
-        TabletDetailDAO tbDAO = new TabletDetailDAO();
-        HeadphoneDetailDAO hpDAO = new HeadphoneDetailDAO();
+        categoryDAO cDAO = new categoryDAO();
+        feedbackDAO fDAO = new feedbackDAO();
+        customerDAO cusDAO = new customerDAO();
+        productImagesDAO piDAO = new productImagesDAO();
+        phoneDetailDAO pdDAO = new phoneDetailDAO();
+        laptopDetailDAO ltDAO = new laptopDetailDAO();
+        tabletDetailDAO tbDAO = new tabletDetailDAO();
+        headphoneDetailDAO hpDAO = new headphoneDetailDAO();
 
         Product p = pDAO.getProductByID(id);
         Category cate = cDAO.getCategoryByProductID(id);
         int numberOfFeedback = fDAO.numberOfFeedback(id);
-        List<Feedback> list3F = fDAO.feedbackPaging(id, feedbackPageNum);
-        Account acc = cusDAO.getCustomerById(id);
-        List<ProductImage> listProductImages = piDAO.getImageByProductId(id);
-        List<ProductImage> allImages = piDAO.getAllImage();
-        List<Product> relatedProduct = pDAO.get4RelatedProduct(cate.getCategoryId(), id);
+        List<feedback> list3F = fDAO.feedbackPaging(id, feedbackPageNum);
+        Customer acc = cusDAO.getCustomerById(id);
+        List<productImage> listProductImages = piDAO.getImageByProductId(id);
+        List<productImage> allImages = piDAO.getAllImage();
+        List<Product> relatedProduct = pDAO.get4RelatedProduct(Integer.parseInt(cate.getCategory_id()), id);
         List<Category> listAllCategory = cDAO.getAllCategory();
 
         // Định dạng giá tiền cho sản phẩm chính
@@ -87,7 +103,7 @@ public class productDetail1 extends HttpServlet {
         }
         
         // Lấy thông tin chi tiết của sản phẩm
-        int cateID = cate.getCategoryId();
+        int cateID = Integer.parseInt(cate.getCategory_id());
         switch (cateID) {
             case 1:
                 PhoneDetail pd = pdDAO.phoneDetail(id);
@@ -121,7 +137,7 @@ public class productDetail1 extends HttpServlet {
         request.setAttribute("allImages", allImages);
         request.setAttribute("allCategories", listAllCategory);
 
-        request.getRequestDispatcher("/view/user/product.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/common/product.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -5,7 +5,8 @@
 package DAO;
 
 import DBContext.DBContext;
-import Model.*;
+import Model.Category;
+import Model.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import java.util.List;
  *
  * @author Admin
  */
-public class CategoryDAO {
+public class categoryDAO {
 
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
@@ -34,7 +35,7 @@ public class CategoryDAO {
             rs = stm.executeQuery();
             while (rs.next()) {
                 return new Category(
-                        rs.getInt(1),
+                        rs.getString(1),
                         rs.getString(2));
             }
         } catch (Exception e) {
@@ -51,7 +52,7 @@ public class CategoryDAO {
             rs = stm.executeQuery();
             while (rs.next()) {
                 list.add(new Category(
-                        rs.getInt(1),
+                        rs.getString(1),
                         rs.getString(2)));
             }
         } catch (Exception e) {
@@ -89,7 +90,7 @@ public class CategoryDAO {
     }
     
     public static void main(String[] args) {
-        CategoryDAO cdao = new CategoryDAO();
+        categoryDAO cdao = new categoryDAO();
         String pid = "5";
         // Category ID
 //        Category cate = cdao.getCategoryByProductID(pid);
@@ -97,7 +98,7 @@ public class CategoryDAO {
 
         List<Category> feedbackList = cdao.getAllCategory();
         for (Category o : feedbackList) {
-            System.out.println(o.getCategoryName());
+            System.out.println(o.getCategory_name());
         }
         
 //        int count = cdao.countNumberOfProductOfEachCategory("2");

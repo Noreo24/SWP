@@ -9,32 +9,32 @@ package Model;
  * @author Admin
  */
 public class Category {
-    private int categoryId;
-    private String categoryName;
+
+    private String category_id,
+            category_name;
 
     public Category() {
     }
 
-    public Category(int categoryId, String categoryName) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
+    public Category(String category_id, String category_name) {
+        this.category_id = category_id;
+        this.category_name = category_name;
     }
 
-    
-
-    public int getCategoryId() {
-        return categoryId;
+    public String getCategory_id() {
+        return category_id;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getCategory_name() {
+        return category_name;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
     }
+
 }

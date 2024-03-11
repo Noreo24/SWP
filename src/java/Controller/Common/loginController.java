@@ -4,43 +4,87 @@
  */
 package Controller.Common;
 
-import DAO.*;
-import Model.*;
+import DAO.adminDAO;
+import DAO.customerDAO;
+import DAO.staffDAO;
+import Model.Admin;
+import Model.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import util.Encode;
 
 /**
  *
- * @author LanChau
+ * @author Admin
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/logincontroller"})
-public class LoginController extends HttpServlet {
+public class loginController extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet loginController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet loginController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String err = "You are not allowed to access this site!";
+        request.setAttribute("err", err);
         request.getRequestDispatcher("/view/common/login.jsp").forward(request, response);
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String pass = request.getParameter("password");
         String rempass = request.getParameter("rememberpass");
-
-        CustomerDAO customerDAO = new CustomerDAO();
-        AdminDAO adminDAO = new AdminDAO();
-        ManagementDao managementDao = new ManagementDao();
-
-//        AccountDAO accountDAO = new AccountDAO();
+        adminDAO adao = new adminDAO();
+        customerDAO cdao = new customerDAO();
+        staffDAO sdao = new staffDAO();
         if (rempass != null) {
             Cookie c_user = new Cookie("username", username);
             Cookie c_pass = new Cookie("pass", pass);
@@ -51,47 +95,22 @@ public class LoginController extends HttpServlet {
             response.addCookie(c_user);
             response.addCookie(c_pass);
         }
-        // Get User by account
-        Account account = customerDAO.getUserCustomerByUsername(username, pass);
-        
-        // If account null --> find account in table admin
-        if (account == null) {
-            account = adminDAO.getUserAdminByUsername(username, pass);
-        }
-        
-        // If account null --> find account in table management
-        if (account == null) {
-            account = managementDao.getUserManagementByUsername(username, pass);
-        }
-        
-        if (account != null) {
-            if ("true".equals(account.getStatus())) {
+        if (cdao.getCustomerByUsername(username, Encode.toSHA1(pass)) != null) {
+            Customer c = cdao.getCustomerByUsername(username, Encode.toSHA1(pass));
+            if (c.getStatus().equals("true")) {
                 HttpSession session = request.getSession();
-                session.setAttribute("accountSession", account);
-
-                // đoạn này để ko ảnh hưởng code cũ. Nên trọc data từ accountSession
-                if (account.getRoleName().equals("Admin")) {
-                    session.setAttribute("a", account);
-                    response.sendRedirect("ManagerAccount");
-                } else if(account.getRoleName().equals("Customer")) {
-                    session.setAttribute("c", account);
-                    response.sendRedirect("Home");
-                }else if(account.getRoleName().equals("Management")) {
-                    session.setAttribute("m", account);
-                    response.sendRedirect("Home");
-                }
-                
+                session.setAttribute("acc", c);
+                response.sendRedirect("home");
             } else {
                 String err = "Your account is banned!";
                 request.setAttribute("err", err);
                 request.getRequestDispatcher("/view/common/login.jsp").forward(request, response);
             }
-
-//        } else if (adao.getAdminByUsername(username, pass) != null) {
-//            Admin a = adao.getAdminByUsername(username, pass);
-//            HttpSession session = request.getSession();
-//            session.setAttribute("a", a);
-//            
+        } else if (adao.getAdminByUsername(username, pass) != null) {
+            Admin a = adao.getAdminByUsername(username, pass);
+            HttpSession session = request.getSession();
+            session.setAttribute("acc", a);
+            response.sendRedirect("dashboard");
         } else {
             String err = "Wrong username or password!";
             request.setAttribute("err", err);

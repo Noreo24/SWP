@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Admin
  */
-public class TrademarkDAO {
+public class trademarkDAO {
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
@@ -69,12 +69,32 @@ public class TrademarkDAO {
         return 0;
     }
     
-    public static void main(String[] args) {
-        TrademarkDAO tmdao = new TrademarkDAO();
-
-        List<Trademark> feedbackList = tmdao.listAllTrademark();
-        for (Trademark o : feedbackList) {
-            System.out.println(o.getTrademark_name());
+    public Trademark getTrademarkByPID(String product_id){
+        String query = "SELECT tm.trademark_id, tm.trademark_name, tm.status "
+                + "FROM Trademark tm left JOIN Product p "
+                + "ON p.trademark_id = tm.trademark_id "
+                + "where p.product_id = ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, product_id);
+            rs = stm.executeQuery();
+            while (rs.next()){
+                return new Trademark(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3)
+                );
+            }
+        } catch (Exception e) {
         }
+        return null;
+    }
+    
+    public static void main(String[] args) {
+        trademarkDAO tmdao = new trademarkDAO();
+
+        Trademark feedbackList = tmdao.getTrademarkByPID("1");
+            System.out.println(feedbackList.getTrademark_name());
     }
 }

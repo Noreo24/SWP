@@ -14,7 +14,7 @@ import java.sql.ResultSet;
  *
  * @author Admin
  */
-public class TabletDetailDAO {
+public class tabletDetailDAO {
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;

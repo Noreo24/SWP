@@ -1,42 +1,50 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Model;
 
+/**
+ *
+ * @author Admin
+ */
 public class Customer {
 
-    public String userId,
+    private String userID,
             fullName,
             avatar,
             gender,
-            password,
-            user_name,
             email,
+            user_name,
+            password,
             phone,
             address,
-            roleId,
+            roleId, 
             status;
 
     public Customer() {
     }
 
-    public Customer(String userId, String fullName, String avatar, String gender, String password, String user_name, String email, String phone, String address, String roleId, String status) {
-        this.userId = userId;
+    public Customer(String userID, String fullName, String avatar, String gender, String email, String user_name, String password, String phone, String address, String roleId, String status) {
+        this.userID = userID;
         this.fullName = fullName;
         this.avatar = avatar;
         this.gender = gender;
-        this.password = password;
-        this.user_name = user_name;
         this.email = email;
+        this.user_name = user_name;
+        this.password = password;
         this.phone = phone;
         this.address = address;
         this.roleId = roleId;
         this.status = status;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserID() {
+        return userID;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getFullName() {
@@ -63,12 +71,12 @@ public class Customer {
         this.gender = gender;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUser_name() {
@@ -79,12 +87,12 @@ public class Customer {
         this.user_name = user_name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhone() {

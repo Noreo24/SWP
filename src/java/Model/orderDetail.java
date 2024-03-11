@@ -8,22 +8,22 @@ package Model;
  *
  * @author Admin
  */
-public class OrderDetail {
+public class orderDetail {
 
     private String orderDetail_id,
             product_price,
-            quantity,
+            service_tag_id,
             order_id,
             product_id,
             total_cost;
 
-    public OrderDetail() {
+    public orderDetail() {
     }
 
-    public OrderDetail(String orderDetail_id, String product_price, String quantity, String order_id, String product_id, String total_cost) {
+    public orderDetail(String orderDetail_id, String product_price, String service_tag_id, String order_id, String product_id, String total_cost) {
         this.orderDetail_id = orderDetail_id;
         this.product_price = product_price;
-        this.quantity = quantity;
+        this.service_tag_id = service_tag_id;
         this.order_id = order_id;
         this.product_id = product_id;
         this.total_cost = total_cost;
@@ -46,11 +46,11 @@ public class OrderDetail {
     }
 
     public String getQuantity() {
-        return quantity;
+        return service_tag_id;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public void setQuantity(String service_tag_id) {
+        this.service_tag_id = service_tag_id;
     }
 
     public String getOrder_id() {

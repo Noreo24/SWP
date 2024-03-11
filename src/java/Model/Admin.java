@@ -9,7 +9,8 @@ package Model;
  * @author Admin
  */
 public class Admin {
-        private String userID,
+
+    private String userID,
             fullName,
             avatar,
             gender,
@@ -18,7 +19,8 @@ public class Admin {
             password,
             phone,
             address,
-            roleId, status;
+            roleId,
+            status;
 
     public Admin() {
     }
@@ -124,5 +126,5 @@ public class Admin {
     public void setStatus(String status) {
         this.status = status;
     }
-        
+
 }

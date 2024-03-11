@@ -6,14 +6,17 @@ package verify;
 
 import java.util.Random;
 
-/**
- *
- * @author Admin
- */
 public class RandomCode {
-    public String activateCode(){
-        Random rand=new Random();
-        int number=rand.nextInt(999999);
-        return String.format("%06d",number);
+    public String activateCode() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        Random rand = new Random();
+        StringBuilder code = new StringBuilder();
+        
+        for (int i = 0; i < 6; i++) {
+            int index = rand.nextInt(characters.length());
+            code.append(characters.charAt(index));
+        }
+        
+        return code.toString();
     }
 }

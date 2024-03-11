@@ -4,8 +4,15 @@
  */
 package Controller.Admin;
 
-import DAO.*;
-import Model.*;
+import DAO.ProductDAO;
+import DAO.categoryDAO;
+import DAO.productImagesDAO;
+import DAO.trademarkDAO;
+import Model.Admin;
+import Model.Category;
+import Model.Product;
+import Model.Trademark;
+import Model.productImage;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,6 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -26,46 +34,31 @@ public class manageProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        Admin a = (Admin) session.getAttribute("acc");
+//        Management m = (Management) session.getAttribute("acc");
+//        Customer c = (Customer) session.getAttribute("acc");
+        if (a != null //|| m != null
+                ) {
 
-        if (session.getAttribute("accountSession") != null && session.getAttribute("a") != null) {
+            productImagesDAO piDAO = new productImagesDAO();
+            trademarkDAO tmDAO = new trademarkDAO();
+            categoryDAO cDAO = new categoryDAO();
+            List<productImage> allImages = piDAO.getAllImage();
+            List<Trademark> allTrademarks = tmDAO.listAllTrademark();
+            List<Category> allCategories = cDAO.getAllCategory();
 
-            String roleSelect = "Customer";
-
-            if (request.getParameter("roleSelect") != null) {
-                roleSelect = request.getParameter("roleSelect");
-            }
-
-            // Xử lý hành động block hoặc active 
-            if (request.getParameter("userID") != null && request.getParameter("active") != null) {
-                String userID = request.getParameter("userID");
-                String active = request.getParameter("active");
-
-                Account accountInfo = null;
-
-                if (roleSelect.equals("Customer")) {
-                    accountInfo = new CustomerDAO().getCustomerById(userID);
-                } else if (roleSelect.equals("Admin")) {
-                    accountInfo = new AdminDAO().getAdminById(userID);
-                } else if (roleSelect.equals("Management")) {
-                    accountInfo = new ManagementDao().getManagementById(userID);
-                }
-
-                accountInfo.setStatus(active);
-
-                if (roleSelect.equals("Customer")) {
-                    new CustomerDAO().updateCustomer(accountInfo);
-                } else if (roleSelect.equals("Admin")) {
-                    new AdminDAO().updateAdmin(accountInfo);
-                } else if (roleSelect.equals("Management")) {
-                    new ManagementDao().updateManagement(accountInfo);
-                }
-
-            }
-
-            // Xử lý lấy danh sách tài khoản
+            String cateSelect = "All";
+            String trademarkSelect = "All";
             String nameSearch = "";
+
+            if (request.getParameter("cateSelect") != null) {
+                cateSelect = request.getParameter("cateSelect");
+            }
+            if (request.getParameter("trademarkSelect") != null) {
+                trademarkSelect = request.getParameter("trademarkSelect");
+            }
             if (request.getParameter("nameSearch") != null) {
-                nameSearch = request.getParameter("nameSearch");
+                nameSearch = request.getParameter("nameSearch").trim();
             }
             int pageIndex = 1;
             int pageSize = 5;
@@ -76,7 +69,7 @@ public class manageProduct extends HttpServlet {
                     if (pageSize < 0) {
                         pageSize = 5;
                     }
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                 }
             }
             if (request.getParameter("pageIndex") != null) {
@@ -85,31 +78,32 @@ public class manageProduct extends HttpServlet {
                     if (pageIndex < 1) {
                         pageIndex = 1;
                     }
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                 }
             }
-
-            int countAccount = 0;
-
-            if (roleSelect.equals("Customer")) {
-                countAccount = new CustomerDAO().getCount(nameSearch);
-            } else if (roleSelect.equals("Admin")) {
-                countAccount = new AdminDAO().getCount(nameSearch);
-            } else if (roleSelect.equals("Management")) {
-                countAccount = new ManagementDao().getCount(nameSearch);
+//  Ðếm sản phẩm theo từng category và trademark
+            int countProduct = 0;
+            if (!"All".equals(cateSelect) && !"All".equals(trademarkSelect)) {
+                countProduct = new ProductDAO().countProduct(nameSearch, cateSelect, trademarkSelect);
+            } else if (!"All".equals(cateSelect) && "All".equals(trademarkSelect)) {
+                countProduct = new ProductDAO().countProductByCate(nameSearch, cateSelect);
+            } else if ("All".equals(cateSelect) && !"All".equals(trademarkSelect)) {
+                countProduct = new ProductDAO().countProductByTrademark(nameSearch, trademarkSelect);
+            } else if ("All".equals(cateSelect) && "All".equals(trademarkSelect)) {
+                countProduct = new ProductDAO().countProductNoCateAndTrade(nameSearch);
             }
 
-            if (pageSize > countAccount) {
-                pageSize = countAccount;
+            if (pageSize > countProduct) {
+                pageSize = countProduct;
             }
 
             int page = 0;
 
             if (pageSize != 0) {
-                if (countAccount % pageSize != 0) {
-                    page = (countAccount / pageSize) + 1;
+                if (countProduct % pageSize != 0) {
+                    page = (countProduct / pageSize) + 1;
                 } else {
-                    page = countAccount / pageSize;
+                    page = countProduct / pageSize;
                 }
             }
 
@@ -117,26 +111,33 @@ public class manageProduct extends HttpServlet {
                 pageIndex = page;
             }
 
-            ArrayList<Account> accounts = new ArrayList<>();
-
-            if (roleSelect.equals("Customer")) {
-                accounts = new CustomerDAO().getAllCustomer(nameSearch, pageIndex, pageSize);
-            } else if (roleSelect.equals("Admin")) {
-                accounts = new AdminDAO().getAllAdmin(nameSearch, pageIndex, pageSize);
-            } else if (roleSelect.equals("Management")) {
-                accounts = new ManagementDao().getAllManagement(nameSearch, pageIndex, pageSize);
+//  Lấy sản phẩm theo từng category và trademark, ký tự tìm kiếm, số lượng sản phẩm hiện thị, trang
+            List<Product> product = new ArrayList<>();
+            if (!"All".equals(cateSelect) && !"All".equals(trademarkSelect)) {
+                product = new ProductDAO().getAllProductAdmin(nameSearch, cateSelect, trademarkSelect, pageIndex, pageSize);
+            } else if (!"All".equals(cateSelect) && "All".equals(trademarkSelect)) {
+                product = new ProductDAO().getAllProductAdminByCate(nameSearch, cateSelect, pageIndex, pageSize);
+            } else if ("All".equals(cateSelect) && !"All".equals(trademarkSelect)) {
+                product = new ProductDAO().getAllProductAdminByTrademark(nameSearch, trademarkSelect, pageIndex, pageSize);
+            } else if ("All".equals(cateSelect) && "All".equals(trademarkSelect)) {
+                product = new ProductDAO().getAllProductAdmin2(nameSearch, pageIndex, pageSize);
             }
 
+            request.setAttribute("allImages", allImages);
             request.setAttribute("nameSearch", nameSearch);
-            request.setAttribute("accounts", accounts);
+            request.setAttribute("listProduct", product);
             request.setAttribute("page", page);
             request.setAttribute("pageIndex", pageIndex);
             request.setAttribute("pageSize", pageSize);
-            request.setAttribute("countAccount", countAccount);
-            request.setAttribute("roleSelect", roleSelect);
-            request.setAttribute("checkActive", "Manage product");
+            request.setAttribute("countProduct", countProduct);
+            request.setAttribute("cateSelect", cateSelect);
+            request.setAttribute("trademarkSelect", trademarkSelect);
+            request.setAttribute("allTrademarks", allTrademarks);
+            request.setAttribute("allCategories", allCategories);
 
             request.getRequestDispatcher("/view/admin/ManageProduct.jsp").forward(request, response);
+//        } else if (c != null) {
+//            response.sendRedirect("home");
         } else {
             response.sendRedirect("logincontroller");
         }
