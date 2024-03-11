@@ -37,7 +37,7 @@
                         <a class="mb-4 d-block" href="index.html">
                             <img class="img-fluid" width="150px" src="${pageContext.request.contextPath}/img/logo.png" alt="LogBook">
                         </a>
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                        <p>E-shop Mobile là nền tảng trực tuyến hàng đầu chuyên bán điện thoại di động chất lượng cao, cung cấp nhiều loại thiết bị tiên tiến nhằm đáp ứng nhu cầu và sở thích đa dạng của những người đam mê công nghệ.</p>
                     </div>
 
                     <div class="col-lg-2 col-md-3 col-6 mb-4">
@@ -56,7 +56,6 @@
                             <li><a href="#">facebook</a></li>
                             <li><a href="#">twitter</a></li>
                             <li><a href="#">linkedin</a></li>
-                            <li><a href="#">github</a></li>
                         </ul>
                     </div>
 

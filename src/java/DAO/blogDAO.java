@@ -25,32 +25,169 @@ public class blogDAO {
     PreparedStatement stm;
     ResultSet rs;//Lưu trữ và xử lý dữ liệu
 
-    public ArrayList<Blog> getPagingBlogList(int a) {
+    public ArrayList<Blog> getPagingBlogList(int a, String search, String categoryBlogId) {
         ArrayList<Blog> bloglist = new ArrayList<>();
-        String query = "select b.*, cb.categoryBlog_name from Blog b join Category_blog cb on b.categoryBlog_id = cb.categoryBlog_id \n"
-                + "order by b.blog_id\n"
-                + "OFFSET ? rows fetch next 10 rows only";
-        try {
-            cnn = new DBContext().getConnection();//mo ket noi voi sql
-            stm = cnn.prepareStatement(query);
-            stm.setInt(1, (a - 1) * 10);
-            rs = stm.executeQuery();
-            while (rs.next()) {
-                Blog b = new Blog(String.valueOf(rs.getInt(1)),
-                        rs.getString(2),
-                        rs.getString(3),
-                        String.valueOf(rs.getDate(4)),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(10),
-                        String.valueOf(rs.getBoolean(9)));
-                bloglist.add(b);
-            }
+        if ((search == null && categoryBlogId == null) || (search == "" && categoryBlogId == "")) {
+            String query = "select b.*, cb.categoryBlog_name from Blog b join Category_blog cb on b.categoryBlog_id = cb.categoryBlog_id \n"
+                    + "order by b.blog_id\n"
+                    + "OFFSET ? rows fetch next 15 rows only";
+            try {
+                cnn = new DBContext().getConnection();//mo ket noi voi sql
+                stm = cnn.prepareStatement(query);
+                stm.setInt(1, (a - 1) * 15);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Blog b = new Blog(String.valueOf(rs.getInt(1)),
+                            rs.getString(2),
+                            rs.getString(3),
+                            String.valueOf(rs.getDate(4)),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7),
+                            rs.getString(10),
+                            String.valueOf(rs.getBoolean(9)));
+                    bloglist.add(b);
+                }
 
-        } catch (Exception e) {
+            } catch (Exception e) {
+            }
+        } else if ((search != null && categoryBlogId == null) || (search != "" && categoryBlogId == "")) {
+            String query = "select b.*, cb.categoryBlog_name from Blog b join Category_blog cb on b.categoryBlog_id = cb.categoryBlog_id  where b.title like ?\n"
+                    + "order by b.blog_id\n"
+                    + "OFFSET ? rows fetch next 15 rows only";
+            try {
+                cnn = new DBContext().getConnection();//mo ket noi voi sql
+                stm = cnn.prepareStatement(query);
+                stm.setString(1, "%" + search + "%");
+                stm.setInt(2, (a - 1) * 15);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Blog b = new Blog(String.valueOf(rs.getInt(1)),
+                            rs.getString(2),
+                            rs.getString(3),
+                            String.valueOf(rs.getDate(4)),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7),
+                            rs.getString(10),
+                            String.valueOf(rs.getBoolean(9)));
+                    bloglist.add(b);
+                }
+
+            } catch (Exception e) {
+            }
+        } else if (search != "" && categoryBlogId != "") {
+            String query = "select b.*, cb.categoryBlog_name from Blog b join Category_blog cb on b.categoryBlog_id = cb.categoryBlog_id  where b.categoryBlog_id = ? and b.title like ?\n"
+                    + "order by b.blog_id\n"
+                    + "OFFSET ? rows fetch next 15 rows only";
+            try {
+                cnn = new DBContext().getConnection();//mo ket noi voi sql
+                stm = cnn.prepareStatement(query);
+                stm.setString(1, categoryBlogId);
+                stm.setString(2, "%" + search + "%");
+                stm.setInt(3, (a - 1) * 15);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Blog b = new Blog(String.valueOf(rs.getInt(1)),
+                            rs.getString(2),
+                            rs.getString(3),
+                            String.valueOf(rs.getDate(4)),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7),
+                            rs.getString(10),
+                            String.valueOf(rs.getBoolean(9)));
+                    bloglist.add(b);
+                }
+
+            } catch (Exception e) {
+            }
+        } else if ((search == "" && categoryBlogId != "")) {
+            String query = "select b.*, cb.categoryBlog_name from Blog b join Category_blog cb on b.categoryBlog_id = cb.categoryBlog_id  where b.categoryBlog_id = ?\n"
+                    + "order by b.blog_id\n"
+                    + "OFFSET ? rows fetch next 15 rows only";
+            try {
+                cnn = new DBContext().getConnection();//mo ket noi voi sql
+                stm = cnn.prepareStatement(query);
+                stm.setString(1, categoryBlogId);
+                stm.setInt(2, (a - 1) * 15);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Blog b = new Blog(String.valueOf(rs.getInt(1)),
+                            rs.getString(2),
+                            rs.getString(3),
+                            String.valueOf(rs.getDate(4)),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7),
+                            rs.getString(10),
+                            String.valueOf(rs.getBoolean(9)));
+                    bloglist.add(b);
+                }
+
+            } catch (Exception e) {
+            }
         }
         return bloglist;
+    }
+// blog list manage
+
+    public int getAllNumBlog(String search, String categoryBlog_id) {
+        if ((search == null && categoryBlog_id == null) || (search == "" && categoryBlog_id == "") || (search == "" && categoryBlog_id == null)) {
+            String query = "select count(*) from Blog";
+            try {
+                cnn = new DBContext().getConnection();//mo ket noi voi sql
+                stm = cnn.prepareStatement(query);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+
+            } catch (Exception e) {
+            }
+        } else if ((search != "" && categoryBlog_id == "")) {
+            String query = "select count(*) from Blog where title = ?";
+            try {
+                cnn = new DBContext().getConnection();//mo ket noi voi sql
+                stm = cnn.prepareStatement(query);
+                stm.setString(1, search);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+
+            } catch (Exception e) {
+            }
+        } else if ((search == "" && categoryBlog_id != null)) {
+            String query = "select count(*) from Blog where categoryBlog_id = ?";
+            try {
+                cnn = new DBContext().getConnection();//mo ket noi voi sql
+                stm = cnn.prepareStatement(query);
+                stm.setString(1, categoryBlog_id);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+
+            } catch (Exception e) {
+            }
+        } else if ((search != "" && categoryBlog_id != "")) {
+            String query = "select count(*) from Blog where categoryBlog_id = ? and title = ?";
+            try {
+                cnn = new DBContext().getConnection();//mo ket noi voi sql
+                stm = cnn.prepareStatement(query);
+                stm.setString(1, categoryBlog_id);
+                stm.setString(2, search);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+
+            } catch (Exception e) {
+            }
+        }
+        return 0;
+
     }
 
     public int getNumBlog(String cateId, String s) {
@@ -67,7 +204,7 @@ public class blogDAO {
 
             } catch (Exception e) {
             }
-        } else if (cateId == null && s != null) {
+        } else if (cateId != null && s == null) {
             String query = "select count(*) from Blog where status = 1 and categoryBlog_id = ?";
             try {
                 cnn = new DBContext().getConnection();//mo ket noi voi sql
@@ -80,7 +217,7 @@ public class blogDAO {
 
             } catch (Exception e) {
             }
-        } else if (cateId != null && s == null) {
+        } else if (cateId == null && s != null) {
             String query = "select count(*) from Blog where status = 1 and title like ? or content like ? or brief_infor like ?";
             try {
                 cnn = new DBContext().getConnection();//mo ket noi voi sql
@@ -219,7 +356,7 @@ public class blogDAO {
             } catch (Exception e) {
             }
         } else if (cateId == null && s != null) {
-            query = "SELECT b.*, cb.categoryBlog_name, a.fullName FROM Blog b JOIN Category_blog cb ON b.categoryBlog_id = cb.categoryBlog_id join Admin a on a.userId = b.author_id WHERE b.status = 1 and b.title like ? or b.content like ? or b.brief_infor like ? \n"
+            query = "SELECT b.*, cb.categoryBlog_name, a.fullName FROM Blog b JOIN Category_blog cb ON b.categoryBlog_id = cb.categoryBlog_id join Admin a on a.userId = b.author_id WHERE b.status = 1 and (b.title like ? or b.content like ? or b.brief_infor like ?) \n"
                     + "ORDER BY b.updated_date DESC\n"
                     + "OFFSET ? ROWS FETCH NEXT 15 ROWS ONLY;";
             try {
@@ -272,14 +409,14 @@ public class blogDAO {
     }
 
     public Blog getBlogById(String blogId) {
-        String query = "select * from Blog where blog_id = ?";
+        String query = "select b.*, cb.categoryBlog_name, a.fullName from Blog b join Category_blog cb on b.categoryBlog_id = cb.categoryBlog_id join Admin a on a.userId = b.author_id where blog_id = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
             stm.setString(1, blogId);
             rs = stm.executeQuery();
             while (rs.next()) {
-                return new Blog(String.valueOf(rs.getInt(1)), rs.getString(2), rs.getString(3), String.valueOf(rs.getDate(4)), rs.getString(5), rs.getString(6), rs.getString(7), String.valueOf(rs.getInt(8)), String.valueOf(rs.getBoolean(9)));
+                return new Blog(String.valueOf(rs.getInt(1)), rs.getString(2), rs.getString(11), String.valueOf(rs.getDate(4)), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(10), String.valueOf(rs.getBoolean(9)));
             }
 
         } catch (Exception e) {
@@ -416,5 +553,75 @@ public class blogDAO {
 
         } catch (Exception e) {
         }
+    }
+
+    public String getCateBlogIdById(String blogId) {
+        String query = "select categoryBlog_id from Blog where blog_id = ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, blogId);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public ArrayList<Blog> getRelateBlogList(String cateId) {
+        ArrayList<Blog> bloglist = new ArrayList<>();
+        String query = null;
+        query = "select TOP 5 b.*, cb.categoryBlog_name, a.fullName from Blog b join Category_blog cb on b.categoryBlog_id = cb.categoryBlog_id join Admin a on a.userId = b.author_id where b.status=1 and b.categoryBlog_id = ?\n"
+                + "order by b.updated_date desc";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, cateId);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(String.valueOf(rs.getInt(1)),
+                        rs.getString(2),
+                        rs.getString(11),
+                        String.valueOf(rs.getDate(4)),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(10),
+                        String.valueOf(rs.getBoolean(9)));
+                bloglist.add(b);
+            }
+        } catch (Exception e) {
+        }
+        return bloglist;
+    }
+
+    public ArrayList<Blog> getBlogListToExport() {
+        ArrayList<Blog> bloglist = new ArrayList<>();
+        String query = "select b.*, cb.categoryBlog_name, a.fullName from Blog b join Category_blog cb on b.categoryBlog_id = cb.categoryBlog_id join Admin a on a.userId = b.author_id \n" +
+"              order by b.blog_id";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(String.valueOf(rs.getInt(1)),
+                        rs.getString(2),
+                        rs.getString(11),
+                        String.valueOf(rs.getDate(4)),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(10),
+                        String.valueOf(rs.getBoolean(9)));
+                bloglist.add(b);
+            }
+
+        } catch (Exception e) {
+        }
+
+        return bloglist;
     }
 }

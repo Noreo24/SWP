@@ -6,9 +6,10 @@ package Controller.Common;
 
 import DAO.adminDAO;
 import DAO.customerDAO;
-import DAO.staffDAO;
+import DAO.managementDAO;
 import Model.Admin;
 import Model.Customer;
+import Model.Management;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -82,7 +83,7 @@ public class loginController extends HttpServlet {
         String rempass = request.getParameter("rememberpass");
         adminDAO adao = new adminDAO();
         customerDAO cdao = new customerDAO();
-        staffDAO sdao = new staffDAO();
+        managementDAO mdao = new managementDAO();
         if (rempass != null) {
             Cookie c_user = new Cookie("username", username);
             Cookie c_pass = new Cookie("pass", pass);
@@ -109,7 +110,13 @@ public class loginController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("acc", a);
             response.sendRedirect("dashboard");
-        } else {
+        }  else if (mdao.getManagementByUsername(username, pass) != null) {
+            Management m = mdao.getManagementByUsername(username, pass);
+            HttpSession session = request.getSession();
+            session.setAttribute("acc", m);
+            response.sendRedirect("");
+        }
+        else {
             String err = "Wrong username or password!";
             request.setAttribute("err", err);
             request.getRequestDispatcher("/view/common/login.jsp").forward(request, response);

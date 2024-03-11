@@ -140,4 +140,31 @@ public class customerDAO {
         } catch (Exception e) {
         }
     }
+
+    public Customer getCustomerById(String id) {
+        String query = "select * from Customer where [userId] = ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, id);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Customer(String.valueOf(rs.getInt(1)),
+                        rs.getString(2),
+                        rs.getString(3),
+                        String.valueOf(rs.getBoolean(4)),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        "Customer",
+                        String.valueOf(rs.getBoolean(10))
+                );
+            }
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
 }

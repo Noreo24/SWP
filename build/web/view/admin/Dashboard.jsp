@@ -13,6 +13,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/css/managecss/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
     </head>
     <body class="sb-nav-fixed">
         <%@include file="/navigator/adminheader.jsp" %>
@@ -21,7 +22,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4 text-center mb-4">Bảng điều khiển tiếp thị</h1>
+                    <h1 class="mt-4 text-center mb-4">Thống Kê</h1>
                     <div class="dateFromTo">
                         <form action="${pageContext.request.contextPath}/dashboard">
                             Từ: 
@@ -61,11 +62,26 @@
                                 </div>
                                 <div id="collapseThongkesanpham" aria-labelledby="headingOne" data-bs-parent="#cutomerSetting" class="collapse card-body">
                                     <div class="row">
-                                        <div class="col-xl-6">
+                                        <div class="col-xl-11">
                                             <div class="card-body"><canvas id="myBarChart-2" width="100%" height="40"></canvas></div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="card mb-4">
+                                <div class="card-header mb-4 nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseThongkekhachhang" aria-expanded="false" aria-controls="collapseThongkekhachhang">
+                                    <i class="fas fa-chart-area me-1"></i>
+                                    Thống kê sản phẩm bán ra
+                                </div>
+                                <div id="collapseThongkekhachhang" aria-labelledby="headingOne" data-bs-parent="#cutomerSetting" class="collapse card-body">
+                                    <div class="row">
                                         <div class="col-xl-6">
-                                            <div class="card-body"><canvas id="myAreaChart-2" width="100%" height="40"></canvas></div>
+                                            <div class="card-body"><canvas id="myPieChart-1" width="100%" height="40"></canvas></div>
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <div class="card-body"><canvas id="myPieChart-2" width="100%" height="40"></canvas></div>
                                         </div>
                                     </div>
                                 </div>
@@ -182,6 +198,88 @@
                             }
                     }
             });
+        </script>
+
+        <script>
+            /// Set new default font family and font color to mimic Bootstrap's default styling
+            Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+            Chart.defaults.global.defaultFontColor = '#292b2c';
+            // Bar Chart Example
+            var ctx1 = document.getElementById("myBarChart-2");
+            var myLineChart = new Chart(ctx1, {
+            type: 'bar',
+                    data: {
+                    labels: [<c:forEach  items="${listChartRevenueBar}" var="product" > "${product.date}",</c:forEach>],
+                            datasets: [{
+                            label: "Doanh thu",
+                                    backgroundColor: "rgb(255, 255, 59)",
+                                    borderColor: "rgba(2,117,216,1)",
+                                    data: [<c:forEach  items="${listChartRevenueBar}" var="product" > "${product.value}",</c:forEach>],
+                            }],
+                    },
+                    options: {
+                    scales: {
+                    xAxes: [{
+                    time: {
+                    unit: 'month'
+                    },
+                            gridLines: {
+                            display: false
+                            },
+                            ticks: {
+                            maxTicksLimit: 6
+                            }
+                    }],
+                            yAxes: [{
+                            ticks: {
+                            min: 0,
+                                    max: ${maxListChartRevenueBar},
+                                    maxTicksLimit: 5
+                            },
+                                    gridLines: {
+                                    display: true
+                                    }
+                            }],
+                    },
+                            legend: {
+                            display: false
+                            }
+                    }
+            });
+        </script>
+        <script>
+// Set new default font family and font color to mimic Bootstrap's default styling
+            Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+            Chart.defaults.global.defaultFontColor = '#292b2c';
+// Pie Chart Example
+            var ctx = document.getElementById("myPieChart-1");
+            var myPieChart = new Chart(ctx, {
+            type: 'pie',
+                    data: {
+                    labels: [<c:forEach  items="${listChartTradeMarkPie}" var="product" > "${product.getTrademark_name()}",</c:forEach>],
+                            datasets: [{
+                            data: [<c:forEach  items="${listChartTradeMarkPie}" var="product" > "${product.getTrademark_id()}",</c:forEach>],
+                                    backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745', '#Dc760d', '#Dcb10d', '#A9dc0d', '#9ac8ee', '#D480f1', '#0ddc3c', '#7f2e2e', '#047592'],
+                            }],
+                    },
+            });
+        </script>
+        <script>
+// Set new default font family and font color to mimic Bootstrap's default styling
+            Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+            Chart.defaults.global.defaultFontColor = '#292b2c';
+// Pie Chart Example
+            var ctx = document.getElementById("myPieChart-2");
+            var myPieChart = new Chart(ctx, {
+            type: 'pie',
+                    data: {
+                    labels: [<c:forEach  items="${listChartCategoryPie}" var="product" > "${product.getCategory_name()}",</c:forEach>],
+                            datasets: [{
+                            data: [<c:forEach  items="${listChartCategoryPie}" var="product" > "${product.getCategory_id()}",</c:forEach>],
+                                    backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745', '#Dc760d'],
+                            }],
+                            },
+                    });
 
         </script>
     </body>

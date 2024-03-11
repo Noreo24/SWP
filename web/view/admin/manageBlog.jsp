@@ -26,13 +26,35 @@
                         <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></li>
                         <li class="breadcrumb-item active">Blogs</li>
                     </ol>
-
+                    <div class="col-xl-2 col-md-3">
+                        <div class="card bg-success text-white mb-4">
+                            <div class="card-body">Export Blog List</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="${pageContext.request.contextPath}/exportfile?type=blog">Export file</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
                             Danh sách blogs                            </div>
                         <div class="card-body">
-                            <table id="datatablesSimple">
+
+                            <form class="" action="${pageContext.request.contextPath}/bloglistmanage" method="get">
+                                <div class="input-group" style="width: 600px">
+                                    <select name="categoryBlog" class="form-control">
+                                        <option value="" selected="">Tất cả Blog</option>
+                                        <c:forEach items="${clist}" var="c">
+                                            <option value="${c.getCategoryBlog_id()}">${c.getCategoryBlog_name()}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <input value="${search}" name="search" class="form-control" type="text" placeholder="Search by Title" aria-label="Search" aria-describedby="btnNavbarSearch" />
+                                    <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
+                                </div>
+                            </form>
+
+                            <table class="table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -80,6 +102,17 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+                            <div class="datatable-bottom">
+                                <nav class="datatable-pagination">
+                                    <ul class="datatable-pagination-list">
+
+                                        <c:forEach begin="1" end="${endPage}" var="i">
+                                            <li class="datatable-pagination-list-item ${index == i ? 'active' : ''}">
+                                                <a href="${pageContext.request.contextPath}/bloglistmanage?index=${i}&search=${search}&categoryBlog=${categoryBlogId}" data-page="3" class="datatable-pagination-list-item-link">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,9 +130,9 @@
                 </div>
             </footer>
         </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="${pageContext.request.contextPath}/js/jsmanage/scripts.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-    <script src="${pageContext.request.contextPath}/js/jsmanage/datatables-simple-demo.js"></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="${pageContext.request.contextPath}/js/jsmanage/scripts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="${pageContext.request.contextPath}/js/jsmanage/datatables-simple-demo.js"></script>
+    </body>
 </html>

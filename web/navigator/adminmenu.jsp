@@ -29,15 +29,15 @@
                                 Thống kê
                             </a>
                             <div class="sb-sidenav-menu-heading">MENU</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapseLayouts">
+                           <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Quản lý sản phẩm
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapse1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="marketingproductlist">Danh sách sản phẩm</a>
-                                    <a class="nav-link" href="add_product.jsp">Thêm mới sản phẩm</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/manageProduct">Danh sách sản phẩm</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/addProduct">Thêm mới sản phẩm</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

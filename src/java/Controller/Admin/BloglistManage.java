@@ -6,6 +6,7 @@ package Controller.Admin;
 
 import DAO.blogDAO;
 import Model.Blog;
+import Model.categoryBlog;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -58,23 +59,29 @@ public class BloglistManage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        String index = request.getParameter("index");
-//        if (index == null) {
-//            index = "1";
-//        }
-//        int a = Integer.parseInt(index);
+        String index = request.getParameter("index");
+        String search = request.getParameter("search");
+        String categoryBlogId = request.getParameter("categoryBlog");
+        if (index == null) {
+            index = "1";
+        }
+        int a = Integer.parseInt(index);
+
         blogDAO bdao = new blogDAO();
-//        ArrayList<Blog> bloglist = bdao.getPagingBlogList(a);
-//        int count = bdao.getNumBlog();
-//        int endPage = count / 10;
-//        if (count % 10 != 0) {
-//            endPage++;
-//        }
-//        request.setAttribute("endPage", endPage);
-//        request.setAttribute("bloglist", bloglist);
-//        request.setAttribute("index", index
-        ArrayList<Blog> blist = bdao.getBlogList();
-        request.setAttribute("bloglist", blist);
+        ArrayList<categoryBlog> clist = bdao.getCateBlog();
+        ArrayList<Blog> bloglist = bdao.getPagingBlogList(a, search, categoryBlogId);
+        int count = bdao.getAllNumBlog(search, categoryBlogId);
+        int endPage = count / 15;
+        if (count % 15 != 0) {
+            endPage++;
+        }
+        request.setAttribute("categoryBlogId", categoryBlogId);
+        request.setAttribute("search", search);
+        request.setAttribute("clist", clist);
+        request.setAttribute("endPage", endPage);
+        request.setAttribute("bloglist", bloglist);
+        request.setAttribute("index", index);
+        request.setAttribute("bloglist", bloglist);
         request.getRequestDispatcher("/view/admin/ManageBlog.jsp").forward(request, response);
     }
 

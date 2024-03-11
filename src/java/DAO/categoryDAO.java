@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -37,5 +38,70 @@ public class categoryDAO {
         } catch (Exception e) {
         }
         return list;
+    }
+
+    public List<Category> getAllCategory() {
+        List<Category> list = new ArrayList<>();
+        String query = "select * from Category";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                list.add(new Category(
+                        rs.getString(1),
+                        rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int countNumberOfCategories() {
+        String query = "select count (*) from Category";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public int countNumberOfProductOfEachCategory(String cate_id) {
+        String query = "select count(quantity) from Product where category_id = ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, cate_id);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public Category getCategoryByProductID(String product_id) {
+        String query = "  select * from Category c join Product p "
+                + "on c.category_id = p.category_id "
+                + "where p.product_id = ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, product_id);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Category(
+                        rs.getString(1),
+                        rs.getString(2));
+            }
+        } catch (Exception e) {
+        }
+        return null;
     }
 }

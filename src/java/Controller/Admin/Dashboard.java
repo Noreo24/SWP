@@ -6,6 +6,8 @@ package Controller.Admin;
 
 import DAO.DateDAO;
 import DAO.blogDAO;
+import DAO.orderDAO;
+import Model.Category;
 import Model.Date;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import Model.Chart;
+import Model.Trademark;
 
 /**
  *
@@ -65,6 +68,7 @@ public class Dashboard extends HttpServlet {
         DateDAO dd = new DateDAO();
         Date date = dd.get7day();
         blogDAO bd = new blogDAO();
+        orderDAO od = new orderDAO();
         String start = date.getStart().toString();
         String end = date.getEnd().toString();
         if (request.getParameter("start") != null) {
@@ -75,6 +79,7 @@ public class Dashboard extends HttpServlet {
         // set chart blog 
         List<Chart> listChartBlogBar = bd.getChartBlogBar(start, day);
         List<Chart> listChartBlogArea = bd.getChartBlogArea(start, day);
+        List<Chart> listChartRevenueBar = od.getChartRevenueBar(start, day);
         int maxListChartBlogBar = -1;
         for (Chart o : listChartBlogBar) {
             if (o.getValue() > maxListChartBlogBar) {
@@ -90,14 +95,32 @@ public class Dashboard extends HttpServlet {
             }
         }
         maxListChartBlogArea = (maxListChartBlogArea / 10 + 1) * 10;
+
+        int maxListChartRevenueBar = -1;
+        for (Chart o : listChartRevenueBar) {
+            if (o.getValue() > maxListChartRevenueBar) {
+                maxListChartRevenueBar = o.getValue();
+            }
+        }
+
+        maxListChartRevenueBar = (maxListChartRevenueBar / 1000000 + 1) * 1000000;
+
+        List<Trademark> listChartTradeMarkPie = od.getProTradeMarkSold(start, end);
+        List<Category> listChartCategoryPie = od.getProCategorySold(start, end);
+
+        request.setAttribute("listChartCategoryPie", listChartCategoryPie);
+        request.setAttribute("listChartTradeMarkPie", listChartTradeMarkPie);
         request.setAttribute("listChartBlogBar", listChartBlogBar);
         request.setAttribute("listChartBlogArea", listChartBlogArea);
         request.setAttribute("maxListChartBlogBar", maxListChartBlogBar);
         request.setAttribute("maxListChartBlogArea", maxListChartBlogArea);
+        request.setAttribute("listChartRevenueBar", listChartRevenueBar);
+        request.setAttribute("maxListChartRevenueBar", maxListChartRevenueBar);
 
         request.setAttribute("start", start);
         request.setAttribute("end", end);
 
+        
         request.getRequestDispatcher("/view/admin/Dashboard.jsp").forward(request, response);
 
     }

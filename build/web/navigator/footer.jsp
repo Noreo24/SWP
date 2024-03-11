@@ -54,7 +54,7 @@
                         <div class="col-md-3 col-xs-6">
                             <div class="footer">
                                 <h3 class="footer-title">About Us</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+                                <p>E-shop Mobile là nền tảng trực tuyến hàng đầu chuyên bán điện thoại di động chất lượng cao, cung cấp nhiều loại thiết bị tiên tiến nhằm đáp ứng nhu cầu và sở thích đa dạng của những người đam mê công nghệ.</p>
                                 <ul class="footer-links">
                                     <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
                                     <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
@@ -97,9 +97,9 @@
                                 <ul class="footer-links">
                                     <li><a href="#">My Account</a></li>
                                     <li><a href="#">View Cart</a></li>
-                                    <li><a href="#">Wishlist</a></li>
                                     <li><a href="#">Track My Order</a></li>
                                     <li><a href="#">Help</a></li>
+                                    <li><a href="#">Blog</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
             <!-- /bottom footer -->
         </footer>
         <!-- /FOOTER -->   
-            <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/nouislider.min.js"></script>

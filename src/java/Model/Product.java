@@ -24,6 +24,7 @@ public class Product {
             category_id,
             update_date,
             sole,
+            management_id,
             avr_rated_star;
 
     public Product() {
@@ -44,6 +45,25 @@ public class Product {
         this.category_id = category_id;
         this.update_date = update_date;
         this.sole = sole;
+        this.avr_rated_star = avr_rated_star;
+    }
+
+    public Product(String product_id, String product_name, String original_prices, String sale, String sale_prices, String product_highlights, String product_description, String trademark_id, String status, String quantity, String guarantee, String category_id, String update_date, String sole, String management_id, String avr_rated_star) {
+        this.product_id = product_id;
+        this.product_name = product_name;
+        this.original_prices = original_prices;
+        this.sale = sale;
+        this.sale_prices = sale_prices;
+        this.product_highlights = product_highlights;
+        this.product_description = product_description;
+        this.trademark_id = trademark_id;
+        this.status = status;
+        this.quantity = quantity;
+        this.guarantee = guarantee;
+        this.category_id = category_id;
+        this.update_date = update_date;
+        this.sole = sole;
+        this.management_id = management_id;
         this.avr_rated_star = avr_rated_star;
     }
 
