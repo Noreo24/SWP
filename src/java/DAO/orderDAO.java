@@ -1,0 +1,108 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package DAO;
+
+import DBContext.DBContext;
+import Model.Category;
+import Model.Chart;
+import Model.Trademark;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author Admin
+ */
+public class orderDAO {
+
+    Connection cnn;//Kết nối với DB
+    //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
+    PreparedStatement stm;
+    ResultSet rs;//Lưu trữ và xử lý dữ liệu
+
+    public List<Chart> getChartRevenueBar(String start, int day) {
+        List<Chart> list = new ArrayList<>();
+        for (int i = 0; i < day; i++) {
+            int value = 0;
+            String query = "select sum(total_cost) from [Order] where orderDate = DATEADD(DAY, ?, ?)";
+            try {
+                cnn = new DBContext().getConnection();
+                stm = cnn.prepareStatement(query);
+                stm.setInt(1, i);
+                stm.setString(2, start);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    value = rs.getInt(1);
+                }
+                query = "select  DATEADD(DAY, ?, ?)";
+                cnn = new DBContext().getConnection();
+                stm = cnn.prepareStatement(query);
+                stm.setInt(1, i);
+                stm.setString(2, start);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Chart c = Chart.builder()
+                            .date(rs.getDate(1))
+                            .value(value)
+                            .build();
+                    list.add(c);
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+        return list;
+    }
+
+    public List<Trademark> getProTradeMarkSold(String start, String end) {
+        List<Trademark> list = new ArrayList<>();
+        String query = "Select COUNT(*), t.trademark_name from [Order_Detail] d join [Order] o on o.order_id = d.order_id join Product p on p.product_id = d.product_id join Trademark t on t.trademark_id = p.trademark_id where o.orderDate >= ? And o.orderDate <= ?  and o.status_order = 1\n"
+                + "group by t.trademark_name";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, start);
+            stm.setString(2, end);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Trademark t = new Trademark(String.valueOf(rs.getInt(1)), rs.getString(2), null);
+                System.out.println(t.getTrademark_id());
+                System.out.println(t.getTrademark_name());
+
+                list.add(t);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<Category> getProCategorySold(String start, String end) {
+        List<Category> list = new ArrayList<>();
+        String query = "Select COUNT(*), c.category_name from [Order_Detail] d join [Order] o on o.order_id = d.order_id join Product p on p.product_id = d.product_id join Category c on c.category_id = p.category_id where o.orderDate >= ? And o.orderDate <= ? and o.status_order = 1\n"
+                + "group by c.category_name";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, start);
+            stm.setString(2, end);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Category c = new Category(String.valueOf(rs.getInt(1)), rs.getString(2));
+                System.out.println(c.getCategory_id());
+                System.out.println(c.getCategory_name());
+                list.add(c);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
+}
