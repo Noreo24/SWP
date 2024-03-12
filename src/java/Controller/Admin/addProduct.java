@@ -5,13 +5,10 @@
 package Controller.Admin;
 
 import DAO.ProductDAO;
-import DAO.blogDAO;
 import DAO.categoryDAO;
 import DAO.trademarkDAO;
 import Model.Category;
-import Model.Product;
 import Model.Trademark;
-import Model.categoryBlog;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,7 +19,6 @@ import jakarta.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

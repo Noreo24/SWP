@@ -4,8 +4,10 @@
  */
 package Controller.Admin;
 
+import DAO.ProductDAO;
 import DAO.blogDAO;
 import Model.Blog;
+import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -142,6 +144,121 @@ public class exportFile extends HttpServlet {
 
                 cell = row.createCell(8, CellType.STRING);
                 cell.setCellValue(blogexport.get(i).getStatus());
+            }
+            wordkbook.write(response.getOutputStream());
+            wordkbook.close();
+        } else if (type.equals("product")) {
+            ProductDAO pdao = new ProductDAO();
+            ArrayList<Product> productexport = pdao.getProductListToExport();
+
+            row = sheet.createRow(0);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("DANH SACH PRODUCT");
+
+            row = sheet.createRow(3);
+            cell = row.createCell(0, CellType.STRING);
+            cell.setCellValue("STT");
+
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("PRODUCT_ID");
+
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("PRODUCT_NAME");
+
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("ORIGINAL_PRICE");
+
+            cell = row.createCell(4, CellType.STRING);
+            cell.setCellValue("SALE");
+//
+//            cell = row.createCell(5, CellType.STRING);
+//            cell.setCellValue("CONTENT");
+
+            cell = row.createCell(5, CellType.STRING);
+            cell.setCellValue("SALE_PRICE");
+
+            cell = row.createCell(6, CellType.STRING);
+            cell.setCellValue("PRODUCT_HIGHLIGHT");
+
+            cell = row.createCell(7, CellType.STRING);
+            cell.setCellValue("PRODUCT_DESCRIPTION");
+
+            cell = row.createCell(8, CellType.STRING);
+            cell.setCellValue("TRADEMARK");
+
+            cell = row.createCell(9, CellType.STRING);
+            cell.setCellValue("STATUS");
+
+            cell = row.createCell(10, CellType.STRING);
+            cell.setCellValue("QUANTITY");
+
+            cell = row.createCell(11, CellType.STRING);
+            cell.setCellValue("GUARANTEE");
+
+            cell = row.createCell(12, CellType.STRING);
+            cell.setCellValue("CATEGORY");
+
+            cell = row.createCell(13, CellType.STRING);
+            cell.setCellValue("UPDATE_DATE");
+
+            cell = row.createCell(14, CellType.STRING);
+            cell.setCellValue("SOLE");
+
+            cell = row.createCell(15, CellType.STRING);
+            cell.setCellValue("MANAGEMENT_ID");
+
+            cell = row.createCell(16, CellType.STRING);
+            cell.setCellValue("AVR_RATE_STAR");
+
+            for (int i = 0; i < productexport.size(); i++) {
+                //Modelbook book =arr.get(i);
+                row = sheet.createRow(4 + i);
+
+                cell = row.createCell(0, CellType.NUMERIC);
+                cell.setCellValue(i + 1);
+
+                cell = row.createCell(1, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getProduct_id());
+
+                cell = row.createCell(2, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getProduct_name());
+
+                cell = row.createCell(3, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getOriginal_prices());
+
+                cell = row.createCell(4, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getSale());
+//
+//                cell = row.createCell(5, CellType.STRING);
+//                cell.setCellValue(blogexport.get(i).getContent());
+
+                cell = row.createCell(5, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getSale_prices());
+
+                cell = row.createCell(6, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getProduct_highlights());
+
+                cell = row.createCell(7, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getProduct_description());
+
+                cell = row.createCell(8, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getTrademark_id());
+                cell = row.createCell(9, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getStatus());
+                cell = row.createCell(10, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getQuantity());
+                cell = row.createCell(11, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getGuarantee());
+                cell = row.createCell(12, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getCategory_id());
+                cell = row.createCell(13, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getUpdate_date());
+                cell = row.createCell(14, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getSole());
+                cell = row.createCell(15, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getManagement_id());
+                cell = row.createCell(15, CellType.STRING);
+                cell.setCellValue(productexport.get(i).getAvr_rated_star());
             }
             wordkbook.write(response.getOutputStream());
             wordkbook.close();

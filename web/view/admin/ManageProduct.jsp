@@ -22,6 +22,19 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Danh sách sản phẩm</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Products</li>
+                    </ol>
+                    <div class="col-xl-2 col-md-3">
+                        <div class="card bg-success text-white mb-4">
+                            <div class="card-body">Export Blog List</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="${pageContext.request.contextPath}/exportfile?type=product">Export file</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card mb-4">
                         <div class="card-header">
                             <!--<i class="fas fa-table me-1"></i>-->

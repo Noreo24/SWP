@@ -865,7 +865,6 @@ public class ProductDAO {
 //            System.out.println("");
 //            System.out.println(o.getTrademark_id());
 //        }
-
 //        List<Product> relatedProduct = pdao.get4RelatedProduct(cate_id, s);
 //        for (Product o : relatedProduct) {
 //            System.out.println(o.getProduct_name());
@@ -893,6 +892,42 @@ public class ProductDAO {
 //        for (Product o : getAllProduct) {
 //            System.out.println(o.getProduct_id());
 //        }
+    }
+
+    public ArrayList<Product> getProductListToExport() {
+        ArrayList<Product> prolist = new ArrayList<>();
+        String query = "SELECT [product_id]\n"
+                + "      ,[product_name]\n"
+                + "      ,[original_prices]\n"
+                + "      ,[sale]\n"
+                + "      ,[sale_prices]\n"
+                + "      ,[product_highlights]\n"
+                + "      ,[product_description]\n"
+                + "      ,t.trademark_id\n"
+                + "      ,p.status\n"
+                + "      ,[quantity]\n"
+                + "      ,[guarantee]\n"
+                + "      ,p.category_id\n"
+                + "      ,[update_date]\n"
+                + "      ,[sole]\n"
+                + "      ,[management_id]\n"
+                + "      ,[avr_rated_star],\n"
+                + "	  t.trademark_name,\n"
+                + "	  c.category_name\n"
+                + "  FROM [dbo].[Product] p join Trademark t on t.trademark_id = p.trademark_id join Category c on c.category_id = p.category_id";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Product b = new Product(String.valueOf(rs.getInt(1)), rs.getString(2), String.valueOf(rs.getInt(3)), String.valueOf(rs.getBoolean(4)), String.valueOf(rs.getInt(5)), rs.getString(6), rs.getString(7), rs.getString(17), String.valueOf(rs.getBoolean(9)), String.valueOf(rs.getInt(10)), String.valueOf(rs.getInt(11)), rs.getString(18), String.valueOf(rs.getDate(13)), String.valueOf(rs.getInt(14)), String.valueOf(rs.getInt(15)), String.valueOf(rs.getInt(16)));
+                prolist.add(b);
+            }
+
+        } catch (Exception e) {
+        }
+
+        return prolist;
     }
 
 }

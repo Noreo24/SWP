@@ -114,7 +114,7 @@ public class loginController extends HttpServlet {
             Management m = mdao.getManagementByUsername(username, pass);
             HttpSession session = request.getSession();
             session.setAttribute("acc", m);
-            response.sendRedirect("");
+            response.sendRedirect("managementdashboard");
         }
         else {
             String err = "Wrong username or password!";

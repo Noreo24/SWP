@@ -19,12 +19,13 @@ public class order {
             status_order,
             userId,
             saler_id,
-            note;
+            note,
+            order_code;
 
     public order() {
     }
 
-    public order(String order_id, String orderDate, String total_cost, String fullName, String phone, String address, String status_order, String userId, String saler_id, String note) {
+    public order(String order_id, String orderDate, String total_cost, String fullName, String phone, String address, String status_order, String userId, String saler_id, String note, String order_code) {
         this.order_id = order_id;
         this.orderDate = orderDate;
         this.total_cost = total_cost;
@@ -35,7 +36,18 @@ public class order {
         this.userId = userId;
         this.saler_id = saler_id;
         this.note = note;
+        this.order_code = order_code;
     }
+
+    public String getOrder_code() {
+        return order_code;
+    }
+
+    public void setOrder_code(String order_code) {
+        this.order_code = order_code;
+    }
+
+
 
     public String getOrder_id() {
         return order_id;

@@ -186,5 +186,13 @@ public class Product {
     public void setAvr_rated_star(String avr_rated_star) {
         this.avr_rated_star = avr_rated_star;
     }
+
+    public String getManagement_id() {
+        return management_id;
+    }
+
+    public void setManagement_id(String management_id) {
+        this.management_id = management_id;
+    }
     
 }

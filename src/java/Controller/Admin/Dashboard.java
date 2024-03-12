@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import Model.Chart;
 import Model.Trademark;
+import Model.order;
 
 /**
  *
@@ -120,7 +121,9 @@ public class Dashboard extends HttpServlet {
         request.setAttribute("start", start);
         request.setAttribute("end", end);
 
-        
+        List<order> orderList = od.getOrderDashboard(start, end);
+        request.setAttribute("orderList", orderList);
+
         request.getRequestDispatcher("/view/admin/Dashboard.jsp").forward(request, response);
 
     }

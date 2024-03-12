@@ -8,6 +8,7 @@ import DBContext.DBContext;
 import Model.Category;
 import Model.Chart;
 import Model.Trademark;
+import Model.order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -99,6 +100,41 @@ public class orderDAO {
                 System.out.println(c.getCategory_id());
                 System.out.println(c.getCategory_name());
                 list.add(c);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<order> getOrderDashboard(String start, String end) {
+        List<order> list = new ArrayList<>();
+        String query = "SELECT o.[order_id]\n"
+                + "      ,[orderDate]\n"
+                + "      ,[total_cost]\n"
+                + "      ,[fullName]\n"
+                + "      ,[phone]\n"
+                + "      ,[address]\n"
+                + "      ,[status_order]\n"
+                + "      ,[userId]\n"
+                + "      ,[saler_id]\n"
+                + "      ,[note]\n"
+                + "      ,[order_code],\n"
+                + "	  od.product_id,\n"
+                + "	  od.product_price,\n"
+                + "	  od.service_tag_id\n"
+                + "  FROM [Phone_Shop_Online_2].[dbo].[Order] o join Order_Detail od on o.order_id = od.order_id\n"
+                + "  where o.orderDate >= ? and o.orderDate <= ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, start);
+            stm.setString(2, end);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                order o = new order(String.valueOf(rs.getInt(1)), String.valueOf(rs.getDate(2)), String.valueOf(rs.getInt(3)), rs.getString(4), rs.getString(5), rs.getString(6), String.valueOf(rs.getBoolean(7)), rs.getString(12), String.valueOf(rs.getInt(13)), rs.getString(10), rs.getString(11));
+
+                list.add(o);
             }
 
         } catch (Exception e) {

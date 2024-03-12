@@ -22,8 +22,4 @@ public class Constants {
 
     public static String GOOGLE_GRANT_TYPE = "authorization_code";
 
-    public static String FACEBOOK_APP_ID = "958502502400844";
-    public static String FACEBOOK_APP_SECRET = "74b608966b9fd1d9ba4ebb441196c083";
-    public static String FACEBOOK_REDIRECT_URL = "http://localhost:9999/PhoneShop/loginwithfb";
-    public static String FACEBOOK_LINK_GET_TOKEN = "https://graph.facebook.com/oauth/access_token?client_id=%s&client_secret=%s&redirect_uri=%s&code=%s";
 }

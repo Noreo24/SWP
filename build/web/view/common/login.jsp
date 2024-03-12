@@ -51,9 +51,7 @@
                                 <a href="${pageContext.request.contextPath}/view/common/register.jsp"><button class="form-control btn btn-primary px-3">Register a new account</button></a>
                             </div>
                             <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p> 
-                            <div class="social d-flex text-center">
-                                <a href="https://www.facebook.com/dialog/oauth?client_id=958502502400844&redirect_uri=http://localhost:9999/PhoneShop/loginwithfb" class="px-2 py-2 mr-md-1 rounded">Facebook</a>
-                            </div>
+
                             <div class="social d-flex text-center">
                                 <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:9999/PhoneShop/logingooglecontroller&response_type=code
                                    &client_id=101425332251-q5etcuuteqhjvd19fg392nnprnqrnjla.apps.googleusercontent.com&approval_prompt=force" class="px-2 py-2 mr-md-1 rounded">Google</a>

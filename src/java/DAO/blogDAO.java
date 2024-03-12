@@ -600,8 +600,8 @@ public class blogDAO {
 
     public ArrayList<Blog> getBlogListToExport() {
         ArrayList<Blog> bloglist = new ArrayList<>();
-        String query = "select b.*, cb.categoryBlog_name, a.fullName from Blog b join Category_blog cb on b.categoryBlog_id = cb.categoryBlog_id join Admin a on a.userId = b.author_id \n" +
-"              order by b.blog_id";
+        String query = "select b.*, cb.categoryBlog_name, a.fullName from Blog b join Category_blog cb on b.categoryBlog_id = cb.categoryBlog_id join Admin a on a.userId = b.author_id \n"
+                + "              order by b.blog_id";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
