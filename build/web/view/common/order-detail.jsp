@@ -41,11 +41,8 @@
 
     </head>
     <body>
-
         <%@include file="/navigator/userheader.jsp" %>
-        <%@include file="/navigator/navigation.jsp" %>
-
-
+       
 
         <!-- BREADCRUMB -->
         <div id="breadcrumb" class="section">
@@ -71,64 +68,70 @@
         <div class="section">
             <!-- container -->
             <div class="container">
-                <!-- row -->
-                <div class="row">
 
-                    <div class="container">
-                        <h1>Your Cart</h1>
-                        <c:if test="${param.success ne null}">
-                            <div class="alert alert-success" role="alert">
-                                Order success!
+                <div class="container">
+                    <h1>Order Details</h1>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="orderId">Order ID:</label>
+                                <input type="text" class="form-control" id="orderId" value="${order.order_id}" readonly>
                             </div>
-                        </c:if>
-                        <div class="row">
-
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Product Name</th>
-                                        <th>Image</th>
-                                        <th>Quantity</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="productEntry" items="${products}">
-                                        <tr>
-                                            <td>${productEntry.productName}</td>
-<!--                                            Add small image -->
-                                            <td><img src="${productEntry.productImages.get(0).images}" alt="${productEntry.productName}" style="width: 50px;"></td>
-                                            <td>
-<!--                                                Display quantity with buttons to increment and decrement -->
-
-                                                <a href="update-cart?id=${productEntry.productId}&amount=-1" class="btn btn-primary">-</a>
-                                                <span id="quantity_${productEntry.productId}">${map[productEntry.productId]}</span>
-                                                <a href="update-cart?id=${productEntry.productId}&amount=1" class="btn btn-primary">+</a>
-<!--                                                Add button to delete product -->
-                                                <a href="update-cart?id=${productEntry.productId}&amount=0" class="btn btn-danger">Delete</a>
-                                            </td>
-                                            <td><fmt:formatNumber value="${productEntry.salePrices}" type="currency" currencyCode="VND"/></td>
-                                            <td>
-                                                <!-- Checkbox for ordering individual product -->
-                                                <input type="checkbox" name="productIds" value="${productEntry.productId}">
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                                
-                            </table>
-
-
+                            <div class="form-group">
+                                <label for="orderDate">Order Date:</label>
+                                <input type="text" class="form-control" id="orderDate" value="${order.orderDate}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="totalCost">Total Cost:</label>
+                                <input type="text" class="form-control" id="totalCost" value="${order.total_cost}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="fullName">Full Name:</label>
+                                <input type="text" class="form-control" id="fullName" value="${order.fullName}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone">Phone:</label>
+                                <input type="text" class="form-control" id="phone" value="${order.phone}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address:</label>
+                                <input type="text" class="form-control" id="address" value="${order.address}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Status:</label>
+                                <input type="text" class="form-control" id="status" value="${order.statusString}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="note">Note:</label>
+                                <input type="text" class="form-control" id="note" value="${order.note}" readonly>
+                            </div>
                         </div>
                     </div>
-
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">Order</button>
-
-
                 </div>
-                <!-- /row -->
+
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>Order Detail ID</th>
+                            <th>Product Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="orderDetail" items="${orderdetails}">
+                            <tr>
+                                <td>${orderDetail.orderDetail_id}</td>
+                                <td>${orderDetail.product_price}</td>
+                                <td>${orderDetail.quantity}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+
+
             </div>
-            <!-- /container -->
         </div>
         <!-- /SECTION -->
 
@@ -263,38 +266,6 @@
             <!-- /bottom footer -->
         </footer>
         <!-- /FOOTER -->
-
-        <!-- Order Modal -->
-        <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="orderModalLabel">Place Your Order</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Order Form -->
-                        <form action="order" method="post">
-                            <div class="form-group">
-                                <label for="address">Address:</label>
-                                <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone:</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="note">Note:</label>
-                                <textarea class="form-control" id="note" name="note" placeholder="Any additional notes"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit Order</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- jQuery Plugins -->
         <script src="js/jquery.min.js"></script>

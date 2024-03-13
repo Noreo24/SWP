@@ -22,6 +22,7 @@ public class categoryDAO {
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
     ResultSet rs;//Lưu trữ và xử lý dữ liệu
+
     public ArrayList<Category> getCategoryList() {
         ArrayList<Category> list = new ArrayList<>();
         String query = "select * from Category";
@@ -104,4 +105,23 @@ public class categoryDAO {
         }
         return null;
     }
+
+    public Category getCategoryByID(String id) {
+        String query = "  select * from Category"
+                + "where category_id = ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, id);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Category(
+                        rs.getString(1),
+                        rs.getString(2));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
 }

@@ -25,7 +25,7 @@ import java.util.Locale;
  *
  * @author Admin
  */
-@WebServlet(name = "home", urlPatterns = {"/homehome"})
+//@WebServlet(name = "home", urlPatterns = {"/homehome"})
 public class home extends HttpServlet {
 
     /**

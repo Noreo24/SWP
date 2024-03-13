@@ -19,7 +19,8 @@ public class order {
             status_order,
             userId,
             saler_id,
-            note;
+            note,
+            order_code;
 
     public order() {
     }
@@ -36,6 +37,16 @@ public class order {
         this.saler_id = saler_id;
         this.note = note;
     }
+
+    public String getOrder_code() {
+        return order_code;
+    }
+
+    public void setOrder_code(String order_code) {
+        this.order_code = order_code;
+    }
+    
+    
 
     public String getOrder_id() {
         return order_id;
@@ -115,6 +126,12 @@ public class order {
 
     public void setNote(String note) {
         this.note = note;
+    }
+    
+    public String getStatusString() {
+        if (status_order==null) return "Completed";
+        if (status_order.equals("0")) return "Pending";
+        return "Paid/Pending";
     }
     
 }

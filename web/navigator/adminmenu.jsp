@@ -38,6 +38,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="${pageContext.request.contextPath}/manageProduct">Danh sách sản phẩm</a>
                                     <a class="nav-link" href="${pageContext.request.contextPath}/addProduct">Thêm mới sản phẩm</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/order-list">Duyệt đơn</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

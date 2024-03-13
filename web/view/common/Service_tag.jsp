@@ -29,7 +29,7 @@
     </head>
     <body>
         <%@include file="/navigator/userheader.jsp" %>
-        <%@include file="/navigator/navigation.jsp" %>
+       
 
         <!-- BREADCRUMB -->
         <div id="breadcrumb" class="section">

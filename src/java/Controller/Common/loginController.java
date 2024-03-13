@@ -94,12 +94,12 @@ public class loginController extends HttpServlet {
             response.addCookie(c_user);
             response.addCookie(c_pass);
         }
-        if (cdao.getCustomerByUsername(username, Encode.toSHA1(pass)) != null) {
-            Customer c = cdao.getCustomerByUsername(username, Encode.toSHA1(pass));
+        if (cdao.getCustomerByUsername(username, pass) != null) {
+            Customer c = cdao.getCustomerByUsername(username, pass);
             if (c.getStatus().equals("true")) {
                 HttpSession session = request.getSession();
                 session.setAttribute("acc", c);
-                response.sendRedirect("home");
+                response.sendRedirect("homepage");
             } else {
                 String err = "Your account is banned!";
                 request.setAttribute("err", err);
