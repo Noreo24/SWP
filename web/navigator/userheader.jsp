@@ -182,6 +182,7 @@
                         <li class="active"><a href="#">Home</a></li>
                         <li><a href="#">Categories</a></li>
                         <li><a href="${pageContext.request.contextPath}/loadblogpage">Blogs</a></li>
+                        <li><a href="${pageContext.request.contextPath}/BrandList">Brands</a></li>
                     </ul>
                     <!-- /NAV -->
                 </div>

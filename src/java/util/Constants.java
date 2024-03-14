@@ -22,4 +22,19 @@ public class Constants {
 
     public static String GOOGLE_GRANT_TYPE = "authorization_code";
 
+    
+     /**
+     * Gửi maill
+     */
+    public static String SEENDMAIL_ACCOUNT = "lanbtphs163436@fpt.edu.vn";
+    public static String SEENDMAIL_PASS = "twyo wmjw qjhm fmck";
+
+    /**
+     * Kết nối database
+     */
+    public static String DBCONTEXT_USER = "sa";
+    public static String DBCONTEXT_PASS = "Tiny123@";
+    public static String DBCONTEXT_DATABASE = "Phone_Shop_Online_4_1";
+    public static String DBCONTEXT_PORT = "1433";
+    public static String DBCONTEXT_SERVER = "localhost";
 }
