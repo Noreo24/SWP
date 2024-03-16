@@ -4,6 +4,11 @@
  */
 package Controller.Management;
 
+import DAO.DateDAO;
+import DAO.orderDAO;
+import Model.Chart;
+import Model.Date;
+import Model.Management;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +16,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
@@ -57,6 +64,45 @@ public class ManagementDashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        DateDAO dd = new DateDAO();
+        Date date = dd.get7day();
+        HttpSession session = request.getSession();
+        Management management = (Management) session.getAttribute("acc");
+        String managementId = management.getUserID();
+        orderDAO od = new orderDAO();
+        String start = date.getStart().toString();
+        String end = date.getEnd().toString();
+        if (request.getParameter("start") != null) {
+            start = request.getParameter("start");
+            end = request.getParameter("end");
+        }
+        int day = dd.CountDayByStartEnd(start, end);
+        List<Chart> listChartRevenueBar = od.getChartRevenueBarForManagement(start, day, managementId);
+        List<Chart> listChartProductSoleBar = od.getProductSold(start, day, managementId);
+
+        int maxListChartProductSoleBar = -1;
+        for (Chart o : listChartProductSoleBar) {
+            if (o.getValue() > maxListChartProductSoleBar) {
+                maxListChartProductSoleBar = o.getValue();
+            }
+        }
+        maxListChartProductSoleBar = (maxListChartProductSoleBar / 10 + 1) * 10;
+
+        int maxListChartRevenueBar = -1;
+        for (Chart o : listChartRevenueBar) {
+            if (o.getValue() > maxListChartRevenueBar) {
+                maxListChartRevenueBar = o.getValue();
+            }
+        }
+
+        maxListChartRevenueBar = (maxListChartRevenueBar / 1000000 + 1) * 1000000;
+
+        request.setAttribute("listChartProductSoleBar", listChartProductSoleBar);
+        request.setAttribute("maxListChartProductSoleBar", maxListChartProductSoleBar);
+        request.setAttribute("maxListChartRevenueBar", maxListChartRevenueBar);
+        request.setAttribute("listChartRevenueBar", listChartRevenueBar);
+        request.setAttribute("start", start);
+        request.setAttribute("end", end);
         request.getRequestDispatcher("/view/management/manageDashboard.jsp").forward(request, response);
     }
 

@@ -80,7 +80,7 @@
                         <div class="widget">
                             <h5 class="widget-title"><span>Tìm kiếm</span></h5>
                             <form action="${pageContext.request.contextPath}/loadblogpage" class="widget-search">
-                                <input id="search-query" name="s" type="search" placeholder="Vui lòng nhập từ khóa!">
+                                <input id="search-query" name="s" type="search" placeholder="Vui lòng nhập từ khóa!" value="${s}">
                                 <button type="submit"><i class="ti-search"></i>
                                 </button>
                             </form>

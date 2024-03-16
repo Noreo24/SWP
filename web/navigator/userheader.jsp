@@ -85,8 +85,8 @@
                                 <form>
                                     <select class="input-select">
                                         <option value="0">Danh mục</option>
-                                        <c:forEach items="${catelist}" var="c">
-                                        <option value="${c.getCategory_id()}">${c.getCategory_name()}</option>
+                                        <c:forEach items="${allCategories}" var="c">
+                                            <option value="${c.getCategory_id()}">${c.getCategory_name()}</option>
                                         </c:forEach>
                                     </select>
                                     <input class="input" placeholder="Search here">
@@ -100,13 +100,7 @@
                         <div class="col-md-3 clearfix">
                             <div class="header-ctn">
                                 <!-- Wishlist -->
-                                <div>
-                                    <a href="#">
-                                        <i class="fa fa-heart-o"></i>
-                                        <span>Your Wishlist</span>
-                                        <div class="qty">2</div>
-                                    </a>
-                                </div>
+
                                 <!-- /Wishlist -->
 
                                 <!-- Cart -->
@@ -117,29 +111,7 @@
                                         <div class="qty">3</div>
                                     </a>
                                     <div class="cart-dropdown">
-                                        <div class="cart-list">
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="./img/product01.png" alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
-
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="./img/product02.png" alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="cart-summary">
                                             <small>3 Item(s) selected</small>
                                             <h5>SUBTOTAL: $2940.00</h5>
