@@ -71,7 +71,9 @@
                     <div class="col-md-5 col-md-push-2">
                         <div id="product-main-img">
                             <div class="product-preview">
-                                <img src="${trademark.img}" alt="">
+                                <img 
+                                    src="${pageContext.request.contextPath}/imgBrand/${trademark.img}"
+                                      alt="">
                             </div>
                         </div>
                     </div>
@@ -81,7 +83,9 @@
                     <div class="col-md-2  col-md-pull-5">
                         <div id="product-imgs">
                             <div class="product-preview">
-                                <img src="${trademark.img}" alt="">
+                                <img 
+                                     src="${pageContext.request.contextPath}/imgBrand/${trademark.img}"
+                                     alt="">
                             </div>
                         </div>
                     </div>

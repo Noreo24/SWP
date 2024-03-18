@@ -22,12 +22,50 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Danh sách brand</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"> <a href="${pageContext.request.contextPath}/ManagerAddBrand"><button type="button" class="btn btn-success">Add New Branch</button></a></li>
+                    </ol>
                     <div class="card mb-4">
                         <div class="card-header">
                             <!--<i class="fas fa-table me-1"></i>-->
-
+                            <div class="row">
+                                <form id="searchForm" action="${pageContext.request.contextPath}/ManagerBrand" method="get">
+                                    <div class="input-group" style="width: 100%; display: flex; justify-content: space-between; ">
+                                        <div class="col-sm-2">
+                                            <label class="small mb-1" style="font-weight: bold;">Số branch hiển thị</label>
+                                            <select onchange="onSubmitForm()" class="form-control" name="pageSize">
+                                                <option selected value="5">5</option>
+                                                <option 
+                                                    <c:if test="${pageSize == 10}">
+                                                        selected
+                                                    </c:if> value="10">10</option>
+                                                <option <c:if test="${pageSize == 30}">
+                                                        selected
+                                                    </c:if> value="30">30</option> 
+                                                <option <c:if test="${pageSize == 50}">
+                                                        selected
+                                                    </c:if> value="50">50</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="small mb-1" style="font-weight: bold;">Search by name</label>
+                                            <input type="text" class="form-control" name="nameSearch"
+                                                   value="${nameSearch}" placeholder="Search by name"
+                                                   />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input type="text" name="pageIndex" id="pageIndexID"  hidden
+                                                   value="${pageIndex}" required />
+                                            <input type="text" name="pageSize"  hidden
+                                                   value="${pageSize}" required />
+                                            <input hidden type="submit"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                             <script>
                                 function onSubmitForm() {
+                                    document.getElementById("pageIndexID").value = '1'
                                     document.querySelector('#searchForm').submit();
                                 }
                             </script>
@@ -52,10 +90,22 @@
                                                 <td> ${item.trademark_name}</td>
                                                 <td>${item.description}</td>
                                                 <td>
-                                                    <img src="${item.img}" width="100px"
+                                                    <img
+                                                          src="${pageContext.request.contextPath}/imgBrand/${item.getImg()}" 
+                                                        width="100px"
                                                          height="150px" alt="alt"/>
                                                 </td>
                                                 <td>
+                                                    <c:if test="${item.getStatus() == '1'}">
+                                                        <a href="${pageContext.request.contextPath}/ManagerBrand?branchID=${item.getTrademark_id()}&active=0&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}">
+                                                            <button class="btn btn-danger">Block</button>
+                                                        </a> 
+                                                    </c:if>
+                                                    <c:if test="${item.getStatus() == '0'}">
+                                                        <a href="${pageContext.request.contextPath}/ManagerBrand?branchID=${item.getTrademark_id()}&active=1&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}">
+                                                            <button class="btn btn-success">Active</button>
+                                                        </a> 
+                                                    </c:if>
                                                     <a href="${pageContext.request.contextPath}/ManagerEditBrand?id=${item.trademark_id}">
                                                         <button class="btn btn-dark">Edit</button>
                                                     </a> 
@@ -64,6 +114,18 @@
                                         </c:forEach>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="clearfix">
+                                <div class="hint-text">Showing <b>${accounts.size()}</b> out of <b>${countAccount}</b> entries</div>
+                                <ul class="pagination">
+                                    <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerBrand?nameSearch=${nameSearch}&pageIndex=${pageIndex-1}&pageSize=${pageSize}" class="page-link">Previous</a></li>
+                                        <c:forEach var="item" begin="1" end="${page}">
+                                        <li class="page-item ${item == pageIndex ? 'active': ''}">
+                                            <a href="${pageContext.request.contextPath}/ManagerBrand?nameSearch=${nameSearch}&pageIndex=${item}&pageSize=${pageSize}" class="page-link">${item}</a>
+                                        </li>
+                                    </c:forEach>
+                                    <li class="page-item"><a href="${pageContext.request.contextPath}/ManagerBrand?nameSearch=${nameSearch}&pageIndex=${pageIndex+1}&pageSize=${pageSize}" class="page-link">Next</a></li>
+                                </ul>
                             </div>
                         </div>
 

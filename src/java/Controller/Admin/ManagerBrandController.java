@@ -26,18 +26,78 @@ public class ManagerBrandController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("acc") != null) {
+
+            if(request.getParameter("branchID") != null){
+                Trademark trademark = new trademarkDAO().getTrademarkByID(Integer.parseInt(request.getParameter("branchID")));
+                
+                trademark.setStatus(request.getParameter("active"));
+                
+                new trademarkDAO().update(trademark);
+            }
+            
+            // Xử lý lấy danh sách tài khoản
+            String nameSearch = "";
+            if (request.getParameter("nameSearch") != null) {
+                nameSearch = request.getParameter("nameSearch");
+            }
+            int pageIndex = 1;
+            int pageSize = 5;
+
+            if (request.getParameter("pageSize") != null) {
+                try {
+                    pageSize = Integer.parseInt(request.getParameter("pageSize").trim());
+                    if (pageSize < 0) {
+                        pageSize = 5;
+                    }
+                } catch (Exception e) {
+                }
+            }
+            if (request.getParameter("pageIndex") != null) {
+                try {
+                    pageIndex = Integer.parseInt(request.getParameter("pageIndex").trim());
+                    if (pageIndex < 1) {
+                        pageIndex = 1;
+                    }
+                } catch (Exception e) {
+                }
+            }
+
+            int count = new trademarkDAO().count(nameSearch);
+
+            if (pageSize > count) {
+                pageSize = count;
+            }
+
+            int page = 0;
+
+            if (pageSize != 0) {
+                if (count % pageSize != 0) {
+                    page = (count / pageSize) + 1;
+                } else {
+                    page = count / pageSize;
+                }
+            }
+
+            if (pageIndex > page) {
+                pageIndex = page;
+            }
+
             // Get list brand
-            List<Trademark> trademarks = new trademarkDAO().listAllTrademark();
+            List<Trademark> trademarks = new trademarkDAO().getTrademarks(nameSearch, pageIndex, pageSize);
 
             request.setAttribute("trademarks", trademarks);
             request.setAttribute("checkActive", "Manage Brand");
+            request.setAttribute("nameSearch", nameSearch);
+            request.setAttribute("page", page);
+            request.setAttribute("pageIndex", pageIndex);
+            request.setAttribute("pageSize", pageSize);
 
             request.getRequestDispatcher("/view/admin/ManagerBrand.jsp").forward(request, response);
-        }else{
+        } else {
             response.sendRedirect("logincontroller");
         }
     }
@@ -52,7 +112,7 @@ public class ManagerBrandController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException {
+            throws ServletException, IOException {
 
     }
 

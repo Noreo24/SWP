@@ -78,7 +78,7 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-3">
-                                            <input type="text" name="pageIndex"  hidden
+                                            <input type="text" name="pageIndex" id="pageIndexID"  hidden
                                                    value="${pageIndex}" required />
                                             <input type="text" name="pageSize"  hidden
                                                    value="${pageSize}" required />
@@ -89,6 +89,7 @@
                             </div>
                             <script>
                                 function onSubmitForm() {
+                                    document.getElementById("pageIndexID").value = '1'
                                     document.querySelector('#searchForm').submit();
                                 }
                             </script>
