@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @author Admin
  */
 public class adminDAO {
-
+    
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
@@ -44,12 +44,12 @@ public class adminDAO {
                         String.valueOf(rs.getInt(10)),
                         String.valueOf(rs.getBoolean(11)));
             }
-
+            
         } catch (Exception e) {
         }
         return null;
     }
-
+    
     public Admin getAdminByEmail(String email) {
         String query = "select * from Admin where  email = ?";
         try {
@@ -70,12 +70,12 @@ public class adminDAO {
                         String.valueOf(rs.getInt(10)),
                         String.valueOf(rs.getBoolean(11)));
             }
-
+            
         } catch (Exception e) {
         }
         return null;
     }
-
+    
     public Account getAdminACByEmail(String mail) {
         String query = "select * from Admin where email = ?";
         try {
@@ -97,12 +97,12 @@ public class adminDAO {
                         String.valueOf(rs.getBoolean("status"))
                 );
             }
-
+            
         } catch (Exception e) {
         }
         return null;
     }
-
+    
     public Account getAdminACByUsername(String username) {
         String query = "select * from Admin where user_name = ?";
         try {
@@ -128,7 +128,7 @@ public class adminDAO {
         }
         return null;
     }
-
+    
     public void updateACAdmin(Account account) {
         String query = "UPDATE [dbo].[Admin]\n"
                 + "   SET [fullName] = ? \n"
@@ -140,7 +140,7 @@ public class adminDAO {
                 + "      ,[phone] = ?\n"
                 + "      ,[address] = ?\n"
                 + "      ,[status] = ?\n"
-                + " WHERE [id] = ?";
+                + " WHERE [userId] = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
@@ -154,13 +154,13 @@ public class adminDAO {
             stm.setString(8, account.getAddress());
             stm.setString(9, account.getStatus());
             stm.setString(10, account.getUserID());
-
+            
             stm.executeQuery();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
-
+    
     public Account getAdminACById(String userID) {
         String query = "select * from Admin where [id] = ?";
         try {
@@ -182,17 +182,21 @@ public class adminDAO {
                         String.valueOf(rs.getBoolean("status"))
                 );
             }
-
+            
         } catch (Exception e) {
         }
         return null;
     }
-
+    
+    public static void main(String[] args) {
+        System.out.println(new adminDAO().getAllACAdmin("", 1, 5).size());
+    }
+    
     public int getCountAC(String nameSearch) {
         String query = "SELECT count(*)\n"
                 + "FROM [Admin]\n"
                 + "WHERE fullName like ? \n";
-
+        
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
@@ -201,21 +205,21 @@ public class adminDAO {
             if (rs.next()) {
                 return rs.getInt(1);
             }
-
+            
         } catch (Exception e) {
         }
         return 0;
     }
-
+    
     public ArrayList<Account> getAllACAdmin(String name, int pageNumber, int pageSize) {
         ArrayList<Account> accounts = new ArrayList<>();
-
+        
         String query = ""
                 + "SELECT * "
                 + "  FROM [Admin] a \n"
                 + "WHERE a.[fullName] like ?\n";
-
-        query += "  ORDER BY id\n"
+        
+        query += "  ORDER BY userId\n"
                 + "OFFSET (? - 1) * ? ROWS FETCH NEXT ? ROWS ONLY;";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
@@ -224,7 +228,7 @@ public class adminDAO {
             stm.setInt(2, pageNumber);
             stm.setInt(3, pageSize);
             stm.setInt(4, pageSize);
-
+            
             rs = stm.executeQuery();
             while (rs.next()) {
                 Account account = new Account(String.valueOf(rs.getInt("userId")),
@@ -239,16 +243,16 @@ public class adminDAO {
                         "Admin",
                         String.valueOf(rs.getBoolean("status"))
                 );
-
+                
                 accounts.add(account);
             }
-
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return accounts;
     }
-
+    
     public void addAC(Account account) {
         String query = ""
                 + " INSERT INTO [Admin]\n"
@@ -280,5 +284,5 @@ public class adminDAO {
             System.err.println(e.getMessage());
         }
     }
-
+    
 }

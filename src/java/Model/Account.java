@@ -41,7 +41,9 @@ public class Account {
         this.roleName = roleName;
     }
 
-    public Account(String userId, String fullName, String avatar, String gender, String email, String password, String user_name, String phone, String address, String roleName, String status) {
+    public Account(String userId, String fullName, String avatar,
+            String gender, String email,  String user_name, String password,
+            String phone, String address, String roleName, String status) {
         this.userID = userId;
         this.fullName = fullName;
         this.avatar = avatar;

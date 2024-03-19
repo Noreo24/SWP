@@ -224,7 +224,7 @@ public class managementDAO {
                 + "  FROM [Management] a \n"
                 + "WHERE a.[fullName] like ?\n";
 
-        query += "  ORDER BY id\n"
+        query += "  ORDER BY userId\n"
                 + "OFFSET (? - 1) * ? ROWS FETCH NEXT ? ROWS ONLY;";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql

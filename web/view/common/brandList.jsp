@@ -72,7 +72,9 @@
                                                 <div class="product">
                                                     <div class="product-img">
                                                         <!-- Assuming you have an 'image' property in your Product class -->
-                                                        <img src="${iteam.img}" alt="Product Image">
+                                                        <img  
+                                                              src="${pageContext.request.contextPath}/imgBrand/${iteam.img}"
+                                                             alt="Product Image">
                                                         <!-- Add other image-related code as needed -->
                                                     </div>
                                                     <div class="product-body">

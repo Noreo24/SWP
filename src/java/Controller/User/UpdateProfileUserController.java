@@ -89,7 +89,6 @@ public class UpdateProfileUserController extends HttpServlet {
                     accountInfo = new managementDAO().getManagementACByEmail(management.getEmail());
                     break;
             }
-
             String fullName = request.getParameter("textFullName");
             String phone = request.getParameter("txtPhone");
             String address = request.getParameter("txtAddress");
@@ -151,18 +150,15 @@ public class UpdateProfileUserController extends HttpServlet {
 
                 switch (role) {
                     case "Customer":
-                        Customer customerOld = (Customer) session.getAttribute("acc");
-                        Customer customer = new customerDAO().getCustomerByEmail(customerOld.getEmail());
+                        Customer customer = new customerDAO().getCustomerByEmail(gmail);
                         session.setAttribute("acc", customer);
                         break;
                     case "Admin":
-                        Admin adminOld = (Admin) session.getAttribute("acc");
-                        Admin admin = new adminDAO().getAdminByEmail(adminOld.getEmail());
+                        Admin admin = new adminDAO().getAdminByEmail(gmail);
                         session.setAttribute("acc", admin);
                         break;
                     case "Management":
-                        Management managemenOldt = (Management) session.getAttribute("acc");
-                        Management managemen = new managementDAO().getManagementByEmail(managemenOldt.getEmail());
+                        Management managemen = new managementDAO().getManagementByEmail(gmail);
                         session.setAttribute("acc", managemen);
                         break;
                 }

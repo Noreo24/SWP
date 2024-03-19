@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/GIT/SWP/src/java/DAO/trademarkDAO.java</file>
-            <file>file:/D:/GIT/SWP/src/java/Controller/User/BrandListController.java</file>
-            <file>file:/D:/GIT/SWP/src/java/Controller/User/UpdateProfileUserController.java</file>
-            <file>file:/D:/GIT/SWP/src/java/DAO/ProductDAO.java</file>
-            <file>file:/D:/GIT/SWP/src/java/Controller/User/ProfileUserController.java</file>
-            <file>file:/D:/GIT/SWP/src/java/Controller/Common/loginController.java</file>
+            <file>file:/C:/VietWork/LC/SWP/web/view/admin/ManagerAddBrand.jsp</file>
+            <file>file:/C:/VietWork/LC/SWP/web/view/admin/ManagerAddAccount.jsp</file>
+            <file>file:/C:/VietWork/LC/SWP/src/java/Controller/Admin/ManagerAddBrandController.java</file>
+            <file>file:/C:/VietWork/LC/SWP/src/java/DAO/trademarkDAO.java</file>
+            <file>file:/C:/VietWork/LC/SWP/web/view/admin/ManagerEditAccount.jsp</file>
+            <file>file:/C:/VietWork/LC/SWP/src/java/Controller/Admin/ManagerEditAccountController.java</file>
+            <file>file:/C:/VietWork/LC/SWP/src/java/Controller/Admin/ManagerEditBrandController.java</file>
+            <file>file:/C:/VietWork/LC/SWP/web/view/admin/ManagerEditBrand.jsp</file>
         </group>
     </open-files>
 </project-private>

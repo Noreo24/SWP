@@ -28,26 +28,8 @@ public class ProfileUserController extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("role") != null) {
-            Account accountInfo = new Account();
 
-            String role = session.getAttribute("role").toString();
-
-            switch (role) {
-                case "Customer":
-                    Customer customer = (Customer) session.getAttribute("acc");
-                    accountInfo = new customerDAO().getCustomerACByEmail(customer.getEmail());
-                    break;
-                case "Admin":
-                    Admin admin = (Admin) session.getAttribute("acc");
-                    accountInfo = new adminDAO().getAdminACByEmail(admin.getEmail());
-                    break;
-                case "Management":
-                    Management management = (Management) session.getAttribute("acc");
-                    accountInfo = new managementDAO().getManagementACByEmail(management.getEmail());
-                    break;
-            }
-            request.setAttribute("userAccount", accountInfo);
-
+            request.getRequestDispatcher("/view/user/profile.jsp").forward(request, response);
             // Chua thiet ke cho role khac
             // ....
         } else {
