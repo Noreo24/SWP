@@ -29,7 +29,7 @@
     </head>
     <body>
         <%@include file="/navigator/userheader.jsp" %>
-       
+
 
         <!-- BREADCRUMB -->
         <div id="breadcrumb" class="section">
@@ -84,28 +84,28 @@
                                             <td>${order.fullName}</td>
                                             <td>${order.phone}</td>
                                             <td>${order.address}</td>
-                                            <td>${order.status_order eq '0' ? 'Pending' : 'Paid/Pending'}</td>
+                                            <td>${order.statusString}</td>
                                             <td>${order.note}</td>
                                             <td>${order.order_code}</td>
                                             <c:choose>
-                                                <c:when test="${order.status_order eq  '1'}">
+                                                <c:when test="${order.status_order ne  '0'  }">
                                                     <td>
-                                            <a href="order-detail?id=${order.order_id}" class="btn btn-secondary">Details</a>
-                                            </td>
-                                            </br>
-                                        </c:when>
-                                        <c:otherwise>    
-                                            <td>
-                                                <a href="update-order?id=${order.order_id}&action=delete" class="btn btn-danger">Remove</a>
-                                                <a href="order-detail?id=${order.order_id}" class="btn btn-secondary">Details</a>
-                                                <a href="payment?id=${order.order_id}" class="btn btn-secondary">
-                                                    <i class="fas fa-credit-card"></i> Pay
-                                                </a>
-                                            </td>
-                                             </c:otherwise> 
-                                    </c:choose>
-                                   
-                                </c:forEach>
+                                                        <a href="order-detail?id=${order.order_id}" class="btn btn-secondary">Details</a>
+                                                    </td>
+                                                    </br>
+                                                </c:when>
+                                                <c:otherwise>    
+                                                    <td>
+                                                        <a href="update-order?id=${order.order_id}&action=delete" class="btn btn-danger">Remove</a>
+                                                        <a href="order-detail?id=${order.order_id}" class="btn btn-secondary">Details</a>
+                                                        <a href="payment?id=${order.order_id}" class="btn btn-secondary">
+                                                            <i class="fas fa-credit-card"></i> Pay
+                                                        </a>
+                                                    </td>
+                                                </c:otherwise> 
+                                            </c:choose>
+
+                                        </c:forEach>
                                 </tbody>
                             </table>
                         </div>

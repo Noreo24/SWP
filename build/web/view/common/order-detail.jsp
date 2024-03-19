@@ -42,7 +42,7 @@
     </head>
     <body>
         <%@include file="/navigator/userheader.jsp" %>
-       
+
 
         <!-- BREADCRUMB -->
         <div id="breadcrumb" class="section">
@@ -71,11 +71,11 @@
 
                 <div class="container">
                     <h1>Order Details</h1>
-                    <div class="row">
+                    <form action="order-detail" method="post" class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="orderId">Order ID:</label>
-                                <input type="text" class="form-control" id="orderId" value="${order.order_id}" readonly>
+                                <input type="text" class="form-control" id="orderId" name="id" value="${order.order_id}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="orderDate">Order Date:</label>
@@ -86,35 +86,44 @@
                                 <input type="text" class="form-control" id="totalCost" value="${order.total_cost}" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="fullName">Full Name:</label>
-                                <input type="text" class="form-control" id="fullName" value="${order.fullName}" readonly>
+                                <label for="status">Status:</label>
+                                <input type="text" class="form-control" id="status" value="${order.statusString}" readonly>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone">Phone:</label>
-                                <input type="text" class="form-control" id="phone" value="${order.phone}" readonly>
+                                <input type="text" class="form-control" id="phone" name="phone" value="${order.phone}">
                             </div>
                             <div class="form-group">
                                 <label for="address">Address:</label>
-                                <input type="text" class="form-control" id="address" value="${order.address}" readonly>
+                                <input type="text" class="form-control" id="address" name="address" value="${order.address}">
                             </div>
                             <div class="form-group">
-                                <label for="status">Status:</label>
-                                <input type="text" class="form-control" id="status" value="${order.statusString}" readonly>
+                                <label for="fullName">Full Name:</label>
+                                <input type="text" class="form-control" id="fullName" name="name" value="${order.fullName}">
                             </div>
                             <div class="form-group">
                                 <label for="note">Note:</label>
-                                <input type="text" class="form-control" id="note" value="${order.note}" readonly>
+                                <input type="text" class="form-control" id="note" name="note" value="${order.note}">
                             </div>
                         </div>
-                    </div>
+                        <br>
+                        <c:if test="${order.status_order ne null}">
+                            <div class="col-12 text-center mt-3 mb-3">
+                                <button class="btn btn-primary">Update</button>
+                            </div>
+                        </c:if>
+
+                    </form>
                 </div>
 
                 <table class="table table-bordered mt-3">
                     <thead>
                         <tr>
                             <th>Order Detail ID</th>
+                            <th>Product Image</th>
+                            <th>Product Name</th>
                             <th>Product Price</th>
                             <th>Quantity</th>
                         </tr>
@@ -123,6 +132,10 @@
                         <c:forEach var="orderDetail" items="${orderdetails}">
                             <tr>
                                 <td>${orderDetail.orderDetail_id}</td>
+                                <td class="text-center">
+                                    <img style="width: 25%" src="${orderDetail.product.productImages.get(0).images}"></<img>
+                                </td>
+                                <td>${orderDetail.product.productName}</td>
                                 <td>${orderDetail.product_price}</td>
                                 <td>${orderDetail.quantity}</td>
                             </tr>

@@ -176,8 +176,13 @@ public class OrderController extends HttpServlet {
 
         // clean cart
         new CookieUtils().deleteSession(request, "cart_data_" + account.getUserID());
-        response.sendRedirect("cart?success");
-//        response.sendRedirect("payment?id=" + order.getOrder_id());
+        
+        String method = request.getParameter("method");
+        
+        if (method.equals("now")) 
+            response.sendRedirect("payment?id=" + order.getOrder_id());
+        else response.sendRedirect("cart?success");
+        
 
     }
 

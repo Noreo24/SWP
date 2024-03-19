@@ -11,7 +11,7 @@ package Model;
 public class order {
 
     private String order_id,
-            orderDate,
+            
             total_cost,
             fullName,
             phone,
@@ -21,6 +21,7 @@ public class order {
             saler_id,
             note,
             order_code;
+    String orderDate;
 
     public order() {
     }
@@ -36,6 +37,10 @@ public class order {
         this.userId = userId;
         this.saler_id = saler_id;
         this.note = note;
+    }
+
+    public order(String order_id, java.sql.Date orderDate, String total_cost, String fullName, String phone, String address, String status_order, String userId, String saler_id, String note) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public String getOrder_code() {

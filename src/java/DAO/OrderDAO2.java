@@ -9,6 +9,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import Model.order;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class OrderDAO2 {
 
@@ -63,7 +66,7 @@ public class OrderDAO2 {
             ex.printStackTrace();
         }
     }
-    
+
     public void acceptOrder(order order) {
         String query = "UPDATE [Order] SET total_cost = ?, fullName = ?, phone = ?, address = ?, status_order = NULL, userId = ?, saler_id = ?, note = ? WHERE order_id = ?";
         try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -128,6 +131,45 @@ public class OrderDAO2 {
         }
         return orders;
     }
+     
+
+
+//    public List<order> getAllOrders1() throws ParseException {
+//        List<order> orders = new ArrayList<>();
+//        String query = "SELECT * FROM [Order]";
+//        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+//             ResultSet resultSet = preparedStatement.executeQuery()) {
+//            while (resultSet.next()) {
+//                String order_id = resultSet.getString("order_id");
+//                String orderDateString = resultSet.getString("orderDate");
+//                String total_cost = resultSet.getString("total_cost");
+//                String fullName = resultSet.getString("fullName");
+//                String phone = resultSet.getString("phone");
+//                String address = resultSet.getString("address");
+//                String status_order = resultSet.getString("status_order");
+//                String userId = resultSet.getString("userId");
+//                String saler_id = resultSet.getString("saler_id");
+//                String note = resultSet.getString("note");
+//                String order_code = resultSet.getString("order_code");
+//
+//                // Chuyển đổi chuỗi ngày sang đối tượng Date
+//                DateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd");
+//                Date orderDate = null;
+//                try {
+//                    orderDate = (Date) sourceFormat.parse(orderDateString);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                order order = new order(order_id, orderDate, total_cost, fullName, phone, address, status_order, userId, saler_id, note);
+//                order.setOrder_code(order_code);
+//                orders.add(order);
+//            }
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//        return orders;
+//    }
 
     public order getOrderByID(int orderID) {
         order order = null;
@@ -190,11 +232,8 @@ public class OrderDAO2 {
     public static void main(String[] args) throws Exception {
 
 //        Order order = new Order();
-
 //        order.setUserId("1");
-
 //        new OrderDAO2().createOrder(order);
-
     }
 
 }

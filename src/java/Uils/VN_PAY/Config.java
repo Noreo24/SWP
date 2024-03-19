@@ -25,7 +25,7 @@ import java.util.HashMap;
 public class Config {
 
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_ReturnUrl = "http://localhost:9999/Phone_Shop_Phuc/vnpay_return.jsp";
+    public static String vnp_ReturnUrl = "http://localhost:9999/PhoneShop/vnpay_return.jsp";
     public static String vnp_TmnCode = "LPWGPPC7";
     public static String secretKey = "PAAPZOVWREUCGSHHZJNCFVVUHPPMZRKA";
     public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
@@ -137,6 +137,7 @@ public class Config {
     
     public static void confirmOrder(String ref) throws Exception {
         
+        System.out.println("CONFIRM:" + ref);
         int id = Integer.parseInt(mem.get(ref));
         
         order order = new OrderDAO2().getOrderByID(id);

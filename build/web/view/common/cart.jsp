@@ -43,7 +43,7 @@
     <body>
 
         <%@include file="/navigator/userheader.jsp" %>
-       
+
 
 
 
@@ -96,18 +96,18 @@
                                     <c:forEach var="productEntry" items="${products}">
                                         <tr>
                                             <td>${productEntry.productName}</td>
-<!--                                            Add small image -->
+                                            <!--                                            Add small image -->
                                             <td><img src="${productEntry.productImages.get(0).images}" alt="${productEntry.productName}" style="width: 50px;"></td>
                                             <td>
-<!--                                                Display quantity with buttons to increment and decrement -->
+                                                <!--                                                Display quantity with buttons to increment and decrement -->
 
                                                 <a href="update-cart?id=${productEntry.productId}&amount=-1" class="btn btn-primary">-</a>
                                                 <span id="quantity_${productEntry.productId}">${map[productEntry.productId]}</span>
                                                 <a href="update-cart?id=${productEntry.productId}&amount=1" class="btn btn-primary">+</a>
-<!--                                                Add button to delete product -->
+                                                <!--                                                Add button to delete product -->
                                                 <a href="update-cart?id=${productEntry.productId}&amount=0" class="btn btn-danger">Delete</a>
                                             </td>
-                                            <td><fmt:formatNumber value="${productEntry.salePrices}" type="currency" currencyCode="VND"/></td>
+                                            <td><fmt:formatNumber value="${productEntry.salePrices * map[productEntry.productId]}" type="currency" currencyCode="VND"/></td>
                                             <td>
                                                 <!-- Checkbox for ordering individual product -->
                                                 <input type="checkbox" name="productIds" value="${productEntry.productId}">
@@ -115,7 +115,7 @@
                                         </tr>
                                     </c:forEach>
                                 </tbody>
-                                
+
                             </table>
 
 
@@ -279,15 +279,24 @@
                         <form action="order" method="post">
                             <div class="form-group">
                                 <label for="address">Address:</label>
-                                <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" required>
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" value="${sessionScope.acc.address}" required>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone:</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+                                <input type="tel" class="form-control" id="phone" name="phone" value="${sessionScope.acc.phone}" required>
                             </div>
                             <div class="form-group">
                                 <label for="note">Note:</label>
                                 <textarea class="form-control" id="note" name="note" placeholder="Any additional notes"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Method:</label>
+                                <br>
+                                <label for="now">VN Pay</label>
+                                <input type="radio" id="now" name="method" value="now" required>
+                                <br>
+                                <label for="later">Pay later</label>
+                                <input type="radio" id="later" name="method" value="later" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit Order</button>
                         </form>

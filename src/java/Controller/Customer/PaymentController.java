@@ -107,6 +107,8 @@ public class PaymentController extends HttpServlet {
         
         String orderId = req.getParameter("id");
         Config.mem.put(vnp_TxnRef, orderId);
+        System.out.println(vnp_TxnRef);
+        System.out.println(orderId);
 
         String vnp_TmnCode = Config.vnp_TmnCode;
 

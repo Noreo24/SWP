@@ -15,8 +15,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head
-         <%@include file="/navigator/userheader.jsp" %>
-          <%@include file="/navigator/navigation.jsp" %>
+        <%@include file="/navigator/userheader.jsp" %>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
