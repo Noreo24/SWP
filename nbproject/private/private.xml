@@ -5,20 +5,24 @@
         <group>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/DAO/DateDAO.java</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/Controller/Customer/OrderController.java</file>
+            <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/web/navigator/adminheader.jsp</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/web/view/common/cart.jsp</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/web/view/admin/Dashboard.jsp</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/DAO/orderDAO.java</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/web/vnpay_ipn.jsp</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/web/vnpay_return.jsp</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/Model/order.java</file>
+            <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/web/navigator/userheader.jsp</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/web/view/admin/orderList.jsp</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/Uils/VN_PAY/Config.java</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/Controller/Admin/OrderManageController.java</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/DAO/OrderDetailDAO.java</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/web/view/common/order-detail.jsp</file>
+            <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/DAO/ProductDAO.java</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/Controller/Admin/manageProduct.java</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/Controller/Customer/OrderDetailController.java</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/DAO/OrderDAO2.java</file>
+            <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/DAO/ProductDAO2.java</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/src/java/Controller/Admin/Dashboard.java</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/web/view/admin/addProduct.jsp</file>
             <file>file:/C:/Users/kocho/Desktop/git/SWP-main/SWP-main/web/view/common/myOrder.jsp</file>

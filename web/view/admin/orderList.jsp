@@ -15,12 +15,9 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/css/managecss/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-<style>
-    /* CSS để giảm khoảng cách giữa h1 và table */
-    .container-fluid {
-        margin-top: 20px; /* Điều chỉnh giá trị này để thay đổi khoảng cách */
-    }
-</style>
+        <!-- DataTable CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+
     </head>
     <body class="sb-nav-fixed">
         <%@include file="/navigator/adminheader.jsp" %>
@@ -31,19 +28,28 @@
                 <div class="container-fluid px-4">
                     <!-- row -->
                     <h1 class="mt-4 text-center mb-4">Danh sách đơn hàng</h1>
-                    <div class="dateFromTo">
-                        <form action="${pageContext.request.contextPath}/order-list">
-                            Từ: 
-                            <input class="form-control w-25" type="date" id="start" name="start" value="${start}">
-                            Đến: 
-                            <input class="form-control w-25" type="date" id="end" name="end" value="${end}">  
-                        </form>
-                        </form>
-                    </div>
-                    <br>
+
                     <div class="row">
                         <div class="container">
                             <div class="table-responsive">
+
+                                <div class="dateFromTo mb-3">
+                                    <form action="${pageContext.request.contextPath}/order-list">
+                                        Từ: 
+                                        <input class="form-control w-25" type="date" id="start" name="start" value="${start}">
+                                        Đến: 
+                                        <input class="form-control w-25" type="date" id="end" name="end" value="${end}">  
+                                    </form>
+
+                                    <select class="form-select w-25 mt-3" id="statusFilter">
+                                        <option value="">Tất cả</option>
+                                        <option value="Completed">Hoàn thành</option>
+                                        <option value="Pending">Đang chờ</option>
+                                        <option value="Paid/Pending">Đã thanh toán/Chờ xác nhận</option>
+                                    </select>
+
+                                </div>
+
                                 <table class="table" id="orders-table">
                                     <thead>
                                         <tr>
@@ -61,9 +67,9 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach var="order" items="${orders}">
-                                            <tr>
+                                            <tr class="order-row" data-status="${order.statusString}">
                                                 <td>${order.order_id}</td>
-                                                <td>${order.orderDate}</td>
+                                                <td>${order.formatDate}</td>
                                                 <td><fmt:formatNumber value="${order.total_cost}" type="currency" currencyCode="VND"/></td>
                                                 <td>${order.fullName}</td>
                                                 <td>${order.phone}</td>
@@ -77,7 +83,6 @@
                                                             <a href="order-detail?id=${order.order_id}" class="btn btn-secondary">Details</a>
                                                             <a href="order-accept?id=${order.order_id}" class="btn btn-primary">Accept</a>
                                                         </td>
-                                                        </br>
                                                     </c:when>
                                                     <c:otherwise>    
                                                         <td>
@@ -97,6 +102,42 @@
             </main>
             <!-- Footer-->
         </div>
+        <!-- jQuery -->
+        <script src="js/jquery.min.js"></script>
+        <!-- DataTable JS -->
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+        <!-- Initialize DataTable -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var table = $('#orders-table').DataTable({
+                    "lengthChange": false // Disable the page length menu
+                });
+            });
+        </script>
+
+        <script>
+// Add event listener for status filter
+            document.getElementById('statusFilter').addEventListener('change', function () {
+// Get the selected status
+                var selectedStatus = this.value;
+
+// Get all order rows
+                var orderRows = document.querySelectorAll('.order-row');
+
+// Iterate through each order row
+                orderRows.forEach(function (row) {
+// Get the status of the current order row
+                    var orderStatus = row.getAttribute('data-status');
+// Show/hide the order row based on the selected status
+                    if (selectedStatus === '' || selectedStatus === orderStatus) {
+                        row.style.display = 'table-row'; // Show the row
+                    } else {
+                        row.style.display = 'none'; // Hide the row
+                    }
+                });
+            });
+        </script>
 
 
 

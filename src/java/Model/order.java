@@ -4,6 +4,10 @@
  */
 package Model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Admin
@@ -11,7 +15,6 @@ package Model;
 public class order {
 
     private String order_id,
-            
             total_cost,
             fullName,
             phone,
@@ -50,8 +53,6 @@ public class order {
     public void setOrder_code(String order_code) {
         this.order_code = order_code;
     }
-    
-    
 
     public String getOrder_id() {
         return order_id;
@@ -132,11 +133,37 @@ public class order {
     public void setNote(String note) {
         this.note = note;
     }
-    
+
     public String getStatusString() {
-        if (status_order==null) return "Completed";
-        if (status_order.equals("0")) return "Pending";
+        if (status_order == null) {
+            return "Completed";
+        }
+        if (status_order.equals("0")) {
+            return "Pending";
+        }
         return "Paid/Pending";
     }
-    
+
+    public String getFormatDate() {
+        // Input format of the orderDate
+        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        // Output format of the orderDate
+        DateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        try {
+            // Parse the input orderDate string into a Date object
+            java.util.Date date = inputFormat.parse(orderDate);
+
+            // Format the Date object into the desired output format
+            String formattedDate = outputFormat.format(date);
+
+            return formattedDate;
+        } catch (ParseException e) {
+            // Handle the ParseException, if parsing fails
+            e.printStackTrace();
+            return ""; // or any default value indicating error
+        }
+    }
+
 }
