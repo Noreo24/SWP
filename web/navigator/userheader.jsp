@@ -179,11 +179,25 @@
                 <div id="responsive-nav">
                     <!-- NAV -->
                     <ul class="main-nav nav navbar-nav">
+                        <li  class="${checkActive == 'Home' ? 'active': ''}">
+                            <a href="home">Home</a>
+                        </li>
+                        <li class="${checkActive == 'List product' ? 'active': ''}">
+                            <a href="listProduct">Categories</a>
+                        </li>
+                        <li class="${checkActive == 'Blog' ? 'active': ''}">
+                            <a href="${pageContext.request.contextPath}/loadblogpage">Blogs</a>
+                        </li>
+                        <li class="${checkActive == 'Brand' ? 'active': ''}">
+                            <a href="${pageContext.request.contextPath}/BrandList">Brands</a>
+                        </li>
+                    </ul>
+<!--                    <ul class="main-nav nav navbar-nav">
                         <li class="active"><a href="#">Home</a></li>
                         <li><a href="#">Categories</a></li>
-                        <li><a href="${pageContext.request.contextPath}/loadblogpage">Blogs</a></li>
-                        <li><a href="${pageContext.request.contextPath}/BrandList">Brands</a></li>
-                    </ul>
+                        <li><a href="/loadblogpage">Blogs</a></li>
+                        <li><a href="/BrandList">Brands</a></li>
+                    </ul>-->
                     <!-- /NAV -->
                 </div>
                 <!-- /responsive-nav -->

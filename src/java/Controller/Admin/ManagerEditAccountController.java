@@ -50,7 +50,7 @@ public class ManagerEditAccountController extends HttpServlet {
             } else if (roleName.equals("Admin")) {
                 accountInfo = new adminDAO().getAdminACById(request.getParameter("userID"));
             } else if (roleName.equals("Management")) {
-                accountInfo = new managementDAO().getManagementACById(request.getParameter("userID"));
+                accountInfo = new ManagementDAO().getManagementACById(request.getParameter("userID"));
             }
 
             request.setAttribute("userAccount", accountInfo);
@@ -93,7 +93,7 @@ public class ManagerEditAccountController extends HttpServlet {
         } else if (roleName.equals("Admin")) {
             accountInfo = new adminDAO().getAdminACById(request.getParameter("userID"));
         } else if (roleName.equals("Management")) {
-            accountInfo = new managementDAO().getManagementACById(request.getParameter("userID"));
+            accountInfo = new ManagementDAO().getManagementACById(request.getParameter("userID"));
         }
 
         request.setAttribute("accountOld", accountInfo);
@@ -107,7 +107,7 @@ public class ManagerEditAccountController extends HttpServlet {
             }
 
             if (accountCheck == null) {
-                accountCheck = new managementDAO().getManagementACByEmail(gmail);
+                accountCheck = new ManagementDAO().getManagementACByEmail(gmail);
             }
 
             if (accountCheck != null) {
@@ -123,7 +123,7 @@ public class ManagerEditAccountController extends HttpServlet {
             }
 
             if (accountCheck == null) {
-                accountCheck = new managementDAO().getManagementACByUsername(username);
+                accountCheck = new ManagementDAO().getManagementACByUsername(username);
             }
 
             if (accountCheck != null) {
@@ -231,7 +231,7 @@ public class ManagerEditAccountController extends HttpServlet {
             } else if (roleName.equals("Admin")) {
                 new adminDAO().updateACAdmin(accountInfo);
             } else if (roleName.equals("Management")) {
-                new managementDAO().updateACManagement(accountInfo);
+                new ManagementDAO().updateACManagement(accountInfo);
             }
 
             SendMailLC.sendMailChangProfileByAdmin(accountInfo);

@@ -3,14 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/VietWork/LC/SWP/web/view/admin/ManagerAddBrand.jsp</file>
-            <file>file:/C:/VietWork/LC/SWP/web/view/admin/ManagerAddAccount.jsp</file>
-            <file>file:/C:/VietWork/LC/SWP/src/java/Controller/Admin/ManagerAddBrandController.java</file>
-            <file>file:/C:/VietWork/LC/SWP/src/java/DAO/trademarkDAO.java</file>
-            <file>file:/C:/VietWork/LC/SWP/web/view/admin/ManagerEditAccount.jsp</file>
-            <file>file:/C:/VietWork/LC/SWP/src/java/Controller/Admin/ManagerEditAccountController.java</file>
-            <file>file:/C:/VietWork/LC/SWP/src/java/Controller/Admin/ManagerEditBrandController.java</file>
-            <file>file:/C:/VietWork/LC/SWP/web/view/admin/ManagerEditBrand.jsp</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/src/java/Controller/Admin/editProduct.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/src/java/DAO/ProductDAO.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/src/java/DAO/headphoneDetailDAO.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/web/view/admin/editProduct.jsp</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/src/java/DAO/tabletDetailDAO.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/src/java/DAO/laptopDetailDAO.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/src/java/Controller/Admin/addProduct.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/web/view/admin/ManageProduct.jsp</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/src/java/Model/HeadphoneDetail.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/web/view/admin/addProduct.jsp</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/src/java/Controller/Admin/addProductControl.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/src/java/DAO/phoneDetailDAO.java</file>
         </group>
     </open-files>
 </project-private>

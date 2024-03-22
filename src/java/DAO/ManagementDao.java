@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author Admin
  */
-public class managementDAO {
+public class ManagementDAO {
 
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete

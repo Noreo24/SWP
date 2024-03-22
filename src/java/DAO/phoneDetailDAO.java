@@ -52,11 +52,40 @@ public class phoneDetailDAO {
         return null;
     }
 
-    public void addPhoneDetail(String color, String screen_size, String screen_tech, 
-            String camera_rear, String front_camera, String chip, 
-            String ram, String rom, String pin, 
-            String sim, String operation_system, String screen_feature, 
-            String product_id, String other_feature) {
+    public void editPhoneDetail(String product_id, String color, String screen_size, String screen_tech,
+            String camera_rear, String front_camera, String chip,
+            String ram, String rom, String pin,
+            String sim, String operation_system, String screen_feature, String other_feature) {
+        String query = "UPDATE Phone_detail\n"
+                + "SET color = ?, screen_size = ?, screen_tech = ?, camera_rear = ?, front_camera = ?, chip= ?, ram = ?, rom = ?, \n"
+                + "pin = ?, sim = ?, operation_system = ?, screen_feature = ?, other_feature = ? "
+                + "WHERE product_id = ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, color);
+            stm.setString(2, screen_size);
+            stm.setString(3, screen_tech);
+            stm.setString(4, camera_rear);
+            stm.setString(5, front_camera);
+            stm.setString(6, chip);
+            stm.setString(7, ram);
+            stm.setString(8, rom);
+            stm.setString(9, pin);
+            stm.setString(10, sim);
+            stm.setString(11, operation_system);
+            stm.setString(12, screen_feature);
+            stm.setString(13, other_feature);
+            stm.setString(14, product_id);
+            rs = stm.executeQuery();
+        } catch (Exception e) {
+        }
+    }
+
+    public void addPhoneDetail(String product_id, String color, String screen_size, String screen_tech,
+            String camera_rear, String front_camera, String chip,
+            String ram, String rom, String pin,
+            String sim, String operation_system, String screen_feature, String other_feature) {
         String query = "INSERT into Phone_detail(color, screen_size, screen_tech, camera_rear, front_camera, chip, ram, rom, pin, sim, operation_system, screen_feature, product_id, other_feature) \n"
                 + "	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
@@ -83,7 +112,9 @@ public class phoneDetailDAO {
 
     public static void main(String[] args) {
         phoneDetailDAO pdDAO = new phoneDetailDAO();
-        String pid = "4";
+        String pid = "1";
+        pdDAO.editPhoneDetail(pid, "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc");
         PhoneDetail pd = pdDAO.phoneDetail(pid);
+        System.out.println(pd.getColor());
     }
 }

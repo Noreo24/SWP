@@ -27,6 +27,7 @@
         <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/super-build/ckeditor.js"></script>
         <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/translations/vi.js"></script>
         <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/media-embed/media-embed.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <style>
             .payment-method__item-name {
                 font-size: 20px;
@@ -76,7 +77,7 @@
 
         <div id="layoutSidenav_content">
             <div class="container rounded bg-white mt-5 mb-5" style="margin-top: 0;">
-                <form action="${pageContext.request.contextPath}/editProduct" method="post" enctype="multipart/form-data" >
+                <form action="${pageContext.request.contextPath}/addProductControl" method="post" enctype="multipart/form-data" >
                     <div class="row">
                         <div class="p-4" style="padding: 0;">
                             <h1 class="text-center">Thêm sản phẩm</h1>
@@ -84,9 +85,6 @@
                         </div>
                         <div class="col-md-8">
                             <div class="p-3">
-                                <h5 class="col-md-12" style="font-weight: bold;">ID
-                                    <input type="text" name="id" class="form-control" value="${countProduct}" readonly>
-                                </h5>
                                 <h5 class="col-md-12" style="font-weight: bold;">Tên sản phẩm
                                     <input type="text" name="productName" class="form-control" value="" >
                                 </h5>
@@ -102,7 +100,7 @@
                                 </h5>
                                 <h5 class="col-md-6" style="font-weight: bold;">Chi tiết</h5>
                                 <div class="col-md-12">
-                                    <table class="table hidden" id="phonedetail">
+                                    <table class="table" id="phonedetail">
                                         <tbody>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Màu sắc</td>
@@ -278,7 +276,10 @@
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Micro</td>
-                                                <td><input type="text" name="headphoneMic" class="form-control" value="" ></td>
+                                                <td>
+                                                    <input name="headphoneMic" type="radio" value="1"/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
+                                                    <input name="headphoneMic" type="radio" value="0"/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Phương thức điều khiển</td>
@@ -356,28 +357,22 @@
                                             </c:forEach>
                                         </select>
                                     </h5>
-                                    <h5 class="col-md-12" style="font-weight: bold;">Trạng thái</h5>
-                                    <br/>
-
-                                    <label for="yes" class="col-md-6">Sẵn bán</label>
-                                    <input id="yes" name="status" type="radio" value="1"/>
-                                    <label for="no" class="col-md-6">Không bán</label>
-                                    <input id="no" name="status" type="radio" value="0"/>
-
+<!--                                    <h5 class="col-md-12" style="font-weight: bold;">Trạng thái 
+                                        <input name="status" type="radio" value="1" required/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
+                                        <input name="status" type="radio" value="0" required/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
+                                    </h5>-->
                                     <h5 class="col-md-12" style="font-weight: bold;">Số lượng sản phẩm
-                                        <input type="number" name="quantity" class="form-control" value="">
+                                        <input type="text" name="quantity" class="form-control" data-type="currency" value="">
                                     </h5>
-
                                     <h5 class="col-md-12" style="font-weight: bold;">Sale
-                                        <input name="sale" type="radio" value="1"/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
-                                        <input name="sale" type="radio" value="0"/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
+                                        <input name="sale" type="radio" onchange="inputSalePrice(this)" value="1"/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
+                                        <input name="sale" type="radio" onchange="inputSalePrice(this)" value="0"/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
                                     </h5>
-
                                     <div class="col-md-12" style="font-weight: bold;">Giá gốc
-                                        <input type="text" name="originalPrice" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$1,000,000.00">
+                                        <input type="text" name="originalPrice" class="form-control" value="${product.original_prices}" data-type="currency" required>
                                     </div>
-                                    <div class="col-md-12" style="font-weight: bold;">Giá sale
-                                        <input type="text" name="salePrice" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$1,000,000.00">
+                                    <div class="col-md-12" style="font-weight: bold;" name="salePriceLabel">Giá sale
+                                        <input id="salePrice" type="text" name="salePrice" class="form-control" value="${product.sale_prices}" data-type="currency">
                                     </div>
                                     <h5 class="col-md-6" style="font-weight: bold;">Chọn ảnh
                                         <input id="inputFile" type="file" name="thumbnail" class="form-control" placeholder="Ảnh">
@@ -402,92 +397,97 @@
             <!--</main>-->
             <!-- Footer-->
         </div>
-        <!--        <script>
-                    $("input[data-type='currency']").on({
-                        keyup: function () {
-                            formatCurrency($(this));
-                        },
-                        blur: function () {
-                            formatCurrency($(this), "blur");
-                        }
-                    });
-        
-        
-                    function formatNumber(n) {
-                        // format number 1000000 to 1,234,567
-                        return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+        <script>
+            function inputSalePrice(radio) {
+                var salePriceInput = document.getElementsByName("salePrice")[0];
+                var salePriceLabel = document.getElementsByName("salePriceLabel")[0];
+                if (radio.value === "1") {
+                    document.getElementById("salePrice").setAttribute("required", "required");
+                    document.getElementById("salePrice").removeAttribute("readonly");
+                    salePriceInput.style.display = "block";
+                    salePriceLabel.style.display = "block";
+                } else {
+                    salePriceInput.style.display = "none";
+                    salePriceLabel.style.display = "none";
+                    document.getElementById("salePrice").setAttribute("readonly", "readonly");
+                    document.getElementById("salePrice").removeAttribute("required");
+                    let domain = "0";
+                    document.getElementById("salePrice").value = domain;
+                }
+            }
+        </script>
+        <script>
+// Ensure jQuery is ready before executing the script
+            $(document).ready(function () {
+                $("input[data-type='currency']").on({
+                    keyup: function () {
+                        formatCurrency($(this));
                     }
-        
-        
-                    function formatCurrency(input, blur) {
-                        // appends $ to value, validates decimal side
-                        // and puts cursor back in right position.
-        
-                        // get input value
-                        var input_val = input.val();
-        
-                        // don't validate empty input
-                        if (input_val === "") {
-                            return;
-                        }
-        
-                        // original length
-                        var original_len = input_val.length;
-        
-                        // initial caret position 
-                        var caret_pos = input.prop("selectionStart");
-        
-                        // check for decimal
-                        if (input_val.indexOf(".") >= 0) {
-        
-                            // get position of first decimal
-                            // this prevents multiple decimals from
-                            // being entered
-                            var decimal_pos = input_val.indexOf(".");
-        
-                            // split number by decimal point
-                            var left_side = input_val.substring(0, decimal_pos);
-                            var right_side = input_val.substring(decimal_pos);
-        
-                            // add commas to left side of number
-                            left_side = formatNumber(left_side);
-        
-                            // validate right side
-                            right_side = formatNumber(right_side);
-        
-                            // On blur make sure 2 numbers after decimal
-                            if (blur === "blur") {
-                                right_side += "00";
-                            }
-        
-                            // Limit decimal to only 2 digits
-                            right_side = right_side.substring(0, 2);
-        
-                            // join number by .
-                            input_val = "$" + left_side + "." + right_side;
-        
-                        } else {
-                            // no decimal entered
-                            // add commas to number
-                            // remove all non-digits
-                            input_val = formatNumber(input_val);
-                            input_val = "$" + input_val;
-        
-                            // final formatting
-                            if (blur === "blur") {
-                                input_val += ".00";
-                            }
-                        }
-        
-                        // send updated string to input
-                        input.val(input_val);
-        
-                        // put caret back in the right position
-                        var updated_len = input_val.length;
-                        caret_pos = updated_len - original_len + caret_pos;
-                        input[0].setSelectionRange(caret_pos, caret_pos);
+//                    ,
+//                    blur: function () {
+//                        formatCurrency($(this), "blur");
+//                    }
+                });
+
+                function formatNumber(n) {
+// format number 1000000 to 1,234,567
+                    return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+
+                function formatCurrency(input, blur) {
+                    var input_val = input.val();
+                    if (input_val === "") {
+                        return;
                     }
-                </script>-->
+                    var original_len = input_val.length;
+                    var caret_pos = input.prop("selectionStart");
+
+                    if (input_val.indexOf(".") >= 0) {
+                        var decimal_pos = input_val.indexOf(".");
+                        var left_side = input_val.substring(0, decimal_pos);
+                        var right_side = input_val.substring(decimal_pos);
+                        left_side = formatNumber(left_side);
+                        right_side = formatNumber(right_side);
+//                        if (blur === "blur") {
+//                            right_side += "00";
+//                        }
+                        right_side = right_side.substring(0, 2);
+                        input_val = left_side + "." + right_side;
+                    } else {
+                        input_val = formatNumber(input_val);
+//                        if (blur === "blur") {
+//                            input_val += ".00";
+//                        }
+                    }
+
+                    input.val(input_val);
+
+                    var updated_len = input_val.length;
+                    caret_pos = updated_len - original_len + caret_pos;
+                    input[0].setSelectionRange(caret_pos, caret_pos);
+                }
+            });
+        </script>
+        <script>
+            function inputSalePrice(radio) {
+                var salePriceInput = document.getElementsByName("salePrice")[0];
+                var salePriceLabel = document.getElementsByName("salePriceLabel")[0];
+                if (radio.value === "1") {
+                    document.getElementById("salePrice").setAttribute("required", "required");
+                    document.getElementById("salePrice").removeAttribute("readonly");
+                    salePriceInput.style.display = "block";
+                    salePriceLabel.style.display = "block";
+                } else {
+                    salePriceInput.style.display = "none";
+                    salePriceLabel.style.display = "none";
+                    document.getElementById("salePrice").setAttribute("readonly", "readonly");
+                    document.getElementById("salePrice").removeAttribute("required");
+                    let domain = "0";
+                    document.getElementById("salePrice").value = domain;
+                }
+            }
+        </script>
         <script>
             CKEDITOR.ClassicEditor.create(document.getElementById("editor2"), {
                 // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format

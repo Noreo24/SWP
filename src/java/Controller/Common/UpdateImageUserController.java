@@ -68,7 +68,7 @@ public class UpdateImageUserController extends HttpServlet {
                         break;
                     case "Management":
                         Management management = (Management) session.getAttribute("acc");
-                        account = new managementDAO().getManagementACByEmail(management.getEmail());
+                        account = new ManagementDAO().getManagementACByEmail(management.getEmail());
                         break;
                 }
 
@@ -161,7 +161,7 @@ public class UpdateImageUserController extends HttpServlet {
                 } else if (role.equals("Admin")) {
                     new adminDAO().updateACAdmin(account);
                 } else if (role.equals("Management")) {
-                    new managementDAO().updateACManagement(account);
+                    new ManagementDAO().updateACManagement(account);
                 }
 
                 switch (role) {
@@ -177,7 +177,7 @@ public class UpdateImageUserController extends HttpServlet {
                         break;
                     case "Management":
                         Management managemenOldt = (Management) session.getAttribute("acc");
-                        Management managemen = new managementDAO().getManagementByEmail(managemenOldt.getEmail());
+                        Management managemen = new ManagementDAO().getManagementByEmail(managemenOldt.getEmail());
                         session.setAttribute("acc", managemen);
                         break;
                 }

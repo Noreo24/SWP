@@ -27,6 +27,7 @@
         <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/super-build/ckeditor.js"></script>
         <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/translations/vi.js"></script>
         <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/media-embed/media-embed.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <style>
             .payment-method__item-name {
                 font-size: 20px;
@@ -80,85 +81,82 @@
                     <div class="row">
                         <div class="p-4" style="padding: 0;">
                             <h1 class="text-center">Sửa thông tin sản phẩm</h1>
-                            <i style="color: red">${ERROR}</i>
                         </div>
                         <div class="col-md-8">
                             <div class="p-3">
+
                                 <h5 class="col-md-12" style="font-weight: bold;">ID
-                                    <input type="text" name="id" class="form-control" value="${product.product_id}" readonly>
+                                    <input type="text" name="pId" class="form-control" value="${product.getProduct_id()}" readonly>
                                 </h5>
                                 <h5 class="col-md-12" style="font-weight: bold;">Tên sản phẩm
-                                    <input type="text" name="productName" class="form-control" value="${product.product_name}" >
+                                    <input type="text" name="productName" class="form-control" value="${product.product_name}" required>
                                 </h5>
                                 <h5 class="col-md-12" style="font-weight: bold;">Đặc điểm nổi bật
-                                    <textarea cols="20" rows="40" id="editor2" name="highlight">
+                                    <textarea cols="20" rows="40" id="editor2" name="highlight" required>
                                         ${product.getProduct_highlights()}
                                     </textarea>
                                 </h5>
                                 <h5 class="col-md-12" style="font-weight: bold;">Mô tả
-                                    <textarea cols="20" rows="40" id="editor" name="content">
+                                    <textarea cols="20" rows="40" id="editor" name="content" required>
                                         ${product.getProduct_description()}
                                     </textarea>
                                 </h5>
                                 <h5 class="col-md-6" style="font-weight: bold;">Chi tiết</h5>
                                 <div class="col-md-12">
-                                    <table class="table hidden" id="phonedetail">
+                                    <table class="table" id="phonedetail">
                                         <tbody>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Màu sắc</td>
-                                                <td>${phone_detail.color}</td>
+                                                <td><input name="phoneColor" class="form-control" value="${phone_detail.color}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Kích cỡ màn hình</td>
-                                                <td>${phone_detail.screen_size}</td>
+                                                <td><input name="phoneScreenSize" class="form-control" value="${phone_detail.screen_size}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Công nghệ màn hình</td>
-                                                <td>${phone_detail.screen_tech}</td>
+                                                <td><input name="phoneScreenTech" class="form-control" value="${phone_detail.screen_tech}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Camera sau</td>
-                                                <td>${phone_detail.camera_rear}</td>
+                                                <td><input name="phoneCamRear" class="form-control" value="${phone_detail.camera_rear}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Camera trước</td>
-                                                <td>${phone_detail.front_camera}</td>
+                                                <td><input name="phoneCamFront" class="form-control" value="${phone_detail.front_camera}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Chipset</td>
-                                                <td>${phone_detail.chip}</td>
+                                                <td><input name="phoneChip" class="form-control" value="${phone_detail.chip}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Dung lượng RAM</td>
-                                                <td>${phone_detail.ram}</td>
+                                                <td><input name="phoneRam" class="form-control" value="${phone_detail.ram}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Bộ nhớ trong</td>
-                                                <td>${phone_detail.rom}</td>
+                                                <td><input name="phoneRom" class="form-control" value="${phone_detail.rom}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Pin</td>
-                                                <td>${phone_detail.pin}</td>
+                                                <td><input name="phonePin" class="form-control" value="${phone_detail.pin}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Thẻ SIM</td>
-                                                <td>${phone_detail.sim}</td>
+                                                <td><input name="phoneSim" class="form-control" value="${phone_detail.sim}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Hệ điều hành</td>
-                                                <td>${phone_detail.operation_system}</td>
-                                                <!--                                                        </tr>                                                      <tr>
-                                                                                                            <td style="background: #f2f2f2; width: 20%;">Độ phân giải màn hình</td>
-                                                                                                            <td>2796 x 1290-pixel</td>
-                                                                                                        </tr>-->
+                                                <td><input name="phoneOS" class="form-control" value="${phone_detail.operation_system}"></td>
+                                            </tr> 
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Tính năng màn hình</td>
-                                                <td>${phone_detail.screen_feature}</td>
+                                                <td><input name="phoneScreenFeature" class="form-control" value="${phone_detail.screen_feature}"></td>
                                             </tr>
                                             <c:if test="${phone_detail.other_feature != null}">
                                                 <tr>
                                                     <td style="background: #f2f2f2; width: 20%;">Tính năng khác</td>
-                                                    <td>${phone_detail.other_feature}</td>
+                                                    <td><input name="phoneOther" class="form-control" value="${phone_detail.other_feature}"></td>
                                                 </tr>
                                             </c:if>
                                         </tbody>
@@ -167,42 +165,40 @@
                                         <tbody>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Màu sắc</td>
-                                                <c:if test="${lap_detail.color != null}">
-                                                    <td>${lap_detail.color}</td>
-                                                </c:if>
+                                                <td><input name="lapColor" class="form-control" value="${lap_detail.color}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Kích cỡ màn hình</td>
-                                                <td>${lap_detail.screen_size}</td>
+                                                <td><input name="lapScreenSize" class="form-control" value="${lap_detail.screen_size}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Công nghệ màn hình</td>
-                                                <td>${lap_detail.screen_tech}</td>
+                                                <td><input name="lapScreenTech" class="form-control" value="${lap_detail.screen_tech}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Chipset</td>
-                                                <td>${lap_detail.chip}</td>
+                                                <td><input name="lapChip" class="form-control" value="${lap_detail.chip}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Dung lượng RAM</td>
-                                                <td>${lap_detail.ram}</td>
+                                                <td><input name="lapRam" class="form-control" value="${lap_detail.ram}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Pin</td>
-                                                <td>${lap_detail.pin}</td>
+                                                <td><input name="lapPin" class="form-control" value="${lap_detail.pin}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Hệ điều hành</td>
-                                                <td>${lap_detail.operation_system}</td>
+                                                <td><input name="lapOS" class="form-control" value="${lap_detail.operation_system}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Tính năng màn hình</td>
-                                                <td>${lap_detail.screen_feature}</td>
+                                                <td><input name="lapScreenFeature" class="form-control" value="${lap_detail.screen_feature}"></td>
                                             </tr>
                                             <c:if test="${lap_detail.other_feature != null}">
                                                 <tr>
                                                     <td style="background: #f2f2f2; width: 20%;">Tính năng khác</td>
-                                                    <td>${lap_detail.other_feature}</td>
+                                                    <td><input name="lapOther" class="form-control" value="${lap_detail.other_feature}"></td>
                                                 </tr>
                                             </c:if>
                                         </tbody>
@@ -211,60 +207,60 @@
                                         <tbody>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Màu sắc</td>
-                                                <td>${tablet_detail.color}</td>
+                                                <td><input name="tabColor" class="form-control" value="${tablet_detail.color}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Kích cỡ màn hình</td>
-                                                <td>${tablet_detail.screen_size}</td>
+                                                <td><input name="tabScreenSize" class="form-control" value="${tablet_detail.screen_size}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Công nghệ màn hình</td>
-                                                <td>${tablet_detail.screen_tech}</td>
+                                                <td><input name="tabScreenTech" class="form-control" value="${tablet_detail.screen_tech}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Camera sau</td>
-                                                <td>${tablet_detail.camera_rear}</td>
+                                                <td><input name="tabCamRear" class="form-control" value="${tablet_detail.camera_rear}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Camera trước</td>
-                                                <td>${tablet_detail.front_camera}</td>
+                                                <td><input name="tabCamFront" class="form-control" value="${tablet_detail.front_camera}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Chipset</td>
-                                                <td>${tablet_detail.chip}</td>
+                                                <td><input name="tabChip" class="form-control" value="${tablet_detail.chip}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Dung lượng RAM</td>
-                                                <td>${tablet_detail.ram}</td>
+                                                <td><input name="tabRam" class="form-control" value="${tablet_detail.ram}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Bộ nhớ trong</td>
-                                                <td>${tablet_detail.rom}</td>
+                                                <td><input name="tabRom" class="form-control" value="${tablet_detail.rom}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Pin</td>
-                                                <td>${tablet_detail.pin}</td>
+                                                <td><input name="tabPin" class="form-control" value="${tablet_detail.pin}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Thẻ SIM</td>
-                                                <td>${tablet_detail.sim}</td>
+                                                <td><input name="tabSim" class="form-control" value="${tablet_detail.sim}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Hệ điều hành</td>
-                                                <td>${tablet_detail.operation_system}</td>
+                                                <td><input name="tabOS" class="form-control" value="${tablet_detail.operation_system}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Độ phân giải màn hình</td>
-                                                <td>${tablet_detail.screen_resolution}</td>
+                                                <td><input name="tabScreenResolution" class="form-control" value="${tablet_detail.screen_resolution}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Tính năng màn hình</td>
-                                                <td>${tablet_detail.screen_feature}</td>
+                                                <td><input name="tabScreenFeature" class="form-control" value="${tablet_detail.screen_feature}"></td>
                                             </tr>
                                             <c:if test="${tablet_detail.other_feature != null}">
                                                 <tr>
                                                     <td style="background: #f2f2f2; width: 20%;">Tính năng khác</td>
-                                                    <td>${tablet_detail.other_feature}</td>
+                                                    <td><input name="tabOther" class="form-control" value="${tablet_detail.other_feature}"></td>
                                                 </tr>
                                             </c:if>
                                         </tbody>
@@ -273,36 +269,45 @@
                                         <tbody>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Màu sắc</td>
-                                                <td>${headphone_detail.color}</td>
+                                                <td><input name="headphoneColor" class="form-control" value="${headphone_detail.color}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Tương thích</td>
-                                                <td>${headphone_detail.connect}</td>
+                                                <td><input name="headphoneConnect" class="form-control" value="${headphone_detail.connect}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Thời lượng pin</td>
-                                                <td>${headphone_detail.using_time}</td>
+                                                <td><input name="headphoneTime" class="form-control" value="${headphone_detail.using_time}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Công nghệ âm thanh</td>
-                                                <td>${headphone_detail.sound_tech}</td>
+                                                <td><input name="headphoneSound" class="form-control" value="${headphone_detail.sound_tech}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Micro</td>
-                                                <td>${headphone_detail.micro}</td>
+                                                <td>
+                                                    <c:if test="${headphone_detail.micro == 1}">
+                                                        <input name="headphoneMic" type="radio" value="1" checked/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
+                                                        <input name="headphoneMic" type="radio" value="0"/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
+                                                    </c:if>
+                                                    <c:if test="${headphone_detail.micro == 0}">
+                                                        <input name="headphoneMic" type="radio" value="1"/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
+                                                        <input name="headphoneMic" type="radio" value="0" checked/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
+                                                    </c:if>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Phương thức điều khiển</td>
-                                                <td>${headphone_detail.control_method}</td>
+                                                <td><input name="headphoneCotrol" class="form-control" value="${headphone_detail.control_method}"></td>
                                             </tr>
                                             <tr>
                                                 <td style="background: #f2f2f2; width: 20%;">Chống nước</td>
-                                                <td>${headphone_detail.waterproof}</td>
+                                                <td><input name="headphoneWaterproof" class="form-control" value="${headphone_detail.waterproof}"></td>
                                             </tr>
                                             <c:if test="${headphone_detail.other_feature != null}">
                                                 <tr>
                                                     <td style="background: #f2f2f2; width: 20%;">Tính năng khác</td>
-                                                    <td>${headphone_detail.other_feature}</td>
+                                                    <td><input name="headphoneOther" class="form-control" value="${headphone_detail.other_feature}"></td>
                                                 </tr>
                                             </c:if>
                                         </tbody>
@@ -369,53 +374,37 @@
                                             </c:forEach>
                                         </select>
                                     </h5>
-                                    <h5 class="col-md-12" style="font-weight: bold;">Trạng thái</h5>
-                                    <br/>
-                                    <c:if test="${product.status == 1}">
-                                        <!--<div class="row">-->
-                                        <label for="yes" class="col-md-6">Sẵn bán</label>
-                                        <input id="yes" name="status" type="radio" value="1" checked/>
-                                        <label for="no" class="col-md-6">Không bán</label>
-                                        <input id="no" name="status" type="radio" value="0"/>
-                                        <!--</div>-->
-                                    </c:if>
-                                    <c:if test="${product.status == 0}">
-                                        <!--<div class="row">-->
-                                        <label for="yes" class="col-md-6">Sẵn bán</label>
-                                        <input id="yes" name="status" type="radio" value="1"/>
-                                        <label for="no" class="col-md-6">Không bán</label>
-                                        <input id="no" name="status" type="radio" value="0" checked/>
-                                        <!--</div>-->
-                                    </c:if>
                                     <h5 class="col-md-12" style="font-weight: bold;">Số lượng sản phẩm</h5>
                                     <div class="col-md-4" style="font-weight: bold;">Ban đầu
-                                        <input type="number" name="totalQuantity" class="form-control" value="${product.quantity + product.sole}" >
+                                        <input type="text" name="totalQuantity" class="form-control" value="${product.quantity + product.sole}" readonly>
                                     </div>
                                     <div class="col-md-4" style="font-weight: bold;">Đã bán
-                                        <input type="number" name="sold" class="form-control" value="${product.sole}">
+                                        <input type="text" name="sold" class="form-control" value="${product.sole}"data-type="currency"  required>
                                     </div>
                                     <div class="col-md-4" style="font-weight: bold;">Còn lại
-                                        <input type="number" name="remain" class="form-control" value="${product.quantity}">
+                                        <input type="text" name="remain" class="form-control" value="${product.quantity}" data-type="currency" required>
                                     </div>
                                     <h5 class="col-md-4" style="font-weight: bold;">Sale
                                         <br/>
                                         <c:if test="${product.sale == 1}">
-                                            <input name="sale" type="radio" value="1" checked/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
-                                            <input name="sale" type="radio" value="0"/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
+                                            <input name="sale" type="radio" onchange="inputSalePrice(this)" value="1" checked/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
+                                            <input name="sale" type="radio" onchange="inputSalePrice(this)" value="0"/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
                                         </c:if>
                                         <c:if test="${product.sale == 0}">
-                                            <input name="sale" type="radio" value="1"/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
-                                            <input name="sale" type="radio" value="0" checked/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
+                                            <input name="sale" type="radio" onchange="inputSalePrice(this)" value="1"/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
+                                            <input name="sale" type="radio" onchange="inputSalePrice(this)" value="0" checked/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
                                         </c:if>
                                     </h5>
                                     <div class="col-md-12" style="font-weight: bold;">Giá gốc
-                                        <input type="text" name="originalPrice" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="${product.original_prices}" data-type="currency" placeholder="$1,000,000.00">
+                                        <input type="text" name="originalPrice" class="form-control" value="${product.original_prices}" data-type="currency" required>
                                     </div>
-                                    <div class="col-md-12" style="font-weight: bold;">Giá sale
-                                        <input type="text" name="salePrice" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="${product.original_prices}" data-type="currency" placeholder="$1,000,000.00">
+                                    <%--<c:if test="${product.sale==1}">--%>
+                                    <div class="col-md-12" style="font-weight: bold;" name="salePriceLabel">Giá sale
+                                        <input id="salePrice" type="text" name="salePrice" class="form-control" value="${product.sale_prices}" data-type="currency">
                                     </div>
+                                    <%--</c:if>--%>
                                     <h5 class="col-md-6" style="font-weight: bold;">Chọn ảnh
-                                        <input id="inputFile" type="file" name="thumbnail" class="form-control" placeholder="Ảnh">
+                                        <input id="inputFile" type="file" name="thumbnail" class="form-control" placeholder="Ảnh" required>
                                     </h5>
                                     <h5 class="col-md-6" style="font-weight: bold;">Ngày cập nhật
                                         <input type="text" name="updateDate" class="form-control" value="${updateDate}" readonly="">
@@ -447,92 +436,77 @@
             <!--</main>-->
             <!-- Footer-->
         </div>
-<!--        <script>
-            $("input[data-type='currency']").on({
-                keyup: function () {
-                    formatCurrency($(this));
-                },
-                blur: function () {
-                    formatCurrency($(this), "blur");
+        <script>
+            // Ensure jQuery is ready before executing the script
+            $(document).ready(function () {
+                $("input[data-type='currency']").on({
+                    keyup: function () {
+                        formatCurrency($(this));
+                    }
+//                    ,
+//                    blur: function () {
+//                        formatCurrency($(this), "blur");
+//                    }
+                });
+
+                function formatNumber(n) {
+                    // format number 1000000 to 1,234,567
+                    return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+
+                function formatCurrency(input, blur) {
+                    var input_val = input.val();
+                    if (input_val === "") {
+                        return;
+                    }
+                    var original_len = input_val.length;
+                    var caret_pos = input.prop("selectionStart");
+
+                    if (input_val.indexOf(".") >= 0) {
+                        var decimal_pos = input_val.indexOf(".");
+                        var left_side = input_val.substring(0, decimal_pos);
+                        var right_side = input_val.substring(decimal_pos);
+                        left_side = formatNumber(left_side);
+                        right_side = formatNumber(right_side);
+//                        if (blur === "blur") {
+//                            right_side += "00";
+//                        }
+                        right_side = right_side.substring(0, 2);
+                        input_val = left_side + "." + right_side;
+                    } else {
+                        input_val = formatNumber(input_val);
+//                        if (blur === "blur") {
+//                            input_val += ".00";
+//                        }
+                    }
+
+                    input.val(input_val);
+
+                    var updated_len = input_val.length;
+                    caret_pos = updated_len - original_len + caret_pos;
+                    input[0].setSelectionRange(caret_pos, caret_pos);
                 }
             });
-
-
-            function formatNumber(n) {
-                // format number 1000000 to 1,234,567
-                return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            }
-
-
-            function formatCurrency(input, blur) {
-                // appends $ to value, validates decimal side
-                // and puts cursor back in right position.
-
-                // get input value
-                var input_val = input.val();
-
-                // don't validate empty input
-                if (input_val === "") {
-                    return;
-                }
-
-                // original length
-                var original_len = input_val.length;
-
-                // initial caret position 
-                var caret_pos = input.prop("selectionStart");
-
-                // check for decimal
-                if (input_val.indexOf(".") >= 0) {
-
-                    // get position of first decimal
-                    // this prevents multiple decimals from
-                    // being entered
-                    var decimal_pos = input_val.indexOf(".");
-
-                    // split number by decimal point
-                    var left_side = input_val.substring(0, decimal_pos);
-                    var right_side = input_val.substring(decimal_pos);
-
-                    // add commas to left side of number
-                    left_side = formatNumber(left_side);
-
-                    // validate right side
-                    right_side = formatNumber(right_side);
-
-                    // On blur make sure 2 numbers after decimal
-                    if (blur === "blur") {
-                        right_side += "00";
-                    }
-
-                    // Limit decimal to only 2 digits
-                    right_side = right_side.substring(0, 2);
-
-                    // join number by .
-                    input_val = "$" + left_side + "." + right_side;
-
+        </script>
+        <script>
+            function inputSalePrice(radio) {
+                var salePriceInput = document.getElementsByName("salePrice")[0];
+                var salePriceLabel = document.getElementsByName("salePriceLabel")[0];
+                if (radio.value === "1") {
+                    document.getElementById("salePrice").setAttribute("required", "required");
+                    document.getElementById("salePrice").removeAttribute("readonly");
+                    salePriceInput.style.display = "block";
+                    salePriceLabel.style.display = "block";
                 } else {
-                    // no decimal entered
-                    // add commas to number
-                    // remove all non-digits
-                    input_val = formatNumber(input_val);
-                    input_val = "$" + input_val;
-
-                    // final formatting
-                    if (blur === "blur") {
-                        input_val += ".00";
-                    }
+                    salePriceInput.style.display = "none";
+                    salePriceLabel.style.display = "none";
+                    document.getElementById("salePrice").setAttribute("readonly", "readonly");
+                    document.getElementById("salePrice").removeAttribute("required");
+                    let domain = "0";
+                    document.getElementById("salePrice").value = domain;
                 }
-
-                // send updated string to input
-                input.val(input_val);
-
-                // put caret back in the right position
-                var updated_len = input_val.length;
-                caret_pos = updated_len - original_len + caret_pos;
-                input[0].setSelectionRange(caret_pos, caret_pos);
             }
-        </script>-->
+        </script>
         <script>
             CKEDITOR.ClassicEditor.create(document.getElementById("editor2"), {
                 // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
@@ -847,10 +821,7 @@
         </script>
 
         <script>
-            // L?y tham chi?u ??n nút và input
             var inputFile = document.getElementById('inputFile');
-
-            // Thêm s? ki?n change cho input file
             inputFile.addEventListener('change', function () {
                 var file = inputFile.files[0];
                 validateFileType(file);
@@ -859,10 +830,7 @@
             function validateFileType(file) {
                 if (file) {
                     var fileType = file.type;
-
-                    // Ki?m tra ??nh d?ng t?p có ph?i là hình ?nh hay không
                     if (!fileType.startsWith('image/')) {
-                        // Hi?n th? thông báo l?i n?u t?p không ph?i là hình ?nh
                         alert('Please choose a file image.');
                         clearFileInput();
                     } else {
@@ -877,10 +845,8 @@
             }
 
             function clearFileInput() {
-                // Xóa giá tr? c?a input file
                 inputFile.value = '';
 
-                // Ti?p t?c l?ng nghe s? ki?n change cho input file
                 inputFile.addEventListener('change', function () {
                     var file = inputFile.files[0];
                     validateFileType(file);

@@ -4,8 +4,8 @@
  */
 package Controller.Admin;
 
-import DAO.*; 
-import Model.*; 
+import DAO.*;
+import Model.*;
 import helper.UploadFile;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -84,11 +84,12 @@ public class addProductControl extends HttpServlet {
         headphoneDetailDAO hpDAO = new headphoneDetailDAO();
 
         List<Category> cList = cDAO.getAllCategory();
-        List<Trademark> tmList = tmDAO.listAllTrademark();
+        List<Trademark> tmList = tmDAO.listAllTrademarkAdmin();
+        String countProduct = String.valueOf(pDAO.totalNumberOfProduct());
 
         try {
             if (a != null) {
-                String productId = request.getParameter("id");
+//                String productId = request.getParameter("id");
                 String productName = request.getParameter("productName");
                 String highlight = request.getParameter("highlight");
                 String description = request.getParameter("content");
@@ -101,7 +102,7 @@ public class addProductControl extends HttpServlet {
                         break;
                     }
                 }
-                if (cateID == "1") {
+                if ("1".equals(cateID)) {
                     String phoneColor = request.getParameter("phoneColor");
                     String phoneScreenSize = request.getParameter("phoneScreenSize");
                     String phoneScreenTech = request.getParameter("phoneScreenTech");
@@ -115,9 +116,46 @@ public class addProductControl extends HttpServlet {
                     String phoneSystem = request.getParameter("phoneSystem");
                     String phoneScreenFeaured = request.getParameter("phoneScreenFeaured");
                     String phoneOtherFeaured = request.getParameter("phoneOtherFeaured");
-                    pdDAO.addPhoneDetail(phoneColor, phoneScreenSize, phoneScreenTech, phoneRareCam, phoneFrontCam, phoneChip, phoneRAM, phoneROM, phonePIN, phoneSIM, phoneSystem, phoneScreenFeaured, productId, phoneOtherFeaured);
-                } else if (cateID == "2") {
-
+                    pdDAO.addPhoneDetail(countProduct + 1, phoneColor, phoneScreenSize, phoneScreenTech, phoneRareCam, phoneFrontCam, phoneChip, phoneRAM, phoneROM, phonePIN,
+                            phoneSIM, phoneSystem, phoneScreenFeaured, phoneOtherFeaured);
+                } else if ("2".equals(cateID)) {
+                    String lapColor = request.getParameter("lapColor");
+                    String lapScreenSize = request.getParameter("lapScreenSize");
+                    String lapScreenTech = request.getParameter("lapScreenTech");
+                    String lapChip = request.getParameter("lapChip");
+                    String lapRAM = request.getParameter("lapRAM");
+                    String lapPIN = request.getParameter("lapPIN");
+                    String lapSystem = request.getParameter("lapSystem");
+                    String lapScreenFeatured = request.getParameter("lapScreenFeatured");
+                    String lapOtherFeatured = request.getParameter("lapOtherFeatured");
+                    ltDAO.addLaptopDetail(countProduct + 1, lapColor, lapScreenSize, lapScreenTech, lapChip, lapRAM, lapPIN, lapSystem, lapScreenFeatured, lapOtherFeatured);
+                } else if ("3".equals(cateID)) {
+                    String tabletColor = request.getParameter("tabletColor");
+                    String tabletScreenSize = request.getParameter("tabletScreenSize");
+                    String tabletScreenTech = request.getParameter("tabletScreenTech");
+                    String tabletRareCam = request.getParameter("tabletRareCam");
+                    String tabletFrontCam = request.getParameter("tabletFrontCam");
+                    String tabletChip = request.getParameter("tabletChip");
+                    String tabletRAM = request.getParameter("tabletRAM");
+                    String tabletROM = request.getParameter("tabletROM");
+                    String tabletPIN = request.getParameter("tabletPIN");
+                    String tabletSIM = request.getParameter("tabletSIM");
+                    String tabletSystem = request.getParameter("tabletSystem");
+                    String tabletScreen = request.getParameter("tabletScreen");
+                    String tabletScreenFeatured = request.getParameter("tabletScreenFeatured");
+                    String tabletOtherFeatured = request.getParameter("tabletOtherFeatured");
+                    tbDAO.addTabletDetail(countProduct + 1, tabletColor, tabletScreenSize, tabletScreenTech, tabletRareCam, tabletFrontCam, tabletChip, tabletRAM,
+                            tabletROM, tabletPIN, tabletSIM, tabletSystem, tabletScreen, tabletScreenFeatured, tabletOtherFeatured);
+                } else if ("4".equals(cateID)) {
+                    String headphoneColor = request.getParameter("headphoneColor");
+                    String headphoneConnect = request.getParameter("headphoneConnect");
+                    String headphonePIN = request.getParameter("headphonePIN");
+                    String headphoneSound = request.getParameter("headphoneSound");
+                    String headphoneMic = request.getParameter("headphoneMic");
+                    String headphoneControl = request.getParameter("headphoneControl");
+                    String headphoneWater = request.getParameter("headphoneWater");
+                    String headphoneOtherFeatured = request.getParameter("headphoneOtherFeatured");
+                    hpDAO.addHeadphoneDetail(countProduct + 1, headphoneColor, headphoneConnect, headphonePIN, headphoneSound, headphoneMic, headphoneControl, headphoneWater, headphoneOtherFeatured);
                 }
 
                 String trademarkID = "";
@@ -131,19 +169,41 @@ public class addProductControl extends HttpServlet {
 
                 String status = request.getParameter("status");
 
-                String quantity = request.getParameter("quantity");
-                if (Integer.parseInt(quantity) < 0) {
-                    quantity = "0";
-                } else if (Integer.parseInt(quantity) % 1 > 0.5) {
-                    quantity = String.valueOf((Integer.parseInt(quantity) / 1) + 1);
-                } else if (Integer.parseInt(quantity) % 1 < 0.5) {
-                    quantity = String.valueOf((Integer.parseInt(quantity) / 1));
+                StringBuilder q = new StringBuilder();
+                for (int i = 0; i < request.getParameter("quantity").length(); i++) {
+                    char currentChar = request.getParameter("quantity").charAt(i);
+                    // Kiểm tra xem ký tự hiện tại có phải là số không
+                    if (Character.isDigit(currentChar)) {
+                        q.append(currentChar); // Nếu là số, thêm vào kết quả
+                    }
                 }
+                String quantity = q.toString();
 
                 String sale = request.getParameter("sale");
-                String originalPrice = request.getParameter("originalPrice");
-                String salePrice = request.getParameter("salePrice");
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                StringBuilder oPrice = new StringBuilder();
+                for (int i = 0; i < request.getParameter("originalPrice").length(); i++) {
+                    char currentChar = request.getParameter("originalPrice").charAt(i);
+                    // Kiểm tra xem ký tự hiện tại có phải là số không
+                    if (Character.isDigit(currentChar)) {
+                        oPrice.append(currentChar); // Nếu là số, thêm vào kết quả
+                    }
+                }
+                String originalPrice = oPrice.toString();
+                String salePrice = "";
+                if ("1".equals(sale)) {
+                    StringBuilder sPrice = new StringBuilder();
+                    for (int i = 0; i < request.getParameter("salePrice").length(); i++) {
+                        char currentChar = request.getParameter("salePrice").charAt(i);
+                        // Kiểm tra xem ký tự hiện tại có phải là số không
+                        if (Character.isDigit(currentChar)) {
+                            sPrice.append(currentChar); // Nếu là số, thêm vào kết quả
+                        }
+                    }
+                    salePrice = sPrice.toString();
+                } else {
+                    salePrice = "0";
+                }
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 String updateDate = formatter.format(currentDate);
 
                 String fileName = "";
@@ -152,17 +212,15 @@ public class addProductControl extends HttpServlet {
                 if (!fileName.isEmpty()) {
                     if (isImage(fileName)) {
                         fileName = uploadFile.uploadFile(request, "thumbnail");
-                        piDAO.addNewProductImage(productId, "1", "image/" + fileName);
-                        pDAO.addNewProduct(productName, originalPrice, sale, salePrice, highlight, description, trademarkID, status,
+                        pDAO.addNewProduct(productName, originalPrice, sale, salePrice, highlight, description, trademarkID, "1",
                                 quantity, "1", cateID, updateDate, "0", "1", "0");
+                        piDAO.addNewProductImage(pDAO.getLastProduct().getProduct_id(), "1", "image/" + fileName);
                         response.sendRedirect("manageProduct");
                     } else {
-                        String targetURL = "editProduct?pid=" + productId;
-                        response.sendRedirect(targetURL);
+                        response.sendRedirect("/view/admin/addProduct.jsp");
                     }
                 } else {
-                    String targetURL = "editProduct?pid=" + productId;
-                    response.sendRedirect(targetURL);
+                    response.sendRedirect("/view/admin/addProduct.jsp");
                 }
             }
         } catch (ServletException | IOException e) {
