@@ -365,8 +365,8 @@
                                         <input type="text" name="quantity" class="form-control" data-type="currency" value="">
                                     </h5>
                                     <h5 class="col-md-12" style="font-weight: bold;">Sale
-                                        <input name="sale" type="radio" onchange="inputSalePrice(this)" value="1"/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
-                                        <input name="sale" type="radio" onchange="inputSalePrice(this)" value="0"/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
+                                        <input name="sale" type="radio" onchange="inputSalePrice(this)" value="1" required/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
+                                        <input name="sale" type="radio" onchange="inputSalePrice(this)" value="0" required/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
                                     </h5>
                                     <div class="col-md-12" style="font-weight: bold;">Giá gốc
                                         <input type="text" name="originalPrice" class="form-control" value="${product.original_prices}" data-type="currency" required>
