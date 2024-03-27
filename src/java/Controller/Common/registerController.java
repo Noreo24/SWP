@@ -103,7 +103,7 @@ public class registerController extends HttpServlet {
         } else if (pass.length() < 6 || pass.length() > 24) {
             String err = "Password must be 6 to 24 characters!";
             request.setAttribute("err", err);
-            request.getRequestDispatcher("/PhoneShop/view/common/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/view/common/register.jsp").forward(request, response);
         } else {
             cdao.registCustomer(email, username, Encode.toSHA1(pass), fullname, phone, address);
             response.sendRedirect("/PhoneShop/view/common/login.jsp");

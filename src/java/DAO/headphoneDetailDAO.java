@@ -15,11 +15,12 @@ import java.sql.ResultSet;
  * @author Admin
  */
 public class headphoneDetailDAO {
+
     Connection cnn;//Kết nối với DB
     //Statement stm;//Thực hiện câu lệnh SQL: select,insert,update,delete
     PreparedStatement stm;
     ResultSet rs;//Lưu trữ và xử lý dữ liệu
-    
+
     public HeadphoneDetail headphoneDetail(String pid) {
 
         String query = "select * from Headphone_detail where product_id = ?";
@@ -45,10 +46,54 @@ public class headphoneDetailDAO {
         }
         return null;
     }
-    
+
+    public void editHeadphoneDetail(String product_id, String connect, String color, String using_time,
+            String sound_tech, String micro, String control_method, String waterproof, String other_feature) {
+        String query = "UPDATE Headphone_detail\n"
+                + "SET connect = ?, color = ?, using_time = ?, sound_tech = ?, micro= ?, control_method = ?,\n"
+                + "waterproof = ?, other_feature = ? "
+                + "WHERE product_id = ?";
+        try {
+            cnn = new DBContext().getConnection(); //mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, connect);
+            stm.setString(2, color);
+            stm.setString(3, using_time);
+            stm.setString(4, sound_tech);
+            stm.setString(5, micro);
+            stm.setString(6, control_method);
+            stm.setString(7, waterproof);
+            stm.setString(8, other_feature);
+            stm.setString(9, product_id);
+            rs = stm.executeQuery();
+        } catch (Exception e) {
+        }
+    }
+
+    public void addHeadphoneDetail(String product_id, String connect, String color, String using_time,
+            String sound_tech, String micro, String control_method, String waterproof, String other_feature) {
+        String query = "INSERT into Headphone_detail(connect, color, using_time, sound_tech, micro, control_method, waterproof, product_id, other_feature)\n"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            cnn = new DBContext().getConnection(); //mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, connect);
+            stm.setString(2, color);
+            stm.setString(3, using_time);
+            stm.setString(4, sound_tech);
+            stm.setString(5, micro);
+            stm.setString(6, control_method);
+            stm.setString(7, waterproof);
+            stm.setString(8, product_id);
+            stm.setString(9, other_feature);
+            rs = stm.executeQuery();
+        } catch (Exception e) {
+        }
+    }
+
     public static void main(String[] args) {
         headphoneDetailDAO hpDAO = new headphoneDetailDAO();
         String pid = "9";
-        HeadphoneDetail hp = hpDAO.headphoneDetail(pid);
+        hpDAO.editHeadphoneDetail(pid, pid, pid, pid, pid, pid, pid, pid, pid);
     }
 }

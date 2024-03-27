@@ -52,6 +52,7 @@
                                                 <th>Địa chỉ</th>
                                                 <th>Trạng thái đơn hàng</th>
                                                 <th>Mã sản phẩm</th>
+                                                <th>Giá sản phẩm</th>
                                                 <th>Mã đơn hàng</th>
                                                 <th>Note</th>
                                             </tr>
@@ -67,81 +68,80 @@
                                                     <td>${o.getAddress()}</td>
                                                     <td>${o.getStatus_order()}</td>
                                                     <td>${o.getUserId()}</td>
+                                                    <td>${o.getSaler_id()}</td>
                                                     <td>${o.getOrder_code()}</td>
                                                     <td>${o.getNote()}</td>
-                                                </tr>
-                                            </c:forEach>
+                                                </tr></c:forEach>
 
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-12">
-                            <div class="card mb-4">
-                                <div class="card-header mb-4 nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseThongkesanpham" aria-expanded="false" aria-controls="collapseThongkesanpham">
-                                    <i class="fas fa-chart-area me-1"></i>
-                                    Thống kê doanh thu
-                                </div>
-                                <div id="collapseThongkesanpham" aria-labelledby="headingOne" data-bs-parent="#cutomerSetting" class="collapse card-body">
-                                    <div class="row">
-                                        <div class="col-xl-11">
-                                            <div class="card-body"><canvas id="myBarChart-2" width="100%" height="40"></canvas></div>
+                            <div class="col-xl-12">
+                                <div class="card mb-4">
+                                    <div class="card-header mb-4 nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseThongkesanpham" aria-expanded="false" aria-controls="collapseThongkesanpham">
+                                        <i class="fas fa-chart-area me-1"></i>
+                                        Thống kê doanh thu
+                                    </div>
+                                    <div id="collapseThongkesanpham" aria-labelledby="headingOne" data-bs-parent="#cutomerSetting" class="collapse card-body">
+                                        <div class="row">
+                                            <div class="col-xl-11">
+                                                <div class="card-body"><canvas id="myBarChart-2" width="100%" height="40"></canvas></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-12">
-                            <div class="card mb-4">
-                                <div class="card-header mb-4 nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseThongkekhachhang" aria-expanded="false" aria-controls="collapseThongkekhachhang">
-                                    <i class="fas fa-chart-area me-1"></i>
-                                    Thống kê sản phẩm bán ra
-                                </div>
-                                <div id="collapseThongkekhachhang" aria-labelledby="headingOne" data-bs-parent="#cutomerSetting" class="collapse card-body">
-                                    <div class="row">
-                                        <div class="col-xl-6">
-                                            <div class="card-body"><canvas id="myPieChart-1" width="100%" height="40"></canvas></div>
-                                        </div>
-                                        <div class="col-xl-6">
-                                            <div class="card-body"><canvas id="myPieChart-2" width="100%" height="40"></canvas></div>
+                            <div class="col-xl-12">
+                                <div class="card mb-4">
+                                    <div class="card-header mb-4 nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseThongkekhachhang" aria-expanded="false" aria-controls="collapseThongkekhachhang">
+                                        <i class="fas fa-chart-area me-1"></i>
+                                        Thống kê sản phẩm bán ra
+                                    </div>
+                                    <div id="collapseThongkekhachhang" aria-labelledby="headingOne" data-bs-parent="#cutomerSetting" class="collapse card-body">
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <div class="card-body"><canvas id="myPieChart-1" width="100%" height="40"></canvas></div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="card-body"><canvas id="myPieChart-2" width="100%" height="40"></canvas></div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-12">
-                            <div class="card mb-4">
-                                <div class="card-header mb-4 nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseThongkebaidang" aria-expanded="false" aria-controls="collapseThongkebaidang">
-                                    <i class="fas fa-chart-area me-1"></i>
-                                    Thống kê bài đăng
-                                </div>
-                                <div id="collapseThongkebaidang" aria-labelledby="headingOne" data-bs-parent="#cutomerSetting" class="collapse card-body">
-                                    <div class="row">
-                                        <div class="col-xl-6">
+                            <div class="col-xl-12">
+                                <div class="card mb-4">
+                                    <div class="card-header mb-4 nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseThongkebaidang" aria-expanded="false" aria-controls="collapseThongkebaidang">
+                                        <i class="fas fa-chart-area me-1"></i>
+                                        Thống kê bài đăng
+                                    </div>
+                                    <div id="collapseThongkebaidang" aria-labelledby="headingOne" data-bs-parent="#cutomerSetting" class="collapse card-body">
+                                        <div class="row">
+                                            <div class="col-xl-6">
 
-                                            <div class="card-body"><canvas id="myBarChart-1" width="100%" height="40"></canvas></div>
-                                        </div>
-                                        <div class="col-xl-6">
-                                            <div class="card-body"><canvas id="myAreaChart-1" width="100%" height="40"></canvas></div>
+                                                <div class="card-body"><canvas id="myBarChart-1" width="100%" height="40"></canvas></div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="card-body"><canvas id="myAreaChart-1" width="100%" height="40"></canvas></div>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
-
                             </div>
+
+
                         </div>
-
-
                     </div>
-                </div>
-            </main>
-            <!-- Footer-->
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${pageContext.request.contextPath}/js/jsmanage/scripts.js"></script>
+                </main>
+                <!-- Footer-->
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+            <script src="${pageContext.request.contextPath}/js/jsmanage/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-
         <script>
 // Set new default font family and font color to mimic Bootstrap's default styling
             Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -309,7 +309,6 @@
                     },
             });
             </script>
-
             <script>
                 // Set new default font family and font color to mimic Bootstrap's default styling
                 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';

@@ -467,11 +467,11 @@ public class ProductDAO {
     }
 
     public void editProduct(String pId, String productName, String highlight, String description,
-            String categoryId, String trademarkId, String status, String sold, String quantity,
+            String categoryId, String trademarkId, String sold, String quantity,
             String sale, String originalPrice, String salePrice, String updateDate) {
         String query = "UPDATE Product\n"
                 + "SET product_name = ?, product_highlights = ?, product_description = ?, "
-                + "category_id = ?, trademark_id = ?, status= ?, sole = ?, quantity = ?, "
+                + "category_id = ?, trademark_id = ?, sole = ?, quantity = ?, "
                 + "sale = ?, original_prices = ?, sale_prices = ?, update_date = ? \n"
                 + "WHERE product_id = ?;";
         try {
@@ -482,14 +482,13 @@ public class ProductDAO {
             stm.setString(3, description);
             stm.setString(4, categoryId);
             stm.setString(5, trademarkId);
-            stm.setString(6, status);
-            stm.setString(7, sold);
-            stm.setString(8, quantity);
-            stm.setString(9, sale);
-            stm.setString(10, originalPrice);
-            stm.setString(11, salePrice);
-            stm.setString(12, updateDate);
-            stm.setString(13, pId);
+            stm.setString(6, sold);
+            stm.setString(7, quantity);
+            stm.setString(8, sale);
+            stm.setString(9, originalPrice);
+            stm.setString(10, salePrice);
+            stm.setString(11, updateDate);
+            stm.setString(12, pId);
             rs = stm.executeQuery();
         } catch (Exception e) {
         }
@@ -692,6 +691,36 @@ public class ProductDAO {
         return list;
     }
 
+    public Product getLastProduct() {
+        String query = "select top 1* from Product order by product_id desc";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Product(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15),
+                        rs.getString(16));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     public int totalNumberOfProduct() {
         String query = "select count(*) from Product";
         try {
@@ -837,19 +866,18 @@ public class ProductDAO {
         String updateDate = dateFormat.format(currentDate);
         ProductDAO pdao = new ProductDAO();
         String s = "1";
-        pdao.addNewProduct("New product 2222", "10000", "1", "5000", "Highlight", "description", "1", "1", "200", "1", "1", updateDate, "0", "1", "3");
-
+//        pdao.addNewProduct("New product 2222", "10000", "1", "5000", "Highlight", "description", "1", "1", "200", "1", "1", updateDate, "0", "1", "3");
+//int all = pdao.getLastPId();
+//        System.out.println(all);
 //        pdao.changeProductStatus(s, "1");
 //        System.out.println(pdao.getProductByID(s).getStatus());
 //        pdao.deleteProduct("18", "3");
 //        String cate_id = "2";
-        // Product name
+//         Product name
 //        Product p = pdao.getProductByID(s);
-//        System.out.println(p.getProduct_highlights());
+//        System.out.println(p.getProduct_name());
 //        System.out.println(p.getProduct_description());
-//        pdao.editProduct(s, "Product 1", "Highlight after edit", "Description after edit",
-//                "4", "4", "1", "1000", "1000",
-//                "1", "10000000", "5000000", updateDate);
+//        pdao.editProduct(s, "Bui Tuan1234", s, s, s, s, s, s, s, s, s, updateDate);
 //        System.out.println(pdao.getProductByID(s).getProduct_name());
 //        Product p = pdao.getProductByID(s);
 //        System.out.println(p.getProduct_name());

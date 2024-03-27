@@ -47,8 +47,7 @@ public class editProduct extends HttpServlet {
         Admin a = (Admin) session.getAttribute("acc");
 //        Management m = (Management) session.getAttribute("acc");
 //        Customer c = (Customer) session.getAttribute("acc");
-        if (a != null //                || m != null
-                ) {
+        if (a != null) {
             String pid = request.getParameter("pid");
 
             ProductDAO pDAO = new ProductDAO();
@@ -62,7 +61,7 @@ public class editProduct extends HttpServlet {
 
             Product product = pDAO.getProductByID(pid);
             List<productImage> allImages = piDAO.getAllImage();
-            List<Trademark> allTrademarks = tmDAO.listAllTrademark();
+            List<Trademark> allTrademarks = tmDAO.listAllTrademarkAdmin();
             List<Category> allCategories = cDAO.getAllCategory();
             int cateID = Integer.parseInt(product.getCategory_id());
             switch (cateID) {
@@ -121,42 +120,98 @@ public class editProduct extends HttpServlet {
         UploadFile uploadFile = new UploadFile();
         ProductDAO pDAO = new ProductDAO();
         productImagesDAO piDAO = new productImagesDAO();
+        phoneDetailDAO pdDAO = new phoneDetailDAO();
+        laptopDetailDAO ltDAO = new laptopDetailDAO();
+        tabletDetailDAO tbDAO = new tabletDetailDAO();
+        headphoneDetailDAO hpDAO = new headphoneDetailDAO();
+
         try {
-            String productId = request.getParameter("id");
+            String productId = request.getParameter("pId");
             String productName = request.getParameter("productName");
             String highlight = request.getParameter("highlight");
             String description = request.getParameter("content");
             String categoryId = request.getParameter("categoryId");
             String trademarkId = request.getParameter("trademarkId");
-            String status = request.getParameter("status");
 
-            String sold = request.getParameter("sold");
-            if (Integer.parseInt(sold) < 0) {
-                sold = "0";
-            } else if (Integer.parseInt(sold) % 1 > 0.5) {
-                sold = String.valueOf((Integer.parseInt(sold) / 1) + 1);
-            } else if (Integer.parseInt(sold) % 1 < 0.5) {
-                sold = String.valueOf((Integer.parseInt(sold) / 1));
+            
+            StringBuilder s = new StringBuilder();
+            for (int i = 0; i < request.getParameter("sold").length(); i++) {
+                char currentChar = request.getParameter("sold").charAt(i);
+                // Kiểm tra xem ký tự hiện tại có phải là số không
+                if (Character.isDigit(currentChar)) {
+                    s.append(currentChar); // Nếu là số, thêm vào kết quả
+                }
             }
+            String sold = s.toString();
+            if (Integer.parseInt(sold) <= 0) {
+                sold = pDAO.getProductByID(productId).getSole();
+            }
+//            
+//            if (Integer.parseInt(sold) < 0) {
+//                sold = pDAO.getProductByID(productId).getSole();
+//            } else if (Integer.parseInt(sold) % 1 > 0.5) {
+//                sold = String.valueOf((Integer.parseInt(sold) / 1) + 1);
+//            } else if (Integer.parseInt(sold) % 1 < 0.5) {
+//                sold = String.valueOf((Integer.parseInt(sold) / 1));
+//            }
 
-            String quantity = request.getParameter("remain");
-            if (Integer.parseInt(quantity) < 0) {
-                quantity = "0";
-            } else if (Integer.parseInt(quantity) % 1 > 0.5) {
-                quantity = String.valueOf((Integer.parseInt(quantity) / 1) + 1);
-            } else if (Integer.parseInt(quantity) % 1 < 0.5) {
-                quantity = String.valueOf((Integer.parseInt(quantity) / 1));
+            
+            StringBuilder r = new StringBuilder();
+            for (int i = 0; i < request.getParameter("remain").length(); i++) {
+                char currentChar = request.getParameter("remain").charAt(i);
+                // Kiểm tra xem ký tự hiện tại có phải là số không
+                if (Character.isDigit(currentChar)) {
+                    r.append(currentChar); // Nếu là số, thêm vào kết quả
+                }
             }
+            String quantity = r.toString();
+            if (Integer.parseInt(quantity) <= 0) {
+                quantity = pDAO.getProductByID(productId).getQuantity();
+            }
+//            if (Integer.parseInt(quantity) < 0) {
+//                quantity = pDAO.getProductByID(productId).getQuantity();
+//            } else if (Integer.parseInt(quantity) % 1 > 0.5) {
+//                quantity = String.valueOf((Integer.parseInt(quantity) / 1) + 1);
+//            } else if (Integer.parseInt(quantity) % 1 < 0.5) {
+//                quantity = String.valueOf((Integer.parseInt(quantity) / 1));
+//            }
 
             String sale = request.getParameter("sale");
-            String originalPrice = request.getParameter("originalPrice");
-            String salePrice = request.getParameter("salePrice");
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+            StringBuilder oPrice = new StringBuilder();
+            for (int i = 0; i < request.getParameter("originalPrice").length(); i++) {
+                char currentChar = request.getParameter("originalPrice").charAt(i);
+                // Kiểm tra xem ký tự hiện tại có phải là số không
+                if (Character.isDigit(currentChar)) {
+                    oPrice.append(currentChar); // Nếu là số, thêm vào kết quả
+                }
+            }
+            String originalPrice = oPrice.toString();
+            if (Integer.parseInt(originalPrice) == 0) {
+                originalPrice = pDAO.getProductByID(productId).getOriginal_prices();
+            }
+
+            String salePrice = "";
+            if ("1".equals(sale)) {
+                StringBuilder sPrice = new StringBuilder();
+                for (int i = 0; i < request.getParameter("salePrice").length(); i++) {
+                    char currentChar = request.getParameter("salePrice").charAt(i);
+                    // Kiểm tra xem ký tự hiện tại có phải là số không
+                    if (Character.isDigit(currentChar)) {
+                        sPrice.append(currentChar); // Nếu là số, thêm vào kết quả
+                    }
+                }
+                salePrice = sPrice.toString();
+                if (Integer.parseInt(salePrice) == 0) {
+                    salePrice = pDAO.getProductByID(productId).getSale_prices();
+                }
+            } else {
+                salePrice = "0";
+            }
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String updateDate = formatter.format(currentDate);
 
-//            pDAO.editProduct(productId, productName, highlight, description, categoryId, trademarkId, status, sold,
-//                    quantity, sale, originalPrice, salePrice, updateDate);
-//            response.sendRedirect("manageProduct");
             String fileName = "";
             Part filePart = request.getPart("thumbnail");
             fileName = (String) filePart.getSubmittedFileName();
@@ -164,8 +219,77 @@ public class editProduct extends HttpServlet {
                 if (isImage(fileName)) {
                     fileName = uploadFile.uploadFile(request, "thumbnail");
                     piDAO.changeThumbnailByProductID(productId, "image/" + fileName);
-                    pDAO.editProduct(productId, productName, highlight, description, categoryId, trademarkId,
-                            status, sold, quantity, sale, originalPrice, salePrice, updateDate);
+                    pDAO.editProduct(productId, productName, highlight, description, categoryId, trademarkId, sold, quantity, sale, originalPrice, salePrice, updateDate);
+                    switch (categoryId) {
+                        case "1":
+                            String color = request.getParameter("phoneColor");
+                            String screenSize = request.getParameter("phoneScreenSize");
+                            String screenTech = request.getParameter("phoneScreenTech");
+                            String rearCam = request.getParameter("phoneCamRear");
+                            String frontCam = request.getParameter("phoneCamFront");
+                            String chip = request.getParameter("phoneChip");
+                            String ram = request.getParameter("phoneRam");
+                            String rom = request.getParameter("phoneRom");
+                            String pin = request.getParameter("phonePin");
+                            String sim = request.getParameter("phoneSim");
+                            String os = request.getParameter("phoneOS");
+                            String screenFeature = request.getParameter("phoneScreenFeature");
+                            String other = request.getParameter("phoneOther");
+                            if (pDAO.getProductByID(productId).getCategory_id().equals(categoryId)) {
+                                pdDAO.editPhoneDetail(productId, color, screenSize, screenTech, rearCam, frontCam, chip, ram, rom, pin, sim, os, screenFeature, other);
+                            } else {
+                                pdDAO.addPhoneDetail(productId, color, screenSize, screenTech, rearCam, frontCam, chip, ram, rom, pin, sim, os, screenFeature, other);
+                            }
+                        case "2":
+                            String lapColor = request.getParameter("lapColor");
+                            String lapScreenSize = request.getParameter("lapScreenSize");
+                            String lapScreenTech = request.getParameter("lapScreenTech");
+                            String lapChip = request.getParameter("lapChip");
+                            String lapRam = request.getParameter("lapRam");
+                            String lapPin = request.getParameter("lapPin");
+                            String lapOS = request.getParameter("lapOS");
+                            String lapScreenFeature = request.getParameter("lapScreenFeature");
+                            String lapOther = request.getParameter("lapOther");
+                            if (pDAO.getProductByID(productId).getCategory_id().equals(categoryId)) {
+                                ltDAO.editLaptopDetail(productId, lapColor, lapScreenSize, lapScreenTech, lapChip, lapRam, lapPin, lapOS, lapScreenFeature, lapOther);
+                            } else {
+                                ltDAO.addLaptopDetail(productId, lapColor, lapScreenSize, lapScreenTech, lapChip, lapRam, lapPin, lapOS, lapScreenFeature, lapOther);
+                            }
+                        case "3":
+                            String tabColor = request.getParameter("tabColor");
+                            String tabScreenSize = request.getParameter("tabScreenSize");
+                            String tabScreenTech = request.getParameter("tabScreenTech");
+                            String tabCamRear = request.getParameter("tabCamRear");
+                            String tabCamFront = request.getParameter("tabCamFront");
+                            String tabChip = request.getParameter("tabChip");
+                            String tabRam = request.getParameter("tabRam");
+                            String tabRom = request.getParameter("tabRom");
+                            String tabPin = request.getParameter("tabPin");
+                            String tabSim = request.getParameter("tabSim");
+                            String tabOS = request.getParameter("tabOS");
+                            String tabScreenResolution = request.getParameter("tabScreenResolution");
+                            String tabScreenFeature = request.getParameter("tabScreenFeature");
+                            String tabOther = request.getParameter("tabOther");
+                            if (pDAO.getProductByID(productId).getCategory_id().equals(categoryId)) {
+                                tbDAO.editTabletDetail(productId, tabColor, tabScreenSize, tabScreenTech, tabCamRear, tabCamFront, tabChip, tabRam, tabRom, tabPin, tabSim, tabOS, tabScreenResolution, tabScreenFeature, tabOther);
+                            } else {
+                                tbDAO.addTabletDetail(productId, tabColor, tabScreenSize, tabScreenTech, tabCamRear, tabCamFront, tabChip, tabRam, tabRom, tabPin, tabSim, tabOS, tabScreenResolution, tabScreenFeature, tabOther);
+                            }
+                        case "4":
+                            String headphoneColor = request.getParameter("headphoneColor");
+                            String headphoneConnect = request.getParameter("headphoneConnect");
+                            String headphoneTime = request.getParameter("headphoneTime");
+                            String headphoneSound = request.getParameter("headphoneSound");
+                            String headphoneMic = request.getParameter("headphoneMic");
+                            String headphoneCotrol = request.getParameter("headphoneCotrol");
+                            String headphoneWaterproof = request.getParameter("headphoneWaterproof");
+                            String headphoneOther = request.getParameter("headphoneOther");
+                            if (pDAO.getProductByID(productId).getCategory_id().equals(categoryId)) {
+                                hpDAO.editHeadphoneDetail(productId, headphoneConnect, headphoneColor, headphoneTime, headphoneSound, headphoneMic, headphoneCotrol, headphoneWaterproof, headphoneOther);
+                            } else {
+                                hpDAO.addHeadphoneDetail(productId, headphoneConnect, headphoneColor, headphoneTime, headphoneSound, headphoneMic, headphoneCotrol, headphoneWaterproof, headphoneOther);
+                            }
+                    }
                     response.sendRedirect("manageProduct");
                 } else {
                     String targetURL = "editProduct?pid=" + productId;
@@ -179,7 +303,7 @@ public class editProduct extends HttpServlet {
 ////                request.getRequestDispatcher(targetURL).forward(request, response);
                 response.sendRedirect(targetURL);
             }
-        } catch (ServletException | IOException e) {
+        } catch (Exception e) {
         }
     }
 

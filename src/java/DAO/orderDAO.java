@@ -7,11 +7,8 @@ package DAO;
 import DBContext.DBContext;
 import Model.Category;
 import Model.Chart;
-import Model.Management;
-import Model.Product;
 import Model.Trademark;
 import Model.order;
-import helper.FormatData;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -135,7 +132,7 @@ public class orderDAO {
             stm.setString(2, end);
             rs = stm.executeQuery();
             while (rs.next()) {
-                order o = new order(String.valueOf(rs.getInt(1)), FormatData.formatDate(String.valueOf(rs.getDate(2))), String.valueOf(FormatData.formatNumber(rs.getInt(3))), rs.getString(4), rs.getString(5), rs.getString(6), String.valueOf(rs.getBoolean(7)), rs.getString(12), String.valueOf(rs.getInt(13)), rs.getString(10), rs.getString(11));
+                order o = new order(String.valueOf(rs.getInt(1)), String.valueOf(rs.getDate(2)), String.valueOf(rs.getInt(3)), rs.getString(4), rs.getString(5), rs.getString(6), String.valueOf(rs.getBoolean(7)), rs.getString(12), String.valueOf(rs.getInt(13)), rs.getString(10), rs.getString(11));
 
                 list.add(o);
             }

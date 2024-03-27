@@ -77,7 +77,6 @@ public class loadBlogPage extends HttpServlet {
         if (count % 15 != 0) {
             endPage++;
         }
-        request.setAttribute("s", s);
         request.setAttribute("endPage", endPage);
         request.setAttribute("bloglist", bloglist);
         request.setAttribute("index", index);

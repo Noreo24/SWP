@@ -72,16 +72,16 @@ public class addProduct extends HttpServlet {
         categoryDAO cDAO = new categoryDAO();
         trademarkDAO tmDAO = new trademarkDAO();
 
-        int countProduct = pDAO.totalNumberOfProduct();
+//        int countProduct = pDAO.totalNumberOfProduct();
         List<Category> cList = cDAO.getAllCategory();
-        List<Trademark> tmList = tmDAO.listAllTrademark();
+        List<Trademark> tmList = tmDAO.listAllTrademarkAdmin();
         Date currentDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String updateDate = formatter.format(currentDate);
         
         HttpSession session = request.getSession();
 
-        session.setAttribute("countProduct", countProduct + 1);
+//        session.setAttribute("countProduct", countProduct + 1);
         session.setAttribute("updateDate", updateDate);
         session.setAttribute("cList", cList);
         session.setAttribute("tmList", tmList);

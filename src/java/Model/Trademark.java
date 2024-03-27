@@ -14,6 +14,8 @@ public class Trademark {
             trademark_name,
             status;
 
+    private String description, img;
+
     public Trademark() {
     }
 
@@ -21,6 +23,30 @@ public class Trademark {
         this.trademark_id = trademark_id;
         this.trademark_name = trademark_name;
         this.status = status;
+    }
+
+    public Trademark(String trademark_id, String trademark_name, String status, String description, String img) {
+        this.trademark_id = trademark_id;
+        this.trademark_name = trademark_name;
+        this.status = status;
+        this.description = description;
+        this.img = img;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getTrademark_id() {
@@ -46,5 +72,5 @@ public class Trademark {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
 }
