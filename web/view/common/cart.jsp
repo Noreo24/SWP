@@ -45,26 +45,6 @@
         <%@include file="/navigator/userheader.jsp" %>
 
 
-        <!-- BREADCRUMB -->
-        <div id="breadcrumb" class="section">
-            <!-- container -->
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 class="breadcrumb-header">Regular Page</h3>
-                        <ul class="breadcrumb-tree">
-                            <li><a href="#">Home</a></li>
-                            <li class="active">Blank</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /row -->
-            </div>
-            <!-- /container -->
-        </div>
-        <!-- /BREADCRUMB -->
-
         <!-- SECTION -->
         <div class="section">
             <!-- container -->
@@ -73,7 +53,6 @@
                 <div class="row">
 
                     <div class="container">
-                        <h1>Your Cart</h1>
                         <c:if test="${param.success ne null}">
                             <div class="alert alert-success" role="alert">
                                 Order success!

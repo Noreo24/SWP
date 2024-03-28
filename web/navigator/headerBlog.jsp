@@ -36,7 +36,7 @@
 
                 <nav class="navbar navbar-expand-lg navbar-white">
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/home">
-                        <img class="img-fluid" width="150px" src="${pageContext.request.contextPath}/img/logo.png" alt="">
+                        <img class="img-fluid" width="150px" style="border-radius: 10px" src="${pageContext.request.contextPath}/img/logo.png" alt="">
                     </a>
                     <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation">
                         <i class="ti-menu"></i>

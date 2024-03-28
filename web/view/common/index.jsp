@@ -141,7 +141,7 @@
                             <div class="products-tabs">
                                 <!-- tab -->
                                 <div id="tab1" class="tab-pane active">
-                                    <div class="products-slick" data-nav="#slick-nav-1">
+                                    <div class="products-slick"  data-nav="#slick-nav-1">
                                         <!-- product -->
 
                                         <c:forEach var="product" items="${listNewProducts}">
@@ -151,20 +151,22 @@
                                                     <img src="${product.productImages[0].images}" alt="Product Image">
                                                     <!-- Add other image-related code as needed -->
                                                     <div class="product-label">
-                                                        <span class="sale">${product.salePercent}</span>
+                                                        <c:if test="${product.sale == 'true'}">
+                                                            <span class="sale">${product.salePercent}</span>
+                                                        </c:if>
                                                         <span class="new">NEW</span>
                                                     </div>
                                                 </div>
                                                 <div class="product-body">
                                                     <p class="product-category">${product.category.category_name}</p>
-                                                    <h3 class="product-name"><a href="view/user/product.jsp">${product.productName}</a></h3>
-                                                    <!--                                                    <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                                                                            <del class="product-old-price">${product.originalPrices}</del></h4>-->
+                                                    <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                                     <h4 class="product-price">
                                                         <fmt:formatNumber value="${product.sale ? product.salePrices : product.originalPrices}" type="currency" currencyCode="VND"/>
-                                                        <del class="product-old-price">
-                                                            <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
-                                                        </del>
+                                                        <c:if test="${product.sale == 'true'}">
+                                                            <del class="product-old-price">
+                                                                <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                            </del>
+                                                        </c:if>
                                                     </h4>
                                                     <div class="product-rating">
                                                         <!-- Assuming you have an 'avrRatedStar' property in your Product class -->
@@ -233,20 +235,22 @@
                                                     <img src="${product.productImages[0].images}" alt="Product Image">
                                                     <!-- Add other image-related code as needed -->
                                                     <div class="product-label">
-                                                        <span class="sale">${product.salePercent}</span>
+                                                        <c:if test="${product.sale == 'true'}">
+                                                            <span class="sale">${product.salePercent}</span>
+                                                        </c:if>
                                                         <span class="new">NEW</span>
                                                     </div>
                                                 </div>
                                                 <div class="product-body">
                                                     <p class="product-category">${product.category.category_name}</p>
-                                                    <h3 class="product-name"><a href="#">${product.productName}</a></h3>
-                                                    <!--                                                    <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                                                                            <del class="product-old-price">${product.originalPrices}</del></h4>-->
+                                                    <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                                     <h4 class="product-price">
                                                         <fmt:formatNumber value="${product.sale ? product.salePrices : product.originalPrices}" type="currency" currencyCode="VND"/>
-                                                        <del class="product-old-price">
-                                                            <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
-                                                        </del>
+                                                        <c:if test="${product.sale == 'true'}">
+                                                            <del class="product-old-price">
+                                                                <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                            </del>
+                                                        </c:if>
                                                     </h4>
                                                     <div class="product-rating">
                                                         <!-- Assuming you have an 'avrRatedStar' property in your Product class -->
@@ -289,7 +293,7 @@
                     <div class="col-md-12">
                         <div class="hot-deal">
                             <h2 class="text-uppercase">hot deal this week</h2>
-                            <p>New Collection Up to 50% OFF</p>
+                            <!--<p>New Collection Up to 50% OFF</p>-->
                             <div class="section">
                                 <!-- container -->
                                 <div class="container">
@@ -313,20 +317,22 @@
                                                                         <img src="${product.productImages[0].images}" alt="Product Image">
                                                                         <!-- Add other image-related code as needed -->
                                                                         <div class="product-label">
-                                                                            <span class="sale">${product.salePercent}</span>
+                                                                            <c:if test="${product.sale == 'true'}">
+                                                                                <span class="sale">${product.salePercent}</span>
+                                                                            </c:if>
                                                                             <span class="new">NEW</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="product-body">
                                                                         <p class="product-category">${product.category.category_name}</p>
-                                                                        <h3 class="product-name"><a href="#">${product.productName}</a></h3>
-                                                                        <!--                                                    <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                                                                                                <del class="product-old-price">${product.originalPrices}</del></h4>-->
+                                                                        <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                                                         <h4 class="product-price">
                                                                             <fmt:formatNumber value="${product.sale ? product.salePrices : product.originalPrices}" type="currency" currencyCode="VND"/>
-                                                                            <del class="product-old-price">
-                                                                                <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
-                                                                            </del>
+                                                                            <c:if test="${product.sale == 'true'}">
+                                                                                <del class="product-old-price">
+                                                                                    <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                                                </del>
+                                                                            </c:if>
                                                                         </h4>
                                                                         <div class="product-rating">
                                                                             <!-- Assuming you have an 'avrRatedStar' property in your Product class -->
@@ -409,20 +415,22 @@
                                                     <img src="${product.productImages[0].images}" alt="Product Image">
                                                     <!-- Add other image-related code as needed -->
                                                     <div class="product-label">
-                                                        <span class="sale">${product.salePercent}</span>
+                                                        <c:if test="${product.sale == 'true'}">
+                                                            <span class="sale">${product.salePercent}</span>
+                                                        </c:if>
                                                         <span class="new">SOLE: ${product.sole}</span>
                                                     </div>
                                                 </div>
                                                 <div class="product-body">
                                                     <p class="product-category">${product.category.category_name}</p>
-                                                    <h3 class="product-name"><a href="#">${product.productName}</a></h3>
-                                                    <!--                                                    <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                                                                            <del class="product-old-price">${product.originalPrices}</del></h4>-->
+                                                    <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                                     <h4 class="product-price">
                                                         <fmt:formatNumber value="${product.sale ? product.salePrices : product.originalPrices}" type="currency" currencyCode="VND"/>
-                                                        <del class="product-old-price">
-                                                            <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
-                                                        </del>
+                                                        <c:if test="${product.sale == 'true'}">
+                                                            <del class="product-old-price">
+                                                                <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                            </del>
+                                                        </c:if>
                                                     </h4>
                                                     <div class="product-rating">
                                                         <!-- Assuming you have an 'avrRatedStar' property in your Product class -->
@@ -483,9 +491,14 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                <del class="product-old-price">${product.originalPrices}</del></h4>
+                                                <c:if test="${product.sale == 'true'}">
+                                                    <del class="product-old-price">
+                                                        <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                    </del>
+                                                </c:if>
+                                            </h4>
                                         </div>
                                     </div>
                                     <!-- /product widget -->
@@ -504,9 +517,14 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                <del class="product-old-price">${product.originalPrices}</del></h4>
+                                                <c:if test="${product.sale == 'true'}">
+                                                    <del class="product-old-price">
+                                                        <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                    </del>
+                                                </c:if>
+                                            </h4>
                                         </div>
                                     </div>
                                     <!-- /product widget -->
@@ -525,9 +543,14 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                <del class="product-old-price">${product.originalPrices}</del></h4>
+                                                <c:if test="${product.sale == 'true'}">
+                                                    <del class="product-old-price">
+                                                        <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                    </del>
+                                                </c:if>
+                                            </h4>
                                         </div>
                                     </div>
                                     <!-- /product widget -->
@@ -558,9 +581,14 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                <del class="product-old-price">${product.originalPrices}</del></h4>
+                                                <c:if test="${product.sale == 'true'}">
+                                                    <del class="product-old-price">
+                                                        <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                    </del>
+                                                </c:if>
+                                            </h4>
                                         </div>
                                     </div>
                                     <!-- /product widget -->
@@ -579,9 +607,14 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                <del class="product-old-price">${product.originalPrices}</del></h4>
+                                                <c:if test="${product.sale == 'true'}">
+                                                    <del class="product-old-price">
+                                                        <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                    </del>
+                                                </c:if>
+                                            </h4>
                                         </div>
                                     </div>
                                     <!-- /product widget -->
@@ -600,9 +633,14 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                <del class="product-old-price">${product.originalPrices}</del></h4>
+                                                <c:if test="${product.sale == 'true'}">
+                                                    <del class="product-old-price">
+                                                        <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                    </del>
+                                                </c:if>
+                                            </h4>
                                         </div>
                                     </div>
                                     <!-- /product widget -->
@@ -632,9 +670,14 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                <del class="product-old-price">${product.originalPrices}</del></h4>
+                                                <c:if test="${product.sale == 'true'}">
+                                                    <del class="product-old-price">
+                                                        <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                    </del>
+                                                </c:if>
+                                            </h4>
                                         </div>
                                     </div>
                                     <!-- /product widget -->
@@ -653,9 +696,14 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                <del class="product-old-price">${product.originalPrices}</del></h4>
+                                                <c:if test="${product.sale == 'true'}">
+                                                    <del class="product-old-price">
+                                                        <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                    </del>
+                                                </c:if>
+                                            </h4>
                                         </div>
                                     </div>
                                     <!-- /product widget -->
@@ -674,9 +722,14 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
-                                                <del class="product-old-price">${product.originalPrices}</del></h4>
+                                                <c:if test="${product.sale == 'true'}">
+                                                    <del class="product-old-price">
+                                                        <fmt:formatNumber value="${product.originalPrices}" type="currency" currencyCode="VND"/>
+                                                    </del>
+                                                </c:if>
+                                            </h4>
                                         </div>
                                     </div>
                                     <!-- /product widget -->

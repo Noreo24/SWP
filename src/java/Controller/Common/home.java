@@ -17,6 +17,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.List;
@@ -89,7 +90,10 @@ public class home extends HttpServlet {
 
         // Create an instance of ProductDAO
         ProductDAO2 productDAO = new ProductDAO2();
-
+        categoryDAO cd = new categoryDAO();
+        List<Category> catelist = cd.getAllCategory();
+        HttpSession session = request.getSession();
+        session.setAttribute("catelist", catelist);;
         // List to store products
         List<p> productList;
         List<p> listSoleProducts;
@@ -124,6 +128,7 @@ public class home extends HttpServlet {
         request.setAttribute("listProductsTopDeal", new ProductDAO2().getAllProductsTopDeal());
         request.setAttribute("listNewProducts", listNewProducts);
         request.setAttribute("listSoleProducts", listSoleProducts);
+        request.setAttribute("checkActive", "Home");
 
         // Forward the request to the home.jsp page (adjust the JSP page name accordingly)
         request.getRequestDispatcher("/view/common/index.jsp").forward(request, response);

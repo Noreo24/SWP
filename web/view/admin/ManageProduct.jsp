@@ -22,19 +22,6 @@
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Danh sách sản phẩm</h1>
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Products</li>
-                    </ol>
-                    <div class="col-xl-2 col-md-3">
-                        <div class="card bg-success text-white mb-4">
-                            <div class="card-body">Export Blog List</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="${pageContext.request.contextPath}/exportfile?type=product">Export file</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="card mb-4">
                         <div class="card-header">
                             <!--<i class="fas fa-table me-1"></i>-->
@@ -72,7 +59,7 @@
                                                 <option value="All"
                                                         <c:if test="${cateSelect.equals('All')}">
                                                             selected
-                                                        </c:if>>All
+                                                        </c:if>>Tất cả
                                                 </option>
                                                 <c:forEach items="${allCategories}" var="c">
                                                     <option value="${c.category_name}"
@@ -90,7 +77,7 @@
                                                 <option value="All"
                                                         <c:if test="${trademarkSelect.equals('All')}">
                                                             selected
-                                                        </c:if>>All
+                                                        </c:if>>Tất cả
                                                 </option>
                                                 <c:forEach items="${allTrademarks}" var="tm">
                                                     <option value="${tm.trademark_name}"
@@ -105,8 +92,17 @@
                                         <div class="col-sm-3">
                                             <label class="small mb-1" style="font-weight: bold;">Tên sản phẩm</label>
                                             <input type="text" class="form-control" name="nameSearch"
-                                                   value="${nameSearch}" placeholder="Search by name"
+                                                   value="${nameSearch}" placeholder="Nhập tên"
                                                    />
+                                        </div>
+                                        <div class="col-xl-2 col-md-3">
+                                            <label class="small mb-1" style="font-weight: bold;">Xuất file excel</label>
+                                            <div class="card bg-success text-white mb-4">
+                                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                                    <a class="small text-white stretched-link" href="${pageContext.request.contextPath}/exportfile?type=product">Export file</a>
+                                                    <!--<div class="small text-white"><i class="fas fa-angle-right"></i></div>-->
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -141,7 +137,7 @@
                                                 <td>
                                                     <c:forEach items="${allImages}" var="i">
                                                         <c:if test="${i.product_id == p.product_id}">
-                                                            <img src="${i.images}" style="width: 100px; height: 100%;" alt="Err pic">
+                                                            <img src="${pageContext.request.contextPath}/${i.images}" style="width: 100px; height: 100%;" alt="Err pic">
                                                         </c:if>
                                                     </c:forEach>
                                                 </td>
@@ -153,18 +149,18 @@
                                                 <td>
                                                     <c:forEach items="${allCategories}" var="c">
                                                         <c:if test="${p.category_id == c.category_id}">
-                                                            <a href="listProduct"  style="text-decoration: none; color: black;" onmouseover="this.style.color = '#d31837'" onmouseout="this.style.color = 'black'">
+                                                            <!--<a href="listProduct"  style="text-decoration: none; color: black;" onmouseover="this.style.color = '#d31837'" onmouseout="this.style.color = 'black'">-->
                                                                 ${c.category_name}
-                                                            </a>
+                                                            <!--</a>-->
                                                         </c:if>
                                                     </c:forEach>
                                                 </td>
                                                 <td>
                                                     <c:forEach items="${allTrademarks}" var="tm">
                                                         <c:if test="${tm.trademark_id == p.trademark_id}">
-                                                            <a href="listProduct"  style="text-decoration: none; color: black;" onmouseover="this.style.color = '#d31837'" onmouseout="this.style.color = 'black'">
+                                                            <!--<a href="listProduct"  style="text-decoration: none; color: black;" onmouseover="this.style.color = '#d31837'" onmouseout="this.style.color = 'black'">-->
                                                                 ${tm.trademark_name}
-                                                            </a>
+                                                            <!--</a>-->
                                                         </c:if>
                                                     </c:forEach>
                                                 </td>

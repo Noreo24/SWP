@@ -201,7 +201,7 @@ public class addProductControl extends HttpServlet {
                     }
                     salePrice = sPrice.toString();
                 } else {
-                    salePrice = "0";
+                    salePrice = originalPrice;
                 }
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 String updateDate = formatter.format(currentDate);
@@ -211,10 +211,10 @@ public class addProductControl extends HttpServlet {
                 fileName = (String) filePart.getSubmittedFileName();
                 if (!fileName.isEmpty()) {
                     if (isImage(fileName)) {
-                        fileName = uploadFile.uploadFile(request, "thumbnail");
+                        fileName = uploadFile.uploadFile(request, "image");
                         pDAO.addNewProduct(productName, originalPrice, sale, salePrice, highlight, description, trademarkID, "1",
                                 quantity, "1", cateID, updateDate, "0", "1", "0");
-                        piDAO.addNewProductImage(pDAO.getLastProduct().getProduct_id(), "1",fileName);
+                        piDAO.addNewProductImage(pDAO.getLastProduct().getProduct_id(), "1", "image/" + fileName);
                         response.sendRedirect("manageProduct");
                     } else {
                         response.sendRedirect("/view/admin/addProduct.jsp");

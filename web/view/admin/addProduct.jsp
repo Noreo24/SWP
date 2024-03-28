@@ -1,17 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %>
-<%
-    // Lấy ngày tháng hiện tại
-    Date currentDate = new Date();
-
-    // Tạo đối tượng SimpleDateFormat với định dạng mong muốn
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-    // Định dạng ngày tháng năm
-    String formattedDate = sdf.format(currentDate);
-%>--%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -86,15 +74,15 @@
                         <div class="col-md-8">
                             <div class="p-3">
                                 <h5 class="col-md-12" style="font-weight: bold;">Tên sản phẩm
-                                    <input type="text" name="productName" class="form-control" value="" >
+                                    <input type="text" name="productName" class="form-control" value="" required>
                                 </h5>
                                 <h5 class="col-md-12" style="font-weight: bold;">Đặc điểm nổi bật
-                                    <textarea cols="20" rows="40" id="editor2" name="highlight">
+                                    <textarea cols="20" rows="40" id="editor2" name="highlight" required>
                                         
                                     </textarea>
                                 </h5>
                                 <h5 class="col-md-12" style="font-weight: bold;">Mô tả
-                                    <textarea cols="20" rows="40" id="editor" name="content">
+                                    <textarea cols="20" rows="40" id="editor" name="content" required>
                                         
                                     </textarea>
                                 </h5>
@@ -362,11 +350,11 @@
                                         <input name="status" type="radio" value="0" required/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
                                     </h5>
                                     <h5 class="col-md-12" style="font-weight: bold;">Số lượng sản phẩm
-                                        <input type="text" name="quantity" class="form-control" data-type="currency" value="">
+                                        <input type="text" name="quantity" class="form-control" data-type="currency" value="" required>
                                     </h5>
                                     <h5 class="col-md-12" style="font-weight: bold;">Sale
-                                        <input name="sale" type="radio" onchange="inputSalePrice(this)" value="1"/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
-                                        <input name="sale" type="radio" onchange="inputSalePrice(this)" value="0"/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
+                                        <input name="sale" type="radio" onchange="inputSalePrice(this)" value="1" required/>&nbsp;<i class="fa fa-check" style="color: green;"></i>
+                                        <input name="sale" type="radio" onchange="inputSalePrice(this)" value="0" required/>&nbsp;<i class="fa fa-times" style="color: red;"></i>
                                     </h5>
                                     <div class="col-md-12" style="font-weight: bold;">Giá gốc
                                         <input type="text" name="originalPrice" class="form-control" value="${product.original_prices}" data-type="currency" required>
@@ -375,7 +363,7 @@
                                         <input id="salePrice" type="text" name="salePrice" class="form-control" value="${product.sale_prices}" data-type="currency">
                                     </div>
                                     <h5 class="col-md-6" style="font-weight: bold;">Chọn ảnh
-                                        <input id="inputFile" type="file" name="thumbnail" class="form-control" placeholder="Ảnh">
+                                        <input id="inputFile" type="file" name="thumbnail" class="form-control" placeholder="Ảnh" required>
                                     </h5>
                                     <h5 class="col-md-6" style="font-weight: bold;">Ngày cập nhật
                                         <input type="text" name="updateDate" class="form-control" value="${updateDate}" readonly="">
@@ -854,3 +842,5 @@
         <script src="${pageContext.request.contextPath}/js/jsmanage/datatables-simple-demo.js"></script>
     </body>
 </html>
+
+

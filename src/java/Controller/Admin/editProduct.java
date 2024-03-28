@@ -146,15 +146,6 @@ public class editProduct extends HttpServlet {
             if (Integer.parseInt(sold) <= 0) {
                 sold = pDAO.getProductByID(productId).getSole();
             }
-//            
-//            if (Integer.parseInt(sold) < 0) {
-//                sold = pDAO.getProductByID(productId).getSole();
-//            } else if (Integer.parseInt(sold) % 1 > 0.5) {
-//                sold = String.valueOf((Integer.parseInt(sold) / 1) + 1);
-//            } else if (Integer.parseInt(sold) % 1 < 0.5) {
-//                sold = String.valueOf((Integer.parseInt(sold) / 1));
-//            }
-
             
             StringBuilder r = new StringBuilder();
             for (int i = 0; i < request.getParameter("remain").length(); i++) {
@@ -206,7 +197,7 @@ public class editProduct extends HttpServlet {
                     salePrice = pDAO.getProductByID(productId).getSale_prices();
                 }
             } else {
-                salePrice = "0";
+                salePrice = pDAO.getProductByID(productId).getOriginal_prices();
             }
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -217,7 +208,7 @@ public class editProduct extends HttpServlet {
             fileName = (String) filePart.getSubmittedFileName();
             if (!fileName.isEmpty()) {
                 if (isImage(fileName)) {
-                    fileName = uploadFile.uploadFile(request, "thumbnail");
+                    fileName = uploadFile.uploadFile(request, "image");
                     piDAO.changeThumbnailByProductID(productId, "image/" + fileName);
                     pDAO.editProduct(productId, productName, highlight, description, categoryId, trademarkId, sold, quantity, sale, originalPrice, salePrice, updateDate);
                     switch (categoryId) {

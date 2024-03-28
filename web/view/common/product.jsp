@@ -77,61 +77,68 @@
                         <div class="product-details">
                             <h2 class="product-name">${product_detail.product_name}</h2>
                             <div>
-                                <c:if test="${product_detail.avr_rated_star > 4.0 && product_detail.avr_rated_star <= 5.0}">
-                                    <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </c:if>
-                                <c:if test="${product_detail.avr_rated_star > 3.0 && product_detail.avr_rated_star <= 4.0}">
-                                    <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                </c:if>
-                                <c:if test="${product_detail.avr_rated_star > 2.0 && product_detail.avr_rated_star <= 3.0}">
-                                    <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                </c:if>
-                                <c:if test="${product_detail.avr_rated_star > 1.0 && product_detail.avr_rated_star <= 2.0}">
-                                    <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                </c:if>
-                                <c:if test="${product_detail.avr_rated_star > 0.0 && product_detail.avr_rated_star <= 1.0}">
-                                    <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                </c:if>
-                                <c:if test="${product_detail.avr_rated_star == 0.0}">
-                                    <div class="product-rating">
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                </c:if>
-                                <a class="review-link" href="#">${number_of_feedback} Review(s) | Add your review</a>
+                                <ul class="product-links">
+                                    <li>
+                                        <c:if test="${product_detail.avr_rated_star > 4.0 && product_detail.avr_rated_star <= 5.0}">
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${product_detail.avr_rated_star > 3.0 && product_detail.avr_rated_star <= 4.0}">
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${product_detail.avr_rated_star > 2.0 && product_detail.avr_rated_star <= 3.0}">
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${product_detail.avr_rated_star > 1.0 && product_detail.avr_rated_star <= 2.0}">
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${product_detail.avr_rated_star > 0.0 && product_detail.avr_rated_star <= 1.0}">
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${product_detail.avr_rated_star == 0.0}">
+                                            <div class="product-rating">
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </div>
+                                        </c:if>
+                                    </li>
+                                    <li style="font-weight: bold;">Danh mục:</li>
+                                    <li>${category.category_name}</li>
+                                    <li style="font-weight: bold;">Nhãn hiệu:</li>
+                                    <li>${trade.getTrademark_name()}</li>
+                                </ul>
                             </div>
                             <div>
                                 <c:if test="${product_detail.sale == 1}">
@@ -142,7 +149,7 @@
                                 </c:if>
                                 <c:if test="${product_detail.status == 1}">
                                     <span class="product-available">
-                                        In Stock
+                                        Sẵn bán
                                     </span>
                                 </c:if>
                             </div>
@@ -158,33 +165,28 @@
                             <br>
                             <div class="add-to-cart">
                                 <div class="qty-label">
-                                    <p style="color: orangered; font-size: 20px">Quantity:</p>
+                                    <p style="color: orangered; font-size: 20px">Số lượng</p>
                                     <div class="input-number">
                                         <input type="number" value="1">
                                         <span class="qty-up">+</span>
                                         <span class="qty-down">-</span>
                                     </div>
                                 </div>
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <a href="update-cart?id=${product_detail.product_id}&amount=1" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
                             </div>
 
-                            <ul class="product-btns">
-                                <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-                                <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
-                            </ul>
+                            <!--                            <ul class="product-btns">
+                                                            <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+                                                            <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
+                                                        </ul>-->
 
-                            <ul class="product-links">
-                                <li>Category:</li>
-                                <li><a href="#">${category.category_name}</a></li>
-                            </ul>
-
-                            <ul class="product-links">
-                                <li>Share:</li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                            </ul>
+                            <!--                            <ul class="product-links">
+                                                            <li>Share:</li>
+                                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                                                        </ul>-->
 
                         </div>
                     </div>
@@ -195,9 +197,9 @@
                         <div id="product-tab">
                             <!-- product tab nav -->
                             <ul class="tab-nav">
-                                <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-                                <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                                <li><a data-toggle="tab" href="#tab3">Reviews (${number_of_feedback})</a></li>
+                                <li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
+                                <li><a data-toggle="tab" href="#tab2">Thông số</a></li>
+                                <li><a data-toggle="tab" href="#tab3">Đánh giá (${number_of_feedback})</a></li>
                             </ul>
                             <!-- /product tab nav -->
 
@@ -655,11 +657,11 @@
                                         <div class="col-md-3">
                                             <div id="review-form">
                                                 <form class="review-form">
-                                                    <input class="input" type="text" placeholder="Your Name">
-                                                    <input class="input" type="email" placeholder="Your Email">
-                                                    <textarea class="input" placeholder="Your Review"></textarea>
+                                                    <input class="input" type="text" placeholder="Họ và tên">
+                                                    <input class="input" type="email" placeholder="Email">
+                                                    <textarea class="input" placeholder="Nhận xét"></textarea>
                                                     <div class="input-rating">
-                                                        <span>Your Rating: </span>
+                                                        <span>Đánh giá</span>
                                                         <div class="stars">
                                                             <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
                                                             <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
@@ -668,7 +670,7 @@
                                                             <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
                                                         </div>
                                                     </div>
-                                                    <button class="primary-btn">Submit</button>
+                                                    <button class="primary-btn">Gửi</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -699,7 +701,7 @@
 
                 <div class="col-md-12">
                     <div class="section-title text-center">
-                        <h3 class="title">Related Products</h3>
+                        <h3 class="title">Sản phẩm liên quan</h3>
                     </div>
                 </div>
 
@@ -741,7 +743,7 @@
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <a href="update-cart?id=${relatedProduct.product_id}&amount=1" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
                             </div>
                         </div>
                     </div>

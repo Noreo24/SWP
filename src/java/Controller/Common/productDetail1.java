@@ -4,7 +4,7 @@
  */
 package Controller.Common;
 
-import DAO.*; 
+import DAO.*;
 import Model.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -46,6 +46,7 @@ public class productDetail1 extends HttpServlet {
 
         ProductDAO pDAO = new ProductDAO();
         categoryDAO cDAO = new categoryDAO();
+        trademarkDAO tmDAO = new trademarkDAO();
         feedbackDAO fDAO = new feedbackDAO();
         customerDAO cusDAO = new customerDAO();
         productImagesDAO piDAO = new productImagesDAO();
@@ -56,6 +57,7 @@ public class productDetail1 extends HttpServlet {
 
         Product p = pDAO.getProductByID(id);
         Category cate = cDAO.getCategoryByProductID(id);
+        Trademark trade = tmDAO.getTrademarkByPID(id);
         int numberOfFeedback = fDAO.numberOfFeedback(id);
         List<feedback> list3F = fDAO.feedbackPaging(id, feedbackPageNum);
         Customer acc = cusDAO.getCustomerById(id);
@@ -63,29 +65,36 @@ public class productDetail1 extends HttpServlet {
         List<productImage> allImages = piDAO.getAllImage();
         List<Product> relatedProduct = pDAO.get4RelatedProduct(Integer.parseInt(cate.getCategory_id()), id);
         List<Category> listAllCategory = cDAO.getAllCategory();
+//        List<Trademark> allTrademarks = tmDAO.listAllTrademarkAdmin();
 
         // Định dạng giá tiền cho sản phẩm chính
         long original_price = Long.parseLong(p.getOriginal_prices());
-        long new_price = Long.parseLong(p.getSale_prices());
+        long new_price = 0;
+        if (p.getSale_prices() != null) {
+            new_price = Long.parseLong(p.getSale_prices());
+        }
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
         p.setOriginal_prices(currencyVN.format(original_price));
         p.setSale_prices(currencyVN.format(new_price));
-        
+
         // Định dạng giá tiền cho sản phẩm liên quan
         for (Product i : relatedProduct) {
             long related_original_price = Long.parseLong(i.getOriginal_prices());
-            long related_new_price = Long.parseLong(i.getSale_prices());
+            long related_new_price = 0;
+            if (i.getSale_prices() != null) {
+                related_new_price = Long.parseLong(i.getSale_prices());
+            }
             i.setOriginal_prices(currencyVN.format(related_original_price));
             i.setSale_prices(currencyVN.format(related_new_price));
         }
-        
+
         // Phân trang
         int endPage = numberOfFeedback / 3;
         if (numberOfFeedback % 3 != 0) {
             endPage++;
         }
-        
+
         // Lấy thông tin chi tiết của sản phẩm
         int cateID = Integer.parseInt(cate.getCategory_id());
         switch (cateID) {
@@ -114,12 +123,14 @@ public class productDetail1 extends HttpServlet {
         request.setAttribute("endP", endPage);
         request.setAttribute("product_detail", p);
         request.setAttribute("category", cate);
+        request.setAttribute("trade", trade);
         request.setAttribute("number_of_feedback", numberOfFeedback);
         request.setAttribute("list_3_feedback", list3F);
         request.setAttribute("customer_info", acc);
         request.setAttribute("relatedProduct", relatedProduct);
         request.setAttribute("allImages", allImages);
         request.setAttribute("allCategories", listAllCategory);
+//        request.setAttribute("allTrademarks", allTrademarks);
 
         request.getRequestDispatcher("/view/common/product.jsp").forward(request, response);
     }

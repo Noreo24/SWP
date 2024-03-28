@@ -69,11 +69,11 @@
                 <div class="container">
                     <!-- row -->
                     <div class="row">
-                        <!-- LOGO -->
+                        <!-- /LOGO -->                 <!-- LOGO -->
                         <div class="col-md-3">
                             <div class="header-logo">
                                 <a href="${pageContext.request.contextPath}/home" class="logo">
-                                    <img style="width: 250px" src="${pageContext.request.contextPath}/img/logo.png" alt="">
+                                    <img style="width: 150px; border-radius: 10px;" src="${pageContext.request.contextPath}/img/logo.png" alt="">
                                 </a>
                             </div>
                         </div>
