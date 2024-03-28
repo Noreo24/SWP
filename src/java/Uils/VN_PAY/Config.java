@@ -141,9 +141,9 @@ public class Config {
         int id = Integer.parseInt(mem.get(ref));
         
         order order = new OrderDAO2().getOrderByID(id);
-        order.setStatus_order(null);
+       
         
-        new OrderDAO2().editOrder(order);
+        new OrderDAO2().acceptOrder(order);
         new OrderDAO2().editOrder(order, ref);
         
     }

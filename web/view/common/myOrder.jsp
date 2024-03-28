@@ -68,7 +68,7 @@
                                             <td>${order.note}</td>
                                             <td>${order.order_code}</td>
                                             <c:choose>
-                                                <c:when test="${order.status_order ne  '1'  }">
+                                                <c:when test="${order.status_order eq  '1'  }">
                                                     <td>
                                                         <a href="order-detail?id=${order.order_id}" class="btn btn-secondary">Details</a>
                                                     </td>

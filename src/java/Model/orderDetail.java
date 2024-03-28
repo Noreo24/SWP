@@ -4,6 +4,8 @@
  */
 package Model;
 
+import DAO.ProductDAO2;
+
 /**
  *
  * @author Admin
@@ -75,6 +77,9 @@ public class orderDetail {
 
     public void setTotal_cost(String total_cost) {
         this.total_cost = total_cost;
+    }
+       public p getProduct() {
+        return new ProductDAO2().getProductById(Integer.parseInt(product_id));
     }
     
 }

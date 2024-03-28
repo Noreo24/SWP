@@ -3,7 +3,7 @@ package Controller.Customer;
 import DAO.ProductDAO2;
 import Model.Customer;
 import Model.p;
-import Uils.CookieUtils;
+import util.CookieUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import util.CookieUtils;
 
 /**
  *
@@ -69,7 +70,7 @@ public class CartController extends HttpServlet {
             return;
         }
         
-        String cartString = new CookieUtils().getSession(request, "cart_data_" + account.getUserID());
+        String cartString = new CookieUtils().getCookieValue(request, "cart_data_" + account.getUserID());
 
         // Initialize a map to store productId-quantity pairs
         Map<Integer, Integer> productQuantityMap = new HashMap<>();

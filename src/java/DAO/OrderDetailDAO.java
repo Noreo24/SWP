@@ -117,7 +117,7 @@ public class OrderDetailDAO {
         try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             try ( ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     String orderDetail_id = resultSet.getString("orderDetail_id");
                     String product_price = resultSet.getString("product_price");
                     String quantity = resultSet.getString("quantity");

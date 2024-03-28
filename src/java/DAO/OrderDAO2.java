@@ -50,13 +50,13 @@ public class OrderDAO2 {
     }
 
     public void editOrder(order order) {
-        String query = "UPDATE [Order] SET total_cost = ?, fullName = ?, phone = ?, address = ?, status_order = ?, userId = ?, saler_id = ?, note = ? WHERE order_id = ?";
+        String query = "UPDATE [Order] SET total_cost = ?, fullName = ?, phone = ?, address = ?, status_order = ? , userId = ?, saler_id = ?, note = ? WHERE order_id = ?";
         try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, Integer.parseInt(order.getTotal_cost()));
             preparedStatement.setString(2, order.getFullName());
             preparedStatement.setString(3, order.getPhone());
             preparedStatement.setString(4, order.getAddress());
-            preparedStatement.setBoolean(5, Boolean.parseBoolean(order.getStatus_order()));
+            preparedStatement.setInt(5, Integer.parseInt(order.getStatus_order()));
             preparedStatement.setInt(6, Integer.parseInt(order.getUserId()));
             preparedStatement.setInt(7, Integer.parseInt(order.getSaler_id()));
             preparedStatement.setString(8, order.getNote());
@@ -68,7 +68,7 @@ public class OrderDAO2 {
     }
 
     public void acceptOrder(order order) {
-        String query = "UPDATE [Order] SET total_cost = ?, fullName = ?, phone = ?, address = ?, status_order = '1', userId = ?, saler_id = ?, note = ? WHERE order_id = ?";
+        String query = "UPDATE [Order] SET total_cost = ?, fullName = ?, phone = ?, address = ?, status_order = null , userId = ?, saler_id = ?, note = ? WHERE order_id = ?";
         try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, Integer.parseInt(order.getTotal_cost()));
             preparedStatement.setString(2, order.getFullName());

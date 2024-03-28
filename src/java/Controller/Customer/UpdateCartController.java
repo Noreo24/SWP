@@ -5,7 +5,6 @@
 package Controller.Customer;
 
 import Model.Customer;
-import Uils.CookieUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+import util.CookieUtils;
 
 /**
  *
@@ -72,7 +72,7 @@ public class UpdateCartController extends HttpServlet {
         }
 
         // Get the cart from the cookie
-        String cartString = new CookieUtils().getSession(request, "cart_data_" + account.getUserID());
+        String cartString = new CookieUtils().getCookieValue(request, "cart_data_" + account.getUserID());
         // Initialize a map to store productId-quantity pairs
         Map<Integer, Integer> productQuantityMap = new HashMap<>();
 
@@ -124,8 +124,8 @@ public class UpdateCartController extends HttpServlet {
 
         // Set the updated cart string in the cookie
         CookieUtils cookieUtils = new CookieUtils();
-        cookieUtils.deleteSession(request, "cart_data_" + account.getUserID());       
-        cookieUtils.setSession(request, "cart_data_" + account.getUserID(), updatedCart.toString());
+        cookieUtils.deleteCookie(response, "cart_data_" + account.getUserID());       
+        cookieUtils.setCookie(response, "cart_data_" + account.getUserID(), updatedCart.toString());
         // Redirect back to cart page or wherever needed
         response.sendRedirect("cart");
 
