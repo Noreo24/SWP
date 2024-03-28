@@ -6,7 +6,6 @@ package Controller.Common;
 
 import DAO.*;
 import Model.*;
-import Uils.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,14 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.nio.file.Paths;
-import java.util.List;
-import org.apache.tomcat.jakartaee.commons.io.IOUtils;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import util.Util;
 
 /**
  *
@@ -68,7 +60,7 @@ public class UpdateImageUserController extends HttpServlet {
                         break;
                     case "Management":
                         Management management = (Management) session.getAttribute("acc");
-                        account = new managementDAO().getManagementACByEmail(management.getEmail());
+                        account = new ManagementDAO().getManagementACByEmail(management.getEmail());
                         break;
                 }
 
@@ -161,7 +153,7 @@ public class UpdateImageUserController extends HttpServlet {
                 } else if (role.equals("Admin")) {
                     new adminDAO().updateACAdmin(account);
                 } else if (role.equals("Management")) {
-                    new managementDAO().updateACManagement(account);
+                    new ManagementDAO().updateACManagement(account);
                 }
 
                 switch (role) {
@@ -177,7 +169,7 @@ public class UpdateImageUserController extends HttpServlet {
                         break;
                     case "Management":
                         Management managemenOldt = (Management) session.getAttribute("acc");
-                        Management managemen = new managementDAO().getManagementByEmail(managemenOldt.getEmail());
+                        Management managemen = new ManagementDAO().getManagementByEmail(managemenOldt.getEmail());
                         session.setAttribute("acc", managemen);
                         break;
                 }

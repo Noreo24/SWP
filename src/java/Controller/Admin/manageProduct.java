@@ -44,7 +44,7 @@ public class manageProduct extends HttpServlet {
             trademarkDAO tmDAO = new trademarkDAO();
             categoryDAO cDAO = new categoryDAO();
             List<productImage> allImages = piDAO.getAllImage();
-            List<Trademark> allTrademarks = tmDAO.listAllTrademark();
+            List<Trademark> allTrademarks = tmDAO.listAllTrademarkAdmin();
             List<Category> allCategories = cDAO.getAllCategory();
 
             String cateSelect = "All";

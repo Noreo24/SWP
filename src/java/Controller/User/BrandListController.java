@@ -33,6 +33,7 @@ public class BrandListController extends HttpServlet {
         
         request.setAttribute("allCategories", listAllCategory);
         request.setAttribute("trademarks", trademarks);
+        request.setAttribute("checkActive", "Brand");
 
         request.getRequestDispatcher("/view/common/brandList.jsp").forward(request, response);
     }

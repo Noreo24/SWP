@@ -6,7 +6,6 @@ package Controller.Admin;
 
 import DAO.*;
 import Model.*;
-import Uils.*;
 import java.io.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -18,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.util.ArrayList;
 import util.SendMailLC;
+import util.Util;
 
 /**
  *
@@ -148,7 +148,7 @@ public class ManagerAddAccountController extends HttpServlet {
             accountInfo = new adminDAO().getAdminACByEmail(gmail);
         }
         if (accountInfo == null) {
-            accountInfo = new managementDAO().getManagementACByEmail(gmail);
+            accountInfo = new ManagementDAO().getManagementACByEmail(gmail);
         }
 //        if (roleSelect.equals("Customer")) {
 //            accountInfo = new CustomerDAO().getCustomerByEmail(gmail);
@@ -172,7 +172,7 @@ public class ManagerAddAccountController extends HttpServlet {
         }
 
         if (accountInfo == null) {
-            accountInfo = new managementDAO().getManagementACByUsername(username);
+            accountInfo = new ManagementDAO().getManagementACByUsername(username);
         }
 //        if (roleSelect.equals("Customer")) {
 //            accountInfo = new CustomerDAO().getCustomerByUsername(username);
@@ -196,7 +196,7 @@ public class ManagerAddAccountController extends HttpServlet {
                 Admin admin = (Admin) request.getSession().getAttribute("acc");
                 account.setAdminCreateId(Integer.parseInt(admin.getUserID()));
 
-                new managementDAO().addAC(account);
+                new ManagementDAO().addAC(account);
             }
             
             SendMailLC.sendMailAfterAddAccount(account);

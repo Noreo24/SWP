@@ -50,7 +50,7 @@
                             <!-- Profile picture help block-->
                             <div class="small font-italic text-muted mb-4">  </div>
                             <!-- Profile picture upload button-->  
-                            <a class="btn btn-primary" href="#">Log out</a>
+                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/logoutcontroller">Log out</a>
                             <button id="updateImageBtn" class="btn btn-primary">Update Image</button>
                             <form id="formImg" hidden action="UpdateImageUser" method="post" enctype="multipart/form-data">
                                 <input id="inputFile" type="file" name="photo" accept="image/*"/>

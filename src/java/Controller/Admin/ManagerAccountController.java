@@ -49,7 +49,7 @@ public class ManagerAccountController extends HttpServlet {
                 } else if (roleSelect.equals("Admin")) {
                     accountInfo = new adminDAO().getAdminACById(userID);
                 } else if (roleSelect.equals("Management")) {
-                    accountInfo = new managementDAO().getManagementACById(userID);
+                    accountInfo = new ManagementDAO().getManagementACById(userID);
                 }
 
                 accountInfo.setStatus(active);
@@ -59,7 +59,7 @@ public class ManagerAccountController extends HttpServlet {
                 } else if (roleSelect.equals("Admin")) {
                    new adminDAO().updateACAdmin(accountInfo);
                 } else if (roleSelect.equals("Management")) {
-                    new managementDAO().updateACManagement(accountInfo);
+                    new ManagementDAO().updateACManagement(accountInfo);
                 }
 
             }
@@ -98,7 +98,7 @@ public class ManagerAccountController extends HttpServlet {
             } else if (roleSelect.equals("Admin")) {
                 countAccount = new adminDAO().getCountAC(nameSearch);
             } else if (roleSelect.equals("Management")) {
-                countAccount = new managementDAO().getCountAC(nameSearch);
+                countAccount = new ManagementDAO().getCountAC(nameSearch);
             }
 
             if (pageSize > countAccount) {
@@ -126,7 +126,7 @@ public class ManagerAccountController extends HttpServlet {
             } else if (roleSelect.equals("Admin")) {
                 accounts = new adminDAO().getAllACAdmin(nameSearch, pageIndex, pageSize);
             } else if (roleSelect.equals("Management")) {
-                accounts = new managementDAO().getAllACManagement(nameSearch, pageIndex, pageSize);
+                accounts = new ManagementDAO().getAllACManagement(nameSearch, pageIndex, pageSize);
             }
             
             request.setAttribute("nameSearch", nameSearch);

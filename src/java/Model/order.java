@@ -4,6 +4,10 @@
  */
 package Model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Admin
@@ -39,6 +43,19 @@ public class order {
         this.order_code = order_code;
     }
 
+    public order(String order_id, String orderDate, String total_cost, String fullName, String phone, String address, String status_order, String userId, String saler_id, String note) {
+        this.order_id = order_id;
+        this.orderDate = orderDate;
+        this.total_cost = total_cost;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.address = address;
+        this.status_order = status_order;
+        this.userId = userId;
+        this.saler_id = saler_id;
+        this.note = note;
+    }
+
     public String getOrder_code() {
         return order_code;
     }
@@ -46,8 +63,6 @@ public class order {
     public void setOrder_code(String order_code) {
         this.order_code = order_code;
     }
-
-
 
     public String getOrder_id() {
         return order_id;
@@ -128,5 +143,36 @@ public class order {
     public void setNote(String note) {
         this.note = note;
     }
-    
+   public String getStatusString() {
+        if ("1".equals(status_order)) {
+            return "Completed";
+        }
+        if ("0".equals(status_order)) {
+            return "Pending";
+        }
+        return "Paid/Pending";
+    }
+
+    public String getFormatDate() {
+        // Input format of the orderDate
+        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        // Output format of the orderDate
+        DateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        try {
+            // Parse the input orderDate string into a Date object
+            java.util.Date date = inputFormat.parse(orderDate);
+
+            // Format the Date object into the desired output format
+            String formattedDate = outputFormat.format(date);
+
+            return formattedDate;
+        } catch (ParseException e) {
+            // Handle the ParseException, if parsing fails
+            e.printStackTrace();
+            return ""; // or any default value indicating error
+        }
+    }
+
 }

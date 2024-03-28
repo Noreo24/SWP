@@ -30,7 +30,7 @@ public class orderDAO {
         List<Chart> list = new ArrayList<>();
         for (int i = 0; i < day; i++) {
             int value = 0;
-            String query = "select sum(total_cost) from [Order] where orderDate = DATEADD(DAY, ?, ?)";
+            String query = "select sum(total_cost) from [Order] where status_order = 1 and orderDate = DATEADD(DAY, ?, ?)";
             try {
                 cnn = new DBContext().getConnection();
                 stm = cnn.prepareStatement(query);
@@ -111,7 +111,7 @@ public class orderDAO {
         List<order> list = new ArrayList<>();
         String query = "SELECT o.[order_id]\n"
                 + "      ,[orderDate]\n"
-                + "      ,[total_cost]\n"
+                + "      ,od.[total_cost]\n"
                 + "      ,[fullName]\n"
                 + "      ,[phone]\n"
                 + "      ,[address]\n"
@@ -123,7 +123,7 @@ public class orderDAO {
                 + "	  od.product_id,\n"
                 + "	  od.product_price,\n"
                 + "	  od.service_tag_id\n"
-                + "  FROM [Phone_Shop_Online_2].[dbo].[Order] o join Order_Detail od on o.order_id = od.order_id\n"
+                + "  FROM [Phone_Shop_Online_4].[dbo].[Order] o join Order_Detail od on o.order_id = od.order_id\n"
                 + "  where o.orderDate >= ? and o.orderDate <= ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
@@ -139,6 +139,81 @@ public class orderDAO {
 
         } catch (Exception e) {
         }
+        return list;
+    }
+
+    public List<Chart> getChartRevenueBarForManagement(String start, int day, String managementId) {
+        List<Chart> list = new ArrayList<>();
+        for (int i = 0; i < day; i++) {
+            int value = 0;
+            String query = "select sum(total_cost) from [Order] where orderDate = DATEADD(DAY, ?, ?) and saler_id = ? ";
+            try {
+                cnn = new DBContext().getConnection();
+                stm = cnn.prepareStatement(query);
+                stm.setInt(1, i);
+                stm.setString(2, start);
+                stm.setString(3, managementId);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    value = rs.getInt(1);
+                }
+                query = "select  DATEADD(DAY, ?, ?)";
+                cnn = new DBContext().getConnection();
+                stm = cnn.prepareStatement(query);
+                stm.setInt(1, i);
+                stm.setString(2, start);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Chart c = Chart.builder()
+                            .date(rs.getDate(1))
+                            .value(value)
+                            .build();
+                    list.add(c);
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+        return list;
+    }
+
+    public List<Chart> getProductSold(String start, int day, String managementId) {
+        List<Chart> list = new ArrayList<>();
+        for (int i = 0; i < day; i++) {
+            int value = 0;
+            String query = "select count(*) from [Order_Detail] od join [Order] o on o.order_id = od.order_id where orderDate = DATEADD(DAY, ?, ?) and saler_id = ?";
+            try {
+                cnn = new DBContext().getConnection();
+                stm = cnn.prepareStatement(query);
+                stm.setInt(1, i);
+                stm.setString(2, start);
+                stm.setString(3, managementId);
+
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    value = rs.getInt(1);
+                }
+                query = "select  DATEADD(DAY, ?, ?)";
+                cnn = new DBContext().getConnection();
+                stm = cnn.prepareStatement(query);
+                stm.setInt(1, i);
+                stm.setString(2, start);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Chart c = Chart.builder()
+                            .date(rs.getDate(1))
+                            .value(value)
+                            .build();
+                    list.add(c);
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
         return list;
     }
 }

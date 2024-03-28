@@ -86,7 +86,7 @@
                                     <select class="input-select">
                                         <option value="0">Danh mục</option>
                                         <c:forEach items="${catelist}" var="c">
-                                        <option value="${c.getCategory_id()}">${c.getCategory_name()}</option>
+                                            <option value="${c.getCategory_id()}">${c.getCategory_name()}</option>
                                         </c:forEach>
                                     </select>
                                     <input class="input" placeholder="Search here">
@@ -99,59 +99,21 @@
                         <!-- ACCOUNT -->
                         <div class="col-md-3 clearfix">
                             <div class="header-ctn">
-                                <!-- Wishlist -->
-                                <div>
-                                    <a href="#">
-                                        <i class="fa fa-heart-o"></i>
-                                        <span>Your Wishlist</span>
-                                        <div class="qty">2</div>
-                                    </a>
-                                </div>
-                                <!-- /Wishlist -->
-
                                 <!-- Cart -->
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <div >
+                                    <a href="cart">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span>Your Cart</span>
-                                        <div class="qty">3</div>
                                     </a>
-                                    <div class="cart-dropdown">
-                                        <div class="cart-list">
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="./img/product01.png" alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
-
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="./img/product02.png" alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="cart-summary">
-                                            <small>3 Item(s) selected</small>
-                                            <h5>SUBTOTAL: $2940.00</h5>
-                                        </div>
-                                        <div class="cart-btns">
-                                            <a href="#">View Cart</a>
-                                            <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
                                 </div>
-                                <!-- /Cart -->
-
+                                <!-- MyOrder -->
+                                <div>
+                                    <a href="myOrder">
+                                        <i class="fa fa-list-alt"></i>
+                                        <span>Your Orders</span>
+                                    </a>
+                                </div>
+                                <!-- /MyOrder -->
 
                                 <!-- Menu Toogle -->
                                 <div class="menu-toggle">
@@ -179,11 +141,25 @@
                 <div id="responsive-nav">
                     <!-- NAV -->
                     <ul class="main-nav nav navbar-nav">
+                        <li  class="${checkActive == 'Home' ? 'active': ''}">
+                            <a href="home">Home</a>
+                        </li>
+                        <li class="${checkActive == 'List product' ? 'active': ''}">
+                            <a href="listProduct">Categories</a>
+                        </li>
+                        <li class="${checkActive == 'Blog' ? 'active': ''}">
+                            <a href="${pageContext.request.contextPath}/loadblogpage">Blogs</a>
+                        </li>
+                        <li class="${checkActive == 'Brand' ? 'active': ''}">
+                            <a href="${pageContext.request.contextPath}/BrandList">Brands</a>
+                        </li>
+                    </ul>
+<!--                    <ul class="main-nav nav navbar-nav">
                         <li class="active"><a href="#">Home</a></li>
                         <li><a href="#">Categories</a></li>
-                        <li><a href="${pageContext.request.contextPath}/loadblogpage">Blogs</a></li>
-                        <li><a href="${pageContext.request.contextPath}/BrandList">Brands</a></li>
-                    </ul>
+                        <li><a href="/loadblogpage">Blogs</a></li>
+                        <li><a href="/BrandList">Brands</a></li>
+                    </ul>-->
                     <!-- /NAV -->
                 </div>
                 <!-- /responsive-nav -->

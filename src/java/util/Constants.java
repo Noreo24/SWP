@@ -36,5 +36,5 @@ public class Constants {
     public static String DBCONTEXT_PASS = "123";
     public static String DBCONTEXT_DATABASE = "Phone_Shop_Online_4";
     public static String DBCONTEXT_PORT = "1433";
-    public static String DBCONTEXT_SERVER = "localhost";
+    public static String DBCONTEXT_SERVER = "DESKTOP-QL2JGD5";
 }

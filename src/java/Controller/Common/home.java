@@ -6,9 +6,11 @@ package Controller.Common;
 
 import DAO.categoryDAO;
 import DAO.ProductDAO;
+import DAO.ProductDAO2;
 import DAO.productImagesDAO;
 import Model.Category;
 import Model.Product;
+import Model.p;
 import Model.productImage;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,7 +18,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -83,8 +84,50 @@ public class home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+// Get the filter parameter (if present)
+        String categoryFilter = request.getParameter("category");
+
+        // Create an instance of ProductDAO
+        ProductDAO2 productDAO = new ProductDAO2();
+
+        // List to store products
+        List<p> productList;
+        List<p> listSoleProducts;
+        List<p> listProductsTopDeal;
+        List<p> listNewProducts;
+
+        // Check if category filter is provided
+        if (categoryFilter != null && !categoryFilter.isEmpty() && request.getParameter("modP") == null) {
+            // Retrieve products filtered by category
+            int categoryId = Integer.parseInt(categoryFilter);
+            productList = productDAO.getProductsByCategory(categoryId);
+            listSoleProducts = new ProductDAO2().getSoleProducts(categoryId);
+            listProductsTopDeal = new ProductDAO2().getAllProductsTopDeal(categoryId);
+            
+        } else {
+            // Retrieve all products
+            productList = productDAO.getAllProducts();
+            listSoleProducts = new ProductDAO2().getSoleProducts();
+            listProductsTopDeal = new ProductDAO2().getAllProductsTopDeal();
+            
+        }
+        
+       if (categoryFilter != null && !categoryFilter.isEmpty() && request.getParameter("modP") != null) {
+            int categoryId = Integer.parseInt(categoryFilter);
+            listNewProducts = new ProductDAO2().getNewProducts(categoryId);
+       } else {
+           listNewProducts = new ProductDAO2().getNewProducts();
+       }
+           
+        // Set the product list as a request attribute
+        request.setAttribute("listProducts", productList);
+        request.setAttribute("listProductsTopDeal", new ProductDAO2().getAllProductsTopDeal());
+        request.setAttribute("listNewProducts", listNewProducts);
+        request.setAttribute("listSoleProducts", listSoleProducts);
+
+        // Forward the request to the home.jsp page (adjust the JSP page name accordingly)
+        request.getRequestDispatcher("/view/common/index.jsp").forward(request, response);
+            }
 
     /**
      * Handles the HTTP <code>POST</code> method.

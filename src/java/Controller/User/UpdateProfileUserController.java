@@ -43,7 +43,7 @@ public class UpdateProfileUserController extends HttpServlet {
                     break;
                 case "Management":
                     Management management = (Management) session.getAttribute("acc");
-                    accountInfo = new managementDAO().getManagementACByEmail(management.getEmail());
+                    accountInfo = new ManagementDAO().getManagementACByEmail(management.getEmail());
                     break;
             }
 
@@ -86,7 +86,7 @@ public class UpdateProfileUserController extends HttpServlet {
                     break;
                 case "Management":
                     Management management = (Management) session.getAttribute("acc");
-                    accountInfo = new managementDAO().getManagementACByEmail(management.getEmail());
+                    accountInfo = new ManagementDAO().getManagementACByEmail(management.getEmail());
                     break;
             }
             String fullName = request.getParameter("textFullName");
@@ -112,7 +112,7 @@ public class UpdateProfileUserController extends HttpServlet {
                 }
 
                 if (accountCheck == null) {
-                    accountCheck = new managementDAO().getManagementACByEmail(gmail);
+                    accountCheck = new ManagementDAO().getManagementACByEmail(gmail);
                 }
 
                 if (accountCheck != null) {
@@ -128,7 +128,7 @@ public class UpdateProfileUserController extends HttpServlet {
                 }
 
                 if (accountCheck == null) {
-                    accountCheck = new managementDAO().getManagementACByUsername(username);
+                    accountCheck = new ManagementDAO().getManagementACByUsername(username);
                 }
 
                 if (accountCheck != null) {
@@ -145,7 +145,7 @@ public class UpdateProfileUserController extends HttpServlet {
                 } else if (role.equals("Admin")) {
                     new adminDAO().updateACAdmin(accountInfo);
                 } else if (role.equals("Management")) {
-                    new managementDAO().updateACManagement(accountInfo);
+                    new ManagementDAO().updateACManagement(accountInfo);
                 }
 
                 switch (role) {
@@ -158,7 +158,7 @@ public class UpdateProfileUserController extends HttpServlet {
                         session.setAttribute("acc", admin);
                         break;
                     case "Management":
-                        Management managemen = new managementDAO().getManagementByEmail(gmail);
+                        Management managemen = new ManagementDAO().getManagementByEmail(gmail);
                         session.setAttribute("acc", managemen);
                         break;
                 }

@@ -6,7 +6,7 @@ package Controller.Common;
 
 import DAO.adminDAO;
 import DAO.customerDAO;
-import DAO.managementDAO;
+import DAO.ManagementDAO;
 import Model.Admin;
 import Model.Customer;
 import Model.Management;
@@ -48,7 +48,7 @@ public class loginController extends HttpServlet {
         String rempass = request.getParameter("rememberpass");
         adminDAO adao = new adminDAO();
         customerDAO cdao = new customerDAO();
-        managementDAO mdao = new managementDAO();
+        ManagementDAO mdao = new ManagementDAO();
         if (rempass != null) {
             Cookie c_user = new Cookie("username", username);
             Cookie c_pass = new Cookie("pass", pass);
