@@ -27,7 +27,7 @@ public class trademarkDAO {
 
     public List<Trademark> listAllTrademark() {
         List<Trademark> list = new ArrayList<>();
-        String query = "select * from Trademark where status = 1 ";
+        String query = "select * from Trademark where status = 1";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
@@ -36,15 +36,13 @@ public class trademarkDAO {
                 list.add(new Trademark(
                         rs.getString(1),
                         rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5)));
+                        rs.getString(3)));
             }
         } catch (Exception e) {
         }
         return list;
     }
-    
+
     public List<Trademark> listAllTrademarkAdmin() {
         List<Trademark> list = new ArrayList<>();
         String query = "select * from Trademark where status = 1 ";
@@ -183,10 +181,12 @@ public class trademarkDAO {
     public static void main(String[] args) {
 //        System.out.println(new trademarkDAO().count(""));
         trademarkDAO tmDAO = new trademarkDAO();
-        List<Trademark> list = tmDAO.listAllTrademarkAdmin();
-        for (Trademark tm : list) {
-            System.out.println(tm.getTrademark_name());
-        }
+//        List<Trademark> list = tmDAO.listAllTrademark();
+//        for (Trademark tm : list) {
+//            System.out.println(tm.getTrademark_name());
+//        }
+        Trademark trade = tmDAO.getTrademarkByPID("1");
+        System.out.println(trade.getTrademark_name());
     }
 
     public int add(Trademark trademark) {

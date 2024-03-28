@@ -64,7 +64,7 @@
             <!-- /TOP HEADER -->
 
             <!-- MAIN HEADER -->
-            <div id="header">
+            <div id="header" style="height: 100px;">
                 <!-- container -->
                 <div class="container">
                     <!-- row -->
@@ -73,7 +73,7 @@
                         <div class="col-md-3">
                             <div class="header-logo">
                                 <a href="${pageContext.request.contextPath}/home" class="logo">
-                                    <img style="width: 250px" src="${pageContext.request.contextPath}/img/logo.png" alt="">
+                                    <img style="width: 150px; border-radius: 10px;" src="${pageContext.request.contextPath}/img/logo.png" alt="">
                                 </a>
                             </div>
                         </div>
@@ -144,16 +144,16 @@
                     <!-- NAV -->
                     <ul class="main-nav nav navbar-nav">
                         <li  class="${checkActive == 'Home' ? 'active': ''}">
-                            <a href="home">Home</a>
+                            <a href="home">Trang chủ</a>
                         </li>
                         <li class="${checkActive == 'List product' ? 'active': ''}">
-                            <a href="listProduct">Categories</a>
+                            <a href="listProduct">Danh mục</a>
                         </li>
                         <li class="${checkActive == 'Blog' ? 'active': ''}">
                             <a href="${pageContext.request.contextPath}/loadblogpage">Blogs</a>
                         </li>
                         <li class="${checkActive == 'Brand' ? 'active': ''}">
-                            <a href="${pageContext.request.contextPath}/BrandList">Brands</a>
+                            <a href="${pageContext.request.contextPath}/BrandList">Nhãn hiệu</a>
                         </li>
                     </ul>
 <!--                    <ul class="main-nav nav navbar-nav">

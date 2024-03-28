@@ -157,7 +157,7 @@
                                                 </div>
                                                 <div class="product-body">
                                                     <p class="product-category">${product.category.category_name}</p>
-                                                    <h3 class="product-name"><a href="view/user/product.jsp">${product.productName}</a></h3>
+                                                    <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                                     <!--                                                    <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                                                                             <del class="product-old-price">${product.originalPrices}</del></h4>-->
                                                     <h4 class="product-price">
@@ -239,7 +239,7 @@
                                                 </div>
                                                 <div class="product-body">
                                                     <p class="product-category">${product.category.category_name}</p>
-                                                    <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                                    <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                                     <!--                                                    <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                                                                             <del class="product-old-price">${product.originalPrices}</del></h4>-->
                                                     <h4 class="product-price">
@@ -319,7 +319,7 @@
                                                                     </div>
                                                                     <div class="product-body">
                                                                         <p class="product-category">${product.category.category_name}</p>
-                                                                        <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                                                        <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                                                         <!--                                                    <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                                                                                                 <del class="product-old-price">${product.originalPrices}</del></h4>-->
                                                                         <h4 class="product-price">
@@ -415,7 +415,7 @@
                                                 </div>
                                                 <div class="product-body">
                                                     <p class="product-category">${product.category.category_name}</p>
-                                                    <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                                    <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                                     <!--                                                    <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                                                                             <del class="product-old-price">${product.originalPrices}</del></h4>-->
                                                     <h4 class="product-price">
@@ -483,7 +483,7 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                 <del class="product-old-price">${product.originalPrices}</del></h4>
                                         </div>
@@ -504,7 +504,7 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                 <del class="product-old-price">${product.originalPrices}</del></h4>
                                         </div>
@@ -525,7 +525,7 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                 <del class="product-old-price">${product.originalPrices}</del></h4>
                                         </div>
@@ -558,7 +558,7 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                 <del class="product-old-price">${product.originalPrices}</del></h4>
                                         </div>
@@ -579,7 +579,7 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                 <del class="product-old-price">${product.originalPrices}</del></h4>
                                         </div>
@@ -600,7 +600,7 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                 <del class="product-old-price">${product.originalPrices}</del></h4>
                                         </div>
@@ -632,7 +632,7 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                 <del class="product-old-price">${product.originalPrices}</del></h4>
                                         </div>
@@ -653,7 +653,7 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                 <del class="product-old-price">${product.originalPrices}</del></h4>
                                         </div>
@@ -674,7 +674,7 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">${product.category.category_name}</p>
-                                            <h3 class="product-name"><a href="#">${product.productName}</a></h3>
+                                            <h3 class="product-name"><a href="productDetail?pid=${product.productId}">${product.productName}</a></h3>
                                             <h4 class="product-price">${product.sale ? product.salePrices : product.originalPrices}
                                                 <del class="product-old-price">${product.originalPrices}</del></h4>
                                         </div>

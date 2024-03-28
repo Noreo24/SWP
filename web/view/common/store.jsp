@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -48,38 +50,19 @@
                     <div id="aside" class="col-md-3">
                         <!-- aside Widget -->
                         <div class="aside">
-                            <h3 class="aside-title">Categories</h3>
+                            <h3 class="aside-title">Danh mục</h3>
 
                             <c:forEach items="${allCategories}" var="c">
-                                <div>
-                                    <c:if test="${c.category_id == 1}">
-                                        <input onchange="listProductByCate(this)" type="radio" class="form-check-input" id="${c.category_id}" value="${c.category_id}" name="materialExampleRadios">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.category_id}">${c.category_name}</label>
-                                        <small>(${numOfProduct1})</small>
-                                    </c:if>
-                                    <c:if test="${c.category_id == 2}">
-                                        <input onchange="listProductByCate(this)" type="radio" class="form-check-input" id="${c.category_id}" value="${c.category_id}" name="materialExampleRadios">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.category_id}">${c.category_name}</label>
-                                        <small>(${numOfProduct2})</small>
-                                    </c:if>
-                                    <c:if test="${c.category_id == 3}">
-                                        <input onchange="listProductByCate(this)" type="radio" class="form-check-input" id="${c.category_id}" value="${c.category_id}" name="materialExampleRadios">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.category_id}">${c.category_name}</label>
-                                        <small>(${numOfProduct3})</small>
-                                    </c:if>
-                                    <c:if test="${c.category_id == 4}">
-                                        <input onchange="listProductByCate(this)" type="radio" class="form-check-input" id="${c.category_id}" value="${c.category_id}" name="materialExampleRadios">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.category_id}">${c.category_name}</label>
-                                        <small>(${numOfProduct4})</small>
-                                    </c:if>
-                                </div>
+                                <input onchange="listProductByCate(this)" type="radio" class="form-check-input" id="${c.category_id}" value="${c.category_id}" name="materialExampleRadios">
+                                <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.category_id}">${c.category_name}</label>
+                                <br>
                             </c:forEach>
                         </div>
                         <!-- /aside Widget -->
 
                         <!-- aside Widget -->
                         <div class="aside">
-                            <h3 class="aside-title">Name</h3>
+                            <h3 class="aside-title">Tìm kiếm theo tên</h3>
                             <form>
                                 <div class="d-flex align-items-center">
                                     <div class="md-form md-outline">
@@ -92,7 +75,7 @@
 
                         <!-- aside Widget -->
                         <div class="aside">
-                            <h3 class="aside-title">Price</h3>
+                            <h3 class="aside-title">Tìm kiếm theo giá</h3>
                             <form>
                                 <div class="d-flex align-items-center">
                                     <div class="md-form md-outline popup">
@@ -110,78 +93,18 @@
 
                         <!-- aside Widget -->
                         <div class="aside">
-                            <h3 class="aside-title">Brands</h3>
-
+                            <h3 class="aside-title">Nhãn hiệu</h3>
                             <c:forEach items="${allBrands}" var="c">
-                                <div>
-                                    <c:if test="${c.trademark_id == 1}">
-                                        <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
-                                        <small>(${numOfProductEachBrand1})</small>
-                                    </c:if>
-                                    <c:if test="${c.trademark_id == 2}">
-                                        <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
-                                        <small>(${numOfProductEachBrand2})</small>
-                                    </c:if>
-                                    <c:if test="${c.trademark_id == 3}">
-                                        <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
-                                        <small>(${numOfProductEachBrand3})</small>
-                                    </c:if>
-                                    <c:if test="${c.trademark_id == 4}">
-                                        <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
-                                        <small>(${numOfProductEachBrand4})</small>
-                                    </c:if>
-                                    <c:if test="${c.trademark_id == 5}">
-                                        <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
-                                        <small>(${numOfProductEachBrand5})</small>
-                                    </c:if>
-                                    <c:if test="${c.trademark_id == 6}">
-                                        <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
-                                        <small>(${numOfProductEachBrand6})</small>
-                                    </c:if>
-                                    <c:if test="${c.trademark_id == 7}">
-                                        <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
-                                        <small>(${numOfProductEachBrand7})</small>
-                                    </c:if>
-                                    <c:if test="${c.trademark_id == 8}">
-                                        <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
-                                        <small>(${numOfProductEachBrand8})</small>
-                                    </c:if>
-                                    <c:if test="${c.trademark_id == 9}">
-                                        <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
-                                        <small>(${numOfProductEachBrand9})</small>
-                                    </c:if>
-                                    <c:if test="${c.trademark_id == 10}">
-                                        <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
-                                        <small>(${numOfProductEachBrand10})</small>
-                                    </c:if>
-                                    <c:if test="${c.trademark_id == 11}">
-                                        <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
-                                        <small>(${numOfProductEachBrand11})</small>
-                                    </c:if>
-                                    <c:if test="${c.trademark_id == 12}">
-                                        <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
-                                        <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
-                                        <small>(${numOfProductEachBrand12})</small>
-                                    </c:if>
-                                </div>
+                                <input onchange="listProductByBrand(this)" type="radio" class="form-check-input" id="${c.trademark_id}" value="${c.trademark_id}" name="trademark">
+                                <label class="form-check-label small card-link-secondary" style="font-weight: normal;" for="${c.trademark_id}">${c.trademark_name}</label>
+                                <br>
                             </c:forEach>
                         </div>
                         <!-- /aside Widget -->
 
                         <!-- aside Widget -->
                         <div class="aside">
-                            <h3 class="aside-title">Top selling</h3>
+                            <h3 class="aside-title">Bán chạy</h3>
                             <c:forEach items="${top3SellingInProductList}" var="p">
                                 <c:if test="${p.status == 1}">
                                     <div class="product-widget">
@@ -222,18 +145,18 @@
                         <div class="store-filter clearfix">
                             <div class="store-sort">
                                 <label>
-                                    Sort By Price:
+                                    Sắp xếp theo giá:
                                     <select id="sort" class="input-select" onchange="sortByPrice(this)">
-                                        <option value="0">Descending</option>
-                                        <option value="1">Ascending</option>
+                                        <option value="0">Giảm dần</option>
+                                        <option value="1">Tăng dần</option>
                                     </select>
                                 </label>
 
                                 <label>
-                                    Sort By Rate:
+                                    Sắp xếp theo đánh giá:
                                     <select id="sort" class="input-select" onchange="sortByRate(this)">
-                                        <option value="0">Descending</option>
-                                        <option value="1">Ascending</option>
+                                        <option value="0">Giảm dần</option>
+                                        <option value="1">Tăng dần</option>
                                     </select>
                                 </label>
                             </div>

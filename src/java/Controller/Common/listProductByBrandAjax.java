@@ -229,7 +229,7 @@ public class listProductByBrandAjax extends HttpServlet {
                             if (Float.parseFloat(o.getAvr_rated_star()) > 4.0 && Float.parseFloat(o.getAvr_rated_star()) <= 5.0) {
                                 out.println(" <div class=\"product-body\">\n"
                                         + "                                            <h3 class=\"product-name\"><a href=\"productDetail?pid=" + o.getProduct_id() + "\">" + o.getProduct_name() + "</a></h3>\n"
-                                        + "                                                <h4 class=\"product-price\">" + o.getSale_prices() + " <del class=\"product-old-price\">" + o.getOriginal_prices() + "</del></h4>\n"
+                                        + "                                                <h4 class=\"product-price\">" + o.getOriginal_prices() + "</h4>\n"
                                         + "                                            <div>\n"
                                         + "                                                    <div class=\"product-rating\">\n"
                                         + "                                                        <i class=\"fa fa-star\"></i>\n"
@@ -254,7 +254,7 @@ public class listProductByBrandAjax extends HttpServlet {
                             if (Float.parseFloat(o.getAvr_rated_star()) > 3.0 && Float.parseFloat(o.getAvr_rated_star()) <= 4.0) {
                                 out.println(" <div class=\"product-body\">\n"
                                         + "                                            <h3 class=\"product-name\"><a href=\"productDetail?pid=" + o.getProduct_id() + "\">" + o.getProduct_name() + "</a></h3>\n"
-                                        + "                                                <h4 class=\"product-price\">" + o.getSale_prices() + " <del class=\"product-old-price\">" + o.getOriginal_prices() + "</del></h4>\n"
+                                        + "                                                <h4 class=\"product-price\">" + o.getOriginal_prices() + "</h4>\n"
                                         + "                                            <div>\n"
                                         + "                                                    <div class=\"product-rating\">\n"
                                         + "                                                        <i class=\"fa fa-star\"></i>\n"
@@ -279,7 +279,7 @@ public class listProductByBrandAjax extends HttpServlet {
                             if (Float.parseFloat(o.getAvr_rated_star()) > 2.0 && Float.parseFloat(o.getAvr_rated_star()) <= 3.0) {
                                 out.println(" <div class=\"product-body\">\n"
                                         + "                                            <h3 class=\"product-name\"><a href=\"productDetail?pid=" + o.getProduct_id() + "\">" + o.getProduct_name() + "</a></h3>\n"
-                                        + "                                                <h4 class=\"product-price\">" + o.getSale_prices() + " <del class=\"product-old-price\">" + o.getOriginal_prices() + "</del></h4>\n"
+                                        + "                                                <h4 class=\"product-price\">" + o.getOriginal_prices() + "</h4>\n"
                                         + "                                            <div>\n"
                                         + "                                                    <div class=\"product-rating\">\n"
                                         + "                                                        <i class=\"fa fa-star\"></i>\n"
@@ -304,7 +304,7 @@ public class listProductByBrandAjax extends HttpServlet {
                             if (Float.parseFloat(o.getAvr_rated_star()) > 1.0 && Float.parseFloat(o.getAvr_rated_star()) <= 2.0) {
                                 out.println(" <div class=\"product-body\">\n"
                                         + "                                            <h3 class=\"product-name\"><a href=\"productDetail?pid=" + o.getProduct_id() + "\">" + o.getProduct_name() + "</a></h3>\n"
-                                        + "                                                <h4 class=\"product-price\">" + o.getSale_prices() + " <del class=\"product-old-price\">" + o.getOriginal_prices() + "</del></h4>\n"
+                                        + "                                                <h4 class=\"product-price\">" + o.getOriginal_prices() + "</h4>\n"
                                         + "                                            <div>\n"
                                         + "                                                    <div class=\"product-rating\">\n"
                                         + "                                                        <i class=\"fa fa-star\"></i>\n"
@@ -329,7 +329,7 @@ public class listProductByBrandAjax extends HttpServlet {
                             if (Float.parseFloat(o.getAvr_rated_star()) > 0.0 && Float.parseFloat(o.getAvr_rated_star()) <= 1.0) {
                                 out.println(" <div class=\"product-body\">\n"
                                         + "                                            <h3 class=\"product-name\"><a href=\"productDetail?pid=" + o.getProduct_id() + "\">" + o.getProduct_name() + "</a></h3>\n"
-                                        + "                                                <h4 class=\"product-price\">" + o.getSale_prices() + " <del class=\"product-old-price\">" + o.getOriginal_prices() + "</del></h4>\n"
+                                        + "                                                <h4 class=\"product-price\">" + o.getOriginal_prices() + "</h4>\n"
                                         + "                                            <div>\n"
                                         + "                                                    <div class=\"product-rating\">\n"
                                         + "                                                        <i class=\"fa fa-star\"></i>\n"
@@ -354,7 +354,7 @@ public class listProductByBrandAjax extends HttpServlet {
                             if (Float.parseFloat(o.getAvr_rated_star()) == 0.0) {
                                 out.println(" <div class=\"product-body\">\n"
                                         + "                                            <h3 class=\"product-name\"><a href=\"productDetail?pid=" + o.getProduct_id() + "\">" + o.getProduct_name() + "</a></h3>\n"
-                                        + "                                                <h4 class=\"product-price\">" + o.getSale_prices() + " <del class=\"product-old-price\">" + o.getOriginal_prices() + "</del></h4>\n"
+                                        + "                                                <h4 class=\"product-price\">" + o.getOriginal_prices() + "</h4>\n"
                                         + "                                            <div>\n"
                                         + "                                                    <div class=\"product-rating\">\n"
                                         + "                                                        <i class=\"fa fa-star-o\"></i>\n"

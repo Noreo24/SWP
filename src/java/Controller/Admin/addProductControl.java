@@ -214,7 +214,7 @@ public class addProductControl extends HttpServlet {
                         fileName = uploadFile.uploadFile(request, "thumbnail");
                         pDAO.addNewProduct(productName, originalPrice, sale, salePrice, highlight, description, trademarkID, "1",
                                 quantity, "1", cateID, updateDate, "0", "1", "0");
-                        piDAO.addNewProductImage(pDAO.getLastProduct().getProduct_id(), "1",fileName);
+                        piDAO.addNewProductImage(pDAO.getLastProduct().getProduct_id(), "1", "image/" + fileName);
                         response.sendRedirect("manageProduct");
                     } else {
                         response.sendRedirect("/view/admin/addProduct.jsp");
