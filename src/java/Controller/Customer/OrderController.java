@@ -178,6 +178,8 @@ public class OrderController extends HttpServlet {
         // clean cart
         new CookieUtils().deleteSession(request, "cart_data_" + account.getUserID());
         
+ 
+        
         String method = request.getParameter("method");
         
         if (method.equals("now")) 

@@ -213,7 +213,7 @@ public class addProductControl extends HttpServlet {
                     if (isImage(fileName)) {
                         fileName = uploadFile.uploadFile(request, "image");
                         pDAO.addNewProduct(productName, originalPrice, sale, salePrice, highlight, description, trademarkID, "1",
-                                quantity, "1", cateID, updateDate, "0", "1", "0");
+                                quantity, "1", cateID, updateDate, "0", a.getUserID(), "0");
                         piDAO.addNewProductImage(pDAO.getLastProduct().getProduct_id(), "1", "image/" + fileName);
                         response.sendRedirect("manageProduct");
                     } else {

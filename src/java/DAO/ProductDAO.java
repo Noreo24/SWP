@@ -525,7 +525,7 @@ public class ProductDAO {
 //    }
     public List<Product> getAllProductAdmin2(String name, int pageNumber, int pageSize) {
         List<Product> list = new ArrayList<>();
-        String query = "select * from product p "
+        String query = "select * from product p join Admin a on a.userId = p.management_id "
                 + "where p.product_name like ? "
                 + "ORDER BY p.product_id OFFSET (? - 1) * ? ROWS FETCH NEXT ? ROWS ONLY;";
         try {
@@ -552,7 +552,7 @@ public class ProductDAO {
                         rs.getString(12),
                         rs.getString(13),
                         rs.getString(14),
-                        rs.getString(15),
+                        rs.getString(19),
                         rs.getString(16)
                 ));
             }
@@ -565,7 +565,7 @@ public class ProductDAO {
     public List<Product> getAllProductAdmin(String name, String cateName, String trademarkName, int pageNumber, int pageSize) {
         List<Product> list = new ArrayList<>();
         String query = "select * from Product p join Category c on p.category_id = c.category_id \n"
-                + "join Trademark tm on p.trademark_id = tm.trademark_id "
+                + "join Trademark tm on p.trademark_id = tm.trademark_id join Admin a on a.userId = p.management_id "
                 + "where p.product_name like ? "
                 + "and c.category_name = ? "
                 + "and tm.trademark_name = ? "
@@ -596,7 +596,7 @@ public class ProductDAO {
                         rs.getString(12),
                         rs.getString(13),
                         rs.getString(14),
-                        rs.getString(15),
+                        rs.getString(24),
                         rs.getString(16)));
             }
         } catch (Exception e) {
@@ -607,9 +607,9 @@ public class ProductDAO {
 
     public List<Product> getAllProductAdminByCate(String name, String cateName, int pageNumber, int pageSize) {
         List<Product> list = new ArrayList<>();
-        String query = "select distinct p.*, c.category_name, tm.trademark_name "
+        String query = "select distinct p.*, c.category_name, tm.trademark_name, a.fullName "
                 + "from Product p join Category c on p.category_id = c.category_id \n"
-                + "join Trademark tm on p.trademark_id = tm.trademark_id \n"
+                + "join Trademark tm on p.trademark_id = tm.trademark_id join Admin a on a.userId = p.management_id \n"
                 + "where p.product_name like ? "
                 + "and c.category_name = ? "
                 + "ORDER BY p.product_id OFFSET (? - 1) * ? "
@@ -640,7 +640,7 @@ public class ProductDAO {
                         rs.getString(12),
                         rs.getString(13),
                         rs.getString(14),
-                        rs.getString(15),
+                        rs.getString(20),
                         rs.getString(16)));
             }
         } catch (Exception e) {
@@ -651,9 +651,9 @@ public class ProductDAO {
 
     public List<Product> getAllProductAdminByTrademark(String name, String trademarkName, int pageNumber, int pageSize) {
         List<Product> list = new ArrayList<>();
-        String query = "select distinct p.*, c.category_name, tm.trademark_name \n"
+        String query = "select distinct p.*, c.category_name, tm.trademark_name, a.fullName \n"
                 + "from Product p join Category c on p.category_id = c.category_id \n"
-                + "join Trademark tm on p.trademark_id = tm.trademark_id \n"
+                + "join Trademark tm on p.trademark_id = tm.trademark_id join Admin a on a.userId = p.management_id \n"
                 + "where p.product_name like ? and \n"
                 + "tm.trademark_name = ? \n"
                 + "ORDER BY p.product_id OFFSET (? - 1) * ? ROWS FETCH NEXT ? ROWS ONLY";
@@ -682,7 +682,7 @@ public class ProductDAO {
                         rs.getString(12),
                         rs.getString(13),
                         rs.getString(14),
-                        rs.getString(15),
+                        rs.getString(20),
                         rs.getString(16)));
             }
         } catch (Exception e) {

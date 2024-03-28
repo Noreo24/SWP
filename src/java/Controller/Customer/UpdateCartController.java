@@ -124,9 +124,8 @@ public class UpdateCartController extends HttpServlet {
 
         // Set the updated cart string in the cookie
         CookieUtils cookieUtils = new CookieUtils();
-        cookieUtils.deleteSession(request, "cart_data_" + account.getUserID());
+        cookieUtils.deleteSession(request, "cart_data_" + account.getUserID());       
         cookieUtils.setSession(request, "cart_data_" + account.getUserID(), updatedCart.toString());
-
         // Redirect back to cart page or wherever needed
         response.sendRedirect("cart");
 

@@ -172,7 +172,7 @@
                                                         No
                                                     </c:if>
                                                 </td>
-                                                <td>Manager</td>
+                                                <td>${p.management_id}</td>
                                                 <td>
                                                     <c:if test="${p.status == 1}">
                                                         Hiện                                        
