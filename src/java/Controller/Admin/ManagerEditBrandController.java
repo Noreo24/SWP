@@ -144,6 +144,10 @@ public class ManagerEditBrandController extends HttpServlet {
 
             new trademarkDAO().update(trademark);
 
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+            }
             response.sendRedirect("ManagerBrand");
         }
     }
