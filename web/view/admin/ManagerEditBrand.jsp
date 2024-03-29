@@ -42,7 +42,7 @@
                                     <input  type="text" name="txtId" hidden
                                             value="${trademark.trademark_id}" required />
                                     <p class="text-danger">${errorUsername}</p>
-                                    <label class="small mb-1" for="inputUsername">Name ${pageContext.request.contextPath}/imgBrand/${brand.getImg()}</label>
+                                    <label class="small mb-1" for="inputUsername">Name </label>
                                     <input class="form-control" id="inputUsername"
                                            type="text" required name="txtName"
                                            placeholder="Enter your Name" 

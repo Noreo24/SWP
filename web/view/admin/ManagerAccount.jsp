@@ -114,7 +114,7 @@
                                         <c:forEach var="item" items="${accounts}" varStatus="loop">
                                             <tr>
                                                 <th scope="row">${loop.index +1}</th>
-                                                <td><a href="${pageContext.request.contextPath}/ManagerAccount?userID=${item.getUserID()}&active=false&nameSearch=${nameSearch}&pageIndex=${pageIndex}&pageSize=${pageSize}&roleSelect=${roleSelect}">${item.getFullName()}</a> </td>
+                                                <td>${item.getFullName()} </td>
                                                 <td>${item.getUser_name()}</td>
                                                 <td>${item.getEmail()}</td>
                                                 <td>${item.getPhone()}</td>

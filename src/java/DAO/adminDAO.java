@@ -162,7 +162,7 @@ public class adminDAO {
     }
     
     public Account getAdminACById(String userID) {
-        String query = "select * from Admin where [id] = ?";
+        String query = "select * from Admin where [userId] = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);

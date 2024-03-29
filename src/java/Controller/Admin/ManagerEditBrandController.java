@@ -60,8 +60,7 @@ public class ManagerEditBrandController extends HttpServlet {
 
         if (session.getAttribute("acc") != null) {
 
-            Trademark trademark = new Trademark();
-            trademark.setTrademark_id(request.getParameter("txtId"));
+            Trademark trademark = new trademarkDAO().getTrademarkByID(Integer.parseInt(request.getParameter("txtId")));
             trademark.setTrademark_name(request.getParameter("txtName"));
             trademark.setDescription(request.getParameter("txtDes"));
 //            trademark.setImg(request.getParameter("txtImg"));
@@ -115,7 +114,7 @@ public class ManagerEditBrandController extends HttpServlet {
                 if (imageFileBuild.exists()) {
                     imageFileBuild.delete();
                 }
-                
+
                 // Tạo thư mục Img nếu nó chưa tồn tại
                 File imgDir = new File(imgDirPath);
                 if (!imgDir.exists()) {
@@ -126,9 +125,9 @@ public class ManagerEditBrandController extends HttpServlet {
                 if (!imgDir2.exists()) {
                     imgDir2.mkdirs();
                 }
-                
-                 // Lấy tên file gốc 
-                String submittedFileName = Util.generateRandomName(10) + "_" + trademark.getTrademark_id() +  "." + imgType;
+
+                // Lấy tên file gốc 
+                String submittedFileName = Util.generateRandomName(10) + "_" + trademark.getTrademark_id() + "." + imgType;
 
                 // Tạo đường dẫn tới file trong thư mục Img
                 String filePath = imgDirPath + File.separator + submittedFileName;
@@ -139,7 +138,7 @@ public class ManagerEditBrandController extends HttpServlet {
                 photo.write(filePath);
 
                 photo.write(filePathBuild);
-                
+
                 trademark.setImg(submittedFileName);
             }
 

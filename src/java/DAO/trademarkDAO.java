@@ -36,7 +36,9 @@ public class trademarkDAO {
                 list.add(new Trademark(
                         rs.getString(1),
                         rs.getString(2),
-                        rs.getString(3)));
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5)));
             }
         } catch (Exception e) {
         }
@@ -54,7 +56,9 @@ public class trademarkDAO {
                 list.add(new Trademark(
                         rs.getString(1),
                         rs.getString(2),
-                        rs.getString(3)));
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5)));
             }
         } catch (Exception e) {
         }
@@ -170,7 +174,9 @@ public class trademarkDAO {
                 return new Trademark(
                         rs.getString(1),
                         rs.getString(2),
-                        rs.getString(3)
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5)
                 );
             }
         } catch (Exception e) {

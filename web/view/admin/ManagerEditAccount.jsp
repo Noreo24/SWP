@@ -126,7 +126,7 @@
                                     </script>
                                     <div class="row gx-3 mb-3">
                                         <div class="col-md-6">
-                                            <label class="small mb-1" >Gender: </label>
+                                            <label class="small mb-1" >Gender:  </label>
                                             <input  id="inputGenderMale" type="radio" name="gender"
                                                     checked   value="1"> 
                                             <label for="inputGenderMale">Male</label>
@@ -138,9 +138,9 @@
                                             <label for="inputGenderFeMale">FeMale</label>
                                         </div>
                                     </div>
-                                    <div hidden class="row gx-3 mb-3">
+                                    <div class="row gx-3 mb-3">
                                         <div class="col-md-6">
-                                            <label class="form-label small mb-1">Role</label>
+                                            <label class="form-label small mb-1">Role </label>
                                             <select class="form-select" name="roleSelect">
                                                 <option value="Customer" selected>Customer</option>
                                                 <option value="Admin" 

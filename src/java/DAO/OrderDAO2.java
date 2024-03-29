@@ -12,6 +12,7 @@ import Model.order;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import util.Encode;
 
 public class OrderDAO2 {
 
@@ -202,10 +203,7 @@ public class OrderDAO2 {
 
     public static void main(String[] args) throws Exception {
 
-        order order = new OrderDAO2().getOrderByID(9);
-        order.setStatus_order("true");
-        new OrderDAO2().editOrder(order);
-//        System.out.println(order.getUserId());
+        System.out.println(Encode.toSHA1("123456"));
     }
 
 }

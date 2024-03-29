@@ -146,7 +146,7 @@ public class ManagementDAO {
                 + "      ,[phone] = ?\n"
                 + "      ,[address] = ?\n"
                 + "      ,[status] = ?\n"
-                + " WHERE [id] = ?";
+                + " WHERE [userId] = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
@@ -168,7 +168,7 @@ public class ManagementDAO {
     }
 
     public Account getManagementACById(String userID) {
-        String query = "select * from Management where [id] = ?";
+        String query = "select * from Management where [userId] = ?";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);

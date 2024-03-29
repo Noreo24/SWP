@@ -223,7 +223,7 @@ public class ManagerEditAccountController extends HttpServlet {
                 accountInfo.setAddress(address);
                 accountInfo.setGender(gender);
             }
-
+            System.out.println("alllll: " + accountInfo.getStatus());
             if (roleName.equals("Customer")) {
                 new customerDAO().updateACCustomer(accountInfo);
             } else if (roleName.equals("Admin")) {
