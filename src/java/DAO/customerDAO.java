@@ -29,7 +29,7 @@ public class customerDAO {
     }
 
     public Customer getCustomerByUsername(String username, String pass) {
-        String query = "select * from Customer where user_name = ? and password = ?";
+        String query = "select * from Customer where user_name = ? and password = ? and isDelete = 0";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
@@ -55,8 +55,25 @@ public class customerDAO {
         return null;
     }
 
+    public int checkACDelete(String username, String gmString) {
+        String query = "select * from Customer where user_name = ? and email = ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setString(1, username);
+            stm.setString(2, gmString);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("userId");
+            }
+
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
     public Customer getCustomerByEmail(String email) {
-        String query = "select * from Customer where email = ?";
+        String query = "select * from Customer where email = ? ";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
@@ -202,7 +219,7 @@ public class customerDAO {
     }
 
     public Customer getCustomerById(String id) {
-        String query = "select * from Customer where [userId] = ?";
+        String query = "select * from Customer where [userId] = ? and isDelete = 0";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
@@ -260,8 +277,23 @@ public class customerDAO {
         }
     }
 
+    public void updateDelete(String id, boolean st) {
+        String query = "UPDATE [dbo].[Customer]\n"
+                + "   SET [isDelete] = ? \n"
+                + " WHERE [userId] = ?";
+        try {
+            cnn = new DBContext().getConnection();//mo ket noi voi sql
+            stm = cnn.prepareStatement(query);
+            stm.setBoolean(1, st);
+            stm.setString(2, id);
+            stm.executeQuery();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
     public Account getCustomerACById(String id) {
-        String query = "select * from Customer where [userId] = ?";
+        String query = "select * from Customer where [userId] = ? and isDelete = 0";
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
             stm = cnn.prepareStatement(query);
@@ -290,7 +322,7 @@ public class customerDAO {
     public int getCountAC(String nameSearch) {
         String query = "SELECT count(*)\n"
                 + "FROM [Customer]\n"
-                + "WHERE fullName like ? \n";
+                + "WHERE fullName like ? and isDelete = 0 \n";
 
         try {
             cnn = new DBContext().getConnection();//mo ket noi voi sql
@@ -312,7 +344,7 @@ public class customerDAO {
         String query = ""
                 + "SELECT * "
                 + "  FROM [Customer] a \n"
-                + "WHERE a.[fullName] like ?\n";
+                + "WHERE a.[fullName] like ?   and a.isDelete = 0  \n";
 
         query += "  ORDER BY userId\n"
                 + "OFFSET (? - 1) * ? ROWS FETCH NEXT ? ROWS ONLY;";

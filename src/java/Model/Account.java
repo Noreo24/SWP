@@ -20,7 +20,6 @@ public class Account {
             phone,
             address,
             status, roleName;
-
     private int adminCreateId;
 
     private Account adminCreate;

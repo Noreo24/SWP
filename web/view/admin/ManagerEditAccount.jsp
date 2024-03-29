@@ -138,6 +138,7 @@
                                             <label for="inputGenderFeMale">FeMale</label>
                                         </div>
                                     </div>
+                                    <input hidden name="roleOld" value="${userAccount.getRoleName()}"/>
                                     <div class="row gx-3 mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label small mb-1">Role </label>

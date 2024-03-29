@@ -24,14 +24,14 @@ import util.Util;
  * @author LanChau
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 200, // 2MB
-          maxFileSize = 1024 * 1024 * 1000, // 10MB
-          maxRequestSize = 1024 * 1024 * 5000)   // 50MB
+        maxFileSize = 1024 * 1024 * 1000, // 10MB
+        maxRequestSize = 1024 * 1024 * 5000)   // 50MB
 @WebServlet(name = "ManagerEditAccountController", urlPatterns = {"/ManagerEditAccount"})
 public class ManagerEditAccountController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("acc") != null) {
@@ -71,7 +71,11 @@ public class ManagerEditAccountController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException {
+            throws ServletException, IOException {
+
+        customerDAO cusDao = new customerDAO();
+        adminDAO adDAO = new adminDAO();
+        ManagementDAO managementDAO = new ManagementDAO();
 
         String username = request.getParameter("txtUsername");
         String gmail = request.getParameter("txtGmail");
@@ -83,29 +87,29 @@ public class ManagerEditAccountController extends HttpServlet {
 //        String avatar = request.getParameter("txtAvatar");
         String gender = request.getParameter("gender");
         String roleName = request.getParameter("roleSelect");
+        String roleOld = request.getParameter("roleOld");
 
         Account accountInfo = null;
 
         if (roleName.equals("Customer")) {
-            accountInfo = new customerDAO().getCustomerACById(request.getParameter("userID"));
+            accountInfo = cusDao.getCustomerACById(request.getParameter("userID"));
         } else if (roleName.equals("Admin")) {
-            accountInfo = new adminDAO().getAdminACById(request.getParameter("userID"));
+            accountInfo = adDAO.getAdminACById(request.getParameter("userID"));
         } else if (roleName.equals("Management")) {
-            accountInfo = new ManagementDAO().getManagementACById(request.getParameter("userID"));
+            accountInfo = managementDAO.getManagementACById(request.getParameter("userID"));
         }
 
-        request.setAttribute("accountOld", accountInfo);
-
+//        request.setAttribute("accountOld", accountInfo);
         boolean check = false;
 
         if (!gmail.equals(gmailOld)) {
-            Account accountCheck = new customerDAO().getCustomerACByEmail(gmail);
+            Account accountCheck = cusDao.getCustomerACByEmail(gmail);
             if (accountCheck == null) {
-                accountCheck = new adminDAO().getAdminACByEmail(gmail);
+                accountCheck = adDAO.getAdminACByEmail(gmail);
             }
 
             if (accountCheck == null) {
-                accountCheck = new ManagementDAO().getManagementACByEmail(gmail);
+                accountCheck = managementDAO.getManagementACByEmail(gmail);
             }
 
             if (accountCheck != null) {
@@ -115,13 +119,13 @@ public class ManagerEditAccountController extends HttpServlet {
         }
 
         if (!username.equals(usernameOld)) {
-            Account accountCheck = new customerDAO().getCustomerACByUsername(username);
+            Account accountCheck = cusDao.getCustomerACByUsername(username);
             if (accountCheck == null) {
-                accountCheck = new adminDAO().getAdminACByUsername(username);
+                accountCheck = adDAO.getAdminACByUsername(username);
             }
 
             if (accountCheck == null) {
-                accountCheck = new ManagementDAO().getManagementACByUsername(username);
+                accountCheck = managementDAO.getManagementACByUsername(username);
             }
 
             if (accountCheck != null) {
@@ -223,13 +227,77 @@ public class ManagerEditAccountController extends HttpServlet {
                 accountInfo.setAddress(address);
                 accountInfo.setGender(gender);
             }
-            System.out.println("alllll: " + accountInfo.getStatus());
-            if (roleName.equals("Customer")) {
-                new customerDAO().updateACCustomer(accountInfo);
-            } else if (roleName.equals("Admin")) {
-                new adminDAO().updateACAdmin(accountInfo);
-            } else if (roleName.equals("Management")) {
-                new ManagementDAO().updateACManagement(accountInfo);
+
+            HttpSession session = request.getSession();
+            Account accountAdmin = null;
+            if (session.getAttribute("role") != null) {
+                String role = session.getAttribute("role").toString();
+
+                switch (role) {
+                    case "Customer":
+                        Customer customer = (Customer) session.getAttribute("acc");
+                        accountAdmin = new customerDAO().getCustomerACByEmail(customer.getEmail());
+                        break;
+                    case "Admin":
+                        Admin admin = (Admin) session.getAttribute("acc");
+                        accountAdmin = new adminDAO().getAdminACByEmail(admin.getEmail());
+                        break;
+                    case "Management":
+                        Management management = (Management) session.getAttribute("acc");
+                        accountAdmin = new ManagementDAO().getManagementACByEmail(management.getEmail());
+                        break;
+                }
+            }
+
+            accountInfo.setAdminCreateId(Integer.parseInt(accountAdmin.getUserID()));
+
+            if (!roleName.equals(roleOld)) {
+                if (roleOld.equals("Customer")) {
+                    cusDao.updateDelete(accountInfo.getUserID(), true);
+                } else if (roleOld.equals("Admin")) {
+                    adDAO.updateDelete(accountInfo.getUserID(), true);
+                } else if (roleOld.equals("Management")) {
+                    managementDAO.updateDelete(accountInfo.getUserID(), true);
+                }
+
+                if (roleName.equals("Customer")) {
+                    int uId = cusDao.checkACDelete(accountInfo.getUser_name(), accountInfo.getEmail());
+                    if (uId != 0) {
+                        accountInfo.setUserID(uId + "");
+                        cusDao.updateACCustomer(accountInfo);
+                        cusDao.updateDelete(accountInfo.getUserID(), false);
+                    } else {
+                        cusDao.addAC(accountInfo);
+                    }
+                } else if (roleName.equals("Admin")) {
+                    int uId = adDAO.checkACDelete(accountInfo.getUser_name(), accountInfo.getEmail());
+                    
+                    if (uId != 0) {
+                        accountInfo.setUserID(uId + "");
+                        adDAO.updateACAdmin(accountInfo);
+                        adDAO.updateDelete(accountInfo.getUserID(), false);
+                    } else {
+                        adDAO.addAC(accountInfo);
+                    }
+                } else if (roleName.equals("Management")) {
+                    int uId = managementDAO.checkACDelete(accountInfo.getUser_name(), accountInfo.getEmail());
+                    if (uId != 0) {
+                        accountInfo.setUserID(uId + "");
+                        managementDAO.updateACManagement(accountInfo);
+                        managementDAO.updateDelete(accountInfo.getUserID(), false);
+                    } else {
+                        managementDAO.addAC(accountInfo);
+                    }
+                }
+            } else {
+                if (roleName.equals("Customer")) {
+                    cusDao.updateACCustomer(accountInfo);
+                    
+                } else if (roleName.equals("Admin")) {
+                    adDAO.updateACAdmin(accountInfo);
+                } else if (roleName.equals("Management")) {
+                    managementDAO.updateACManagement(accountInfo);
+                }
             }
 
             SendMailLC.sendMailChangProfileByAdmin(accountInfo);
